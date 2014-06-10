@@ -34,6 +34,7 @@ void CMyDialogEx::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CMyDialogEx, CDialog)
 	ON_WM_NCPAINT()
 	ON_WM_NCCALCSIZE()
+	ON_WM_NCACTIVATE()
 END_MESSAGE_MAP()
 
 
@@ -166,4 +167,30 @@ BOOL CMyDialogEx::LoadImageFromResource(ATL::CImage *pImage, UINT nResID,LPCTSTR
 	// 释放资源
 	::FreeResource(hImgData);
 	return true;
+}
+
+LRESULT CMyDialogEx::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
+{
+	LRESULT lrst = CDialog::DefWindowProc(message, wParam, lParam);
+
+	if (!::IsWindow(m_hWnd)) 
+		return lrst;
+
+	if (message == WM_MOVE || message == WM_PAINT || message == WM_NCPAINT
+		|| message == WM_NOTIFY) 
+	{
+		OnNcPaint();
+	}
+
+	return lrst;
+
+//	return CDialog::DefWindowProc(message, wParam, lParam);
+}
+
+
+BOOL CMyDialogEx::OnNcActivate(BOOL bActive)
+{
+	OnNcPaint();
+	return TRUE;  //方法内必须要return TRUE;过滤掉基类CDialog的OnNcActivate
+//	return CDialog::OnNcActivate(bActive);
 }

@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "NewWindow.h"
 #include "NewWindowDlg.h"
+#include "UI/MyDialog.h"
 #include "afxdialogex.h"
 
 #ifdef _DEBUG
@@ -31,6 +32,7 @@ void CNewWindowDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CNewWindowDlg, CMyDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BUTTON1, &CNewWindowDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -86,3 +88,11 @@ HCURSOR CNewWindowDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void CNewWindowDlg::OnBnClickedButton1()
+{
+	// TODO: Add your control notification handler code here
+	CMyDialog dlg;
+	dlg.DoModal();
+}

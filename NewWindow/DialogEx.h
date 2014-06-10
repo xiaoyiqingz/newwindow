@@ -35,4 +35,6 @@ public:
 	void DrawTitleBar(CDC *pDC);
 	BOOL LoadImageFromResource(ATL::CImage *pImage, UINT nResID,LPCTSTR lpTyp);
 	
+	virtual LRESULT DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam);
+	afx_msg BOOL OnNcActivate(BOOL bActive);
 };
