@@ -5,7 +5,6 @@
 #include "stdafx.h"
 #include "NewWindow.h"
 #include "NewWindowDlg.h"
-#include "UI/MyDialog.h"
 #include "afxdialogex.h"
 
 #ifdef _DEBUG
@@ -22,11 +21,13 @@ CNewWindowDlg::CNewWindowDlg(CWnd* pParent /*=NULL*/)
 	: CMyDialogEx(CNewWindowDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_EDIT = 0;
 }
 
 void CNewWindowDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CMyDialogEx::DoDataExchange(pDX);
+	DDX_Text(pDX, IDC_EDIT1, m_EDIT);
 }
 
 BEGIN_MESSAGE_MAP(CNewWindowDlg, CMyDialogEx)
@@ -93,6 +94,4 @@ HCURSOR CNewWindowDlg::OnQueryDragIcon()
 void CNewWindowDlg::OnBnClickedButton1()
 {
 	// TODO: Add your control notification handler code here
-	CMyDialog dlg;
-	dlg.DoModal();
 }

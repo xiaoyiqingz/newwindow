@@ -37,6 +37,21 @@
     <None Include="res\SKIN_WND_TR.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\SKIN_WND_CLOSE.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\SKIN_WND_MAX.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\SKIN_WND_MIN.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\SKIN_WND_RESTORE.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\state.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NewWindow.h">
@@ -60,12 +75,6 @@
     <ClInclude Include="DialogEx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\UI\MyDialog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UI\MyDialog.h">
-      <Filter>UI</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NewWindow.cpp">
@@ -82,9 +91,6 @@
     </ClCompile>
     <ClCompile Include="DialogEx.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\MyDialog.cpp">
-      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
