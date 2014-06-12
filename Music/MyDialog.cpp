@@ -12,6 +12,8 @@
 #define		IDC_WND_MAX			WM_USER+0x01
 #define		IDC_WND_MIN			WM_USER+0x02
 
+#define		BORDERWIDTH			3
+
 IMPLEMENT_DYNAMIC(CMyDialog, CDialog)
 
 CMyDialog::CMyDialog(INT nIDTemplate, CWnd* pParent /*=NULL*/)
@@ -19,7 +21,7 @@ CMyDialog::CMyDialog(INT nIDTemplate, CWnd* pParent /*=NULL*/)
 {
 	m_bIsInit = false;
 	m_bIsZoomed = false;
-	m_bExtrude = true;
+	m_bExtrude = false;
 }
 
 CMyDialog::~CMyDialog()
@@ -36,6 +38,8 @@ BEGIN_MESSAGE_MAP(CMyDialog, CDialog)
 	ON_WM_PAINT()
 	ON_WM_SIZE()
 	ON_WM_LBUTTONDOWN()
+	ON_WM_NCHITTEST()
+	ON_WM_NCLBUTTONDOWN()
 END_MESSAGE_MAP()
 
 
@@ -174,4 +178,66 @@ void CMyDialog::OnLButtonDown(UINT nFlags, CPoint point)
 	} 
 
 	CDialog::OnLButtonDown(nFlags, point);
+}
+
+
+LRESULT CMyDialog::OnNcHitTest(CPoint point)
+{
+	if( m_bExtrude )
+	{
+		CRect rcWindow;
+		GetWindowRect(&rcWindow);
+
+		if ((point.x <= rcWindow.left+BORDERWIDTH) && (point.y>BORDERWIDTH) && (point.y<rcWindow.bottom-BORDERWIDTH*2) )
+			return HTLEFT;
+		else if ((point.x >= rcWindow.right-BORDERWIDTH) && (point.y>BORDERWIDTH) && (point.y<rcWindow.bottom-BORDERWIDTH*2) )
+			return HTRIGHT;
+		else if ((point.y <= rcWindow.top+BORDERWIDTH) && (point.x>BORDERWIDTH) && (point.x<rcWindow.right-BORDERWIDTH*2))
+			return HTTOP;
+		else if ((point.y >= rcWindow.bottom-BORDERWIDTH) && (point.x>BORDERWIDTH) && (point.x<rcWindow.right-BORDERWIDTH*2))
+			return HTBOTTOM;
+		else if ((point.x <= rcWindow.left+BORDERWIDTH*2) && (point.y <= rcWindow.top+BORDERWIDTH*2))
+			return HTTOPLEFT;
+		else if ((point.x >= rcWindow.right-BORDERWIDTH*2) && (point.y <= rcWindow.top+BORDERWIDTH*2))
+			return HTTOPRIGHT;
+		else if ((point.x <= rcWindow.left+BORDERWIDTH*2) && (point.y >= rcWindow.bottom-BORDERWIDTH*2))
+			return HTBOTTOMLEFT;
+		else if ((point.x >= rcWindow.right-BORDERWIDTH*2) && (point.y >= rcWindow.bottom-BORDERWIDTH*2))
+			return HTBOTTOMRIGHT;
+		else
+			return CWnd::OnNcHitTest(point);
+
+		return 0;
+	}
+	else
+
+	return CDialog::OnNcHitTest(point);
+}
+
+
+void CMyDialog::OnNcLButtonDown(UINT nHitTest, CPoint point)
+{
+	if( m_bExtrude )
+	{
+		if (nHitTest == HTTOP)     
+			SendMessage( WM_SYSCOMMAND, SC_SIZE | WMSZ_TOP, MAKELPARAM(point.x, point.y));
+		else if (nHitTest == HTBOTTOM)
+			SendMessage( WM_SYSCOMMAND, SC_SIZE | WMSZ_BOTTOM, MAKELPARAM(point.x, point.y));
+		else if (nHitTest == HTLEFT)
+			SendMessage( WM_SYSCOMMAND, SC_SIZE | WMSZ_LEFT, MAKELPARAM(point.x, point.y));
+		else if (nHitTest == HTRIGHT)
+			SendMessage( WM_SYSCOMMAND, SC_SIZE | WMSZ_RIGHT, MAKELPARAM(point.x, point.y));
+		else if (nHitTest == HTTOPLEFT)
+			SendMessage( WM_SYSCOMMAND, SC_SIZE | WMSZ_TOPLEFT, MAKELPARAM(point.x, point.y));
+		else if (nHitTest == HTTOPRIGHT)
+			SendMessage( WM_SYSCOMMAND, SC_SIZE | WMSZ_TOPRIGHT, MAKELPARAM(point.x, point.y));
+		else if (nHitTest == HTBOTTOMLEFT)
+			SendMessage( WM_SYSCOMMAND, SC_SIZE | WMSZ_BOTTOMLEFT, MAKELPARAM(point.x, point.y));
+		else if (nHitTest == HTBOTTOMRIGHT)
+			SendMessage(WM_SYSCOMMAND, SC_SIZE | WMSZ_BOTTOMRIGHT, MAKELPARAM(point.x, point.y));
+		else if (nHitTest==HTCAPTION)
+			SendMessage(WM_SYSCOMMAND, SC_MOVE | 4, MAKELPARAM(point.x, point.y));
+	}
+
+	CDialog::OnNcLButtonDown(nHitTest, point);
 }

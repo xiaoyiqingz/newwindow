@@ -40,4 +40,6 @@ public:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg LRESULT OnNcHitTest(CPoint point);
+	afx_msg void OnNcLButtonDown(UINT nHitTest, CPoint point);
 };
