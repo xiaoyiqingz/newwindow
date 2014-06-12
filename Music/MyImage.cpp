@@ -77,14 +77,14 @@ bool CMyImage::LoadImage(LPCTSTR pszFileName)
 }
 
 //加载图片
-bool CMyImage::LoadImage(HINSTANCE hInstance, LPCTSTR pszResourceName)
+bool CMyImage::LoadImage(HINSTANCE hInstance, LPCTSTR pszResourceName, LPCTSTR pszType)
 {
 	//加载判断
 	ASSERT(m_pImage==NULL);
 	if (m_pImage!=NULL) return false;
 
 	//查找资源
-	HRSRC hResource=FindResource(hInstance,pszResourceName,TEXT("IMAGE"));
+	HRSRC hResource=FindResource(hInstance,pszResourceName,pszType);
 	if (hResource==NULL) return false;
 
 	//读取资源

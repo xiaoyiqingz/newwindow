@@ -40,6 +40,15 @@
     <None Include="res\image1.bin">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\close.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\minimize.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\minimode.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Music.h">
@@ -63,6 +72,12 @@
     <ClInclude Include="MyImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MyButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyImageEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Music.cpp">
@@ -78,6 +93,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MyImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyImageEx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

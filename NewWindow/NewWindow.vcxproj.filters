@@ -52,6 +52,9 @@
     <None Include="res\state.bmp">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\back.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NewWindow.h">
@@ -73,6 +76,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DialogEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="\UI\MyDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

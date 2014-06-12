@@ -21,13 +21,11 @@ CNewWindowDlg::CNewWindowDlg(CWnd* pParent /*=NULL*/)
 	: CMyDialogEx(CNewWindowDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
-	m_EDIT = 0;
 }
 
 void CNewWindowDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CMyDialogEx::DoDataExchange(pDX);
-	DDX_Text(pDX, IDC_EDIT1, m_EDIT);
 }
 
 BEGIN_MESSAGE_MAP(CNewWindowDlg, CMyDialogEx)

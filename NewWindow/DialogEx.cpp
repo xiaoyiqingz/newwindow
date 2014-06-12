@@ -104,6 +104,7 @@ BOOL CMyDialogEx::OnInitDialog()
 	LoadImageFromResource(&m_ImageTitleM, IDB_TITLE_MEDIUM, _T("PNG"));
 	LoadImageFromResource(&m_ImageTitleM_Spe, IDB_TITLE_MSEP, _T("PNG"));
 	LoadImageFromResource(&m_ImageTitleR, IDB_TITLE_RIGHT, _T("PNG"));
+	m_ImageTitleM_Spe.LoadImage(hInstance, MAKEINTRESOURCE(IDB_TITLE_SET));
 
 	m_ImageBt_Close.LoadFromResource(hInstance, IDB_TITLE_CLOSE);
 	m_ImageBt_Max.LoadFromResource(hInstance, IDB_TITLE_MAX);

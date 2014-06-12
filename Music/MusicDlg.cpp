@@ -47,10 +47,10 @@ BOOL CMusicDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
-	LoadBackSkin(_T("G:\\vstest\\NewWindow\\Music\\res\\back.jpg"));
-//	LoadBackSkin(AfxGetInstanceHandle(), _T("BACK_ALL"));
-//	LoadBackSkin(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_BACK));
-//	LoadBackSkin(AfxGetInstanceHandle(), _T("BK"));
+//	LoadBackSkin(_T("G:\\vstest\\NewWindow\\Music\\res\\back.jpg"));
+//	LoadBackSkin(AfxGetInstanceHandle(), IDB_BACKALL, _T("IMAGE"));
+//	LoadBackSkin(AfxGetInstanceHandle(), IDB_CLOSE, _T("PNG"));
+	LoadBackSkin(AfxGetInstanceHandle(), IDB_GROUND);
 
 	SetWindowPos(NULL, 0, 0, 816, 510, SWP_NOMOVE);
 	return TRUE;  

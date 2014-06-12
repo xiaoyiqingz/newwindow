@@ -24,7 +24,7 @@ public:
 	//º”‘ÿÕº∆¨
 	bool LoadImage(LPCTSTR pszFileName);
 	//º”‘ÿÕº∆¨
-	bool LoadImage(HINSTANCE hInstance, LPCTSTR pszResourceName);
+	bool LoadImage(HINSTANCE hInstance, LPCTSTR pszResourceName, LPCTSTR pszType);
 	bool LoadImage(HINSTANCE hInstance, UINT nIDResource);
 
 	//ªÊª≠∫Ø ˝

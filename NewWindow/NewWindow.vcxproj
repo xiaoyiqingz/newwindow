@@ -95,6 +95,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
+    <None Include="res\back.jpg" />
     <None Include="res\NewWindow.ico" />
     <None Include="res\NewWindow.rc2" />
     <None Include="res\SKIN_WND_CLOSE.bmp" />
