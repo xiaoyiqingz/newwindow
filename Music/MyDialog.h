@@ -30,6 +30,7 @@ protected:
 
 public:
 	virtual bool OnMaxSize() {return  false;}
+	virtual void OnClientDraw(CDC*pDC, INT nWidth, INT nHeight){};
 
 	DECLARE_MESSAGE_MAP()
 public:

@@ -4,11 +4,19 @@
 
 #pragma once
 #include "MyDialog.h"
-
+#include "MyButton.h"
+#include "MyListBox.h"
 // CMusicDlg dialog
 class CMusicDlg : public CMyDialog
 {
 // Construction
+protected:
+	CMyButton		m_btPrev;
+	CMyButton		m_btPlay;
+	CMyButton		m_btPause;
+	CMyButton		m_btNext;
+	CMyListBox		m_ListMusic;
+
 public:
 	CMusicDlg(CWnd* pParent = NULL);	// standard constructor
 

@@ -21,7 +21,7 @@ CMyDialog::CMyDialog(INT nIDTemplate, CWnd* pParent /*=NULL*/)
 {
 	m_bIsInit = false;
 	m_bIsZoomed = false;
-	m_bExtrude = false;
+	m_bExtrude = true;
 }
 
 CMyDialog::~CMyDialog()
@@ -80,11 +80,15 @@ BOOL CMyDialog::OnInitDialog()
 
 void CMyDialog::LoadBackSkin(LPCTSTR pszResourcePath)
 {
+//	return m_ImageBack.LoadImage(pszResourcePath);
 	m_ImageBack.Load(pszResourcePath);
 }
 
 void CMyDialog::LoadBackSkin(HINSTANCE hInstance, UINT nIDResource, LPCTSTR pszType)
 {
+//  HINSTANCE hInstance, LPCTSTR pszResourceName,LPCTSTR pszType 
+//	return m_ImageBack.LoadImage(hInstance,pszResourceName, pszType);
+
 	if (pszType == NULL) 
 		m_ImageBack.LoadFromResource(hInstance, nIDResource);
 	else 
@@ -97,11 +101,47 @@ void CMyDialog::OnPaint()
 	CRect rcClient;
 	GetClientRect(&rcClient);
 
-	if (!m_ImageBack.IsNull()) {
+	CDC BufferDC;
+	CBitmap  BufferBmp;
+	BufferDC.CreateCompatibleDC(&dc);
+	BufferBmp.CreateCompatibleBitmap(&dc, rcClient.Width(), rcClient.Height());
+	BufferDC.SelectObject(&BufferBmp);
+
+	BufferDC.FillSolidRect(&rcClient, RGB(255, 255, 255));
+	m_ImageBack.Draw(BufferDC.GetSafeHdc(), 0, 0, rcClient.Width(), rcClient.Height());
+
+	CRect rcNewClient;
+	rcNewClient.left = m_bExtrude ? BORDERWIDTH : 0;
+	rcNewClient.top = m_bExtrude ? BORDERWIDTH : 0;
+	rcNewClient.right = rcClient.right - (m_bExtrude ? BORDERWIDTH * 2 : 0);
+	rcNewClient.bottom = rcClient.right - (m_bExtrude ? BORDERWIDTH * 2 : 0);
+
+	CImage ImageBuffer;
+	ImageBuffer.Create(rcNewClient.Width(), rcNewClient.Height(), 32);
+
+	CImageDC ImageDC(ImageBuffer);
+	CDC * pBufferDC = CDC::FromHandle(ImageDC);
+
+	pBufferDC->SetBkMode(TRANSPARENT);
+	m_ImageBack.Draw(pBufferDC->GetSafeHdc(),0,0,rcNewClient.Width(),
+		rcNewClient.Height(),rcNewClient.left,rcNewClient.top,rcNewClient.Width(),rcNewClient.Height());
+
+	BufferDC.SelectObject(BufferBmp);
+
+	OnClientDraw(pBufferDC,rcNewClient.Width(),rcNewClient.Height());
+
+	BufferDC.BitBlt(0,0,rcNewClient.Width(),rcNewClient.Height(),pBufferDC,0,0,SRCCOPY);
+
+	dc.BitBlt(rcClient.left,rcClient.top,rcClient.Width(),rcClient.Height(),&BufferDC,0,0,SRCCOPY);
+
+	BufferDC.DeleteDC();
+	BufferBmp.DeleteObject();
+
+	/*if (!m_ImageBack.IsNull()) {
 		m_ImageBack.Draw(dc.GetSafeHdc(), 0, 0,rcClient.Width(), rcClient.Height());
 //		m_ImageBack.DrawImageTile(&dc, 0, 0, rcClient.Width(), rcClient.Height());
 //		m_ImageBack.BitBlt(dc.GetSafeHdc(), 0, 0, rcClient.Width(), rcClient.Height(), 0, 0);
-	}
+	}*/
 }
 
 

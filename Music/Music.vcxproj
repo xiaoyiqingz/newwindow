@@ -106,6 +106,10 @@
     <None Include="res\minimode.png" />
     <None Include="res\Music.ico" />
     <None Include="res\Music.rc2" />
+    <None Include="res\next_mini.png" />
+    <None Include="res\pause_mini.png" />
+    <None Include="res\play_mini.png" />
+    <None Include="res\prev_mini.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Music.h" />
@@ -114,6 +118,7 @@
     <ClInclude Include="MyDialog.h" />
     <ClInclude Include="MyImage.h" />
     <ClInclude Include="MyImageEx.h" />
+    <ClInclude Include="MyListBox.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -125,6 +130,7 @@
     <ClCompile Include="MyDialog.cpp" />
     <ClCompile Include="MyImage.cpp" />
     <ClCompile Include="MyImageEx.cpp" />
+    <ClCompile Include="MyListBox.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

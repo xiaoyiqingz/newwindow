@@ -12,7 +12,10 @@
 #define new DEBUG_NEW
 #endif
 
-
+#define IDC_PREV    WM_USER+0x010
+#define IDC_PLAY	WM_USER+0x011
+#define IDC_PAUSE	WM_USER+0x012
+#define IDC_NEXT	WM_USER+0x013
 // CMusicDlg dialog
 
 
@@ -53,6 +56,29 @@ BOOL CMusicDlg::OnInitDialog()
 	LoadBackSkin(AfxGetInstanceHandle(), IDB_GROUND);
 
 	SetWindowPos(NULL, 0, 0, 816, 510, SWP_NOMOVE);
+
+	HINSTANCE hInstance = AfxGetInstanceHandle();
+	m_btPrev.Create(NULL, WS_CHILD|WS_VISIBLE, CRect(90,45,0,0), this,IDC_PREV);
+	m_btPrev.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_PREV), _T("PNG"));
+	m_btPlay.Create(NULL, WS_CHILD|WS_VISIBLE, CRect(130,45,0,0), this,IDC_PLAY);
+	m_btPlay.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_PLAY), _T("PNG"));
+	m_btPause.Create(NULL, WS_CHILD|WS_VISIBLE, CRect(130,45,0,0), this,IDC_PAUSE);
+	m_btPause.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_PAUSE), _T("PNG"));
+	m_btNext.Create(NULL, WS_CHILD|WS_VISIBLE, CRect(170,45,0,0), this,IDC_NEXT);
+	m_btNext.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_NEXT), _T("PNG"));
+
+	CRect rcClient;
+	GetClientRect(&rcClient);
+
+	m_ListMusic.Create(WS_CHILD|WS_VISIBLE|LBS_OWNERDRAWVARIABLE|LBS_HASSTRINGS,
+		CRect(1,120,309,rcClient.bottom),this,NULL);
+	m_ListMusic.SetItemHeight(48);
+
+	m_ListMusic.AddString(TEXT("光明 - 汪峰"));
+	m_ListMusic.AddString(TEXT("年轻的战场 - 中国好声音"));
+	m_ListMusic.AddString(TEXT("就现在（《中国好声音》）"));
+	m_ListMusic.AddString(TEXT("我爱你中国 - 梁博"));
+	m_ListMusic.AddString(TEXT("第一次爱的人 - 王心凌"));
 	return TRUE;  
 }
 
