@@ -37,4 +37,10 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
+public:
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+
+	virtual bool OnMaxSize();
+
 };

@@ -35,6 +35,7 @@ void CMusicDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CMusicDlg, CMyDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
 
@@ -62,7 +63,7 @@ BOOL CMusicDlg::OnInitDialog()
 	m_btPrev.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_PREV), _T("PNG"));
 	m_btPlay.Create(NULL, WS_CHILD|WS_VISIBLE, CRect(130,45,0,0), this,IDC_PLAY);
 	m_btPlay.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_PLAY), _T("PNG"));
-	m_btPause.Create(NULL, WS_CHILD|WS_VISIBLE, CRect(130,45,0,0), this,IDC_PAUSE);
+	m_btPause.Create(NULL, WS_CHILD, CRect(130,45,0,0), this,IDC_PAUSE);
 	m_btPause.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_PAUSE), _T("PNG"));
 	m_btNext.Create(NULL, WS_CHILD|WS_VISIBLE, CRect(170,45,0,0), this,IDC_NEXT);
 	m_btNext.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_NEXT), _T("PNG"));
@@ -118,3 +119,47 @@ HCURSOR CMusicDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+BOOL CMusicDlg::OnCommand(WPARAM wParam, LPARAM lParam)
+{
+	// TODO: Add your specialized code here and/or call the base class
+	switch (LOWORD(wParam)) {
+	case IDC_PLAY:
+		{
+			m_btPause.ShowWindow(SW_SHOW);
+			m_btPlay.ShowWindow(SW_HIDE);
+		}
+		break;
+	case IDC_PAUSE:
+		{
+			m_btPlay.ShowWindow(SW_SHOW);
+			m_btPause.ShowWindow(SW_HIDE);
+		}
+		break;
+	}
+	return CMyDialog::OnCommand(wParam, lParam);
+}
+
+
+BOOL CMusicDlg::OnEraseBkgnd(CDC* pDC)
+{
+	// TODO: Add your message handler code here and/or call default
+
+	return TRUE;
+//	return CMyDialog::OnEraseBkgnd(pDC);
+}
+
+bool CMusicDlg::OnMaxSize()
+{
+	CRect rcClient;
+	GetClientRect(&rcClient);
+
+	static bool bMini = false;
+
+	bMini = !bMini;
+
+	SetWindowPos(NULL, 0, 0, rcClient.Width(), (bMini? 76:510), SWP_NOMOVE);
+	
+	return true;
+}

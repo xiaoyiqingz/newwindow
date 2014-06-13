@@ -21,7 +21,7 @@ CMyDialog::CMyDialog(INT nIDTemplate, CWnd* pParent /*=NULL*/)
 {
 	m_bIsInit = false;
 	m_bIsZoomed = false;
-	m_bExtrude = true;
+	m_bExtrude = false;
 }
 
 CMyDialog::~CMyDialog()
