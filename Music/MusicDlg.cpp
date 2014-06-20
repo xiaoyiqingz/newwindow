@@ -31,6 +31,7 @@ void CMusicDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CMyDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_NEW_CLOSE, m_btNewClose);
+	DDX_Control(pDX, IDC_CHECK1, m_Check);
 }
 
 BEGIN_MESSAGE_MAP(CMusicDlg, CMyDialog)
@@ -72,6 +73,13 @@ BOOL CMusicDlg::OnInitDialog()
 	m_btNewClose.SetBackImage(hInstance, IDB_NEW_CLOSE);
 	m_btNewClose.SetButtonType(BT_PUSHBUTTON);
 	m_btNewClose.SetSize(36, 31);
+
+	m_Check.SetCheckImage(_T("res\\checkbox_normal.png"),
+		_T("res\\checkbox_hightlight.png"),
+		_T("res\\checkbox_tick_normal.png"),
+		_T("res\\checkbox_tick_highlight.png"));
+	m_Check.SetButtonType(BT_CHECKBUTTON);
+	m_Check.SetSize(68, 15);
 
 	CRect rcClient;
 	GetClientRect(&rcClient);

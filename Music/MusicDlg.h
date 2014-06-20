@@ -7,6 +7,7 @@
 #include "MyButton.h"
 #include "MyListBox.h"
 #include "MyButtonEx.h"
+#include "afxwin.h"
 // CMusicDlg dialog
 class CMusicDlg : public CMyDialog
 {
@@ -18,7 +19,8 @@ protected:
 	CMyButton		m_btNext;
 	CMyListBox		m_ListMusic;
 
-	CMyButtonEx			m_btNewClose;
+	CMyButtonEx		m_btNewClose;
+	CMyButtonEx		m_Check;
 public:
 	CMusicDlg(CWnd* pParent = NULL);	// standard constructor
 
@@ -36,12 +38,14 @@ protected:
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
-	afx_msg void OnPaint();
-	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+
 	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
+	virtual bool OnMaxSize();	
+
 public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
-
-	virtual bool OnMaxSize();
+	afx_msg void OnPaint();
+	afx_msg HCURSOR OnQueryDragIcon();
+	
 };
