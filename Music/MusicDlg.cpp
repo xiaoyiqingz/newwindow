@@ -30,6 +30,7 @@ CMusicDlg::CMusicDlg(CWnd* pParent /*=NULL*/)
 void CMusicDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CMyDialog::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_NEW_CLOSE, m_btNewClose);
 }
 
 BEGIN_MESSAGE_MAP(CMusicDlg, CMyDialog)
@@ -67,6 +68,10 @@ BOOL CMusicDlg::OnInitDialog()
 	m_btPause.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_PAUSE), _T("PNG"));
 	m_btNext.Create(NULL, WS_CHILD|WS_VISIBLE, CRect(170,45,0,0), this,IDC_NEXT);
 	m_btNext.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_NEXT), _T("PNG"));
+
+	m_btNewClose.SetBackImage(hInstance, IDB_NEW_CLOSE);
+	m_btNewClose.SetButtonType(BT_PUSHBUTTON);
+	m_btNewClose.SetSize(36, 31);
 
 	CRect rcClient;
 	GetClientRect(&rcClient);

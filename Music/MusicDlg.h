@@ -6,6 +6,7 @@
 #include "MyDialog.h"
 #include "MyButton.h"
 #include "MyListBox.h"
+#include "MyButtonEx.h"
 // CMusicDlg dialog
 class CMusicDlg : public CMyDialog
 {
@@ -17,6 +18,7 @@ protected:
 	CMyButton		m_btNext;
 	CMyListBox		m_ListMusic;
 
+	CMyButtonEx			m_btNewClose;
 public:
 	CMusicDlg(CWnd* pParent = NULL);	// standard constructor
 
@@ -42,5 +44,4 @@ public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 
 	virtual bool OnMaxSize();
-
 };

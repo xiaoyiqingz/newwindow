@@ -111,27 +111,36 @@
     <None Include="res\pause_mini.png" />
     <None Include="res\play_mini.png" />
     <None Include="res\prev_mini.png" />
+    <None Include="res\SKIN_WND_CLOSE.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ISkinControl.h" />
+    <ClInclude Include="MemoryDC.h" />
     <ClInclude Include="Music.h" />
     <ClInclude Include="MusicDlg.h" />
     <ClInclude Include="MyButton.h" />
+    <ClInclude Include="MyButtonEx.h" />
     <ClInclude Include="MyDialog.h" />
     <ClInclude Include="MyImage.h" />
     <ClInclude Include="MyImageEx.h" />
     <ClInclude Include="MyListBox.h" />
+    <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ISkinControl.cpp" />
+    <ClCompile Include="MemoryDC.cpp" />
     <ClCompile Include="Music.cpp" />
     <ClCompile Include="MusicDlg.cpp" />
     <ClCompile Include="MyButton.cpp" />
+    <ClCompile Include="MyButtonEx.cpp" />
     <ClCompile Include="MyDialog.cpp" />
     <ClCompile Include="MyImage.cpp" />
     <ClCompile Include="MyImageEx.cpp" />
     <ClCompile Include="MyListBox.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

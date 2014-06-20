@@ -2,14 +2,14 @@
 #include "MyImage.h"
 
 
-CMyImage::CMyImage(void)
+CMyImage::CMyImage()
 {
 	m_pImage=NULL;
 	ZeroMemory(m_strImageName, sizeof(m_strImageName) );
 }
 
 
-CMyImage::~CMyImage(void)
+CMyImage::~CMyImage()
 {
 	 DestroyImage();
 }
@@ -64,7 +64,7 @@ bool CMyImage::LoadImage(LPCTSTR pszFileName)
 
 	//¼ÓÔØÎÄ¼þ
 	CT2CW strFileName(pszFileName);
-	m_pImage=Image::FromFile((LPCWSTR)strFileName);
+	m_pImage=Bitmap::FromFile((LPCWSTR)strFileName);
 
 	//´íÎóÅÐ¶Ï
 	if ((m_pImage==NULL)||(m_pImage->GetLastStatus()!=Ok))
@@ -103,7 +103,7 @@ bool CMyImage::LoadImage(HINSTANCE hInstance, LPCTSTR pszResourceName, LPCTSTR p
 	pIStream->Write(pImageBuffer,dwImageSize,NULL);
 
 	//´´½¨Î»Í¼
-	m_pImage=Image::FromStream(pIStream);
+	m_pImage=Bitmap::FromStream(pIStream);
 
 	//ÊÍ·Å×ÊÔ´
 	SafeRelease(pIStream);
@@ -144,7 +144,7 @@ bool CMyImage::LoadImage(HINSTANCE hInstance, UINT nIDResource)
 	pIStream->Write(pImageBuffer,dwImageSize,NULL);
 
 	//´´½¨Î»Í¼
-	m_pImage=Image::FromStream(pIStream);
+	m_pImage=Bitmap::FromStream(pIStream);
 
 	//ÊÍ·Å×ÊÔ´
 	SafeRelease(pIStream);
@@ -211,28 +211,21 @@ bool CMyImage::DrawImage( CDC * pDC, INT nXPos, INT nYPos, INT nDestWidth, INT n
 	return true;
 }
 
-//»æ»­Í¼Ïñ
-bool CMyImage::DrawImage(CDC * pDC, INT nXDest, INT nYDest, INT nDestWidth, INT nDestHeight, INT nXScr, INT nYSrc)
+bool CMyImage::DrawImage(CDC * pDC, RECT &rc)
 {
-	//¼ÓÔØÅÐ¶Ï
-	ASSERT(m_pImage!=NULL);
-	if (m_pImage==NULL) return false;
+	ASSERT(m_pImage != NULL);
+	if (m_pImage == NULL)  return false;
 
-	//´´½¨ÆÁÄ»
-	ASSERT(pDC!=NULL);
+	ASSERT(pDC != NULL);
 	Graphics graphics(pDC->GetSafeHdc());
 
-	//¹¹ÔìÎ»ÖÃ
 	RectF rcDrawRect;
-	rcDrawRect.X=(REAL)nXDest;
-	rcDrawRect.Y=(REAL)nYDest;
-	rcDrawRect.Width=(REAL)nDestWidth;
-	rcDrawRect.Height=(REAL)nDestHeight;
+	rcDrawRect.X = (REAL)rc.left;
+	rcDrawRect.Y = (REAL)rc.top;
+	rcDrawRect.Width = (REAL)(rc.right - rc.left);
+	rcDrawRect.Height = (REAL)(rc.bottom- rc.left);
 
-	//»æ»­Í¼Ïñ
-	graphics.DrawImage(m_pImage,rcDrawRect,(REAL)nXScr,(REAL)nYSrc,(REAL)nDestWidth,(REAL)nDestHeight,UnitPixel);
-
-	return true;
+	graphics.DrawImage(m_pImage, rcDrawRect,0, 0, (REAL)GetWidth(), (REAL)GetHeight(), UnitPixel);
 }
 
 //»æ»­Í¼Ïñ
@@ -255,6 +248,30 @@ bool CMyImage::DrawImage(CDC * pDC, INT nXDest, INT nYDest, INT nDestWidth, INT 
 
 	//»æ»­Í¼Ïñ
 	graphics.DrawImage(m_pImage,rcDrawRect,(REAL)nXScr,(REAL)nYSrc,(REAL)nSrcWidth,(REAL)nSrcHeight,UnitPixel);
+
+	return true;
+}
+
+//»æ»­Í¼Ïñ
+bool CMyImage::DrawImage(CDC * pDC, INT nXDest, INT nYDest, INT nDestWidth, INT nDestHeight, INT nXScr, INT nYSrc)
+{
+	//¼ÓÔØÅÐ¶Ï
+	ASSERT(m_pImage!=NULL);
+	if (m_pImage==NULL) return false;
+
+	//´´½¨ÆÁÄ»
+	ASSERT(pDC!=NULL);
+	Graphics graphics(pDC->GetSafeHdc());
+
+	//¹¹ÔìÎ»ÖÃ
+	RectF rcDrawRect;
+	rcDrawRect.X=(REAL)nXDest;
+	rcDrawRect.Y=(REAL)nYDest;
+	rcDrawRect.Width=(REAL)nDestWidth;
+	rcDrawRect.Height=(REAL)nDestHeight;
+
+	//»æ»­Í¼Ïñ
+	graphics.DrawImage(m_pImage,rcDrawRect,(REAL)nXScr,(REAL)nYSrc,(REAL)nDestWidth,(REAL)nDestHeight,UnitPixel);
 
 	return true;
 }
@@ -351,4 +368,121 @@ bool CMyImage::AlphaDrawImage(CDC * pDestDC, INT xDest, INT yDest, INT cxDest, I
 	}
 
 	return true;
+}
+
+bool CMyImage::Draw( CDC * pDC, INT x, INT y, INT cx, INT cy,INT nLeft,INT nTop,INT nRight,INT nBottom )
+{
+	int cxImage = GetWidth();
+	int cyImage = GetHeight();
+
+	// ×óÉÏ
+	{
+		RECT rcDest = {x, y, x+nLeft, y+nTop};
+		RECT rcSrc = {0, 0, nLeft, nTop};
+		if (!::IsRectEmpty(&rcDest) && !::IsRectEmpty(&rcSrc))
+			DrawImage(pDC,rcDest.left, rcDest.top, rcDest.right-rcDest.left, rcDest.bottom-rcDest.top, 
+			rcSrc.left, rcSrc.top,rcSrc.right-rcSrc.left, rcSrc.bottom-rcSrc.top);
+	}
+
+	// ×ó±ß
+	{
+		RECT rcDest = {x, y+nTop, x+nLeft, (y+nTop)+(cy-nTop-nBottom)};
+		RECT rcSrc = {0, nTop, nLeft, nTop+(cyImage-nTop-nBottom)};
+		if (!::IsRectEmpty(&rcDest) && !::IsRectEmpty(&rcSrc))
+			DrawImage(pDC,rcDest.left, rcDest.top, rcDest.right-rcDest.left, rcDest.bottom-rcDest.top, 
+			rcSrc.left, rcSrc.top,rcSrc.right-rcSrc.left, rcSrc.bottom-rcSrc.top);
+	}
+
+	// ÉÏ±ß
+	{
+		RECT rcDest = {x+nLeft, y,x+(cx-nRight), y+nTop};
+		RECT rcSrc = {nLeft, 0, (cxImage-nLeft-nRight), nTop};
+		if (!::IsRectEmpty(&rcDest) && !::IsRectEmpty(&rcSrc))
+			DrawImage(pDC,rcDest.left, rcDest.top, rcDest.right-rcDest.left, rcDest.bottom-rcDest.top, 
+			rcSrc.left, rcSrc.top,rcSrc.right-rcSrc.left, rcSrc.bottom-rcSrc.top);
+	}
+
+	// ÓÒÉÏ
+	{
+		RECT rcDest = {x+(cx-nRight), y, (x+(cx-nRight))+nRight, y+nTop};
+		RECT rcSrc = {cxImage-nRight, 0, (cxImage-nRight)+nRight, nTop};
+		if (!::IsRectEmpty(&rcDest) && !::IsRectEmpty(&rcSrc))
+			DrawImage(pDC,rcDest.left, rcDest.top, rcDest.right-rcDest.left, rcDest.bottom-rcDest.top, 
+			rcSrc.left, rcSrc.top,rcSrc.right-rcSrc.left, rcSrc.bottom-rcSrc.top);
+	}
+
+	// ÓÒ±ß
+	{
+		RECT rcDest = {x+(cx-nRight), y+nTop, (x+(cx-nRight))+nRight, (y+nTop)+(cy-nTop-nBottom)};
+		RECT rcSrc = {cxImage-nRight, nTop, (cxImage-nRight)+nRight, nTop+(cyImage-nTop-nBottom)};
+		if (!::IsRectEmpty(&rcDest) && !::IsRectEmpty(&rcSrc))
+			DrawImage(pDC,rcDest.left, rcDest.top, rcDest.right-rcDest.left, rcDest.bottom-rcDest.top, 
+			rcSrc.left, rcSrc.top,rcSrc.right-rcSrc.left, rcSrc.bottom-rcSrc.top);
+	}
+
+	// ÏÂ±ß
+	{
+		RECT rcDest = {x+nLeft, y+(cy-nBottom), (x+nLeft)+(cx-nLeft-nRight), (y+(cy-nBottom))+nBottom};
+		RECT rcSrc = {nLeft, cyImage-nBottom, nLeft+(cxImage-nLeft-nRight), (cyImage-nBottom)+nBottom};
+		if (!::IsRectEmpty(&rcDest) && !::IsRectEmpty(&rcSrc))
+			DrawImage(pDC,rcDest.left, rcDest.top, rcDest.right-rcDest.left, rcDest.bottom-rcDest.top, 
+			rcSrc.left, rcSrc.top,rcSrc.right-rcSrc.left, rcSrc.bottom-rcSrc.top);
+	}
+
+	// ÓÒÏÂ
+	{
+		RECT rcDest = {x+(cx-nRight), y+(cy-nBottom), (x+(cx-nRight))+nRight, (y+(cy-nBottom))+nBottom};
+		RECT rcSrc = {cxImage-nRight, cyImage-nBottom, (cxImage-nRight)+nRight, (cyImage-nBottom)+nBottom};
+		if (!::IsRectEmpty(&rcDest) && !::IsRectEmpty(&rcSrc))
+			DrawImage(pDC,rcDest.left, rcDest.top, rcDest.right-rcDest.left, rcDest.bottom-rcDest.top, 
+			rcSrc.left, rcSrc.top,rcSrc.right-rcSrc.left, rcSrc.bottom-rcSrc.top);
+	}
+
+	// ×óÏÂ
+	{
+		RECT rcDest = {x, y+(cy-nBottom), x+nLeft, (y+(cy-nBottom))+nBottom};
+		RECT rcSrc = {0, cyImage-nBottom, nLeft, (cyImage-nBottom)+nBottom};
+		if (!::IsRectEmpty(&rcDest) && !::IsRectEmpty(&rcSrc))
+			DrawImage(pDC,rcDest.left, rcDest.top, rcDest.right-rcDest.left, rcDest.bottom-rcDest.top, 
+			rcSrc.left, rcSrc.top,rcSrc.right-rcSrc.left, rcSrc.bottom-rcSrc.top);
+	}
+
+	// ÖÐ¼ä
+	{
+		RECT rcDest = {x+nLeft, y+nTop, x+(cx-nRight), y+(cy-nBottom)};
+		RECT rcSrc = {nLeft, nTop, cxImage-nRight, cyImage-nBottom};
+
+		if (!::IsRectEmpty(&rcDest) && !::IsRectEmpty(&rcSrc))
+			DrawImage(pDC,rcDest.left, rcDest.top, rcDest.right-rcDest.left, rcDest.bottom-rcDest.top, 
+			rcSrc.left, rcSrc.top,rcSrc.right-rcSrc.left, rcSrc.bottom-rcSrc.top);
+	}
+
+	return TRUE;
+}
+
+bool CMyImage::Draw( CDC * pDC, const RECT& rectDest, const RECT& rectSrc )
+{
+	return Draw(pDC,rectDest.left, rectDest.top, rectDest.right-rectDest.left, rectDest.bottom-rectDest.top, 
+		rectSrc.left, rectSrc.top,rectSrc.right, rectSrc.bottom);
+}
+
+bool CMyImage::Draw( CDC * pDC, const RECT& rectDest )
+{
+	return Draw(pDC,rectDest,m_rcNinePart);
+}
+
+void CMyImage::SetNinePart( CONST LPRECT lprcNinePart )
+{
+	if( lprcNinePart == NULL ) return;
+
+	::CopyRect(&m_rcNinePart,lprcNinePart);
+}
+
+HBITMAP CMyImage::ImageToBitmap(/*HDC hDC*/) 
+{ 
+	ASSERT(m_pImage != NULL);
+	if(m_pImage == NULL) return NULL;
+	m_pImage->GetHBITMAP(Color(0,0,0),&m_hBitmap);
+
+	return m_hBitmap;
 }

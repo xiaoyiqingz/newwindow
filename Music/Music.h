@@ -9,7 +9,11 @@
 #endif
 
 #include "resource.h"		// main symbols
+#include <Shlwapi.h>
+#include <map>
+#include <vector>
 
+using namespace std;
 // CMusicApp:
 // See Music.cpp for the implementation of this class
 //
