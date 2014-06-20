@@ -105,10 +105,10 @@
     <ClInclude Include="MemoryDC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ISkinControl.h">
+    <ClInclude Include="RenderManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RenderManager.h">
+    <ClInclude Include="MyDialogBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -143,10 +143,10 @@
     <ClCompile Include="MemoryDC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ISkinControl.cpp">
+    <ClCompile Include="RenderManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderManager.cpp">
+    <ClCompile Include="MyDialogBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

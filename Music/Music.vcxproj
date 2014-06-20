@@ -114,7 +114,7 @@
     <None Include="res\SKIN_WND_CLOSE.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ISkinControl.h" />
+    <ClInclude Include="MyDialogBase.h" />
     <ClInclude Include="MemoryDC.h" />
     <ClInclude Include="Music.h" />
     <ClInclude Include="MusicDlg.h" />
@@ -130,7 +130,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ISkinControl.cpp" />
+    <ClCompile Include="MyDialogBase.cpp" />
     <ClCompile Include="MemoryDC.cpp" />
     <ClCompile Include="Music.cpp" />
     <ClCompile Include="MusicDlg.cpp" />

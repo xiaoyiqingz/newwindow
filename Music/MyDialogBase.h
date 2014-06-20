@@ -6,7 +6,7 @@
 #include "Music.h"
 #include "MyImage.h"
 
-class ISkinControl
+class MyDialogBase
 {
 protected:
 	HDC							m_hParentDC;
@@ -27,8 +27,8 @@ public:
 	COLORREF					m_colFrameNormal;					//±ß¿òÑÕÉ«
 
 public:
-	ISkinControl(void);
-	virtual ~ISkinControl(void);
+	MyDialogBase(void);
+	virtual ~MyDialogBase(void);
 
 public:
 	//¾ØÐÎ¾ÓÖÐ

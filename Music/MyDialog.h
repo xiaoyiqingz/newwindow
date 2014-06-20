@@ -2,11 +2,11 @@
 #include "MyImage.h"
 #include "MyButton.h"
 #include "MyImageEx.h"
-#include "ISkinControl.h"
+#include "MyDialogBase.h"
 
 // CMyDialog dialog
 
-class CMyDialog : public CDialog, public ISkinControl
+class CMyDialog : public CDialog, public MyDialogBase
 {
 	DECLARE_DYNAMIC(CMyDialog)
 public:

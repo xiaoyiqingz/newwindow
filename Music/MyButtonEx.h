@@ -1,6 +1,6 @@
 #pragma once
 #include "MyImage.h"
-#include "ISkinControl.h"
+#include "MyDialogBase.h"
 
 enum BUTTON_TYPE 
 {
@@ -13,7 +13,7 @@ enum BUTTON_TYPE
 
 // CMyButtonEx
 
-class CMyButtonEx : public CButton,public ISkinControl
+class CMyButtonEx : public CButton,public MyDialogBase
 {
 protected:
 	CImage			m_pBackImg;

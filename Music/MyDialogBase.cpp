@@ -1,8 +1,8 @@
 #include "StdAfx.h"
-#include "ISkinControl.h"
+#include "MyDialogBase.h"
 #include "RenderManager.h"
 
-ISkinControl::ISkinControl(void)
+MyDialogBase::MyDialogBase(void)
 {
 	m_hParentDC = NULL;
 	m_bTransparent = FALSE;
@@ -16,12 +16,12 @@ ISkinControl::ISkinControl(void)
 	m_Font = RenderEngine->GetDeaultFont();
 }
 
-ISkinControl::~ISkinControl(void)
+MyDialogBase::~MyDialogBase(void)
 {
 	m_bTransparent = FALSE;
 }
 
-void ISkinControl::CalcCenterRect( RECT& rcDest, int cx, int cy, RECT& rcCenter )
+void MyDialogBase::CalcCenterRect( RECT& rcDest, int cx, int cy, RECT& rcCenter )
 {
 	int x = ((rcDest.right-rcDest.left) - cx + 1) / 2;
 	int y = ((rcDest.bottom-rcDest.top) - cy + 1) / 2;
@@ -32,7 +32,7 @@ void ISkinControl::CalcCenterRect( RECT& rcDest, int cx, int cy, RECT& rcCenter 
 	rcCenter.bottom = rcCenter.top+cy;
 }
 
-void ISkinControl::DrawParentWndBg(HWND hWnd, HDC hDC )
+void MyDialogBase::DrawParentWndBg(HWND hWnd, HDC hDC )
 {
 	if( hWnd == NULL ) return;
 	if ( !m_bTransparent ) return;
@@ -47,27 +47,27 @@ void ISkinControl::DrawParentWndBg(HWND hWnd, HDC hDC )
 	::BitBlt(hDC, 0, 0, rcWindow.Width(), rcWindow.Height(), m_hParentDC, rcWindow.left, rcWindow.top, SRCCOPY);
 }
 
-void ISkinControl::SetDefText( COLORREF colText )
+void MyDialogBase::SetDefText( COLORREF colText )
 {
 	m_colDefText = colText;
 }
 
-void ISkinControl::SetNormalText( COLORREF colText )
+void MyDialogBase::SetNormalText( COLORREF colText )
 {
 	m_colNormalText = colText;
 }
 
-void ISkinControl::SetDisableText( COLORREF colText )
+void MyDialogBase::SetDisableText( COLORREF colText )
 {
 	m_colDisableText = colText;
 }
 
-void ISkinControl::SetSelectText( COLORREF colText )
+void MyDialogBase::SetSelectText( COLORREF colText )
 {
 	m_colSelectText = colText;
 }
 
-void ISkinControl::SetFrameColor( COLORREF colFrame )
+void MyDialogBase::SetFrameColor( COLORREF colFrame )
 {
 	m_colFrameNormal = colFrame;
 }
@@ -90,12 +90,12 @@ BOOL ISkinControl::SetScrollImage( CWnd * pOwn,LPCTSTR pszFileName )
 	return TRUE;
 }*/
 
-void ISkinControl::RemoveScorll()
+void MyDialogBase::RemoveScorll()
 {
 	RenderEngine->RemoveImage(m_pImageScroll);
 }
 
-BOOL ISkinControl::TrackMouseLeave( HWND hWnd )
+BOOL MyDialogBase::TrackMouseLeave( HWND hWnd )
 {
 	TRACKMOUSEEVENT tme = { 0 };
 	tme.cbSize = sizeof(tme);
@@ -105,22 +105,22 @@ BOOL ISkinControl::TrackMouseLeave( HWND hWnd )
 	return _TrackMouseEvent(&tme);
 }
 
-void ISkinControl::SetCtrlFont( HFONT hFont )
+void MyDialogBase::SetCtrlFont( HFONT hFont )
 {
 	m_Font = hFont;
 }
 
-HFONT ISkinControl::GetCtrlFont()
+HFONT MyDialogBase::GetCtrlFont()
 {
 	return m_Font;
 }
 
-void ISkinControl::SetBackColor( COLORREF colBack )
+void MyDialogBase::SetBackColor( COLORREF colBack )
 {
 	m_colBack = colBack;
 }
 
-void ISkinControl::SetUnTransparent()
+void MyDialogBase::SetUnTransparent()
 {
 	m_bTransparent  = false;
 }
