@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "Music.h"
 #include "MyDialog.h"
+#include "RenderManager.h"
 #include "afxdialogex.h"
 
 
@@ -22,10 +23,20 @@ CMyDialog::CMyDialog(INT nIDTemplate, CWnd* pParent /*=NULL*/)
 	m_bIsInit = false;
 	m_bIsZoomed = false;
 	m_bExtrude = false;
+
+	m_hMemDC = NULL;
+	m_hMemBmp = m_hOldBmp = NULL;
 }
 
 CMyDialog::~CMyDialog()
 {
+	if (m_hMemBmp != NULL && m_hOldBmp != NULL) {
+		::SelectObject(m_hMemDC, m_hOldBmp);
+		::DeleteObject(m_hMemBmp);
+		::DeleteDC(m_hMemDC);
+	}
+	m_hMemBmp = m_hOldBmp = NULL;
+	m_hMemDC = NULL;
 }
 
 void CMyDialog::DoDataExchange(CDataExchange* pDX)
@@ -50,6 +61,7 @@ BOOL CMyDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
+/*  If  Dialog  properties  [Border]  is  none,  we  don't need it;
 	DWORD dwStyle = GetStyle();
 	DWORD dwNewStyle = WS_OVERLAPPED | WS_VISIBLE| WS_SYSMENU |WS_MINIMIZEBOX
 		|WS_MAXIMIZEBOX|WS_CLIPCHILDREN|WS_CLIPSIBLINGS;
@@ -59,7 +71,7 @@ BOOL CMyDialog::OnInitDialog()
 	DWORD dwExStyle = GetExStyle();
 	DWORD dwNewExStyle = WS_EX_LEFT |WS_EX_LTRREADING |WS_EX_RIGHTSCROLLBAR;
 	dwNewExStyle&=dwExStyle;
-	SetWindowLong(m_hWnd,GWL_EXSTYLE,dwNewExStyle);
+	SetWindowLong(m_hWnd,GWL_EXSTYLE,dwNewExStyle);*/
 
 	CRect rcControl(0,0,0,0);  //在WM_SIZE中改变大小
 
@@ -74,8 +86,15 @@ BOOL CMyDialog::OnInitDialog()
 
 	m_bIsInit = true;
 
-	return TRUE;  // return TRUE unless you set the focus to a control
-	// EXCEPTION: OCX Property Pages should return FALSE
+	CRect rcClient;
+	GetClientRect(&rcClient);
+	HDC hDC = ::GetDC(m_hWnd);
+	m_hMemDC = ::CreateCompatibleDC(hDC);
+	m_hMemBmp = ::CreateCompatibleBitmap(hDC, rcClient.Width(), rcClient.Height());
+	m_hOldBmp = (HBITMAP)::SelectObject(m_hMemDC, m_hMemBmp);
+	::ReleaseDC(m_hWnd, hDC);
+
+	return TRUE; 
 }
 
 void CMyDialog::LoadBackSkin(LPCTSTR pszResourcePath)
@@ -101,6 +120,30 @@ void CMyDialog::OnPaint()
 	CRect rcClient;
 	GetClientRect(&rcClient);
 
+	int cx = 0 , cy = 0;
+	if (m_hMemBmp != NULL) {
+		BITMAP bmpInfo = {0};
+		::GetObject(m_hMemBmp, sizeof(BITMAP), &bmpInfo);
+		cx = bmpInfo.bmWidth;
+		cy = bmpInfo.bmHeight;
+	}
+
+	if (rcClient.Width() != cx || rcClient.Height() != cy) {
+		if (m_hMemBmp != NULL && m_hMemDC != NULL) {
+			::SelectObject(m_hMemDC, m_hOldBmp);
+			::DeleteObject(m_hMemBmp);
+		}
+
+		m_hMemBmp = ::CreateCompatibleBitmap(dc.GetSafeHdc(), rcClient.Width(), rcClient.Height());
+		m_hOldBmp = (HBITMAP)::SelectObject(m_hMemDC, m_hMemBmp);
+	}
+
+
+	RenderEngine->DrawColor(m_hMemDC, rcClient, RGB(234,241,249));
+	DrawClientArea(CDC::FromHandle(m_hMemDC), rcClient.Width(), rcClient.Height());
+	::BitBlt(dc.m_hDC, 0, 0, rcClient.Width(), rcClient.Height(), m_hMemDC,0, 0, SRCCOPY);
+
+/*
 	CDC BufferDC;
 	CBitmap  BufferBmp;
 	BufferDC.CreateCompatibleDC(&dc);
@@ -135,7 +178,7 @@ void CMyDialog::OnPaint()
 	dc.BitBlt(rcClient.left,rcClient.top,rcClient.Width(),rcClient.Height(),&BufferDC,0,0,SRCCOPY);
 
 	BufferDC.DeleteDC();
-	BufferBmp.DeleteObject();
+	BufferBmp.DeleteObject();*/
 
 	/*if (!m_ImageBack.IsNull()) {
 		m_ImageBack.Draw(dc.GetSafeHdc(), 0, 0,rcClient.Width(), rcClient.Height());

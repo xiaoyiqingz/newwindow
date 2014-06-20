@@ -1,4 +1,4 @@
-#ifndef CONTROL_HEAD_FILE
+ #ifndef CONTROL_HEAD_FILE
 #define CONTROL_HEAD_FILE
 
 #pragma once

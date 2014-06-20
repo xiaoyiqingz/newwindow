@@ -25,10 +25,7 @@ protected:
 	BOOL			m_bHover;
 	BOOL			m_bFocus;
 	BOOL			m_bMouseTracking;
-
-	BOOL			m_bTransparent;
-	HDC				m_hParentDC;		
-
+	
 	BUTTON_TYPE		m_nBtnType;
 
 	DECLARE_DYNAMIC(CMyButtonEx)
@@ -42,7 +39,6 @@ public:
 	bool SetBackImage(HINSTANCE hInstance, UINT nResourceID);
 	bool SetCheckImage(LPCTSTR lpNormal, LPCTSTR lpHover, LPCTSTR lpTickNormal, LPCTSTR lpTickHover);
 	void SetSize(int nWidth, int nHeight);
-	void DrawParentWndBg(HWND hWnd, HDC hDC );
 
 	void DrawPushButton(CDC* pDC,RECT &rcClient);
 	void DrawCheckButton(CDC* pDC,RECT &rcClient);

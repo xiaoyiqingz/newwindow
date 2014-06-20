@@ -19,9 +19,6 @@ CMyButtonEx::CMyButtonEx()
 
 	m_bFocus = m_bHover = m_bPress = m_bMouseTracking = FALSE;
 	m_nBtnType = BT_PUSHBUTTON;
-
-	m_hParentDC = NULL;
-	m_bTransparent = FALSE;
 }
 
 CMyButtonEx::~CMyButtonEx()
@@ -229,21 +226,6 @@ void CMyButtonEx::OnPaint()
 	}
 }
 
-void CMyButtonEx::DrawParentWndBg(HWND hWnd, HDC hDC)
-{
-	if( hWnd == NULL ) return;
-	if ( !m_bTransparent ) return;
-
-	HWND hParentWnd = ::GetParent(hWnd);
-
-	CRect rcWindow;
-	::GetWindowRect(hWnd,&rcWindow);
-	::ScreenToClient(hParentWnd, (LPPOINT)&rcWindow); 
-	::ScreenToClient(hParentWnd, ((LPPOINT)&rcWindow)+1);
-
-	::BitBlt(hDC, 0, 0, rcWindow.Width(), rcWindow.Height(), m_hParentDC, rcWindow.left, rcWindow.top, SRCCOPY);
-}
-
 void CMyButtonEx::DrawPushButton(CDC* pDC,RECT &rcClient)
 {
 	if (m_bPress) {
@@ -272,7 +254,7 @@ void CMyButtonEx::DrawCheckButton(CDC* pDC,RECT &rcClient)
 	rcCheck.bottom = rcCheck.top + nHeight;
 
 	rcText = rcClient;
-	rcText.left = rcCheck.left + 4;
+	rcText.left = rcCheck.right + 5;
 
 	BOOL bCheck = ((GetCheck() == BST_CHECKED) ? TRUE : FALSE);
 
@@ -290,7 +272,7 @@ void CMyButtonEx::DrawCheckButton(CDC* pDC,RECT &rcClient)
 				m_pCheckImgTickN->DrawImage(pDC, rcCheck);
 		} else {
 			if (m_pCheckImgN != NULL && !m_pCheckImgN->IsNull())
-				m_pCheckImgN->Draw(pDC, rcCheck);
+				m_pCheckImgN->DrawImage(pDC, rcCheck);
 		}
 	}
 
@@ -301,8 +283,10 @@ void CMyButtonEx::DrawCheckButton(CDC* pDC,RECT &rcClient)
 		UINT nFormat = DT_LEFT | DT_VCENTER | DT_SINGLELINE | DT_END_ELLIPSIS;
 
 		int Mode = pDC->SetBkMode(TRANSPARENT);
-		CFont* pFont = GetFont();
+//		CFont* pFont = GetFont();
+		CFont* pFont = CFont::FromHandle(GetCtrlFont());
 		CFont* pOldFont = pDC->SelectObject(pFont);
+		pDC->SetTextColor(RGB(255, 0, 0));
 		pDC->DrawText(strText, rcText, nFormat);
 		pDC->SelectObject(pOldFont);
 		pDC->SetBkMode(Mode);

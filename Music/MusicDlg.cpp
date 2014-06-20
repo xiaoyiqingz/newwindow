@@ -70,16 +70,23 @@ BOOL CMusicDlg::OnInitDialog()
 	m_btNext.Create(NULL, WS_CHILD|WS_VISIBLE, CRect(170,45,0,0), this,IDC_NEXT);
 	m_btNext.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_NEXT), _T("PNG"));
 
+	HDC hParentDC = GetBackDC();
 	m_btNewClose.SetBackImage(hInstance, IDB_NEW_CLOSE);
 	m_btNewClose.SetButtonType(BT_PUSHBUTTON);
 	m_btNewClose.SetSize(36, 31);
 
+	HFONT font;
+	font = CreateFont(0, 0, 0, 0, FW_DONTCARE, TRUE, FALSE, FALSE, DEFAULT_CHARSET,OUT_CHARACTER_PRECIS,
+		CLIP_CHARACTER_PRECIS,DEFAULT_QUALITY,FF_MODERN,_T("»ªÎÄÐÐ¿¬"));
 	m_Check.SetCheckImage(_T("res\\checkbox_normal.png"),
 		_T("res\\checkbox_hightlight.png"),
 		_T("res\\checkbox_tick_normal.png"),
 		_T("res\\checkbox_tick_highlight.png"));
 	m_Check.SetButtonType(BT_CHECKBUTTON);
+	m_Check.SetParentBack(hParentDC);
 	m_Check.SetSize(68, 15);
+	m_Check.SetCtrlFont(font);
+//	DeleteObject(font);   //*
 
 	CRect rcClient;
 	GetClientRect(&rcClient);
@@ -175,4 +182,13 @@ bool CMusicDlg::OnMaxSize()
 	SetWindowPos(NULL, 0, 0, rcClient.Width(), (bMini? 76:510), SWP_NOMOVE);
 	
 	return true;
+}
+
+
+void CMusicDlg::DrawClientArea(CDC*pDC,int nWidth,int nHeight)
+{
+	CRect rcClient;
+	GetClientRect(&rcClient);
+
+	m_ImageBack.Draw(pDC->GetSafeHdc(),0, 0, nWidth, nHeight);
 }

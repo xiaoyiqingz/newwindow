@@ -47,5 +47,5 @@ public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
-	
+	virtual void DrawClientArea(CDC*pDC,int nWidth,int nHeight);
 };
