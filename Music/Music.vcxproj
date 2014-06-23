@@ -111,6 +111,10 @@
     <None Include="res\pause_mini.png" />
     <None Include="res\play_mini.png" />
     <None Include="res\prev_mini.png" />
+    <None Include="res\radiobtn_highlight.png" />
+    <None Include="res\radiobtn_normal.png" />
+    <None Include="res\radiobtn_tick_highlight.png" />
+    <None Include="res\radiobtn_tick_normal.png" />
     <None Include="res\SKIN_WND_CLOSE.bmp" />
   </ItemGroup>
   <ItemGroup>

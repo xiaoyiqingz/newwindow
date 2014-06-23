@@ -5,7 +5,8 @@
 CMyImage::CMyImage()
 {
 	m_pImage=NULL;
-	ZeroMemory(m_strImageName, sizeof(m_strImageName) );
+	ZeroMemory(m_strImageName, sizeof(m_strImageName));
+	::SetRect(&m_rcNinePart,0,0,0,0);
 }
 
 
@@ -223,7 +224,7 @@ bool CMyImage::DrawImage(CDC * pDC, RECT &rc)
 	rcDrawRect.X = (REAL)rc.left;
 	rcDrawRect.Y = (REAL)rc.top;
 	rcDrawRect.Width = (REAL)(rc.right - rc.left);
-	rcDrawRect.Height = (REAL)(rc.bottom- rc.left);
+	rcDrawRect.Height = (REAL)(rc.bottom- rc.top);
 
 	graphics.DrawImage(m_pImage, rcDrawRect,0, 0, (REAL)GetWidth(), (REAL)GetHeight(), UnitPixel);
 }

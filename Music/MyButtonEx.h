@@ -17,15 +17,17 @@ class CMyButtonEx : public CButton,public MyDialogBase
 {
 protected:
 	CImage			m_pBackImg;
+	CMyImage	    * m_pBackImgN, * m_pBackImgH, * m_pBackImgD, * m_pBackImgF;
 	CMyImage		*m_pCheckImgH, *m_pCheckImgN, *m_pCheckImgTichH, *m_pCheckImgTickN; 
-	CImage*			m_pIconImg;
-	CImage*			m_pMenuImg;
+	CMyImage		*m_pIconImg;
+	CMyImage		*m_pMenuImg;
 
 	BOOL			m_bPress;
 	BOOL			m_bHover;
 	BOOL			m_bFocus;
 	BOOL			m_bMouseTracking;
 	
+	HMENU			m_hMenu;
 	BUTTON_TYPE		m_nBtnType;
 
 	DECLARE_DYNAMIC(CMyButtonEx)
@@ -37,11 +39,17 @@ public:
 public:
 	void SetButtonType(BUTTON_TYPE nBtnType);
 	bool SetBackImage(HINSTANCE hInstance, UINT nResourceID);
+	BOOL SetBackImage(LPCTSTR lpNormal, LPCTSTR lpHoven, LPCTSTR lpDown, LPCTSTR lpFocus, CONST LPRECT lprcNinePart=NULL);
 	bool SetCheckImage(LPCTSTR lpNormal, LPCTSTR lpHover, LPCTSTR lpTickNormal, LPCTSTR lpTickHover);
+	bool SetIconImage(LPCTSTR lpszFileName);
+	BOOL SetMenuImage(LPCTSTR lpszFileName);
 	void SetSize(int nWidth, int nHeight);
+	void SetMenu(HMENU hMenu);
 
 	void DrawPushButton(CDC* pDC,RECT &rcClient);
 	void DrawCheckButton(CDC* pDC,RECT &rcClient);
+	void DrawIconButton(CDC* pDC,RECT &rcClient);
+	void DrawMenuButton(CDC* pDC,RECT &rcClient);
 //	void SetParentBack(HDC hDC){ m_bTransparent = true; m_hParentDC = hDC;}
 
 public:

@@ -21,6 +21,12 @@ protected:
 
 	CMyButtonEx		m_btNewClose;
 	CMyButtonEx		m_Check;
+	CMyButtonEx		m_Radio1;
+	CMyButtonEx		m_Radio2;
+	CMyButtonEx		m_Radio3;
+	CMyButtonEx		m_btIcon;
+	CMyButtonEx		m_btMenu;
+
 public:
 	CMusicDlg(CWnd* pParent = NULL);	// standard constructor
 
@@ -41,11 +47,12 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
-	virtual bool OnMaxSize();	
+	/*virtual bool OnMaxSize();*/	/*子类重写父类的OnMaxSize,子类实现后最大化按子类实现进行，否则按父类最大化进行*/
 
 public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	virtual void DrawClientArea(CDC*pDC,int nWidth,int nHeight);
+	
 };

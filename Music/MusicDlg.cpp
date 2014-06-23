@@ -32,6 +32,11 @@ void CMusicDlg::DoDataExchange(CDataExchange* pDX)
 	CMyDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_NEW_CLOSE, m_btNewClose);
 	DDX_Control(pDX, IDC_CHECK1, m_Check);
+	DDX_Control(pDX, IDC_MY_RADIO, m_Radio1);
+	DDX_Control(pDX, IDC_RADIO2, m_Radio2);
+	DDX_Control(pDX, IDC_RADIO3, m_Radio3);
+	DDX_Control(pDX, IDC_BUTTON2, m_btIcon);
+	DDX_Control(pDX, IDC_BUTTON3, m_btMenu);
 }
 
 BEGIN_MESSAGE_MAP(CMusicDlg, CMyDialog)
@@ -87,6 +92,51 @@ BOOL CMusicDlg::OnInitDialog()
 	m_Check.SetSize(68, 15);
 	m_Check.SetCtrlFont(font);
 //	DeleteObject(font);   //*
+
+	m_Radio1.SetCheckImage(_T("res\\radiobtn_normal.png"), 
+		_T("res\\radiobtn_highlight.png"), 
+		_T("res\\radiobtn_tick_normal.png"), 
+		_T("res\\radiobtn_tick_highlight.png"));
+	m_Radio1.SetButtonType(BT_RADIOBUTTON);
+	m_Radio1.SetParentBack(hParentDC);
+	m_Radio1.SetSize(68,15);
+	m_Radio1.SetCheck(BST_CHECKED);
+
+	m_Radio2.SetCheckImage(_T("res\\radiobtn_normal.png"), 
+		_T("res\\radiobtn_highlight.png"), 
+		_T("res\\radiobtn_tick_normal.png"), 
+		_T("res\\radiobtn_tick_highlight.png"));
+	m_Radio2.SetButtonType(BT_RADIOBUTTON);
+	m_Radio2.SetParentBack(hParentDC);
+	m_Radio2.SetSize(68,15);
+
+	m_Radio3.SetCheckImage(_T("res\\radiobtn_normal.png"), 
+		_T("res\\radiobtn_highlight.png"), 
+		_T("res\\radiobtn_tick_normal.png"), 
+		_T("res\\radiobtn_tick_highlight.png"));
+	m_Radio3.SetButtonType(BT_RADIOBUTTON);
+	m_Radio3.SetParentBack(hParentDC);
+	m_Radio3.SetSize(68,15);
+
+	m_btIcon.SetBackImage(NULL,_T("res\\allbtn_highlight.png"),
+		_T("res\\allbtn_down.png"),NULL);
+	m_btIcon.SetIconImage(_T("res\\message.png"));
+	m_btIcon.SetButtonType(BT_ICONBUTTON);
+	m_btIcon.SetParentBack(hParentDC);
+	m_btIcon.SetSize(22, 22);
+
+	static CMenu menu;
+	menu.LoadMenu(IDR_MENU1);
+
+	CMenu *PopupMenu = menu.GetSubMenu(0);
+
+	m_btMenu.SetBackImage(NULL,_T("res\\menubtn_highlight.png"), _T("res\\menubtn_highlight.png"),NULL);
+	m_btMenu.SetIconImage(_T("res\\imonline.png"));
+	m_btMenu.SetMenuImage(_T("res\\MainPanel_FolderNode_expandTexture.png"));
+	m_btMenu.SetButtonType(BT_MENUBUTTON);
+	m_btMenu.SetParentBack(hParentDC);
+	m_btMenu.SetMenu(PopupMenu->m_hMenu);
+	m_btMenu.SetSize(35,22);
 
 	CRect rcClient;
 	GetClientRect(&rcClient);
@@ -170,6 +220,7 @@ BOOL CMusicDlg::OnEraseBkgnd(CDC* pDC)
 //	return CMyDialog::OnEraseBkgnd(pDC);
 }
 
+/*
 bool CMusicDlg::OnMaxSize()
 {
 	CRect rcClient;
@@ -182,7 +233,7 @@ bool CMusicDlg::OnMaxSize()
 	SetWindowPos(NULL, 0, 0, rcClient.Width(), (bMini? 76:510), SWP_NOMOVE);
 	
 	return true;
-}
+}*/
 
 
 void CMusicDlg::DrawClientArea(CDC*pDC,int nWidth,int nHeight)

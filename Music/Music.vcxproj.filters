@@ -67,6 +67,18 @@
     <None Include="res\SKIN_WND_CLOSE.bmp">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\radiobtn_highlight.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\radiobtn_normal.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\radiobtn_tick_highlight.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\radiobtn_tick_normal.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Music.h">

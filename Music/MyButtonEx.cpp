@@ -14,11 +14,14 @@ IMPLEMENT_DYNAMIC(CMyButtonEx, CButton)
 CMyButtonEx::CMyButtonEx()
 {
 	m_pCheckImgH = m_pCheckImgN = m_pCheckImgTichH = m_pCheckImgTickN = NULL;
+	m_pBackImgN = m_pBackImgH = m_pBackImgD = m_pBackImgF = NULL;
 	m_pIconImg = NULL;
 	m_pMenuImg = NULL;
 
 	m_bFocus = m_bHover = m_bPress = m_bMouseTracking = FALSE;
 	m_nBtnType = BT_PUSHBUTTON;
+
+	m_hMenu = NULL;
 }
 
 CMyButtonEx::~CMyButtonEx()
@@ -48,11 +51,16 @@ void CMyButtonEx::OnDestroy()
 	RenderEngine->RemoveImage(m_pCheckImgN);
 	RenderEngine->RemoveImage(m_pCheckImgTichH);
 	RenderEngine->RemoveImage(m_pCheckImgTickN);
+	RenderEngine->RemoveImage(m_pIconImg);
+	RenderEngine->RemoveImage(m_pMenuImg);
 
-	m_pIconImg = NULL;
-	m_pMenuImg = NULL;
+	RenderEngine->RemoveImage(m_pBackImgN);
+	RenderEngine->RemoveImage(m_pBackImgH);
+	RenderEngine->RemoveImage(m_pBackImgD);
+	RenderEngine->RemoveImage(m_pBackImgF);
 
 	m_bFocus = m_bHover = m_bPress = m_bMouseTracking = FALSE;
+	m_hMenu = NULL;
 }
 
 void CMyButtonEx::SetButtonType(BUTTON_TYPE nBtnType)
@@ -116,10 +124,18 @@ void CMyButtonEx::OnLButtonUp(UINT nFlags, CPoint point)
 		RedrawWindow(NULL, NULL, RDW_FRAME | RDW_INVALIDATE 
 			| RDW_ERASE | RDW_ERASENOW);
 		
-/*
-		if(m_nBtnType == BT_MENUBUTTON) {
 
-		}*/
+		if (m_nBtnType == BT_MENUBUTTON)
+		{
+			if (::IsMenu(m_hMenu))
+			{
+				CRect rc;
+				GetClientRect(&rc);
+				ClientToScreen(&rc);
+				::TrackPopupMenuEx(m_hMenu, TPM_LEFTALIGN | TPM_LEFTBUTTON | TPM_VERTICAL,
+					rc.left, rc.bottom, ::GetParent(GetSafeHwnd()), NULL);
+			}
+		}
 	}
 	CButton::OnLButtonUp(nFlags, point);
 }
@@ -170,6 +186,42 @@ bool CMyButtonEx::SetBackImage(HINSTANCE hInstance, UINT nResourceID)
 	return true;
 }
 
+BOOL CMyButtonEx::SetBackImage(LPCTSTR lpNormal, LPCTSTR lpHoven, LPCTSTR lpDown, LPCTSTR lpFocus, CONST LPRECT lprcNinePart /*=NULL*/)
+{
+	RenderEngine->RemoveImage(m_pBackImgN);
+	RenderEngine->RemoveImage(m_pBackImgH);
+	RenderEngine->RemoveImage(m_pBackImgD);
+	RenderEngine->RemoveImage(m_pBackImgF);
+
+	m_pBackImgN = RenderEngine->GetImage(lpNormal);
+	m_pBackImgH = RenderEngine->GetImage(lpHoven);
+	m_pBackImgD = RenderEngine->GetImage(lpDown);
+	m_pBackImgF = RenderEngine->GetImage(lpFocus);
+
+	if( lprcNinePart != NULL )
+	{
+		if (m_pBackImgN != NULL)
+			m_pBackImgN->SetNinePart(lprcNinePart);
+
+		if (m_pBackImgH != NULL)
+			m_pBackImgH->SetNinePart(lprcNinePart);
+
+		if (m_pBackImgD != NULL)
+			m_pBackImgD->SetNinePart(lprcNinePart);
+
+		if (m_pBackImgF != NULL)
+			m_pBackImgF->SetNinePart(lprcNinePart);
+	}
+
+	if ((lpNormal != NULL && NULL == m_pBackImgN) || 
+		(lpHoven  != NULL && NULL == m_pBackImgH) ||
+		(lpDown   != NULL && NULL == m_pBackImgD) ||
+		(lpFocus  != NULL && NULL == m_pBackImgF))
+		return FALSE;
+	else
+		return TRUE;
+}
+
 bool CMyButtonEx::SetCheckImage(LPCTSTR lpNormal, LPCTSTR lpHover, LPCTSTR lpTickNormal, LPCTSTR lpTickHover)
 {
 	RenderEngine->RemoveImage(m_pCheckImgH);
@@ -191,11 +243,41 @@ bool CMyButtonEx::SetCheckImage(LPCTSTR lpNormal, LPCTSTR lpHover, LPCTSTR lpTic
 
 }
 
+bool CMyButtonEx::SetIconImage(LPCTSTR lpszFileName)
+{
+	RenderEngine->RemoveImage(m_pIconImg);
+	
+	m_pIconImg = RenderEngine->GetImage(lpszFileName);
+
+	if (m_pIconImg == NULL) 
+		return false;
+	else 
+		return true;
+
+}
+
+BOOL CMyButtonEx::SetMenuImage(LPCTSTR lpszFileName)
+{
+	RenderEngine->RemoveImage(m_pMenuImg);
+
+	m_pMenuImg = RenderEngine->GetImage(lpszFileName);
+
+	if (NULL == m_pMenuImg)
+		return FALSE;
+	else
+		return TRUE;
+}
+
 void CMyButtonEx::SetSize(int nWidth, int nHeight)
 {
 	SetWindowPos(NULL, 0, 0, nWidth, nHeight, SWP_NOMOVE);
 }
 
+
+void CMyButtonEx::SetMenu(HMENU hMenu)
+{
+	m_hMenu = hMenu;
+}
 
 LRESULT CMyButtonEx::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -205,6 +287,11 @@ LRESULT CMyButtonEx::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 			| RDW_ERASE | RDW_ERASENOW);
 	}
 
+	if ( message == BM_SETCHECK )
+	{
+		RedrawWindow(NULL, NULL, RDW_FRAME | RDW_INVALIDATE
+			| RDW_ERASE | RDW_ERASENOW);
+	}
 	return CButton::DefWindowProc(message, wParam, lParam);
 }
 
@@ -219,11 +306,22 @@ void CMyButtonEx::OnPaint()
 	CMemoryDC memoryDC(&dc, rcClient);
 	DrawParentWndBg(GetSafeHwnd(), memoryDC->GetSafeHdc());
 
-	if (m_nBtnType == BT_PUSHBUTTON) {
-		DrawPushButton(&memoryDC, rcClient);
-	} else if (m_nBtnType == BT_CHECKBUTTON) {
-		DrawCheckButton(&memoryDC, rcClient);
-	}
+	switch (m_nBtnType) {
+		case BT_PUSHBUTTON:
+			DrawPushButton(&memoryDC, rcClient);
+			break;
+		case BT_RADIOBUTTON:
+		case BT_CHECKBUTTON:
+			DrawCheckButton(&memoryDC, rcClient);
+			break;
+		case BT_ICONBUTTON:
+			DrawIconButton(&memoryDC, rcClient);
+			break;
+		case BT_MENUBUTTON:
+			DrawMenuButton(&memoryDC, rcClient);
+			break;
+		ASSERT(FALSE);
+	}	
 }
 
 void CMyButtonEx::DrawPushButton(CDC* pDC,RECT &rcClient)
@@ -290,5 +388,130 @@ void CMyButtonEx::DrawCheckButton(CDC* pDC,RECT &rcClient)
 		pDC->DrawText(strText, rcText, nFormat);
 		pDC->SelectObject(pOldFont);
 		pDC->SetBkMode(Mode);
+	}
+}
+
+void CMyButtonEx::DrawIconButton(CDC* pDC,RECT &rcClient)
+{
+	if (m_bPress)
+	{
+		if (m_pBackImgD != NULL && !m_pBackImgD->IsNull())
+			m_pBackImgD->Draw(pDC, rcClient);
+	} else if (m_bHover) {
+		if (m_pBackImgH != NULL && !m_pBackImgH->IsNull())
+			m_pBackImgH->Draw(pDC, rcClient);
+	}
+
+	if (m_bPress)
+		::OffsetRect(&rcClient,1, 1);
+
+	CString strText;
+	GetWindowText(strText);
+
+	BOOL bHasText = FALSE;
+	if (strText.GetLength() > 0)
+		bHasText = TRUE;
+
+	BOOL bHasIcon = FALSE;
+	if (m_pIconImg != NULL && !m_pIconImg->IsNull())
+		bHasIcon = TRUE;
+
+	if (bHasIcon && bHasText)	// 带图标和文字
+	{
+		int cxIcon = m_pIconImg->GetWidth();
+		int cyIcon = m_pIconImg->GetHeight();
+
+		int nMode = pDC->SetBkMode(TRANSPARENT);
+		CFont *pFont = GetFont();
+		CFont *pOldFont = pDC->SelectObject(pFont);
+
+		CRect rcText(0,0,0,0);	// 计算文字宽高
+		pDC->DrawText(strText, &rcText, DT_SINGLELINE | DT_CALCRECT);
+
+		int cx = cxIcon+3+rcText.Width();
+		int cy = cyIcon;
+
+		CRect rcCenter;
+		CalcCenterRect(rcClient, cx, cy, rcCenter);
+
+		CRect rcIcon(rcCenter.left, rcCenter.top, rcCenter.left+cxIcon, rcCenter.bottom);
+		m_pIconImg->DrawImage(pDC, rcIcon);
+
+		UINT nFormat = DT_CENTER | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS;
+		rcText = CRect(rcIcon.right+3, rcClient.top, rcIcon.right+3+rcText.Width(), rcClient.bottom);
+		pDC->DrawText(strText, &rcText, nFormat);
+
+		pDC->SelectObject(pOldFont);
+		pDC->SetBkMode(nMode);	
+	}
+	else if (bHasIcon)
+	{
+		int cxIcon = m_pIconImg->GetWidth();
+		int cyIcon = m_pIconImg->GetHeight();
+
+		CRect rcIcon;
+		CalcCenterRect(rcClient, cxIcon, cyIcon, rcIcon);
+
+		m_pIconImg->DrawImage(pDC, rcIcon);
+	}
+	else if (bHasText)
+	{
+		CRect rcText(rcClient);
+		rcText.left += 2;
+		rcText.right -= 2;
+
+		UINT nFormat = DT_CENTER | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS;
+
+		int nMode = pDC->SetBkMode(TRANSPARENT);
+		CFont *pFont = GetFont();
+		CFont *pOldFont = pDC->SelectObject(pFont);
+		pDC->DrawText(strText, &rcText, nFormat);
+		pDC->SelectObject(pOldFont);
+		pDC->SetBkMode(nMode);	
+	}
+}
+
+void CMyButtonEx::DrawMenuButton(CDC* pDC,RECT &rcClient)
+{
+	if (m_bPress)
+	{
+		if (m_pBackImgD != NULL && !m_pBackImgD->IsNull())
+			m_pBackImgD->DrawImage(pDC, rcClient);
+	}
+	else if (m_bHover)
+	{
+		if (m_pBackImgH != NULL && !m_pBackImgH->IsNull())
+			m_pBackImgH->DrawImage(pDC, rcClient);
+	}
+
+	CRect rcMenu(0, 0, 0, 0);
+
+	if (m_pMenuImg != NULL && !m_pMenuImg->IsNull())
+	{
+		int cx = m_pMenuImg->GetWidth();
+		int cy = m_pMenuImg->GetHeight();
+		int x = rcClient.right - 3 - cx;
+		int y = (rcClient.bottom-rcClient.top - cy + 1) / 2;
+		rcMenu = CRect(x, y, x+cx, y+cy);
+		m_pMenuImg->DrawImage(pDC, rcMenu);
+	}
+
+	if (m_pIconImg != NULL && !m_pIconImg->IsNull())
+	{
+		int cx = m_pIconImg->GetWidth();
+		int cy = m_pIconImg->GetHeight();
+
+		int nRight;
+		if (rcMenu.left > 0)
+			nRight = rcMenu.left;
+		else
+			nRight = rcClient.right;
+
+		CRect rcIcon(rcClient.left, rcClient.top, nRight, rcClient.bottom);
+		CalcCenterRect(rcIcon, cx, cy, rcIcon);
+
+		if (m_bPress)
+			rcIcon.OffsetRect(1, 1);
+		m_pIconImg->DrawImage(pDC, rcIcon);
 	}
 }
