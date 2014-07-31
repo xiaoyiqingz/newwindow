@@ -326,15 +326,100 @@ void CMyButtonEx::OnPaint()
 
 void CMyButtonEx::DrawPushButton(CDC* pDC,RECT &rcClient)
 {
-	if (m_bPress) {
-		m_pBackImg.Draw(pDC->GetSafeHdc(), rcClient, CRect(108, 0, 144, 31));   //3
+	if (m_bPress)		// 鼠标左键按下状态
+	{
+		if (m_pBackImgD != NULL && !m_pBackImgD->IsNull())
+			m_pBackImgD->DrawImage(pDC, rcClient);
+	}
+	else if (m_bHover)	// 鼠标悬停状态
+	{
+		if (m_pBackImgH != NULL && !m_pBackImgH->IsNull())
+			m_pBackImgH->DrawImage(pDC, rcClient);
+	}
+	else if (m_bFocus)	// 焦点状态
+	{
+		if (m_pBackImgF != NULL && !m_pBackImgF->IsNull())
+			m_pBackImgF->DrawImage(pDC, rcClient);
+	}
+	else				// 普通状态
+	{
+		if (m_pBackImgN != NULL && !m_pBackImgN->IsNull())
+			m_pBackImgN->DrawImage(pDC, rcClient);
+	}
+
+	if (m_bPress)
+		::OffsetRect(&rcClient,1, 1);
+
+	CString strText;
+	GetWindowText(strText);
+
+	BOOL bHasText = FALSE;
+	if (strText.GetLength() > 0)
+		bHasText = TRUE;
+
+	BOOL bHasIcon = FALSE;
+	if (m_pIconImg != NULL && !m_pIconImg->IsNull())
+		bHasIcon = TRUE;
+
+	if (bHasIcon && bHasText)	// 带图标和文字
+	{
+		int cxIcon = m_pIconImg->GetWidth();
+		int cyIcon = m_pIconImg->GetHeight();
+
+		int nMode = pDC->SetBkMode(TRANSPARENT);
+
+		CFont *pFont = GetFont();
+		CFont *pOldFont = pDC->SelectObject(pFont);
+
+		CRect rcText(0,0,0,0);	// 计算文字宽高
+		pDC->DrawText(strText, &rcText, DT_SINGLELINE | DT_CALCRECT);
+
+		int cx = cxIcon+3+rcText.Width();
+		int cy = cyIcon;
+
+		CRect rcCenter;
+		CalcCenterRect(rcClient, cx, cy, rcCenter);
+
+		CRect rcIcon(rcCenter.left, rcCenter.top, rcCenter.left+cxIcon, rcCenter.bottom);
+		m_pIconImg->DrawImage(pDC, rcIcon);
+
+		UINT nFormat = DT_LEFT | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS;
+		rcText = CRect(rcIcon.right+3, rcClient.top, rcIcon.right+3+rcText.Width(), rcClient.bottom);
+		pDC->DrawText(strText, &rcText, nFormat);
+
+		pDC->SelectObject(pOldFont);
+		pDC->SetBkMode(nMode);
+	}
+	else if (bHasIcon)	// 仅图标
+	{
+		int cxIcon = m_pIconImg->GetWidth();
+		int cyIcon = m_pIconImg->GetHeight();
+
+		CRect rcIcon;
+		CalcCenterRect(rcClient, cxIcon, cyIcon, rcIcon);
+
+		m_pIconImg->DrawImage(pDC, rcIcon);
+	}
+	else if (bHasText)	// 仅文字
+	{
+		UINT nFormat = DT_LEFT | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS;
+
+		int nMode = pDC->SetBkMode(TRANSPARENT);
+		CFont *pFont = GetFont();
+		CFont *pOldFont = pDC->SelectObject(pFont);
+		pDC->DrawText(strText, &rcClient, nFormat);
+		pDC->SelectObject(pOldFont);
+		pDC->SetBkMode(nMode);
+	}
+	/*if (m_bPress) {
+		m_pBackImg.Draw(pDC->GetSafeHdc(), rcClient, CRect(108, 0, 144, 31));  //3
 	} else if (m_bFocus) {
 		m_pBackImg.Draw(pDC->GetSafeHdc(), rcClient, CRect(36, 0, 72, 31));   //2
 	} else if (m_bHover) {
 		m_pBackImg.Draw(pDC->GetSafeHdc(), rcClient, CRect(72, 0, 108, 31));  //4
 	} else {
-		m_pBackImg.Draw(pDC->GetSafeHdc(), rcClient, CRect(0, 0, 36, 31));	//1
-	}
+		m_pBackImg.Draw(pDC->GetSafeHdc(), rcClient, CRect(36, 0, 72, 31));	  //2
+	}*/
 }
 
 void CMyButtonEx::DrawCheckButton(CDC* pDC,RECT &rcClient)

@@ -19,8 +19,6 @@
 // CMusicDlg dialog
 
 
-
-
 CMusicDlg::CMusicDlg(CWnd* pParent /*=NULL*/)
 	: CMyDialog(CMusicDlg::IDD, pParent)
 {
@@ -37,12 +35,17 @@ void CMusicDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_RADIO3, m_Radio3);
 	DDX_Control(pDX, IDC_BUTTON2, m_btIcon);
 	DDX_Control(pDX, IDC_BUTTON3, m_btMenu);
+	DDX_Control(pDX, IDC_LIST1, m_list1);
+	DDX_Control(pDX, IDC_BUTTON4, m_btRight);
+	DDX_Control(pDX, IDC_EDIT_MULTI, m_etMuti);
 }
 
 BEGIN_MESSAGE_MAP(CMusicDlg, CMyDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_WM_ERASEBKGND()
+	ON_BN_CLICKED(IDC_BUTTON4, &CMusicDlg::OnClickedButton4)
+	ON_NOTIFY(NM_CLICK, IDC_LIST1, &CMusicDlg::OnClickList1)
 END_MESSAGE_MAP()
 
 
@@ -61,11 +64,156 @@ BOOL CMusicDlg::OnInitDialog()
 //	LoadBackSkin(_T("G:\\vstest\\NewWindow\\Music\\res\\back.jpg"));
 //	LoadBackSkin(AfxGetInstanceHandle(), IDB_BACKALL, _T("IMAGE"));
 //	LoadBackSkin(AfxGetInstanceHandle(), IDB_CLOSE, _T("PNG"));
-	LoadBackSkin(AfxGetInstanceHandle(), IDB_GROUND);
+	LoadBackSkin(AfxGetInstanceHandle(), IDB_BACK_NEW, _T("PNG"));
+	SetWindowPos(NULL, 0, 0, 597, 527, SWP_NOMOVE);	
 
-	SetWindowPos(NULL, 0, 0, 816, 510, SWP_NOMOVE);
+	InitButton();
+/*
+	DWORD dwStyle = m_list1.GetExtendedStyle();
+	dwStyle |= LVS_EX_FULLROWSELECT;
+	m_list1.SetExtendedStyle(dwStyle);*/
 
+	m_list1.InsertColumn( 0, _T(""), LVCFMT_LEFT, 100 );
+	m_list1.InsertColumn( 1, _T(""), LVCFMT_LEFT, 300 );
+	m_list1.InsertColumn( 2, _T(""), LVCFMT_LEFT, 50 );
+	m_list1.InsertColumn( 3, _T(""), LVCFMT_LEFT, 50 );
+	m_list1.InsertColumn( 4, _T(""), LVCFMT_LEFT, 50 );
+	m_list1.m_HeaderCtrl.SetItemHeight(0);
+
+	m_list1.m_HeaderCtrl.SetBackImage(_T("res\\folder_nav_item_bg_hover.png"),&CRect(2,2,2,2));
+	m_list1.m_HeaderCtrl.SetPressImage(_T("res\\folder_nav_item_bg_pressed.png"),&CRect(2,2,2,2));
+	m_list1.m_HeaderCtrl.SetGridImage(_T("res\\category_sep.png"));
+	m_list1.SetHovenImage(_T("res\\item_bg_hover.png"),&CRect(2,2,2,2));
+	m_list1.SetSelectImage(_T("res\\item_bg_selected.png"),&CRect(2,2,2,2));
+	m_list1.SetScrollImage(&m_list1,_T("res\\SKIN_SCROLL.bmp"));
+
+	for (int i=0; i < 12; i++) {
+		m_list1.InsertItem(i,NULL);	
+		m_list1.SetItemContent(i, _T("我的自同步"), _T("@3设备 1本地"), _T("历史记录"));
+		m_list1.InsertImage(i, 0, _T("res\\appicns_folder_Download.png"));
+		m_list1.InsertImage(i, 2, _T("res\\tab1image1.png"), _T("res\\tab1image_gray.png"));
+		m_list1.InsertImage(i, 3, _T("res\\button_invite.png"));
+		m_list1.InsertImage(i, 4, _T("res\\tab_set.png"));
+	}
+	
+	m_list1.SetItemHeight(70);
+	m_list1.MoveWindow(0,70,597,430);
+	m_list1.m_HeaderCtrl.EnableWindow(FALSE);
+	m_list1.m_HeaderCtrl.SetLockCount(1);
+
+	HDC hParentDC = GetBackDC();
+	m_etMuti.SetBackNormalImg(_T("res\\frameBorderEffect_normalDraw.png"), CRect(3,3,3,3));
+	m_etMuti.SetBackHotImg(_T("res\\frameBorderEffect_mouseDownDraw.png"), CRect(3,3,3,3));
+	m_etMuti.SetScrollImage(&m_etMuti,_T("res\\SKIN_SCROLL.bmp"));
+	m_etMuti.SetParentBack(hParentDC);
+/*
+	CRect rcClient;
+	GetClientRect(&rcClient);
+
+	m_ListMusic.Create(WS_CHILD|WS_VISIBLE|LBS_OWNERDRAWVARIABLE|LBS_HASSTRINGS,
+		CRect(1,120,309,rcClient.bottom),this,NULL);
+	m_ListMusic.SetItemHeight(48);
+
+	m_ListMusic.AddString(TEXT("光明 - 汪峰"));
+	m_ListMusic.AddString(TEXT("年轻的战场 - 中国好声音"));
+	m_ListMusic.AddString(TEXT("就现在（《中国好声音》）"));
+	m_ListMusic.AddString(TEXT("我爱你中国 - 梁博"));
+	m_ListMusic.AddString(TEXT("第一次爱的人 - 王心凌"));*/
+	return TRUE;  
+}
+
+
+void CMusicDlg::OnPaint()
+{
+	if (IsIconic())
+	{
+		CPaintDC dc(this); // device context for painting
+
+		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
+
+		// Center icon in client rectangle
+		int cxIcon = GetSystemMetrics(SM_CXICON);
+		int cyIcon = GetSystemMetrics(SM_CYICON);
+		CRect rect;
+		GetClientRect(&rect);
+		int x = (rect.Width() - cxIcon + 1) / 2;
+		int y = (rect.Height() - cyIcon + 1) / 2;
+
+		// Draw the icon
+		dc.DrawIcon(x, y, m_hIcon);
+	}
+	else
+	{
+		CMyDialog::OnPaint();
+	}
+}
+
+// The system calls this function to obtain the cursor to display while the user drags
+//  the minimized window.
+HCURSOR CMusicDlg::OnQueryDragIcon()
+{
+	return static_cast<HCURSOR>(m_hIcon);
+}
+
+
+
+BOOL CMusicDlg::OnCommand(WPARAM wParam, LPARAM lParam)
+{
+	// TODO: Add your specialized code here and/or call the base class
+	switch (LOWORD(wParam)) {
+	case IDC_PLAY:
+		{
+			m_btPause.ShowWindow(SW_HIDE);
+			m_btPlay.ShowWindow(SW_HIDE);
+		}
+		break;
+	case IDC_PAUSE:
+		{
+			m_btPlay.ShowWindow(SW_HIDE);
+			m_btPause.ShowWindow(SW_HIDE);
+		}
+		break;
+	}
+	return CMyDialog::OnCommand(wParam, lParam);
+}
+
+
+BOOL CMusicDlg::OnEraseBkgnd(CDC* pDC)
+{
+	// TODO: Add your message handler code here and/or call default
+
+	return TRUE;
+//	return CMyDialog::OnEraseBkgnd(pDC);
+}
+
+/*
+bool CMusicDlg::OnMaxSize()
+{
+	CRect rcClient;
+	GetClientRect(&rcClient);
+
+	static bool bMini = false;
+
+	bMini = !bMini;
+
+	SetWindowPos(NULL, 0, 0, rcClient.Width(), (bMini? 76:510), SWP_NOMOVE);
+	
+	return true;
+}*/
+
+
+void CMusicDlg::DrawClientArea(CDC*pDC,int nWidth,int nHeight)
+{
+	CRect rcClient;
+	GetClientRect(&rcClient);
+
+	m_ImageBack.Draw(pDC->GetSafeHdc(),0, 0, nWidth, nHeight);
+}
+
+void CMusicDlg::InitButton()
+{
 	HINSTANCE hInstance = AfxGetInstanceHandle();
+/*
 	m_btPrev.Create(NULL, WS_CHILD|WS_VISIBLE, CRect(90,45,0,0), this,IDC_PREV);
 	m_btPrev.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_PREV), _T("PNG"));
 	m_btPlay.Create(NULL, WS_CHILD|WS_VISIBLE, CRect(130,45,0,0), this,IDC_PLAY);
@@ -73,9 +221,18 @@ BOOL CMusicDlg::OnInitDialog()
 	m_btPause.Create(NULL, WS_CHILD, CRect(130,45,0,0), this,IDC_PAUSE);
 	m_btPause.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_PAUSE), _T("PNG"));
 	m_btNext.Create(NULL, WS_CHILD|WS_VISIBLE, CRect(170,45,0,0), this,IDC_NEXT);
-	m_btNext.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_NEXT), _T("PNG"));
+	m_btNext.SetButtonImage(hInstance, MAKEINTRESOURCE(IDB_NEXT), _T("PNG"));*/
 
 	HDC hParentDC = GetBackDC();
+	m_btRight.SetBackImage(_T("res\\button-check_basic_blue48.png"), 
+		_T("res\\button-check_basic_blue48.png"),
+		_T("res\\button-check_basic_blue48.png"),
+		_T("res\\button-check_basic_blue48.png"));
+	m_btRight.SetButtonType(BT_PUSHBUTTON);
+	m_btRight.SetParentBack(hParentDC);
+	m_btRight.SetSize(18,18);
+	m_btRight.MoveWindow(10,505,18,18);
+
 	m_btNewClose.SetBackImage(hInstance, IDB_NEW_CLOSE);
 	m_btNewClose.SetButtonType(BT_PUSHBUTTON);
 	m_btNewClose.SetSize(36, 31);
@@ -138,108 +295,33 @@ BOOL CMusicDlg::OnInitDialog()
 	m_btMenu.SetMenu(PopupMenu->m_hMenu);
 	m_btMenu.SetSize(35,22);
 
-	CRect rcClient;
-	GetClientRect(&rcClient);
-
-	m_ListMusic.Create(WS_CHILD|WS_VISIBLE|LBS_OWNERDRAWVARIABLE|LBS_HASSTRINGS,
-		CRect(1,120,309,rcClient.bottom),this,NULL);
-	m_ListMusic.SetItemHeight(48);
-
-	m_ListMusic.AddString(TEXT("光明 - 汪峰"));
-	m_ListMusic.AddString(TEXT("年轻的战场 - 中国好声音"));
-	m_ListMusic.AddString(TEXT("就现在（《中国好声音》）"));
-	m_ListMusic.AddString(TEXT("我爱你中国 - 梁博"));
-	m_ListMusic.AddString(TEXT("第一次爱的人 - 王心凌"));
-	return TRUE;  
 }
 
-// If you add a minimize button to your dialog, you will need the code below
-//  to draw the icon.  For MFC applications using the document/view model,
-//  this is automatically done for you by the framework.
-
-void CMusicDlg::OnPaint()
+void CMusicDlg::InitEdit()
 {
-	if (IsIconic())
-	{
-		CPaintDC dc(this); // device context for painting
 
-		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
+}
 
-		// Center icon in client rectangle
-		int cxIcon = GetSystemMetrics(SM_CXICON);
-		int cyIcon = GetSystemMetrics(SM_CYICON);
-		CRect rect;
-		GetClientRect(&rect);
-		int x = (rect.Width() - cxIcon + 1) / 2;
-		int y = (rect.Height() - cyIcon + 1) / 2;
 
-		// Draw the icon
-		dc.DrawIcon(x, y, m_hIcon);
+void CMusicDlg::OnClickedButton4()
+{
+	// TODO: Add your control notification handler code here
+	/*m_list1.InsertItem(8,NULL);	
+	m_list1.SetItemText(8,1,_T("我的同步"));
+	m_list1.SetItemText(8,2,_T("new"));
+	m_list1.InsertImage(8,_T("res\\DocType.png"));*/
+}
+
+
+void CMusicDlg::OnClickList1(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	int nItem = pNMItemActivate->iItem;
+	int nSubItem = pNMItemActivate->iSubItem;
+
+	if (nSubItem == 2) {
+		m_list1.SetItemContent(nItem, _T("我的同步"), _T("@2设备 0本地"), _T(""));
 	}
-	else
-	{
-		CMyDialog::OnPaint();
-	}
-}
-
-// The system calls this function to obtain the cursor to display while the user drags
-//  the minimized window.
-HCURSOR CMusicDlg::OnQueryDragIcon()
-{
-	return static_cast<HCURSOR>(m_hIcon);
-}
-
-
-
-BOOL CMusicDlg::OnCommand(WPARAM wParam, LPARAM lParam)
-{
-	// TODO: Add your specialized code here and/or call the base class
-	switch (LOWORD(wParam)) {
-	case IDC_PLAY:
-		{
-			m_btPause.ShowWindow(SW_SHOW);
-			m_btPlay.ShowWindow(SW_HIDE);
-		}
-		break;
-	case IDC_PAUSE:
-		{
-			m_btPlay.ShowWindow(SW_SHOW);
-			m_btPause.ShowWindow(SW_HIDE);
-		}
-		break;
-	}
-	return CMyDialog::OnCommand(wParam, lParam);
-}
-
-
-BOOL CMusicDlg::OnEraseBkgnd(CDC* pDC)
-{
-	// TODO: Add your message handler code here and/or call default
-
-	return TRUE;
-//	return CMyDialog::OnEraseBkgnd(pDC);
-}
-
-/*
-bool CMusicDlg::OnMaxSize()
-{
-	CRect rcClient;
-	GetClientRect(&rcClient);
-
-	static bool bMini = false;
-
-	bMini = !bMini;
-
-	SetWindowPos(NULL, 0, 0, rcClient.Width(), (bMini? 76:510), SWP_NOMOVE);
 	
-	return true;
-}*/
-
-
-void CMusicDlg::DrawClientArea(CDC*pDC,int nWidth,int nHeight)
-{
-	CRect rcClient;
-	GetClientRect(&rcClient);
-
-	m_ImageBack.Draw(pDC->GetSafeHdc(),0, 0, nWidth, nHeight);
+	*pResult = 0;
 }

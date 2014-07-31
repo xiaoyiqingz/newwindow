@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "MyDialogBase.h"
 #include "RenderManager.h"
+#include "UI/SkinUI_ScrollBar.h"
 
 MyDialogBase::MyDialogBase(void)
 {
@@ -72,8 +73,8 @@ void MyDialogBase::SetFrameColor( COLORREF colFrame )
 	m_colFrameNormal = colFrame;
 }
 
-/*
-BOOL ISkinControl::SetScrollImage( CWnd * pOwn,LPCTSTR pszFileName )
+
+BOOL MyDialogBase::SetScrollImage( CWnd * pOwn,LPCTSTR pszFileName )
 {
 	RenderEngine->RemoveImage(m_pImageScroll);
 	m_pImageScroll = RenderEngine->GetImage(pszFileName);
@@ -88,7 +89,7 @@ BOOL ISkinControl::SetScrollImage( CWnd * pOwn,LPCTSTR pszFileName )
 	}
 
 	return TRUE;
-}*/
+}
 
 void MyDialogBase::RemoveScorll()
 {

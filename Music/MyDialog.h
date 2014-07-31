@@ -40,7 +40,8 @@ public:
 	DECLARE_MESSAGE_MAP()
 public:
 	virtual BOOL OnInitDialog();
-	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);void	LoadBackSkin(LPCTSTR pszResourcePath);
+	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
+	void	LoadBackSkin(LPCTSTR pszResourcePath);
 	void	LoadBackSkin(HINSTANCE hInstance, UINT nIDResource, LPCTSTR pszType = NULL);
 	HDC		GetBackDC(){ return m_hMemDC; }
 

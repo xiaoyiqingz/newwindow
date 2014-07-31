@@ -227,6 +227,7 @@ bool CMyImage::DrawImage(CDC * pDC, RECT &rc)
 	rcDrawRect.Height = (REAL)(rc.bottom- rc.top);
 
 	graphics.DrawImage(m_pImage, rcDrawRect,0, 0, (REAL)GetWidth(), (REAL)GetHeight(), UnitPixel);
+	return true;
 }
 
 //»æ»­Í¼Ïñ

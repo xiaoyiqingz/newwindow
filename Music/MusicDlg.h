@@ -7,7 +7,10 @@
 #include "MyButton.h"
 #include "MyListBox.h"
 #include "MyButtonEx.h"
+#include "MyListCtrl.h"
+#include "MyEdit.h"
 #include "afxwin.h"
+#include "afxcmn.h"
 // CMusicDlg dialog
 class CMusicDlg : public CMyDialog
 {
@@ -26,7 +29,10 @@ protected:
 	CMyButtonEx		m_Radio3;
 	CMyButtonEx		m_btIcon;
 	CMyButtonEx		m_btMenu;
+	CMyButtonEx		m_btRight;
 
+	CMyListCtrl		m_list1;
+	CMyEdit			m_etMuti;
 public:
 	CMusicDlg(CWnd* pParent = NULL);	// standard constructor
 
@@ -35,7 +41,6 @@ public:
 
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
-
 
 // Implementation
 protected:
@@ -46,13 +51,18 @@ protected:
 	virtual BOOL OnInitDialog();
 	DECLARE_MESSAGE_MAP()
 
+public:
 	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
 	/*virtual bool OnMaxSize();*/	/*子类重写父类的OnMaxSize,子类实现后最大化按子类实现进行，否则按父类最大化进行*/
+
+	void InitButton();
+	void InitEdit();
 
 public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	virtual void DrawClientArea(CDC*pDC,int nWidth,int nHeight);
-	
+	afx_msg void OnClickedButton4();
+	afx_msg void OnClickList1(NMHDR *pNMHDR, LRESULT *pResult);
 };

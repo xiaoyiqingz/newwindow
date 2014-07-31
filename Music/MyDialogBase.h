@@ -73,7 +73,7 @@ public:
 	//滚动条
 public:
 	//加载资源
-	/*BOOL SetScrollImage(CWnd * pOwn,LPCTSTR pszFileName);*/
+	BOOL SetScrollImage(CWnd * pOwn,LPCTSTR pszFileName);
 	//
 	void RemoveScorll();
 };

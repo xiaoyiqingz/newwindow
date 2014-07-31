@@ -78,6 +78,7 @@ BOOL CMyDialog::OnInitDialog()
 	m_btClose.Create(NULL,WS_CHILD|WS_VISIBLE,rcControl,this,IDCANCEL);
 	m_btClose.SetButtonImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_CLOSE), _T("PNG"));
 
+
 	m_btMax.Create(NULL,WS_CHILD|WS_VISIBLE,rcControl,this,IDC_WND_MAX);
 	m_btMax.SetButtonImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_MAX), _T("PNG"));
 

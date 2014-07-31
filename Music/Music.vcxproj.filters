@@ -79,6 +79,12 @@
     <None Include="res\radiobtn_tick_normal.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\back_new.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\button-check_basic_blue48.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Music.h">
@@ -123,6 +129,12 @@
     <ClInclude Include="MyDialogBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MyEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyListCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Music.cpp">
@@ -159,6 +171,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MyDialogBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyListCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyEdit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

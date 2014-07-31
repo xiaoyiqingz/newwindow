@@ -38,16 +38,21 @@
 #include <afxcontrolbars.h>     // MFC support for ribbons and control bars
 
 #include <GdiPlus.h>
+#pragma comment(lib,"Gdiplus.lib")
 using namespace Gdiplus;
 
-#pragma comment(lib,"Gdiplus.lib")
-
-//删除指针
 #define SafeDelete(pData) { try { delete pData; } catch (...) { ASSERT(FALSE); } pData=NULL; }
-//接口释放
 #define SafeRelease(pObject) { if (pObject!=NULL) { pObject->Release(); pObject=NULL; } }
 
+#include "UI/detours.h"
+#include "UI/SkinUI_ScrollBar.h"
+#ifdef _DEBUG
+#pragma comment (lib,"../lib/SkinUI_ScrollBarD.lib")
+#else
+#pragma comment (lib,"../lib/SkinUI_ScrollBar.lib")
+#endif
 
+#pragma comment (lib,"../lib/Detours.lib")
 
 
 

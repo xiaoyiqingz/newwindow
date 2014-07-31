@@ -98,8 +98,10 @@
     <None Include="ReadMe.txt" />
     <None Include="res\back.jpg" />
     <None Include="res\back1.jpg" />
+    <None Include="res\back_new.png" />
     <None Include="res\bitmap.BMP" />
     <None Include="res\bitmap1.bmp" />
+    <None Include="res\button-check_basic_blue48.png" />
     <None Include="res\close.png" />
     <None Include="res\ground.bmp" />
     <None Include="res\image1.bin" />
@@ -125,9 +127,11 @@
     <ClInclude Include="MyButton.h" />
     <ClInclude Include="MyButtonEx.h" />
     <ClInclude Include="MyDialog.h" />
+    <ClInclude Include="MyEdit.h" />
     <ClInclude Include="MyImage.h" />
     <ClInclude Include="MyImageEx.h" />
     <ClInclude Include="MyListBox.h" />
+    <ClInclude Include="MyListCtrl.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -141,9 +145,11 @@
     <ClCompile Include="MyButton.cpp" />
     <ClCompile Include="MyButtonEx.cpp" />
     <ClCompile Include="MyDialog.cpp" />
+    <ClCompile Include="MyEdit.cpp" />
     <ClCompile Include="MyImage.cpp" />
     <ClCompile Include="MyImageEx.cpp" />
     <ClCompile Include="MyListBox.cpp" />
+    <ClCompile Include="MyListCtrl.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
