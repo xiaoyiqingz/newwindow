@@ -37,6 +37,14 @@
 
 #include <afxcontrolbars.h>     // MFC support for ribbons and control bars
 
+
+#if (defined(DEBUG) || defined(_DEBUG))
+#define new DEBUG_NEW
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+#endif
+
 #include <GdiPlus.h>
 #pragma comment(lib,"Gdiplus.lib")
 using namespace Gdiplus;

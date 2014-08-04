@@ -38,6 +38,7 @@ void CMusicDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LIST1, m_list1);
 	DDX_Control(pDX, IDC_BUTTON4, m_btRight);
 	DDX_Control(pDX, IDC_EDIT_MULTI, m_etMuti);
+	DDX_Control(pDX, IDC_TAB1, m_Tab);
 }
 
 BEGIN_MESSAGE_MAP(CMusicDlg, CMyDialog)
@@ -54,7 +55,9 @@ END_MESSAGE_MAP()
 BOOL CMusicDlg::OnInitDialog()
 {
 	CMyDialog::OnInitDialog();
-
+/*
+	_CrtDumpMemoryLeaks();
+	_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );*/
 	// Set the icon for this dialog.  The framework does this automatically
 	//  when the application's main window is not a dialog
 	SetIcon(m_hIcon, TRUE);			// Set big icon
@@ -68,6 +71,7 @@ BOOL CMusicDlg::OnInitDialog()
 	SetWindowPos(NULL, 0, 0, 597, 527, SWP_NOMOVE);	
 
 	InitButton();
+	InitTabCtrl();
 /*
 	DWORD dwStyle = m_list1.GetExtendedStyle();
 	dwStyle |= LVS_EX_FULLROWSELECT;
@@ -302,6 +306,22 @@ void CMusicDlg::InitEdit()
 
 }
 
+void CMusicDlg::InitTabCtrl() {
+	m_Tab.SetParentBack(GetBackDC());
+	for (int i = 0; i < 2; i++) {
+		m_Tab.AddItem(i);
+	}
+
+	m_Tab.SetItemSize(CSize(64, 64));
+	m_Tab.SetIconImage(0, _T("res\\tab1.png"), _T("res\\tab1.png"));
+	m_Tab.SetIconImage(1, _T("res\\tab2.png"), _T("res\\tab2.png"));
+
+//	m_Tab.SetBackImage(_T("res\\back.png"), &CRect(2,2,2,2));
+	m_Tab.SetItemsImage(NULL, _T("res\\Hoven.png"), _T("res\\down.png"), &CRect(2,2,2,2));
+	m_Tab.SetLeftTop(0,0);
+	m_Tab.SetCurSel(0);
+	m_Tab.MoveWindow(20, 10, 300, 60);
+}
 
 void CMusicDlg::OnClickedButton4()
 {

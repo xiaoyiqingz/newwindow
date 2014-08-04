@@ -9,6 +9,7 @@
 #include "MyButtonEx.h"
 #include "MyListCtrl.h"
 #include "MyEdit.h"
+#include "MyTabCtrl.h"
 #include "afxwin.h"
 #include "afxcmn.h"
 // CMusicDlg dialog
@@ -33,6 +34,7 @@ protected:
 
 	CMyListCtrl		m_list1;
 	CMyEdit			m_etMuti;
+	CMyTabCtrl		m_Tab;
 public:
 	CMusicDlg(CWnd* pParent = NULL);	// standard constructor
 
@@ -57,6 +59,7 @@ public:
 
 	void InitButton();
 	void InitEdit();
+	void InitTabCtrl();
 
 public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);

@@ -132,6 +132,7 @@
     <ClInclude Include="MyImageEx.h" />
     <ClInclude Include="MyListBox.h" />
     <ClInclude Include="MyListCtrl.h" />
+    <ClInclude Include="MyTabCtrl.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -150,6 +151,7 @@
     <ClCompile Include="MyImageEx.cpp" />
     <ClCompile Include="MyListBox.cpp" />
     <ClCompile Include="MyListCtrl.cpp" />
+    <ClCompile Include="MyTabCtrl.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
