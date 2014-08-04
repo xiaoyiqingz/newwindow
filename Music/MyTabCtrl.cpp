@@ -152,7 +152,7 @@ int CMyTabCtrl::AddItem(int nID)
 
 	__super::InsertItem(nID,TEXT(""));
 
-	SetItemPadding(nID,1);
+	SetItemPadding(nID,10);
 
 	return m_ItemArray.size() - 1;
 }

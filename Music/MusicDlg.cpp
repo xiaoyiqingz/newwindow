@@ -310,37 +310,19 @@ void CMusicDlg::InitEdit()
 
 void CMusicDlg::InitTabCtrl() {
 	m_Tab.SetParentBack(GetBackDC());
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 2; i++) {
 		m_Tab.AddItem(i);
 	}
-	m_Tab.m_colNormalText = RGB(255,255,255);
-	static CFont font;
-	font.CreateFont(20,0,0,0,FW_BOLD,0,FALSE,0,0,0,0,0,0,TEXT("Î¢ÈíÑÅºÚ"));
 
-	m_Tab.SetCtrlFont(font);
-
-	m_Tab.SetItemSize(CSize(120, 45));
-	m_Tab.SetItemText(0,TEXT("Ê×Ò³"));
-	m_Tab.SetItemText(1,TEXT("É±¶¾"));
-	m_Tab.SetItemText(2,TEXT("ÇåÀíÀ¬»ø"));
-
-	m_Tab.SetIconImage(0, _T("res\\plugin_87.png"),
-		_T("res\\plugin_87.png"));
-
-	m_Tab.SetIconImage(1, _T("res\\plugin_706.png"),
-		TEXT("res\\plugin_706.png"));
-
-	m_Tab.SetIconImage(2, _T("res\\plugin_2061.png"),
-		_T("res\\plugin_2061.png"));
-/*
+	m_Tab.SetItemSize(CSize(64, 64));
 	m_Tab.SetIconImage(0, _T("res\\tab1.png"), _T("res\\tab1.png"));
-	m_Tab.SetIconImage(1, _T("res\\tab2.png"), _T("res\\tab2.png"));*/
+	m_Tab.SetIconImage(1, _T("res\\tab2.png"), _T("res\\tab2.png"));
 
-	m_Tab.SetBackImage(_T("res\\back.png"), &CRect(2,2,2,2));
+//	m_Tab.SetBackImage(_T("res\\back.png"), &CRect(2,2,2,2));
 	m_Tab.SetItemsImage(NULL, _T("res\\Hoven.png"), _T("res\\down.png"), &CRect(2,2,2,2));
 	m_Tab.SetLeftTop(0,0);
 	m_Tab.SetCurSel(0);
-	m_Tab.SetWindowPos(NULL,0,0,363,45,SWP_NOMOVE);
+	m_Tab.MoveWindow(10,10,148, 64);
 }
 
 void CMusicDlg::OnClickedButton4()
