@@ -2,6 +2,7 @@
 #include "MyImage.h"
 #include "MyButton.h"
 #include "MyImageEx.h"
+#include "MyImage.h"
 #include "MyDialogBase.h"
 
 // CMyDialog dialog
@@ -11,6 +12,7 @@ class CMyDialog : public CDialog, public MyDialogBase
 	DECLARE_DYNAMIC(CMyDialog)
 public:
 	CMyImageEx		m_ImageBack;
+	CMyImage		m_BackImg;
 	CMyButton		m_btClose;
 	CMyButton		m_btMax;
 	CMyButton		m_btMin;

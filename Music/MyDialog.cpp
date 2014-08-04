@@ -109,10 +109,12 @@ void CMyDialog::LoadBackSkin(HINSTANCE hInstance, UINT nIDResource, LPCTSTR pszT
 //  HINSTANCE hInstance, LPCTSTR pszResourceName,LPCTSTR pszType 
 //	return m_ImageBack.LoadImage(hInstance,pszResourceName, pszType);
 
+/*
 	if (pszType == NULL) 
 		m_ImageBack.LoadFromResource(hInstance, nIDResource);
 	else 
-		m_ImageBack.LoadImage(hInstance, MAKEINTRESOURCE(nIDResource), pszType);
+		m_ImageBack.LoadImage(hInstance, MAKEINTRESOURCE(nIDResource), pszType);*/
+	m_BackImg.LoadImage(hInstance, nIDResource, pszType);
 }
 
 void CMyDialog::OnPaint()

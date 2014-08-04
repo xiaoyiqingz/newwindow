@@ -30,7 +30,7 @@ public:
 	bool LoadImage(LPCTSTR pszFileName);
 	//¼ÓÔØÍ¼Æ¬
 	bool LoadImage(HINSTANCE hInstance, LPCTSTR pszResourceName, LPCTSTR pszType);
-	bool LoadImage(HINSTANCE hInstance, UINT nIDResource);
+	bool LoadImage(HINSTANCE hInstance, UINT nIDResource, LPCTSTR lpszResType = NULL);
 
 	//»æ»­º¯Êý
 public:

@@ -119,15 +119,21 @@ bool CMyImage::LoadImage(HINSTANCE hInstance, LPCTSTR pszResourceName, LPCTSTR p
 	return true;
 }
 
-bool CMyImage::LoadImage(HINSTANCE hInstance, UINT nIDResource)
+bool CMyImage::LoadImage(HINSTANCE hInstance, UINT nIDResource, LPCTSTR lpszResType)
 {
 	//加载判断
 	ASSERT(m_pImage==NULL);
 	if (m_pImage!=NULL) return false;
 
 	//查找资源
-	HRSRC hResource=FindResource(hInstance, MAKEINTRESOURCE(nIDResource), RT_BITMAP);
-	if (hResource==NULL) return false;
+	HRSRC hResource;
+	if (lpszResType == NULL) {
+		hResource =FindResource(hInstance, MAKEINTRESOURCE(nIDResource), RT_BITMAP);
+	} else {
+		hResource=FindResource(hInstance, MAKEINTRESOURCE(nIDResource), lpszResType);
+	}
+
+		if (hResource==NULL) return false;
 
 	//读取资源
 	DWORD dwImageSize=SizeofResource(hInstance,hResource);

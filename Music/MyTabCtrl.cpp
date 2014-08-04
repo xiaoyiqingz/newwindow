@@ -38,6 +38,8 @@ CMyTabCtrl::CMyTabCtrl()
 	m_pItemImgHov = m_pItemImgNor = m_pItemImgSel = NULL;
 	m_bMouseTracking = FALSE;
 	m_nSelIndex = m_nHoverIndex = -1;
+	m_bMouseTracking = FALSE;
+	m_nLeft = m_nTop = 0;
 }
 
 CMyTabCtrl::~CMyTabCtrl()
@@ -65,28 +67,6 @@ void CMyTabCtrl::SetLeftTop(int nLeft, int nTop)
 {
 	m_nLeft = nLeft;
 	m_nTop = nTop;
-}
-
-void CMyTabCtrl::SetItemPadding(int nIndex, int nPadding)
-{
-	CTabCtrlItem* lpItem = GetItemByIndex(nIndex);
-
-	if (lpItem != NULL) 
-		lpItem->m_nPadding = nPadding;
-}
-
-CSize CMyTabCtrl::SetItemSize(CSize size)
-{
-	for (int i = 0; i < (int)m_ItemArray.size(); i++) {
-		CTabCtrlItem *lpItem = m_ItemArray[i];
-		lpItem->m_nWidth = size.cx;
-		lpItem->m_nHeight = size.cy;
-
-		lpItem->m_nLeftWidth = 0;
-		lpItem->m_nRightWidth = 0;
-	} 
-
-	return __super::SetItemSize(size);
 }
 
 BOOL CMyTabCtrl::SetBackImage(LPCTSTR lpszFileName, CONST LPRECT lpNinePart/*=NULL*/)
@@ -151,23 +131,15 @@ BOOL CMyTabCtrl::SetIconImage(int nIndex, LPCTSTR lpIcon, LPCTSTR lpSelIcon)
 		return TRUE;	
 }
 
-void CMyTabCtrl::SetCurSel(int nCurSel)
-{
-	m_nSelIndex = nCurSel;
-	Invalidate(FALSE);
-}
-
 int CMyTabCtrl::GetCurSel()
 {
 	return m_nSelIndex;
 }
 
-void CMyTabCtrl::SetItemText(int nIndex, LPCTSTR lpszText)
+void CMyTabCtrl::SetCurSel(int nCurSel)
 {
-	CTabCtrlItem *lpItem = GetItemByIndex(nIndex);
-
-	if (lpItem != NULL)
-		lpItem->m_strText = lpszText;	
+	m_nSelIndex = nCurSel;
+	Invalidate(FALSE);
 }
 
 int CMyTabCtrl::AddItem(int nID)
@@ -180,9 +152,152 @@ int CMyTabCtrl::AddItem(int nID)
 
 	__super::InsertItem(nID,TEXT(""));
 
-	SetItemPadding(nID,10);
+	SetItemPadding(nID,1);
 
 	return m_ItemArray.size() - 1;
+}
+
+CSize CMyTabCtrl::SetItemSize(CSize size)
+{
+	for (int i = 0; i < m_ItemArray.size(); i++) {
+		CTabCtrlItem *lpItem = m_ItemArray.at(i);
+		lpItem->m_nWidth = size.cx;
+		lpItem->m_nHeight = size.cy;
+
+		lpItem->m_nLeftWidth = 0;
+		lpItem->m_nRightWidth = 0;
+	} 
+
+	return __super::SetItemSize(size);
+}
+
+void CMyTabCtrl::SetItemPadding(int nIndex, int nPadding)
+{
+	CTabCtrlItem* lpItem = GetItemByIndex(nIndex);
+
+	if (lpItem != NULL) 
+		lpItem->m_nPadding = nPadding;
+}
+
+void CMyTabCtrl::SetItemText(int nIndex, LPCTSTR lpszText)
+{
+	CTabCtrlItem *lpItem = GetItemByIndex(nIndex);
+
+	if (lpItem != NULL)
+		lpItem->m_strText = lpszText;	
+}
+
+BOOL CMyTabCtrl::GetItemRectByIndex(int nIndex, CRect& rect)
+{
+	CTabCtrlItem *lpItem;
+	int nLeft = m_nLeft, nTop = m_nTop;
+
+	for (int i = 0; i < (int)m_ItemArray.size(); i++)
+	{
+		lpItem = m_ItemArray[i];
+		if (lpItem != NULL)
+		{
+			if (i == nIndex)
+			{
+				rect = CRect(nLeft, nTop, nLeft+lpItem->m_nWidth, nTop+lpItem->m_nHeight);
+				return TRUE;
+			}
+			nLeft += lpItem->m_nWidth;
+			nLeft += lpItem->m_nPadding;
+		}
+	}
+
+	return FALSE;
+}
+
+void CMyTabCtrl::DrawItem(CDC *pDC, int nIndex)
+{
+	CTabCtrlItem * lpItem = GetItemByIndex(nIndex);
+	if (lpItem == NULL) return;
+
+	CRect rcItem;
+	GetItemRectByIndex(nIndex, rcItem);
+
+	if (m_nSelIndex == nIndex) {
+		if (lpItem->m_lpBgImgD != NULL && !lpItem->m_lpBgImgD->IsNull())
+			lpItem->m_lpBgImgD->Draw(pDC, rcItem);
+		else if (m_pItemImgSel != NULL && !m_pItemImgSel->IsNull()) 
+			m_pItemImgSel->Draw(pDC, rcItem);
+	} else if (m_nHoverIndex == nIndex) {
+		if (lpItem->m_lpBgImgH != NULL && !lpItem->m_lpBgImgH->IsNull())
+			lpItem->m_lpBgImgH->Draw(pDC, rcItem);
+		else if (m_pItemImgHov != NULL && !m_pItemImgHov->IsNull())
+			m_pItemImgHov->Draw(pDC, rcItem);
+	} else {
+		if (lpItem->m_lpBgImgN != NULL && !lpItem->m_lpBgImgN->IsNull())
+			lpItem->m_lpBgImgN->Draw(pDC, rcItem);
+		else if (m_pItemImgNor != NULL && !m_pItemImgNor->IsNull())
+			m_pItemImgNor->Draw(pDC, rcItem);
+	}
+
+	CMyImage * lpIconImg = NULL;
+
+	if (m_nSelIndex == nIndex)
+		lpIconImg = lpItem->m_lpSelIconImg;
+	else
+		lpIconImg = lpItem->m_lpIconImg;
+
+	BOOL bHasText = FALSE;
+	if (lpItem->m_strText.GetLength() > 0)
+		bHasText = TRUE;
+
+	BOOL bHasIcon = FALSE;
+	if (lpIconImg != NULL && !lpIconImg->IsNull())
+		bHasIcon = TRUE;
+
+	if (bHasIcon && bHasText)
+	{
+		int cxIcon = lpIconImg->GetWidth();
+		int cyIcon = lpIconImg->GetHeight();
+
+		int nMode = pDC->SetBkMode(TRANSPARENT);
+		pDC->SelectObject(GetCtrlFont());
+		pDC->SetTextColor(m_colNormalText);
+
+		CRect rcText(0,0,0,0);	
+		pDC->DrawText(lpItem->m_strText, lpItem->m_strText.GetLength(), &rcText, DT_SINGLELINE | DT_CALCRECT);
+
+		int cx = cxIcon+1+rcText.Width();
+		int cy = cyIcon;
+
+		CRect rcCenter;
+		CalcCenterRect(rcItem, cx, cy, rcCenter);
+
+		CRect rcIcon(rcCenter.left, rcCenter.top, rcCenter.left+cxIcon, rcCenter.bottom);
+		lpIconImg->Draw(pDC, rcIcon);
+
+		UINT nFormat = DT_LEFT | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS;
+		rcText = CRect(rcIcon.right+1, rcItem.top, rcIcon.right+1+rcText.Width(), rcItem.bottom);
+		pDC->DrawText(lpItem->m_strText, lpItem->m_strText.GetLength(), &rcText, nFormat);
+
+		pDC->SetBkMode(nMode);
+	}
+	else if (bHasIcon)	
+	{
+		int cxIcon = lpIconImg->GetWidth();
+		int cyIcon = lpIconImg->GetHeight();
+
+		CRect rcIcon;
+		CalcCenterRect(rcItem, cxIcon, cyIcon, rcIcon);
+
+		lpIconImg->Draw(pDC, rcIcon);
+	}
+	else if (bHasText)	
+	{
+		UINT nFormat = DT_CENTER | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS;
+
+		int nMode = pDC->SetBkMode(TRANSPARENT);
+		pDC->SetTextColor(m_colNormalText);
+		pDC->SelectObject(GetCtrlFont());
+
+		pDC->DrawText(lpItem->m_strText, lpItem->m_strText.GetLength(), &rcItem, nFormat);
+		pDC->SetBkMode(nMode);
+	}
 }
 
 BOOL CMyTabCtrl::OnEraseBkgnd(CDC* pDC)
@@ -193,20 +308,20 @@ BOOL CMyTabCtrl::OnEraseBkgnd(CDC* pDC)
 
 void CMyTabCtrl::OnPaint()
 {
-	CPaintDC dc(this); 
+	CPaintDC dc(this);
 
 	CRect rcClient;
 	GetClientRect(&rcClient);
 
 	CMemoryDC MemDC(&dc, rcClient);
 
-	DrawParentWndBg(GetSafeHwnd(), MemDC.m_hDC);
+	DrawParentWndBg(GetSafeHwnd(),MemDC.m_hDC);
 
-	if (m_pImgBack != NULL && !m_pImgBack->IsNull()) {
+	if (m_pImgBack != NULL && !m_pImgBack->IsNull())
 		m_pImgBack->Draw(&MemDC, rcClient);
-	}
 
-	for (int i =0; i < (int)m_ItemArray.size(); i++) {
+	for (int i = 0; i < (int)m_ItemArray.size(); i++)
+	{
 		DrawItem(&MemDC, i);
 	}
 }
@@ -278,6 +393,8 @@ void CMyTabCtrl::OnDestroy()
 	m_ItemArray.clear();
 
 	m_nSelIndex = m_nHoverIndex = -1;
+	m_bMouseTracking = FALSE;
+	m_nLeft = m_nTop = 0;
 }
 
 
@@ -288,87 +405,6 @@ BOOL CMyTabCtrl::PreTranslateMessage(MSG* pMsg)
 	return __super::PreTranslateMessage(pMsg);
 }
 
-void CMyTabCtrl::DrawItem(CDC *pDC, int nIndex)
-{
-	CTabCtrlItem * lpItem = GetItemByIndex(nIndex);
-	if (lpItem == NULL) return;
-
-	CRect rcItem;
-	GetItemRectByIndex(nIndex, rcItem);
-
-	if (m_nSelIndex == nIndex) {
-		if (lpItem->m_lpBgImgD != NULL && !lpItem->m_lpBgImgD->IsNull())
-			lpItem->m_lpBgImgD->Draw(pDC, rcItem);
-		else if (m_pItemImgSel != NULL && !m_pItemImgSel->IsNull()) 
-			m_pItemImgSel->Draw(pDC, rcItem);
-	} else if (m_nHoverIndex == nIndex) {
-		if (lpItem->m_lpBgImgH != NULL && !lpItem->m_lpBgImgH->IsNull())
-			lpItem->m_lpBgImgH->Draw(pDC, rcItem);
-		else if (m_pItemImgHov != NULL && !m_pItemImgHov->IsNull())
-			m_pItemImgHov->Draw(pDC, rcItem);
-	} else {
-		if (lpItem->m_lpBgImgN != NULL && !lpItem->m_lpBgImgN->IsNull())
-			lpItem->m_lpBgImgN->Draw(pDC, rcItem);
-		else if (m_pItemImgNor != NULL && !m_pItemImgNor->IsNull())
-			m_pItemImgNor->Draw(pDC, rcItem);
-	}
-
-	CMyImage * lpIconImage = NULL;
-
-	if (m_nSelIndex == nIndex) 
-		lpIconImage = lpItem->m_lpSelIconImg;
-	else
-		lpIconImage = lpItem->m_lpIconImg;
-
-	BOOL bHasText = FALSE;
-	if (lpItem->m_strText.GetLength() > 0) 
-		bHasText = TRUE;
-
-	BOOL bHasIcon = FALSE;
-	if (lpIconImage !=NULL && !lpIconImage->IsNull())
-		bHasIcon = TRUE;
-
-	if (bHasText && bHasIcon) {
-		int cxIcon = lpIconImage->GetWidth();
-		int cyIcon = lpIconImage->GetHeight();
-
-		int nMode = pDC->SetBkMode(TRANSPARENT);
-		pDC->SelectObject(GetCtrlFont());
-		pDC->SetTextColor(m_colNormalText);
-
-		CRect rcText(0,0,0,0);
-		pDC->DrawText(lpItem->m_strText, lpItem->m_strText.GetLength(), &rcText, DT_SINGLELINE | DT_CALCRECT);
-
-		int cx = cxIcon+1+rcText.Width();
-		int cy = cyIcon;
-
-		CRect rcCenter;
-		CalcCenterRect(rcItem, cx, cy, rcCenter);
-
-		CRect rcIcon(rcCenter.left, rcCenter.top, rcCenter.left + cxIcon, rcCenter.bottom);
-		lpIconImage->Draw(pDC, rcIcon);
-		rcText = CRect(rcIcon.right+1, rcItem.top, rcIcon.right+1+rcText.Width(), rcItem.bottom);
-		pDC->DrawText(lpItem->m_strText,lpItem->m_strText.GetLength(), &rcText, DT_VCENTER | DT_SINGLELINE | DT_END_ELLIPSIS | DT_LEFT);
-
-		pDC->SetBkMode(nMode);
-	} else if (bHasIcon) {
-		int cxIcon = lpIconImage->GetWidth();
-		int cyIcon = lpIconImage->GetHeight();
-
-		CRect rcIcon;
-		CalcCenterRect(rcItem, cxIcon, cyIcon, rcIcon);
-		lpIconImage->Draw(pDC, rcIcon);
-	} else if (bHasText) {
-		int nMode = pDC->SetBkMode(TRANSPARENT);
-		pDC->SetTextColor(m_colNormalText);
-		pDC->SelectObject(GetCtrlFont());
-
-		pDC->DrawText(lpItem->m_strText, lpItem->m_strText.GetLength() ,&rcItem, DT_VCENTER | DT_LEFT | DT_SINGLELINE | DT_END_ELLIPSIS);
-		pDC->SetBkMode(nMode);
-	}
-
-}
-
 CTabCtrlItem * CMyTabCtrl::GetItemByIndex(int nIndex)
 {
 	if (nIndex >= 0 && nIndex < (int)m_ItemArray.size()) 
@@ -377,38 +413,19 @@ CTabCtrlItem * CMyTabCtrl::GetItemByIndex(int nIndex)
 		return NULL;
 }
 
-BOOL CMyTabCtrl::GetItemRectByIndex(int nIndex, CRect& rect)
-{
-	CTabCtrlItem *pItem;
-	int nLeft = m_nLeft;
-	int nTop = m_nTop;
-
-	for (int i = 0; i < (int)m_ItemArray.size(); i++) {
-		pItem = m_ItemArray[i];
-		if (pItem != NULL) {
-			if (nIndex == i) {
-				rect = CRect(nLeft, nTop, nLeft + pItem->m_nWidth, nTop + pItem->m_nHeight);
-				return TRUE;
-			}
-			nLeft += pItem->m_nWidth;
-			nLeft += pItem->m_nPadding;
-		}
-	}
-
-	return FALSE;
-}
-
 int CMyTabCtrl::HitTest(POINT pt)
 {
 	CTabCtrlItem *lpItem;
 	int nLeft = m_nLeft, nTop = m_nTop;
-
 	CRect rcItem;
-	for (int i = 0 ; i < (int)m_ItemArray.size(); i++) {
+
+	for (int i = 0; i < (int)m_ItemArray.size(); i++)
+	{
 		lpItem = m_ItemArray[i];
-		if (lpItem != NULL) {
-			rcItem = CRect(nLeft, nTop, nLeft + lpItem->m_nWidth, nTop + lpItem->m_nHeight);
-			if (rcItem.PtInRect(pt)) 
+		if (lpItem != NULL)
+		{
+			rcItem = CRect(nLeft, nTop, nLeft+lpItem->m_nWidth, nTop+lpItem->m_nHeight);
+			if (rcItem.PtInRect(pt))
 				return i;
 			nLeft += lpItem->m_nWidth;
 			nLeft += lpItem->m_nPadding;
