@@ -15,7 +15,7 @@ IMPLEMENT_DYNAMIC(CMyListCtrl, CListCtrl)
 CMyListCtrl::CMyListCtrl()
 {
 	m_nHeightItem = 0;
-	m_uActiveItem = 0;
+	m_uActiveItem = -1;
 	m_nItemHov = 0;
 	m_pHovenImg = m_pSelectImg = NULL;
 	m_pCheckImg = m_pUnCheckImg = NULL;

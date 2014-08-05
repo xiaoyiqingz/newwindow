@@ -47,6 +47,7 @@ BEGIN_MESSAGE_MAP(CMusicDlg, CMyDialog)
 	ON_WM_ERASEBKGND()
 	ON_BN_CLICKED(IDC_BUTTON4, &CMusicDlg::OnClickedButton4)
 	ON_NOTIFY(NM_CLICK, IDC_LIST1, &CMusicDlg::OnClickList1)
+	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMusicDlg::OnSelchangeTab1)
 END_MESSAGE_MAP()
 
 
@@ -72,11 +73,22 @@ BOOL CMusicDlg::OnInitDialog()
 
 	InitButton();
 	InitTabCtrl();
+
+
+	m_page0.Create(IDD_PAGE0, &m_Tab);
+	m_page1.Create(IDD_PAGE1, &m_Tab);
+
+	CRect rcClient(0, 70, 597, 500);
+	m_page0.MoveWindow(&rcClient);
+	m_page1.MoveWindow(&rcClient);
+	m_page0.ShowWindow(SW_SHOW);
+	m_page1.ShowWindow(SW_HIDE);
 /*
 	DWORD dwStyle = m_list1.GetExtendedStyle();
 	dwStyle |= LVS_EX_FULLROWSELECT;
 	m_list1.SetExtendedStyle(dwStyle);*/
 
+/*
 	m_list1.InsertColumn( 0, _T(""), LVCFMT_LEFT, 100 );
 	m_list1.InsertColumn( 1, _T(""), LVCFMT_LEFT, 300 );
 	m_list1.InsertColumn( 2, _T(""), LVCFMT_LEFT, 50 );
@@ -103,7 +115,7 @@ BOOL CMusicDlg::OnInitDialog()
 	m_list1.SetItemHeight(70);
 	m_list1.MoveWindow(0,70,597,430);
 	m_list1.m_HeaderCtrl.EnableWindow(FALSE);
-	m_list1.m_HeaderCtrl.SetLockCount(1);
+	m_list1.m_HeaderCtrl.SetLockCount(1);*/
 
 	HDC hParentDC = GetBackDC();
 	m_etMuti.SetBackNormalImg(_T("res\\frameBorderEffect_normalDraw.png"), CRect(3,3,3,3));
@@ -213,7 +225,9 @@ void CMusicDlg::DrawClientArea(CDC*pDC,int nWidth,int nHeight)
 
 	CRect rc(0,0,nWidth,nHeight);
 //	m_ImageBack.Draw(pDC->GetSafeHdc(),0, 0, nWidth, nHeight);
-	m_BackImg.Draw(pDC, rcClient);
+	if (&m_BackImg != NULL && !m_BackImg.IsNull()) {
+		m_BackImg.Draw(pDC, rcClient);
+	}
 }
 
 void CMusicDlg::InitButton()
@@ -238,6 +252,7 @@ void CMusicDlg::InitButton()
 	m_btRight.SetParentBack(hParentDC);
 	m_btRight.SetSize(18,18);
 	m_btRight.MoveWindow(10,505,18,18);
+
 
 	m_btNewClose.SetBackImage(hInstance, IDB_NEW_CLOSE);
 	m_btNewClose.SetButtonType(BT_PUSHBUTTON);
@@ -310,19 +325,20 @@ void CMusicDlg::InitEdit()
 
 void CMusicDlg::InitTabCtrl() {
 	m_Tab.SetParentBack(GetBackDC());
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 3; i++) {
 		m_Tab.AddItem(i);
 	}
 
 	m_Tab.SetItemSize(CSize(64, 64));
 	m_Tab.SetIconImage(0, _T("res\\tab1.png"), _T("res\\tab1.png"));
 	m_Tab.SetIconImage(1, _T("res\\tab2.png"), _T("res\\tab2.png"));
+	m_Tab.SetIconImage(2, _T("res\\tab3.png"), _T("res\\tab3.png"));
 
 //	m_Tab.SetBackImage(_T("res\\back.png"), &CRect(2,2,2,2));
 	m_Tab.SetItemsImage(NULL, _T("res\\Hoven.png"), _T("res\\down.png"), &CRect(2,2,2,2));
-	m_Tab.SetLeftTop(0,0);
+	m_Tab.SetLeftTop(10,10);
 	m_Tab.SetCurSel(0);
-	m_Tab.MoveWindow(10,10,148, 64);
+	m_Tab.MoveWindow(0,0 ,597, 527);
 }
 
 void CMusicDlg::OnClickedButton4()
@@ -345,5 +361,24 @@ void CMusicDlg::OnClickList1(NMHDR *pNMHDR, LRESULT *pResult)
 		m_list1.SetItemContent(nItem, _T("我的同步"), _T("@2设备 0本地"), _T(""));
 	}
 	
+	*pResult = 0;
+}
+
+
+void CMusicDlg::OnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	int nCurSel = m_Tab.GetCurSel();
+
+	switch (nCurSel) {
+		case 0:
+			m_page0.ShowWindow(SW_SHOW);
+			m_page1.ShowWindow(SW_HIDE);
+		break;
+		case 1:
+			m_page0.ShowWindow(SW_HIDE);
+			m_page1.ShowWindow(SW_SHOW);
+			break;
+	}
+
 	*pResult = 0;
 }

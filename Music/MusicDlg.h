@@ -10,6 +10,8 @@
 #include "MyListCtrl.h"
 #include "MyEdit.h"
 #include "MyTabCtrl.h"
+#include "Page0.h"
+#include "Page1.h"
 #include "afxwin.h"
 #include "afxcmn.h"
 // CMusicDlg dialog
@@ -35,6 +37,11 @@ protected:
 	CMyListCtrl		m_list1;
 	CMyEdit			m_etMuti;
 	CMyTabCtrl		m_Tab;
+
+public:
+	CPage0			m_page0;
+	CPage1			m_page1;
+
 public:
 	CMusicDlg(CWnd* pParent = NULL);	// standard constructor
 
@@ -68,4 +75,5 @@ public:
 	virtual void DrawClientArea(CDC*pDC,int nWidth,int nHeight);
 	afx_msg void OnClickedButton4();
 	afx_msg void OnClickList1(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
 };

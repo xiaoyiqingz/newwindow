@@ -142,7 +142,7 @@ void CMyDialog::OnPaint()
 	}
 
 
-	RenderEngine->DrawColor(m_hMemDC, rcClient, RGB(234,241,249));
+	RenderEngine->DrawColor(m_hMemDC, rcClient, RGB(255,255,255));
 	DrawClientArea(CDC::FromHandle(m_hMemDC), rcClient.Width(), rcClient.Height());
 	::BitBlt(dc.m_hDC, 0, 0, rcClient.Width(), rcClient.Height(), m_hMemDC,0, 0, SRCCOPY);
 

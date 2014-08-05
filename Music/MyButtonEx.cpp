@@ -402,7 +402,7 @@ void CMyButtonEx::DrawPushButton(CDC* pDC,RECT &rcClient)
 	}
 	else if (bHasText)	// ½öÎÄ×Ö
 	{
-		UINT nFormat = DT_LEFT | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS;
+		UINT nFormat = DT_CENTER | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS;
 
 		int nMode = pDC->SetBkMode(TRANSPARENT);
 		CFont *pFont = GetFont();
