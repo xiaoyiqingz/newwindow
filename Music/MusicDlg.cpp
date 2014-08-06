@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "Music.h"
 #include "MusicDlg.h"
+#include "DialogSet.h"
 #include "afxdialogex.h"
 #include "resource.h"
 
@@ -28,7 +29,7 @@ CMusicDlg::CMusicDlg(CWnd* pParent /*=NULL*/)
 void CMusicDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CMyDialog::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_NEW_CLOSE, m_btNewClose);
+	DDX_Control(pDX, IDC_SET, m_btSet);
 	DDX_Control(pDX, IDC_CHECK1, m_Check);
 	DDX_Control(pDX, IDC_MY_RADIO, m_Radio1);
 	DDX_Control(pDX, IDC_RADIO2, m_Radio2);
@@ -48,6 +49,7 @@ BEGIN_MESSAGE_MAP(CMusicDlg, CMyDialog)
 	ON_BN_CLICKED(IDC_BUTTON4, &CMusicDlg::OnClickedButton4)
 	ON_NOTIFY(NM_CLICK, IDC_LIST1, &CMusicDlg::OnClickList1)
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMusicDlg::OnSelchangeTab1)
+	ON_BN_CLICKED(IDC_SET, &CMusicDlg::OnBnClickedSet)
 END_MESSAGE_MAP()
 
 
@@ -122,19 +124,7 @@ BOOL CMusicDlg::OnInitDialog()
 	m_etMuti.SetBackHotImg(_T("res\\frameBorderEffect_mouseDownDraw.png"), CRect(3,3,3,3));
 	m_etMuti.SetScrollImage(&m_etMuti,_T("res\\SKIN_SCROLL.bmp"));
 	m_etMuti.SetParentBack(hParentDC);
-/*
-	CRect rcClient;
-	GetClientRect(&rcClient);
 
-	m_ListMusic.Create(WS_CHILD|WS_VISIBLE|LBS_OWNERDRAWVARIABLE|LBS_HASSTRINGS,
-		CRect(1,120,309,rcClient.bottom),this,NULL);
-	m_ListMusic.SetItemHeight(48);
-
-	m_ListMusic.AddString(TEXT("光明 - 汪峰"));
-	m_ListMusic.AddString(TEXT("年轻的战场 - 中国好声音"));
-	m_ListMusic.AddString(TEXT("就现在（《中国好声音》）"));
-	m_ListMusic.AddString(TEXT("我爱你中国 - 梁博"));
-	m_ListMusic.AddString(TEXT("第一次爱的人 - 王心凌"));*/
 	return TRUE;  
 }
 
@@ -250,13 +240,17 @@ void CMusicDlg::InitButton()
 		_T("res\\button-check_basic_blue48.png"));
 	m_btRight.SetButtonType(BT_PUSHBUTTON);
 	m_btRight.SetParentBack(hParentDC);
-	m_btRight.SetSize(18,18);
-	m_btRight.MoveWindow(10,505,18,18);
+	m_btRight.SetSize(24,24);
+	m_btRight.MoveWindow(10,502,24,24);
 
 
-	m_btNewClose.SetBackImage(hInstance, IDB_NEW_CLOSE);
-	m_btNewClose.SetButtonType(BT_PUSHBUTTON);
-	m_btNewClose.SetSize(36, 31);
+	m_btSet.SetBackImage(NULL,_T("res\\allbtn_highlight.png"),
+		_T("res\\allbtn_down.png"), NULL, &CRect(3,3,3,3));
+	m_btSet.SetIconImage(_T("res\\tab_set.png"));
+	m_btSet.SetButtonType(BT_ICONBUTTON);
+	m_btSet.SetParentBack(hParentDC);
+	m_btSet.SetSize(60, 26);
+	m_btSet.MoveWindow(530, 502, 60, 26);
 
 	HFONT font;
 	font = CreateFont(0, 0, 0, 0, FW_DONTCARE, TRUE, FALSE, FALSE, DEFAULT_CHARSET,OUT_CHARACTER_PRECIS,
@@ -381,4 +375,11 @@ void CMusicDlg::OnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	}
 
 	*pResult = 0;
+}
+
+
+void CMusicDlg::OnBnClickedSet()
+{
+	CDialogSet dlg;
+	dlg.DoModal();
 }

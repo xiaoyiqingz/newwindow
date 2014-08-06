@@ -31,6 +31,7 @@ void CPage0::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CPage0, CMyDialog)
 	ON_WM_CTLCOLOR()
+	ON_BN_CLICKED(IDC_BUTTON1, &CPage0::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -95,4 +96,10 @@ HBRUSH CPage0::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 		return B;
 	}
 	return hbr;
+}
+
+
+void CPage0::OnBnClickedButton1()
+{
+	MessageBox(_T("创建同步文件夹"));
 }

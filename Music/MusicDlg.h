@@ -25,7 +25,7 @@ protected:
 	CMyButton		m_btNext;
 	CMyListBox		m_ListMusic;
 
-	CMyButtonEx		m_btNewClose;
+	CMyButtonEx		m_btSet;
 	CMyButtonEx		m_Check;
 	CMyButtonEx		m_Radio1;
 	CMyButtonEx		m_Radio2;
@@ -76,4 +76,5 @@ public:
 	afx_msg void OnClickedButton4();
 	afx_msg void OnClickList1(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnBnClickedSet();
 };
