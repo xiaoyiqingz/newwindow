@@ -40,6 +40,7 @@ CMyTabCtrl::CMyTabCtrl()
 	m_nSelIndex = m_nHoverIndex = -1;
 	m_bMouseTracking = FALSE;
 	m_nLeft = m_nTop = 0;
+	m_rcTabRegion = CRect(0, 0, 0, 0);
 }
 
 CMyTabCtrl::~CMyTabCtrl()
@@ -160,18 +161,20 @@ int CMyTabCtrl::AddItem(int nID)
 	return m_ItemArray.size() - 1;
 }
 
-CSize CMyTabCtrl::SetItemSize(CSize size)
+CSize CMyTabCtrl::SetItemSize(CSize size,  CSize sizeRect)
 {
 	for (int i = 0; i < m_ItemArray.size(); i++) {
 		CTabCtrlItem *lpItem = m_ItemArray.at(i);
 		lpItem->m_nWidth = size.cx;
 		lpItem->m_nHeight = size.cy;
-
 		lpItem->m_nLeftWidth = 0;
 		lpItem->m_nRightWidth = 0;
+	
+		m_rcTabRegion.right += sizeRect.cx; //横向的tabctrl 刷新矩形的横坐标根据item增长，纵坐标不变
 	} 
+		m_rcTabRegion.bottom += sizeRect.cy;
 
-	return __super::SetItemSize(size);
+ 	return __super::SetItemSize(sizeRect);
 }
 
 void CMyTabCtrl::SetItemPadding(int nIndex, int nPadding)
@@ -240,10 +243,13 @@ void CMyTabCtrl::DrawItem(CDC *pDC, int nIndex)
 
 	CMyImage * lpIconImg = NULL;
 
-	if (m_nSelIndex == nIndex)
+	BOOL bSelected = FALSE;
+	if (m_nSelIndex == nIndex) {
 		lpIconImg = lpItem->m_lpSelIconImg;
-	else
+		bSelected = TRUE;
+	} else {
 		lpIconImg = lpItem->m_lpIconImg;
+	}
 
 	BOOL bHasText = FALSE;
 	if (lpItem->m_strText.GetLength() > 0)
@@ -276,6 +282,9 @@ void CMyTabCtrl::DrawItem(CDC *pDC, int nIndex)
 
 		UINT nFormat = DT_LEFT | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS;
 		rcText = CRect(rcIcon.right+1, rcItem.top, rcIcon.right+1+rcText.Width(), rcItem.bottom);
+		if (bSelected) {
+			pDC->SetTextColor(RGB(255,255,255));
+		}
 		pDC->DrawText(lpItem->m_strText, lpItem->m_strText.GetLength(), &rcText, nFormat);
 
 		pDC->SetBkMode(nMode);
@@ -297,7 +306,9 @@ void CMyTabCtrl::DrawItem(CDC *pDC, int nIndex)
 		int nMode = pDC->SetBkMode(TRANSPARENT);
 		pDC->SetTextColor(m_colNormalText);
 		pDC->SelectObject(GetCtrlFont());
-
+		if (bSelected) {
+			pDC->SetTextColor(RGB(255,255,255));
+		}
 		pDC->DrawText(lpItem->m_strText, lpItem->m_strText.GetLength(), &rcItem, nFormat);
 		pDC->SetBkMode(nMode);
 	}
@@ -338,7 +349,8 @@ void CMyTabCtrl::OnLButtonDown(UINT nFlags, CPoint point)
 	if (nIndex != -1) {
 		if (nIndex != m_nSelIndex) {
 			m_nSelIndex = nIndex;
-			Invalidate(FALSE);
+			//Invalidate(FALSE);
+			InvalidateRect(m_rcTabRegion, FALSE);
 
 			NMHDR nmhdr = {m_hWnd, GetDlgCtrlID(), TCN_SELCHANGE};
 			::SendMessage(::GetParent(m_hWnd), WM_NOTIFY, GetDlgCtrlID(), (LPARAM)&nmhdr);
@@ -360,7 +372,8 @@ void CMyTabCtrl::OnMouseMove(UINT nFlags, CPoint point)
 	if (nIndex != m_nHoverIndex)
 	{
 		m_nHoverIndex = nIndex;
-		Invalidate();
+		//Invalidate(FALSE);
+		InvalidateRect(m_rcTabRegion, FALSE);
 	}
 
 	__super::OnMouseMove(nFlags, point);
@@ -373,7 +386,8 @@ LRESULT CMyTabCtrl::OnMouseLeave(WPARAM wparam, LPARAM lparam)
 	int nIndex = -1;
 	if (nIndex !=m_nHoverIndex) {
 		m_nHoverIndex = nIndex;
-		Invalidate(FALSE);
+		//Invalidate(FALSE);
+		InvalidateRect(m_rcTabRegion, FALSE);
 	}
 	return 0;
 }

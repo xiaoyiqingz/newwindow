@@ -28,6 +28,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	virtual BOOL OnInitDialog();
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnBnClickedButton1();
+	afx_msg void OnClickList1(NMHDR *pNMHDR, LRESULT *pResult);
 };

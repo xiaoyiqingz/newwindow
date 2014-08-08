@@ -20,7 +20,7 @@ IMPLEMENT_DYNAMIC(CMyDialog, CDialog)
 CMyDialog::CMyDialog(INT nIDTemplate, CWnd* pParent /*=NULL*/)
 	: CDialog(nIDTemplate, pParent)
 {
-	m_bIsInit = false;
+//	m_bIsInit = false;
 	m_bIsZoomed = false;
 	m_bExtrude = false;
 
@@ -47,8 +47,8 @@ void CMyDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CMyDialog, CDialog)
 	ON_WM_PAINT()
-	ON_WM_SIZE()
-	ON_WM_LBUTTONDOWN()
+//	ON_WM_SIZE()
+//	ON_WM_LBUTTONDOWN()
 	ON_WM_NCHITTEST()
 	ON_WM_NCLBUTTONDOWN()
 END_MESSAGE_MAP()
@@ -73,6 +73,7 @@ BOOL CMyDialog::OnInitDialog()
 	dwNewExStyle&=dwExStyle;
 	SetWindowLong(m_hWnd,GWL_EXSTYLE,dwNewExStyle);*/
 
+/*
 	CRect rcControl(0,0,0,0);  //在WM_SIZE中改变大小
 
 	m_btClose.Create(NULL,WS_CHILD|WS_VISIBLE,rcControl,this,IDCANCEL);
@@ -85,7 +86,7 @@ BOOL CMyDialog::OnInitDialog()
 	m_btMin.Create(NULL,WS_CHILD|WS_VISIBLE,rcControl,this,IDC_WND_MIN);
 	m_btMin.SetButtonImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_MIN), _T("PNG"));
 
-	m_bIsInit = true;
+	m_bIsInit = true;*/
 
 	CRect rcClient;
 	GetClientRect(&rcClient);
@@ -191,6 +192,7 @@ void CMyDialog::OnPaint()
 }
 
 
+/*
 void CMyDialog::OnSize(UINT nType, int cx, int cy)
 {
 	CDialog::OnSize(nType, cx, cy);
@@ -220,20 +222,23 @@ void CMyDialog::OnSize(UINT nType, int cx, int cy)
 
 	//解除锁定
 	UnlockWindowUpdate();
-}
+}*/
 
 
+/*
 BOOL CMyDialog::OnCommand(WPARAM wParam, LPARAM lParam)
 {
 	switch (LOWORD(wParam)) {
 	case IDC_WND_MAX:
 		if (!OnMaxSize()) {
-			static CRect rcClient(0, 0, 0, 0);
+			static CRect rcClient(0, 0, 0, 0);   //用static是为了保存最大化前窗口的大小，方便还原
 			if (m_bIsZoomed) {
 				MoveWindow(&rcClient);
 
 				m_bIsZoomed = false;
 			} else {
+				CRect rcItem;
+				GetClientRect(&rcItem);
 				GetWindowRect(&rcClient);
 
 				CRect rc;
@@ -253,9 +258,10 @@ BOOL CMyDialog::OnCommand(WPARAM wParam, LPARAM lParam)
 	}
 
 	return CDialog::OnCommand(wParam, lParam);
-}
+}*/
 
 
+/*
 void CMyDialog::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	if (!m_bIsZoomed) {
@@ -264,7 +270,7 @@ void CMyDialog::OnLButtonDown(UINT nFlags, CPoint point)
 	} 
 
 	CDialog::OnLButtonDown(nFlags, point);
-}
+}*/
 
 
 LRESULT CMyDialog::OnNcHitTest(CPoint point)

@@ -85,6 +85,12 @@
     <None Include="res\button-check_basic_blue48.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\set_back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\set_line.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Music.h">
@@ -147,6 +153,15 @@
     <ClInclude Include="DialogSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SetPage0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPage1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPage2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Music.cpp">
@@ -201,6 +216,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DialogSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPage0.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPage1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPage2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

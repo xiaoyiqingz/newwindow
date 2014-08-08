@@ -90,11 +90,11 @@ bool CMyImage::LoadImage(HINSTANCE hInstance, LPCTSTR pszResourceName, LPCTSTR p
 
 	//读取资源
 	DWORD dwImageSize=SizeofResource(hInstance,hResource);
-	LPVOID pImageBuffer=LoadResource(hInstance,hResource);
+	LPVOID pImageBuffer=LoadResource(hInstance,hResource);  //该函数装载指定资源到全局存储器
 
 	//创建数据
 	IStream * pIStream=NULL;
-	if (CreateStreamOnHGlobal(NULL,TRUE,&pIStream)!=S_OK)
+	if (CreateStreamOnHGlobal(NULL,TRUE,&pIStream)!=S_OK)   //函数从指定内存创建流对象
 	{
 		ASSERT(FALSE);
 		return false;
@@ -188,7 +188,7 @@ bool CMyImage::DrawImage(CDC * pDC, INT nXPos, INT nYPos)
 	rcDrawRect.Width=(REAL)nImageWidth;
 	rcDrawRect.Height=(REAL)nImageHeight;
 
-	//绘画图像
+	//绘画图像  在指定位置并且按指定大小绘制指定的 Image 的指定部分 在rcDrawRect中画Image从（0,0）到（width，heigh）
 	graphics.DrawImage(m_pImage,rcDrawRect,0,0,(REAL)nImageWidth,(REAL)nImageHeight,UnitPixel);
 
 	return true;

@@ -38,6 +38,9 @@ protected:
 	CMyEdit			m_etMuti;
 	CMyTabCtrl		m_Tab;
 
+	CMyButtonEx		m_btClose;
+	CMyButtonEx		m_btMin;
+	bool			m_bIsInit;
 public:
 	CPage0			m_page0;
 	CPage1			m_page1;
@@ -67,6 +70,7 @@ public:
 	void InitButton();
 	void InitEdit();
 	void InitTabCtrl();
+	void SetControlPos(int cx, int cy);
 
 public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
@@ -77,4 +81,6 @@ public:
 	afx_msg void OnClickList1(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnBnClickedSet();
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 };

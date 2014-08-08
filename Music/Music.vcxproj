@@ -117,6 +117,8 @@
     <None Include="res\radiobtn_normal.png" />
     <None Include="res\radiobtn_tick_highlight.png" />
     <None Include="res\radiobtn_tick_normal.png" />
+    <None Include="res\set_back.png" />
+    <None Include="res\set_line.bmp" />
     <None Include="res\SKIN_WND_CLOSE.bmp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +140,9 @@
     <ClInclude Include="Page1.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SetPage2.h" />
+    <ClInclude Include="SetPage0.h" />
+    <ClInclude Include="SetPage1.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -159,6 +164,9 @@
     <ClCompile Include="Page0.cpp" />
     <ClCompile Include="Page1.cpp" />
     <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="SetPage2.cpp" />
+    <ClCompile Include="SetPage0.cpp" />
+    <ClCompile Include="SetPage1.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

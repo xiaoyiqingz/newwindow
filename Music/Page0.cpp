@@ -30,8 +30,8 @@ void CPage0::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CPage0, CMyDialog)
-	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDC_BUTTON1, &CPage0::OnBnClickedButton1)
+	ON_NOTIFY(NM_CLICK, IDC_LIST1, &CPage0::OnClickList1)
 END_MESSAGE_MAP()
 
 
@@ -87,19 +87,20 @@ void CPage0::OnInitListCtrl()
 	m_list1.m_HeaderCtrl.SetLockCount(1);
 }
 
-
-HBRUSH CPage0::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
-{
-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
-	if (nCtlColor == CTLCOLOR_DLG) {
-		HBRUSH B = CreateSolidBrush(RGB(0,0,0));
-		return B;
-	}
-	return hbr;
-}
-
-
 void CPage0::OnBnClickedButton1()
 {
 	MessageBox(_T("创建同步文件夹"));
+}
+
+void CPage0::OnClickList1(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	
+	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+	if (pNMListView->iItem != -1) {
+		CString strText;
+		strText.Format(_T("%d, %d"), pNMListView->iItem, pNMListView->iSubItem);
+		MessageBox(strText);
+	}
+	*pResult = 0;
 }

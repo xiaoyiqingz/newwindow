@@ -33,6 +33,7 @@ public:
 	BOOL		m_bMouseTracking;
 	int			m_nSelIndex, m_nHoverIndex;
 	int			m_nLeft, m_nTop;
+	CRect		m_rcTabRegion;
 
 public:
 	CMyTabCtrl();
@@ -44,7 +45,7 @@ public:
 	BOOL	SetIconImage(int nIndex, LPCTSTR lpIcon, LPCTSTR lpSelIcon);
 
 	void	SetLeftTop(int nLeft, int nTop);
-	CSize	SetItemSize(CSize size);
+	CSize	SetItemSize(CSize sizeItem, CSize sizeRect);
 	void	SetItemPadding(int nIndex, int nPadding);
 	int		HitTest(POINT pt);
 	void	DrawItem(CDC *pDC, int nIndex);

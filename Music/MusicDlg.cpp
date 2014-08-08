@@ -17,12 +17,14 @@
 #define IDC_PLAY	WM_USER+0x011
 #define IDC_PAUSE	WM_USER+0x012
 #define IDC_NEXT	WM_USER+0x013
+#define IDC_MIN		WM_USER+0x014
 // CMusicDlg dialog
 
 
 CMusicDlg::CMusicDlg(CWnd* pParent /*=NULL*/)
 	: CMyDialog(CMusicDlg::IDD, pParent)
 {
+	m_bIsInit = false;
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
@@ -50,6 +52,8 @@ BEGIN_MESSAGE_MAP(CMusicDlg, CMyDialog)
 	ON_NOTIFY(NM_CLICK, IDC_LIST1, &CMusicDlg::OnClickList1)
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMusicDlg::OnSelchangeTab1)
 	ON_BN_CLICKED(IDC_SET, &CMusicDlg::OnBnClickedSet)
+	ON_WM_SIZE()
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 
@@ -73,6 +77,23 @@ BOOL CMusicDlg::OnInitDialog()
 	LoadBackSkin(AfxGetInstanceHandle(), IDB_BACK_NEW, _T("PNG"));
 	SetWindowPos(NULL, 0, 0, 597, 527, SWP_NOMOVE);	
 
+	CRect rcControl(0,0,0,0);
+	HDC hParentDC = GetBackDC();
+	m_btClose.Create(NULL, WS_VISIBLE | WS_CHILD, rcControl, this, IDCANCEL);
+	m_btClose.SetBackImage(_T("res\\close1.png"), _T("res\\close2.png"), 
+		_T("res\\close3.png"), _T("res\\close4.png"));
+	m_btClose.SetButtonType(BT_PUSHBUTTON);
+	m_btClose.SetParentBack(hParentDC);
+	m_btClose.SetSize(18,18);
+
+	m_btMin.Create(NULL, WS_VISIBLE | WS_CHILD, rcControl, this, IDC_MIN);
+	m_btMin.SetBackImage(_T("res\\minimize1.png"), _T("res\\minimize2.png"), 
+		_T("res\\minimize3.png"), _T("res\\minimize4.png"));
+	m_btMin.SetButtonType(BT_PUSHBUTTON);
+	m_btMin.SetParentBack(hParentDC);
+	m_btMin.SetSize(18,18);
+	m_bIsInit = true;
+
 	InitButton();
 	InitTabCtrl();
 
@@ -80,11 +101,15 @@ BOOL CMusicDlg::OnInitDialog()
 	m_page0.Create(IDD_PAGE0, &m_Tab);
 	m_page1.Create(IDD_PAGE1, &m_Tab);
 
-	CRect rcClient(0, 70, 597, 500);
-	m_page0.MoveWindow(&rcClient);
-	m_page1.MoveWindow(&rcClient);
+	CRect rcItem(0, 70, 597, 500);
+	m_page0.MoveWindow(&rcItem);
+	m_page1.MoveWindow(&rcItem);
 	m_page0.ShowWindow(SW_SHOW);
 	m_page1.ShowWindow(SW_HIDE);
+
+	CRect rcClient;
+	GetClientRect(&rcClient);
+	SetControlPos(rcClient.Width(), rcClient.Height());
 /*
 	DWORD dwStyle = m_list1.GetExtendedStyle();
 	dwStyle |= LVS_EX_FULLROWSELECT;
@@ -119,11 +144,12 @@ BOOL CMusicDlg::OnInitDialog()
 	m_list1.m_HeaderCtrl.EnableWindow(FALSE);
 	m_list1.m_HeaderCtrl.SetLockCount(1);*/
 
+/*
 	HDC hParentDC = GetBackDC();
 	m_etMuti.SetBackNormalImg(_T("res\\frameBorderEffect_normalDraw.png"), CRect(3,3,3,3));
 	m_etMuti.SetBackHotImg(_T("res\\frameBorderEffect_mouseDownDraw.png"), CRect(3,3,3,3));
 	m_etMuti.SetScrollImage(&m_etMuti,_T("res\\SKIN_SCROLL.bmp"));
-	m_etMuti.SetParentBack(hParentDC);
+	m_etMuti.SetParentBack(hParentDC);*/
 
 	return TRUE;  
 }
@@ -179,15 +205,58 @@ BOOL CMusicDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 			m_btPause.ShowWindow(SW_HIDE);
 		}
 		break;
+	case IDC_MIN:
+		ShowWindow(SW_MINIMIZE);
+		break;
 	}
 	return CMyDialog::OnCommand(wParam, lParam);
 }
 
 
+void CMusicDlg::OnSize(UINT nType, int cx, int cy)
+{
+	CMyDialog::OnSize(nType, cx, cy);
+	if( !m_bIsInit ) return;
+
+	SetControlPos(cx, cy);
+}
+
+
+void CMusicDlg::SetControlPos(int cx, int cy)
+{
+	//变量定义
+	const UINT uFlags=SWP_NOACTIVATE|SWP_NOZORDER|SWP_NOCOPYBITS|SWP_NOSIZE;
+
+	//锁定屏幕
+	LockWindowUpdate();
+
+	//移动控件
+	HDWP hDwp=BeginDeferWindowPos(32);
+
+	CRect rcButton;
+	m_btClose.GetWindowRect(&rcButton);
+	DeferWindowPos(hDwp,m_btClose,NULL,cx-rcButton.Width()-2,0,0,0,uFlags);
+	DeferWindowPos(hDwp,m_btMin,NULL,cx-rcButton.Width()-2-18,0,0,0,uFlags);
+
+	EndDeferWindowPos(hDwp);
+
+	//重画界面
+	Invalidate(FALSE);
+	UpdateWindow();
+
+	//解除锁定
+	UnlockWindowUpdate();
+}
+
+
+void CMusicDlg::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	PostMessage(WM_NCLBUTTONDOWN, HTCAPTION, MAKELPARAM(point.x, point.y));
+	CMyDialog::OnLButtonDown(nFlags, point);
+}
+
 BOOL CMusicDlg::OnEraseBkgnd(CDC* pDC)
 {
-	// TODO: Add your message handler code here and/or call default
-
 	return TRUE;
 //	return CMyDialog::OnEraseBkgnd(pDC);
 }
@@ -213,7 +282,7 @@ void CMusicDlg::DrawClientArea(CDC*pDC,int nWidth,int nHeight)
 	CRect rcClient;
 	GetClientRect(&rcClient);
 
-	CRect rc(0,0,nWidth,nHeight);
+//	CRect rc(0,0,nWidth,nHeight);
 //	m_ImageBack.Draw(pDC->GetSafeHdc(),0, 0, nWidth, nHeight);
 	if (&m_BackImg != NULL && !m_BackImg.IsNull()) {
 		m_BackImg.Draw(pDC, rcClient);
@@ -323,7 +392,7 @@ void CMusicDlg::InitTabCtrl() {
 		m_Tab.AddItem(i);
 	}
 
-	m_Tab.SetItemSize(CSize(64, 64));
+	m_Tab.SetItemSize(CSize(64, 64), CSize(104, 74));
 	m_Tab.SetIconImage(0, _T("res\\tab1.png"), _T("res\\tab1.png"));
 	m_Tab.SetIconImage(1, _T("res\\tab2.png"), _T("res\\tab2.png"));
 	m_Tab.SetIconImage(2, _T("res\\tab3.png"), _T("res\\tab3.png"));
