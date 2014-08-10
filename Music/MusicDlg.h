@@ -12,6 +12,7 @@
 #include "MyTabCtrl.h"
 #include "Page0.h"
 #include "Page1.h"
+#include "Page2.h"
 #include "afxwin.h"
 #include "afxcmn.h"
 // CMusicDlg dialog
@@ -44,6 +45,7 @@ protected:
 public:
 	CPage0			m_page0;
 	CPage1			m_page1;
+	CPage2			m_page2;
 
 public:
 	CMusicDlg(CWnd* pParent = NULL);	// standard constructor

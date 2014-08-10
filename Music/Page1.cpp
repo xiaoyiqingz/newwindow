@@ -76,6 +76,6 @@ void CPage1::OnInitListCtrl()
 
 	m_ListPhone.SetItemHeight(70);
 	m_ListPhone.MoveWindow(0,0,597,350);
-	m_ListPhone.m_HeaderCtrl.EnableWindow(FALSE);
-	m_ListPhone.m_HeaderCtrl.SetLockCount(1);
+//	m_ListPhone.m_HeaderCtrl.EnableWindow(FALSE);
+//	m_ListPhone.m_HeaderCtrl.SetLockCount(1);
 }

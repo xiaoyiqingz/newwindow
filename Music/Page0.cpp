@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "Music.h"
 #include "Page0.h"
+#include "AddDevice.h"
 #include "afxdialogex.h"
 
 
@@ -63,7 +64,7 @@ void CPage0::OnInitListCtrl()
 	m_list1.InsertColumn( 2, _T(""), LVCFMT_LEFT, 50 );
 	m_list1.InsertColumn( 3, _T(""), LVCFMT_LEFT, 50 );
 	m_list1.InsertColumn( 4, _T(""), LVCFMT_LEFT, 50 );
-	m_list1.m_HeaderCtrl.SetItemHeight(0);
+//	m_list1.m_HeaderCtrl.SetItemHeight(0);
 /*
 	m_list1.m_HeaderCtrl.SetBackImage(_T("res\\folder_nav_item_bg_hover.png"),&CRect(2,2,2,2));
 	m_list1.m_HeaderCtrl.SetPressImage(_T("res\\folder_nav_item_bg_pressed.png"),&CRect(2,2,2,2));
@@ -83,8 +84,8 @@ void CPage0::OnInitListCtrl()
 
 	m_list1.SetItemHeight(70);
 	m_list1.MoveWindow(0,0,597,350);
-	m_list1.m_HeaderCtrl.EnableWindow(FALSE);
-	m_list1.m_HeaderCtrl.SetLockCount(1);
+//	m_list1.m_HeaderCtrl.EnableWindow(FALSE);
+//	m_list1.m_HeaderCtrl.SetLockCount(1);
 }
 
 void CPage0::OnBnClickedButton1()
@@ -97,10 +98,12 @@ void CPage0::OnClickList1(NMHDR *pNMHDR, LRESULT *pResult)
 	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
 	
 	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
-	if (pNMListView->iItem != -1) {
-		CString strText;
-		strText.Format(_T("%d, %d"), pNMListView->iItem, pNMListView->iSubItem);
-		MessageBox(strText);
+	switch (pNMListView->iSubItem)
+	{
+		case 3:
+			CAddDevice dlg;
+			dlg.DoModal();
+			break;
 	}
 	*pResult = 0;
 }

@@ -103,6 +103,7 @@
     <None Include="res\bitmap1.bmp" />
     <None Include="res\button-check_basic_blue48.png" />
     <None Include="res\close.png" />
+    <None Include="res\device_back.png" />
     <None Include="res\ground.bmp" />
     <None Include="res\image1.bin" />
     <None Include="res\minimize.png" />
@@ -122,6 +123,7 @@
     <None Include="res\SKIN_WND_CLOSE.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddDevice.h" />
     <ClInclude Include="DialogSet.h" />
     <ClInclude Include="MyDialogBase.h" />
     <ClInclude Include="MemoryDC.h" />
@@ -135,9 +137,11 @@
     <ClInclude Include="MyImageEx.h" />
     <ClInclude Include="MyListBox.h" />
     <ClInclude Include="MyListCtrl.h" />
+    <ClInclude Include="MyListIcon.h" />
     <ClInclude Include="MyTabCtrl.h" />
     <ClInclude Include="Page0.h" />
     <ClInclude Include="Page1.h" />
+    <ClInclude Include="Page2.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SetPage2.h" />
@@ -147,6 +151,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddDevice.cpp" />
     <ClCompile Include="DialogSet.cpp" />
     <ClCompile Include="MyDialogBase.cpp" />
     <ClCompile Include="MemoryDC.cpp" />
@@ -160,9 +165,11 @@
     <ClCompile Include="MyImageEx.cpp" />
     <ClCompile Include="MyListBox.cpp" />
     <ClCompile Include="MyListCtrl.cpp" />
+    <ClCompile Include="MyListIcon.cpp" />
     <ClCompile Include="MyTabCtrl.cpp" />
     <ClCompile Include="Page0.cpp" />
     <ClCompile Include="Page1.cpp" />
+    <ClCompile Include="Page2.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="SetPage2.cpp" />
     <ClCompile Include="SetPage0.cpp" />

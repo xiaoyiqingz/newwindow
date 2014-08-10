@@ -163,7 +163,7 @@ int CMyTabCtrl::AddItem(int nID)
 
 CSize CMyTabCtrl::SetItemSize(CSize size,  CSize sizeRect)
 {
-	for (int i = 0; i < m_ItemArray.size(); i++) {
+	for (int i = 0; i < (int)m_ItemArray.size(); i++) {
 		CTabCtrlItem *lpItem = m_ItemArray.at(i);
 		lpItem->m_nWidth = size.cx;
 		lpItem->m_nHeight = size.cy;

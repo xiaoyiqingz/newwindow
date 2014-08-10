@@ -91,6 +91,9 @@
     <None Include="res\set_line.bmp">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\device_back.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Music.h">
@@ -162,6 +165,15 @@
     <ClInclude Include="SetPage2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AddDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Page2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyListIcon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Music.cpp">
@@ -225,6 +237,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetPage2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Page2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyListIcon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

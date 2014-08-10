@@ -62,8 +62,8 @@ END_MESSAGE_MAP()
 BOOL CMusicDlg::OnInitDialog()
 {
 	CMyDialog::OnInitDialog();
-/*
-	_CrtDumpMemoryLeaks();
+
+	/*_CrtDumpMemoryLeaks();
 	_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );*/
 	// Set the icon for this dialog.  The framework does this automatically
 	//  when the application's main window is not a dialog
@@ -100,12 +100,15 @@ BOOL CMusicDlg::OnInitDialog()
 
 	m_page0.Create(IDD_PAGE0, &m_Tab);
 	m_page1.Create(IDD_PAGE1, &m_Tab);
+	m_page2.Create(IDD_PAGE2, &m_Tab);
 
 	CRect rcItem(0, 70, 597, 500);
 	m_page0.MoveWindow(&rcItem);
 	m_page1.MoveWindow(&rcItem);
+	m_page2.MoveWindow(&rcItem);
 	m_page0.ShowWindow(SW_SHOW);
 	m_page1.ShowWindow(SW_HIDE);
+	m_page2.ShowWindow(SW_HIDE);
 
 	CRect rcClient;
 	GetClientRect(&rcClient);
@@ -436,10 +439,17 @@ void CMusicDlg::OnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		case 0:
 			m_page0.ShowWindow(SW_SHOW);
 			m_page1.ShowWindow(SW_HIDE);
+			m_page2.ShowWindow(SW_HIDE);
 		break;
 		case 1:
 			m_page0.ShowWindow(SW_HIDE);
 			m_page1.ShowWindow(SW_SHOW);
+			m_page2.ShowWindow(SW_HIDE);
+			break;
+		case 2:
+			m_page0.ShowWindow(SW_HIDE);
+			m_page1.ShowWindow(SW_HIDE);
+			m_page2.ShowWindow(SW_SHOW);
 			break;
 	}
 

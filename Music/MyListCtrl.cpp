@@ -50,7 +50,7 @@ int CMyListCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (__super::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	m_HeaderCtrl.SubclassWindow(GetHeaderCtrl()->GetSafeHwnd());
+//	m_HeaderCtrl.SubclassWindow(GetHeaderCtrl()->GetSafeHwnd());
 
 	return 0;
 }
@@ -99,8 +99,7 @@ void CMyListCtrl::PreSubclassWindow()
 {
 	// TODO: Add your specialized code here and/or call the base class
 	__super::PreSubclassWindow();
-	
-	m_HeaderCtrl.SubclassWindow(GetHeaderCtrl()->GetSafeHwnd());
+//	m_HeaderCtrl.SubclassWindow(GetHeaderCtrl()->GetSafeHwnd());
 	return;
 }
 
@@ -113,7 +112,8 @@ void CMyListCtrl::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 	CMemoryDC BufferDc(pDC, rcItem);
 
 	INT nItemID = lpDrawItemStruct->itemID;
-	INT nColumnCount=m_HeaderCtrl.GetItemCount();
+//	INT nColumnCount=m_HeaderCtrl.GetItemCount();
+	INT nColumnCount = GetHeaderCtrl()->GetItemCount();
 
 	CRect rcClipBox;
 	BufferDc.GetClipBox(&rcClipBox);
@@ -836,5 +836,3 @@ LRESULT CMyHeaderCtrl::OnLayout( WPARAM wParam, LPARAM lParam )
 
 	return lResult; 
 }
-
-
