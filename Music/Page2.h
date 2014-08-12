@@ -1,7 +1,6 @@
 #pragma once
 #include "MyDialog.h"
 #include "MyListCtrl.h"
-#include "MyListIcon.h"
 #include "afxcmn.h"
 
 // CPage2 dialog
@@ -10,7 +9,7 @@ class CPage2 : public CMyDialog
 {
 	DECLARE_DYNAMIC(CPage2)
 public:
-	CMyListIcon		m_list1;
+	CMyListCtrl		m_list1;
 
 public:
 	CPage2(CWnd* pParent = NULL);   // standard constructor
@@ -24,6 +23,8 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
+	void	OnInitListCtrl();
+
+public:
 	virtual BOOL OnInitDialog();
-	afx_msg void OnBnClickedButton1();
 };

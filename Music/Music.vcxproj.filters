@@ -94,6 +94,12 @@
     <None Include="res\device_back.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\device_back1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_createdir.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Music.h">
@@ -174,6 +180,24 @@
     <ClInclude Include="MyListIcon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AddWin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddPhone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddMail.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateSyncDIr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiStatic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SyncDirSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Music.cpp">
@@ -246,6 +270,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MyListIcon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddWin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddPhone.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddMail.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateSyncDIr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiStatic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SyncDirSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

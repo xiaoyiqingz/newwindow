@@ -29,7 +29,6 @@ void CPage2::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CPage2, CMyDialog)
-	ON_BN_CLICKED(IDC_BUTTON1, &CPage2::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -40,32 +39,41 @@ BOOL CPage2::OnInitDialog()
 {
 	CMyDialog::OnInitDialog();
 
-	m_list1.SetParentBack(GetBackDC());
-	m_list1.SetScrollImage(&m_list1,_T("res\\SKIN_SCROLL.bmp"));
-
-	m_list1.SetItemImage(0, _T("res\\linux.png"), _T("res\\check_nor.png"), 
-		_T("res\\check_sel.png"));
-	m_list1.SetItemText(0,_T("Zhang"));
-	for (int i = 1; i < 6; i++) {
-		m_list1.SetItemImage(i, _T("res\\win32.png"), _T("res\\check_nor.png"), 
-			_T("res\\check_sel.png"));
-		m_list1.SetItemText(i,_T("DeskTop"));
-	}
-	m_list1.SetItemSize(CSize(78,78));
-	m_list1.SetPadding(10, 10);
-	
+	OnInitListCtrl();
 	return TRUE; 
 }
 
-void CPage2::OnBnClickedButton1()
+void CPage2::OnInitListCtrl()
 {
-	int nCount = m_list1.GetItemCount();
+	m_list1.InsertColumn(0, _T(""), LVCFMT_LEFT, 100);
+	m_list1.InsertColumn(1, _T(""), LVCFMT_LEFT, 447);
+	m_list1.InsertColumn(2, _T(""), LVCFMT_LEFT, 50);
 
-	CString	strText(_T("被选中的有："));
-	for (int i =0; i < nCount; i++) {
-		if (m_list1.GetChecked(i))
-			strText.AppendFormat(_T("%d  "), i);
-	}
-	MessageBox(strText);
+	m_list1.SetHovenImage(_T("res\\item_bg_hover.png"),&CRect(2,2,2,2));
+	m_list1.SetSelectImage(_T("res\\item_bg_selected.png"),&CRect(2,2,2,2));
+	m_list1.SetScrollImage(&m_list1, _T("res\\SKIN_SCROLL.bmp"));
+
+	m_list1.InsertItem(0, NULL);
+	m_list1.InsertImage(0, 0, _T("res\\pdf.png"));
+	m_list1.SetItemContent(0, _T("自同步使用说明.pdf"), _T("1分钟前"), _T("D:\\我的自同步"));
+	m_list1.InsertImage(0, 2, _T("res\\folder_nor.png"), _T("res\\folder_nor.png"));
+
+	m_list1.InsertItem(1, NULL);
+	m_list1.InsertImage(1, 0, _T("res\\doc.png"));
+	m_list1.SetItemContent(1, _T("自同步使用说明.doc"), _T("2小时前"), _T("D:\\我的自同步"));
+	m_list1.InsertImage(1, 2, _T("res\\folder_nor.png"), _T("res\\folder_nor.png"));
+
+	m_list1.InsertItem(2, NULL);
+	m_list1.InsertImage(2, 0, _T("res\\png.png"));
+	m_list1.SetItemContent(2, _T("相册封面.pdf"), _T("2014-07-06"), _T("D:\\我的自同步"));
+	m_list1.InsertImage(2, 2, _T("res\\folder_del.png"), _T("res\\folder_del.png"));
+
+	m_list1.InsertItem(3, NULL);
+	m_list1.InsertImage(3, 0, _T("res\\folder.png"));
+	m_list1.SetItemContent(3, _T("aa"), _T("2014-07-05"), _T("D:\\我的自同步"));
+	m_list1.InsertImage(3, 2, _T("res\\folder_nor.png"), _T("res\\folder_nor.png"));
+
+	m_list1.SetItemHeight(70);
+	m_list1.MoveWindow(0,0,597,350);
 }
 

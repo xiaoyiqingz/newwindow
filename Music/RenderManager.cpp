@@ -408,6 +408,7 @@ CMyImage * CRenderManager::GetImage( LPCTSTR lpszFileName,LPCTSTR lpszResType/*=
 	}
 }
 
+
 //É¾³ýÍ¼Æ¬
 void CRenderManager::RemoveImage( CMyImage *&pImage )
 {
@@ -483,7 +484,7 @@ void CRenderManager::AddFont( LPCTSTR pStrFontName, int nSize, bool bBold, bool 
 
 HFONT CRenderManager::GetFont( int nIndex )
 {
-	if ( nIndex>m_ArrayFont.size() ) return NULL;
+	if ( nIndex>(int)m_ArrayFont.size() ) return NULL;
 	
 	return m_ArrayFont.at(nIndex);
 }

@@ -42,7 +42,7 @@ BOOL CDialogSet::OnInitDialog()
 {
 	CMyDialog::OnInitDialog();
 
-	m_ImageBack.LoadImage(AfxGetInstanceHandle(), IDB_SET_BACK, _T("PNG"));
+	m_ImageBack.LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_SET_BACK), _T("PNG"));
 	SetWindowPos(NULL, 0 , 0, 571, 400, SWP_NOMOVE);
 
 	CRect rcControl(0, 0, 0, 0);

@@ -5,6 +5,8 @@
 #include "Music.h"
 #include "Page0.h"
 #include "AddDevice.h"
+#include "SyncDirSet.h"
+#include "CreateSyncDIr.h"
 #include "afxdialogex.h"
 
 
@@ -90,7 +92,8 @@ void CPage0::OnInitListCtrl()
 
 void CPage0::OnBnClickedButton1()
 {
-	MessageBox(_T("创建同步文件夹"));
+	CCreateSyncDIr dlg;
+	dlg.DoModal();
 }
 
 void CPage0::OnClickList1(NMHDR *pNMHDR, LRESULT *pResult)
@@ -98,11 +101,16 @@ void CPage0::OnClickList1(NMHDR *pNMHDR, LRESULT *pResult)
 	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
 	
 	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+	CAddDevice dlgAddDevice;
+	CSyncDirSet dlgSyncDirSet;
 	switch (pNMListView->iSubItem)
 	{
 		case 3:
-			CAddDevice dlg;
-			dlg.DoModal();
+			dlgAddDevice.DoModal();
+			break;
+
+		case 4:
+			dlgSyncDirSet.DoModal();
 			break;
 	}
 	*pResult = 0;

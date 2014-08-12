@@ -396,6 +396,9 @@ void CMusicDlg::InitTabCtrl() {
 	}
 
 	m_Tab.SetItemSize(CSize(64, 64), CSize(104, 74));
+	m_Tab.SetItemPadding(0, 10);
+	m_Tab.SetItemPadding(1, 60);
+	m_Tab.SetItemPadding(2, 10);
 	m_Tab.SetIconImage(0, _T("res\\tab1.png"), _T("res\\tab1.png"));
 	m_Tab.SetIconImage(1, _T("res\\tab2.png"), _T("res\\tab2.png"));
 	m_Tab.SetIconImage(2, _T("res\\tab3.png"), _T("res\\tab3.png"));

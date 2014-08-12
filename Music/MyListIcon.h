@@ -7,6 +7,7 @@ struct tagItem
 {
 	int			nItem;
 	bool		bIsSelected;
+	bool		bIsHoveing;
 	CString		strText;
 	CMyImage	*m_pImgBack;
 	CMyImage	*m_pImgIcon;
@@ -20,8 +21,10 @@ class CMyListIcon : public CListCtrl, public MyDialogBase
 public:
 	CItemArray		m_ItemImgArray;
 	CSize			m_ItemSize;
-
+	BOOL			m_bMouseTracking;
+	int				m_nHoverIndex;
 	int				m_xPadding, m_yPadding;
+	CImageList		m_ImageList1;
 public:
 	CMyListIcon();
 	virtual ~CMyListIcon();
@@ -47,6 +50,9 @@ public:
 	afx_msg void OnPaint();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	virtual void PreSubclassWindow();
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg LRESULT OnMouseLeave(WPARAM wparam, LPARAM lparam);
 };
 
 
