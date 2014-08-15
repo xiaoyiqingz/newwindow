@@ -64,15 +64,18 @@ void CPage1::OnInitListCtrl()
 
 	m_ListPhone.InsertItem(0, NULL);
 	m_ListPhone.InsertImage(0, 0, _T("res\\Android.png"));
-	m_ListPhone.SetItemContent(0, _T("Android"), _T(""), _T("F:\\手机备份"));
+	m_ListPhone.SetItemContent(0, _T("Android"), _T(""), _T("F:\\手机备份"),
+		_T("上次备份完成于1分钟前"));
 
 	m_ListPhone.InsertItem(1, NULL);
 	m_ListPhone.InsertImage(1, 0, _T("res\\Apple.png"));
-	m_ListPhone.SetItemContent(1, _T("iPhone"), _T(""), _T("F:\\手机备份"));
+	m_ListPhone.SetItemContent(1, _T("iPhone"), _T(""), _T("F:\\手机备份"),
+		_T("上次备份完成于 2014-07-16"));
 
 	m_ListPhone.InsertItem(2, NULL);
 	m_ListPhone.InsertImage(2, 0, _T("res\\Android.png"));
-	m_ListPhone.SetItemContent(2, _T("Android"), _T(""), _T("F:\\手机备份"));
+	m_ListPhone.SetItemContent(2, _T("Android"), _T(""), _T("F:\\手机备份"),
+		_T("上次备份完成于 2014-07-16"));
 
 	m_ListPhone.SetItemHeight(70);
 	m_ListPhone.MoveWindow(0,0,597,350);

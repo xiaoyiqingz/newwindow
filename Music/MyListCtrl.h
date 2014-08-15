@@ -51,11 +51,11 @@ typedef vector<tagItemImage>	CItemImgArray;
 
 struct tagItemContent
 {
-	bool		bRelationHov;
-	LPCTSTR		strItemName;
-	LPCTSTR		strItemRelation;
-	LPCTSTR		strItemContent;
-//	LPCTSTR		strItem
+	bool		bRightTopHov;
+	LPCTSTR		strLeftTop;
+	LPCTSTR		strRightTop;
+	LPCTSTR		strLeftBottom;
+	LPCTSTR		strRightBottom;
 };
 
 typedef map<int, tagItemContent> CItemContentArray;
@@ -99,7 +99,7 @@ public:
 	void DrawReportItem(CDC * pDC, INT nItem, CRect & rcSubItem, INT nColumnIndex);
 	void SetItemHeight(int nHeight);
 	
-	void SetItemContent(int nItem,  LPCTSTR lpszName, LPCTSTR lpszRelation, LPCTSTR lpszContent);
+	void SetItemContent(int nItem,  LPCTSTR lpszLeftTop, LPCTSTR lpszRightTop, LPCTSTR lpszLeftBottom, LPCTSTR lpszRightBtoom = NULL);
 	BOOL GetItemContent(int nItem,  tagItemContent& itemContent);
 
 protected:

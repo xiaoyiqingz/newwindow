@@ -182,7 +182,7 @@ void CMyListCtrl::OnMouseMove(UINT nFlags, CPoint point)
 
 			if (it == m_ItemContent.end()) {
 			} else {
-				it->second.bRelationHov = true;
+				it->second.bRightTopHov = true;
 				Invalidate(FALSE);
 			}
 			break;
@@ -191,7 +191,7 @@ void CMyListCtrl::OnMouseMove(UINT nFlags, CPoint point)
 
 			if (it == m_ItemContent.end()) {
 			} else {
-				it->second.bRelationHov = false;
+				it->second.bRightTopHov = false;
 				Invalidate(FALSE);
 			}
 		}
@@ -444,58 +444,83 @@ void CMyListCtrl::DrawReportItem(CDC * pDC, INT nItem, CRect & rcSubItem, INT nC
 				break;
 			}
 		}
-	} else if (nColumnIndex == 1) {
+	} 
+	else if (nColumnIndex == 1) {
 		tagItemContent ItemContent;
 		CItemContentArray::iterator it = m_ItemContent.find(nItem);
-		CRect rcName, rcContent, rcRelation;
-		rcRelation.left = rcSubItem.right - 80;
-		rcRelation.right = rcSubItem.right;
-		rcRelation.top = rcSubItem.top;
-		rcRelation.bottom = rcSubItem.top + (rcSubItem.bottom - rcSubItem.top)/2 - 5;
-
-		rcName.top = rcRelation.top;
-		rcName.bottom = rcRelation.bottom;
-		rcName.right = rcRelation.left - 30;
-		rcName.left = rcSubItem.left;
-
-		rcContent.top = rcRelation.bottom + 5;
-		rcContent.bottom = rcSubItem.bottom;
-		rcContent.left = rcSubItem.left;
-		rcContent.right = rcSubItem.right;
 
 		if (it == m_ItemContent.end()) {
 			return;
 		} else {
-			ItemContent.strItemContent = it->second.strItemContent;
-			ItemContent.strItemName = it->second.strItemName;
-			ItemContent.strItemRelation = it->second.strItemRelation;
-			ItemContent.bRelationHov = it->second.bRelationHov;
+			ItemContent.strLeftBottom = it->second.strLeftBottom;
+			ItemContent.strLeftTop = it->second.strLeftTop;
+			ItemContent.strRightTop = it->second.strRightTop;
+			ItemContent.strRightBottom = it->second.strRightBottom;
+			ItemContent.bRightTopHov = it->second.bRightTopHov;
 		}
-		if (ItemContent.strItemName != NULL) {
+
+		CRect rcLeftTop, rcLeftBottom, rcRightTop, rcRightBottom;
+		rcRightTop.left = rcSubItem.right - 80;
+		rcRightTop.right = rcSubItem.right;
+		rcRightTop.top = rcSubItem.top;
+		rcRightTop.bottom = rcSubItem.top + (rcSubItem.bottom - rcSubItem.top)/2 - 5;
+
+		rcLeftTop.top = rcRightTop.top;
+		rcLeftTop.bottom = rcRightTop.bottom;
+		rcLeftTop.right = rcRightTop.left - 30;
+		rcLeftTop.left = rcSubItem.left;
+
+		if (ItemContent.strRightBottom != NULL) {
+			rcLeftBottom.top = rcRightTop.bottom + 5;
+			rcLeftBottom.bottom = rcSubItem.bottom;
+			rcLeftBottom.left = rcSubItem.left;
+			rcLeftBottom.right = rcSubItem.left + rcSubItem.Width()/2;
+
+			rcRightBottom.top = rcLeftBottom.top;
+			rcRightBottom.bottom = rcLeftBottom.bottom;
+			rcRightBottom.left = rcLeftBottom.right + 5;
+			rcRightBottom.right = rcRightTop.right;
+		} else {
+			rcLeftBottom.top = rcRightTop.bottom + 5;
+			rcLeftBottom.bottom = rcSubItem.bottom;
+			rcLeftBottom.left = rcSubItem.left;
+			rcLeftBottom.right = rcSubItem.right;
+		}
+
+		if (ItemContent.strLeftTop != NULL) {
 			CFont font, *pOldFont;
 			font.CreateFont(15, 8, 0, 0, FW_MEDIUM, FALSE, FALSE, 0, DEFAULT_CHARSET,             
 				OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, 
 				DEFAULT_PITCH | FF_SWISS, _T("ËÎÌו"));
 			pOldFont = pDC->SelectObject(&font);
-			pDC->DrawText(ItemContent.strItemName,lstrlen(ItemContent.strItemName),
-				&rcName, DT_BOTTOM | DT_SINGLELINE |DT_END_ELLIPSIS);
+			pDC->DrawText(ItemContent.strLeftTop,lstrlen(ItemContent.strLeftTop),
+				&rcLeftTop, DT_BOTTOM | DT_SINGLELINE |DT_END_ELLIPSIS);
 			pDC->SelectObject(pOldFont);
 		} 
-		if (ItemContent.strItemContent != NULL) {
-			pDC->SetTextColor(RGB(125, 125, 125));
-			pDC->DrawText(ItemContent.strItemContent,lstrlen(ItemContent.strItemContent), 
-				&rcContent, DT_TOP | DT_SINGLELINE |DT_END_ELLIPSIS);
+		if (ItemContent.strLeftBottom != NULL) {
+			COLORREF oldColor;
+			oldColor = pDC->SetTextColor(RGB(125, 125, 125));
+			pDC->DrawText(ItemContent.strLeftBottom,lstrlen(ItemContent.strLeftBottom), 
+				&rcLeftBottom, DT_TOP | DT_SINGLELINE |DT_END_ELLIPSIS);
+			pDC->SetTextColor(oldColor);
 		}	
-		if (ItemContent.strItemRelation !=NULL) {
-			if (ItemContent.bRelationHov) {
-				pDC->SetTextColor(RGB(255, 0, 0));
+		if (ItemContent.strRightTop !=NULL) {
+			COLORREF oldColor;
+			if (ItemContent.bRightTopHov) {
+				oldColor = pDC->SetTextColor(RGB(255, 0, 0));
 			} else {
-				pDC->SetTextColor(RGB(0, 0, 255));
+				oldColor = pDC->SetTextColor(RGB(0, 0, 255));
 			}			
-			pDC->DrawText(ItemContent.strItemRelation,lstrlen(ItemContent.strItemRelation), 
-				&rcRelation, DT_BOTTOM | DT_SINGLELINE |DT_END_ELLIPSIS);
+			pDC->DrawText(ItemContent.strRightTop,lstrlen(ItemContent.strRightTop), 
+				&rcRightTop, DT_BOTTOM | DT_SINGLELINE |DT_END_ELLIPSIS);
+			pDC->SetTextColor(oldColor);
 		}
-	} else if (nColumnIndex == 3) {
+		if (ItemContent.strRightBottom != NULL) {
+			pDC->DrawText(ItemContent.strRightBottom,lstrlen(ItemContent.strRightBottom), 
+				&rcRightBottom, DT_TOP | DT_SINGLELINE |DT_END_ELLIPSIS | DT_LEFT);
+		}
+	} 
+	else if (nColumnIndex == 3) {
 		CItemImgArray::iterator iter = m_ItemInviteArray.begin();
 		for (;iter != m_ItemInviteArray.end(); ++iter) {
 			if (iter->nItem == nItem) {
@@ -607,14 +632,15 @@ DWORD CMyListCtrl::SetExtendedStyle(DWORD dwNewStyle)
 	return CListCtrl::SetExtendedStyle(dwNewStyle);
 }
 
-void CMyListCtrl::SetItemContent(int nItem, LPCTSTR lpszName, LPCTSTR lpszRelation, LPCTSTR lpszContent)
+void CMyListCtrl::SetItemContent(int nItem, LPCTSTR lpszLeftTop, LPCTSTR lpszRightTop, LPCTSTR lpszLeftBottom, LPCTSTR lpszRightBtoom)
 {
 	CItemContentArray::iterator it = m_ItemContent.find(nItem);
 	tagItemContent ItemContent;
-	ItemContent.strItemName = lpszName;
-	ItemContent.strItemRelation = lpszRelation;
-	ItemContent.strItemContent = lpszContent;
-	ItemContent.bRelationHov = false;
+	ItemContent.strLeftTop = lpszLeftTop;
+	ItemContent.strRightTop = lpszRightTop;
+	ItemContent.strLeftBottom = lpszLeftBottom;
+	ItemContent.strRightBottom = lpszRightBtoom;
+	ItemContent.bRightTopHov = false;
 
 	if (it == m_ItemContent.end()) {
 		m_ItemContent.insert(map<int, tagItemContent>::value_type(nItem, ItemContent));	
@@ -631,9 +657,9 @@ BOOL CMyListCtrl::GetItemContent(int nItem, tagItemContent& itemContent)
 	if (it == m_ItemContent.end()) {
 		return FALSE;
 	} else {
-		itemContent.strItemContent = it->second.strItemContent;
-		itemContent.strItemName = it->second.strItemName;
-		itemContent.strItemRelation = it->second.strItemRelation;
+		itemContent.strLeftBottom = it->second.strLeftBottom;
+		itemContent.strLeftTop = it->second.strLeftTop;
+		itemContent.strRightTop = it->second.strRightTop;
 		return TRUE;
 	}
 }
