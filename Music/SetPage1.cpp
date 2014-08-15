@@ -24,6 +24,7 @@ CSetPage1::~CSetPage1()
 void CSetPage1::DoDataExchange(CDataExchange* pDX)
 {
 	CMyDialog::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_DISCOVER_PORT, m_etDiscoverPort);
 }
 
 

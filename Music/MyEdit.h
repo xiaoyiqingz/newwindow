@@ -10,6 +10,7 @@ protected:
 	CMyImage*		m_pBackImgN;
 	CMyImage*		m_pBackImgH;
 	CMyImage*		m_pIconImg;
+	CMyImage*		m_pArrowImg;
 
 	bool	m_bPress, m_bHover, m_bFocus, m_bMouseTracking;
 	int		m_nIconWidth;

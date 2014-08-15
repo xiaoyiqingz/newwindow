@@ -62,7 +62,7 @@ BOOL CPage0::OnInitDialog()
 void CPage0::OnInitListCtrl()
 {
 	m_list1.InsertColumn( 0, _T(""), LVCFMT_LEFT, 100 );
-	m_list1.InsertColumn( 1, _T(""), LVCFMT_LEFT, 300 );
+	m_list1.InsertColumn( 1, _T(""), LVCFMT_LEFT, 347 );
 	m_list1.InsertColumn( 2, _T(""), LVCFMT_LEFT, 50 );
 	m_list1.InsertColumn( 3, _T(""), LVCFMT_LEFT, 50 );
 	m_list1.InsertColumn( 4, _T(""), LVCFMT_LEFT, 50 );
@@ -115,7 +115,24 @@ void CPage0::OnClickList1(NMHDR *pNMHDR, LRESULT *pResult)
 		case 3:
 			dlgAddDevice.DoModal();
 			break;
+		case 1:
+			{
+				CRect rcSubItem, rcLeftTop;
+				POINT point;
+				m_list1.GetSubItemRect(pNMListView->iItem, 
+					pNMListView->iSubItem, LVIR_BOUNDS, rcSubItem);
+				GetCursorPos(&point);
+				rcLeftTop.top = rcSubItem.top;
+				rcLeftTop.bottom = rcSubItem.top + (rcSubItem.bottom - rcSubItem.top)/2 ;
+				rcLeftTop.right = rcSubItem.right;
+				rcLeftTop.left =  rcSubItem.right - 80;
 
+				ClientToScreen(rcLeftTop);
+				if (PtInRect(&rcLeftTop, point)) {
+					dlgSyncDirSet.DoModal();
+				}
+			}	
+			break;
 		case 4:
 			dlgSyncDirSet.DoModal();
 			break;

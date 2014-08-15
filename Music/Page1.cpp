@@ -55,8 +55,8 @@ BOOL CPage1::OnInitDialog()
 void CPage1::OnInitListCtrl()
 {
 	m_ListPhone.InsertColumn(0, _T(""), LVCFMT_LEFT, 100);
-	m_ListPhone.InsertColumn(1, _T(""), LVCFMT_LEFT, 300);
-	m_ListPhone.InsertColumn(2, _T(""), LVCFMT_LEFT, 197);
+	m_ListPhone.InsertColumn(1, _T(""), LVCFMT_LEFT, 350);
+	m_ListPhone.InsertColumn(2, _T(""), LVCFMT_LEFT, 147);
 
 	m_ListPhone.SetHovenImage(_T("res\\item_bg_hover.png"),&CRect(2,2,2,2));
 	m_ListPhone.SetSelectImage(_T("res\\item_bg_selected.png"),&CRect(2,2,2,2));

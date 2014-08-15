@@ -1,11 +1,15 @@
 #pragma once
 #include "MyDialog.h"
+#include "MyEdit.h"
+#include "afxwin.h"
 
 // CSetPage1 dialog
 
 class CSetPage1 : public CMyDialog
 {
 	DECLARE_DYNAMIC(CSetPage1)
+public:
+	CEdit		m_etDiscoverPort;
 
 public:
 	CSetPage1(CWnd* pParent = NULL);   // standard constructor

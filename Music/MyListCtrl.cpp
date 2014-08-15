@@ -169,15 +169,15 @@ void CMyListCtrl::OnMouseMove(UINT nFlags, CPoint point)
 		}
 	}
 
-	CRect rcSubItem, rcRelationItem;
+	CRect rcSubItem, rcLeftTop;
 	for ( INT i = 0 ; i < GetItemCount(); i++) {
 		GetSubItemRect(i, 1, LVIR_BOUNDS, rcSubItem);
-		rcRelationItem.top = rcSubItem.top;
-		rcRelationItem.bottom = rcSubItem.top + (rcSubItem.bottom - rcSubItem.top)/2 ;
-		rcRelationItem.right = rcSubItem.right;
-		rcRelationItem.left =  rcSubItem.right - 80;
+		rcLeftTop.top = rcSubItem.top;
+		rcLeftTop.bottom = rcSubItem.top + (rcSubItem.bottom - rcSubItem.top)/2 ;
+		rcLeftTop.right = rcSubItem.right;
+		rcLeftTop.left =  rcSubItem.right - 80;
 
-		if (PtInRect(&rcRelationItem, point)) {
+		if (PtInRect(&rcLeftTop, point)) {
 			CItemContentArray::iterator it = m_ItemContent.find(i);
 
 			if (it == m_ItemContent.end()) {
@@ -278,6 +278,7 @@ void CMyListCtrl::OnLButtonDown(UINT nFlags, CPoint point)
 			}
 		}
 	} 
+
 	__super::OnLButtonDown(nFlags, point);
 }
 

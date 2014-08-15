@@ -688,15 +688,19 @@ LRESULT CMyButtonEx::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (message == WM_PRINT || message == WM_PRINTCLIENT) {
 /*
+
 		CRect rcClient;
 		GetClientRect(&rcClient);
 		CDC dc;
 		dc.Attach((HDC)wParam);
 		CMemoryDC MemoryDc(&dc, rcClient);
-		DrawParentWndBg(GetSafeHwnd(), (HDC)wParam);
+		DrawParentWndBg(GetSafeHwnd(), MemoryDc->GetSafeHdc());
 
-		DrawPushButton(&MemoryDc, rcClient);*/
-		return 1;
+		DrawPushButton(&MemoryDc, rcClient);
+
+		dc.BitBlt(rcClient.left, rcClient.top, rcClient.Width(), rcClient.Height(),&MemoryDc, 0, 0, SRCCOPY);
+		
+		ReleaseDC(&dc);*/
 	}
 
 	return __super::WindowProc(message, wParam, lParam);

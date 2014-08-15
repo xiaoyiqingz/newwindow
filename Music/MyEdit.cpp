@@ -16,6 +16,7 @@ CMyEdit::CMyEdit()
 	m_pBackImgN = NULL;
 	m_pBackImgH = NULL;
 	m_pIconImg = NULL;
+	m_pArrowImg = NULL;
 
 	m_bFocus = m_bPress = m_bHover = m_bMouseTracking = FALSE;
 	m_nIconWidth = 0;
@@ -218,6 +219,7 @@ void CMyEdit::OnDestroy()
 	RenderEngine->RemoveImage(m_pBackImgN);
 	RenderEngine->RemoveImage(m_pBackImgH);
 	RenderEngine->RemoveImage(m_pIconImg);
+	RenderEngine->RemoveImage(m_pArrowImg);
 
 	RemoveScorll();
 }
