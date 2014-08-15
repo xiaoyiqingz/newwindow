@@ -30,6 +30,7 @@ void CSetPage2::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CSetPage2, CMyDialog)
+	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 
@@ -58,4 +59,16 @@ void CSetPage2::OnInitButton()
 	m_btUpdate.SetButtonType(BT_PUSHBUTTON);
 	m_btUpdate.SetParentBack(hParentDc);
 	m_btUpdate.SetSize(74, 26);
+}
+
+
+HBRUSH CSetPage2::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CMyDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	if (nCtlColor == CTLCOLOR_STATIC) {
+		HBRUSH hBrush = CreateSolidBrush(RGB(255, 255, 255));
+		pDC->SetBkMode(TRANSPARENT);
+		return hBrush;
+	}
+	return hbr;
 }

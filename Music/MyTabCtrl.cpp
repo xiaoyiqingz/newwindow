@@ -41,6 +41,7 @@ CMyTabCtrl::CMyTabCtrl()
 	m_bMouseTracking = FALSE;
 	m_nLeft = m_nTop = 0;
 	m_rcTabRegion = CRect(0, 0, 0, 0);
+	m_textPos = TEXT_RIGHT;
 }
 
 CMyTabCtrl::~CMyTabCtrl()
@@ -188,6 +189,11 @@ void CMyTabCtrl::SetItemText(int nIndex, LPCTSTR lpszText)
 		lpItem->m_strText = lpszText;	
 }
 
+void CMyTabCtrl::SetTextPos(TEXT_POS textPos)
+{
+	m_textPos = textPos;
+}
+
 BOOL CMyTabCtrl::GetItemRectByIndex(int nIndex, CRect& rect)
 {
 	CTabCtrlItem *lpItem;
@@ -262,21 +268,34 @@ void CMyTabCtrl::DrawItem(CDC *pDC, int nIndex)
 		int nMode = pDC->SetBkMode(TRANSPARENT);
 		pDC->SelectObject(GetCtrlFont());
 		pDC->SetTextColor(m_colNormalText);
+		UINT nFormat = DT_LEFT | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS;
 
 		CRect rcText(0,0,0,0);	
 		pDC->DrawText(lpItem->m_strText, lpItem->m_strText.GetLength(), &rcText, DT_SINGLELINE | DT_CALCRECT);
-
-		int cx = cxIcon+1+rcText.Width();
-		int cy = cyIcon;
-
+		
 		CRect rcCenter;
-		CalcCenterRect(rcItem, cx, cy, rcCenter);
+		if (m_textPos == TEXT_RIGHT) {
+			int cx = cxIcon+1+rcText.Width();
+			int cy = cyIcon;
+			CalcCenterRect(rcItem, cx, cy, rcCenter);
 
-		CRect rcIcon(rcCenter.left, rcCenter.top, rcCenter.left+cxIcon, rcCenter.bottom);
-		lpIconImg->Draw(pDC, rcIcon);
+			CRect rcIcon(rcCenter.left, rcCenter.top, rcCenter.left+cxIcon, rcCenter.bottom);
+			lpIconImg->Draw(pDC, rcIcon);
 
-		UINT nFormat = DT_LEFT | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS;
-		rcText = CRect(rcIcon.right+1, rcItem.top, rcIcon.right+1+rcText.Width(), rcItem.bottom);
+			rcText = CRect(rcIcon.right+1, rcItem.top, rcIcon.right+1+rcText.Width(), rcItem.bottom);
+
+		} else if (m_textPos == TEXT_BOTTOM) {
+			int cx = cxIcon ;
+			int cy = cyIcon;
+			CalcCenterRect(rcItem, cx, cy, rcCenter);
+
+			CRect rcIcon(rcCenter.left, rcCenter.top, rcCenter.left+cxIcon, rcCenter.top+cyIcon);
+			lpIconImg->Draw(pDC, rcIcon);
+			
+			CalcCenterRect(rcItem, rcText.Width(), rcText.Height(), rcCenter);
+			rcText = CRect(rcCenter.left, rcItem.bottom-rcText.Height(),rcCenter.left+rcText.Width(), rcItem.bottom);
+		}
+ 
 		if (bSelected) {
 			pDC->SetTextColor(RGB(255,255,255));
 		}

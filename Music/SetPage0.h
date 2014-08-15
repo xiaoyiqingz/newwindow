@@ -11,7 +11,6 @@ class CSetPage0 : public CMyDialog
 public:
 	CMyButtonEx		m_btAccount;
 	CMyButtonEx		m_btName;
-
 public:
 	CSetPage0(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CSetPage0();
@@ -30,4 +29,5 @@ public:
 public:
 	virtual BOOL OnInitDialog();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 };

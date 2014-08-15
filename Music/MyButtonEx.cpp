@@ -136,6 +136,26 @@ void CMyButtonEx::OnLButtonUp(UINT nFlags, CPoint point)
 					rc.left, rc.bottom, ::GetParent(GetSafeHwnd()), NULL);
 			}
 		}
+
+		if (m_nBtnType == BT_SPLITBUTTON)
+		{
+			CRect rcClient, rcMenu;
+			GetClientRect(&rcClient);
+			rcMenu.left = rcClient.right - 16;
+			rcMenu.top = rcClient.top;
+			rcMenu.right = rcClient.right;
+			rcMenu.bottom = rcClient.bottom;
+			if (PtInRect(rcMenu, point)){
+				if (::IsMenu(m_hMenu))
+				{
+					CRect rc;
+					GetClientRect(&rc);
+					ClientToScreen(&rc);
+					::TrackPopupMenuEx(m_hMenu, TPM_LEFTALIGN | TPM_LEFTBUTTON | TPM_VERTICAL,
+						rc.left, rc.bottom, ::GetParent(GetSafeHwnd()), NULL);
+				}
+			}
+		}
 	}
 	CButton::OnLButtonUp(nFlags, point);
 }
@@ -292,6 +312,7 @@ LRESULT CMyButtonEx::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 		RedrawWindow(NULL, NULL, RDW_FRAME | RDW_INVALIDATE
 			| RDW_ERASE | RDW_ERASENOW);
 	}
+
 	return CButton::DefWindowProc(message, wParam, lParam);
 }
 
@@ -319,6 +340,9 @@ void CMyButtonEx::OnPaint()
 			break;
 		case BT_MENUBUTTON:
 			DrawMenuButton(&memoryDC, rcClient);
+			break;
+		case BT_SPLITBUTTON:
+			DrawSplitButton(&memoryDC, rcClient);
 			break;
 		ASSERT(FALSE);
 	}	
@@ -599,4 +623,81 @@ void CMyButtonEx::DrawMenuButton(CDC* pDC,RECT &rcClient)
 			rcIcon.OffsetRect(1, 1);
 		m_pIconImg->DrawImage(pDC, rcIcon);
 	}
+}
+
+void CMyButtonEx::DrawSplitButton(CDC* pDC,RECT &rcClient)
+{
+	if (m_pBackImgN != NULL && !m_pBackImgN->IsNull()) {
+		m_pBackImgN->DrawImage(pDC, rcClient);
+	}
+
+	CRect  rcMenu, rcIcon;
+	if (m_pMenuImg != NULL && !m_pMenuImg->IsNull()) {
+		int cx = m_pMenuImg->GetWidth();
+		int cy = m_pMenuImg->GetHeight();
+
+		int x = rcClient.right - 3 - cx;
+		int y = (rcClient.bottom - rcClient.top - cy + 1) /2;
+		rcMenu = CRect(x, y, x+cx, y+cy);
+		m_pMenuImg->DrawImage(pDC, rcMenu);
+	}
+
+	if (m_pIconImg != NULL && !m_pIconImg->IsNull()) {
+		int cx = m_pIconImg->GetWidth();
+		int cy = m_pIconImg->GetHeight();
+
+		int x = rcClient.left + 3;
+		int y = (rcClient.bottom - rcClient.top - cy + 1)/2;
+		if (m_bPress) {
+			rcIcon = CRect(x+1, y+1, x+cx, y+cy);
+		} else {
+			rcIcon = CRect(x, y, x+cx, y+cy);
+		}		
+		m_pIconImg->DrawImage(pDC, rcIcon);
+	}
+
+	CString strText;
+	GetWindowText(strText);
+	
+	BOOL  bHasText;
+	if (strText.GetLength() > 0) 
+		bHasText = TRUE;
+
+	if (bHasText) {
+		int  nMode = pDC->SetBkMode(TRANSPARENT);
+		CFont *Font = GetFont();
+		CFont *oldFont = pDC->SelectObject(Font);
+		CRect rcText;
+		if (m_bPress) {
+			rcText = CRect(rcIcon.right + 3, rcClient.top + 3, rcMenu.left - 2, rcClient.bottom );
+		} else {
+			rcText = CRect(rcIcon.right + 2, rcClient.top + 2, rcMenu.left - 2, rcClient.bottom);
+		}
+		
+//		pDC->DrawText(strText, rcText, DT_SINGLELINE | DT_CALCRECT);
+
+		UINT nFormat = DT_LEFT | DT_END_ELLIPSIS | DT_VCENTER | DT_SINGLELINE;
+		pDC->DrawText(strText, rcText, nFormat);
+		pDC->SelectObject(oldFont);
+		pDC->SetBkMode(nMode);
+	}
+}
+
+
+LRESULT CMyButtonEx::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
+{
+	if (message == WM_PRINT || message == WM_PRINTCLIENT) {
+/*
+		CRect rcClient;
+		GetClientRect(&rcClient);
+		CDC dc;
+		dc.Attach((HDC)wParam);
+		CMemoryDC MemoryDc(&dc, rcClient);
+		DrawParentWndBg(GetSafeHwnd(), (HDC)wParam);
+
+		DrawPushButton(&MemoryDc, rcClient);*/
+		return 1;
+	}
+
+	return __super::WindowProc(message, wParam, lParam);
 }

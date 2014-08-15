@@ -1,5 +1,6 @@
 #pragma once
 #include "MyDialogBase.h"
+#include "MyToolTip.h"
 #include "MyImage.h"
 
 // CMyListCtrl
@@ -54,6 +55,7 @@ struct tagItemContent
 	LPCTSTR		strItemName;
 	LPCTSTR		strItemRelation;
 	LPCTSTR		strItemContent;
+//	LPCTSTR		strItem
 };
 
 typedef map<int, tagItemContent> CItemContentArray;
@@ -76,7 +78,8 @@ public:
 	int				m_nItemHov;
 
 	CMyHeaderCtrl	m_HeaderCtrl;
-	CToolTipCtrl	m_ToolTip;
+	
+	CMyToolTip		m_ToolTip;
 public:
 	CMyListCtrl();
 	virtual ~CMyListCtrl();

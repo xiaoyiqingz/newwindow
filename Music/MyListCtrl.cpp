@@ -60,6 +60,10 @@ void CMyListCtrl::OnDestroy()
 {
 	__super::OnDestroy();
 
+	if (m_ToolTip.GetSafeHwnd())
+		m_ToolTip.DestroyWindow();
+	m_ToolTip.m_hWnd = NULL;
+
 	RenderEngine->RemoveImage(m_pCheckImg);
 	RenderEngine->RemoveImage(m_pUnCheckImg);
 	RenderEngine->RemoveImage(m_pHovenImg);
@@ -198,11 +202,17 @@ void CMyListCtrl::OnMouseMove(UINT nFlags, CPoint point)
 		GetSubItemRect(i, 2, LVIR_BOUNDS, rcSubItemTip);
 		if (PtInRect(&rcSubItemTip, point)) {
 			CString strText = _T("立即同步");
-			m_ToolTip.AddTool(this, strText);
-			m_ToolTip.Pop();
-		} else {
-			m_ToolTip.AddTool(this, _T(""));
-			m_ToolTip.Pop();
+			if (!m_ToolTip.GetSafeHwnd()) {
+				m_ToolTip.Create(this);				
+				m_ToolTip.SetMaxTipWidth(200);
+			}
+
+			if (m_ToolTip.GetSafeHwnd()) {
+			//	m_ToolTip.SetBackImg(_T("res\\bk_tooltip.png"));
+				m_ToolTip.Activate(TRUE);
+				m_ToolTip.SetTipBkColor(RGB(255, 0, 0));
+				m_ToolTip.AddTool(this, _T("立即同步"),&rcSubItemTip, 1);
+			}
 		}
 	}
 

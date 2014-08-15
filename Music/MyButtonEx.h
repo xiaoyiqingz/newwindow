@@ -8,7 +8,8 @@ enum BUTTON_TYPE
 	BT_RADIOBUTTON,
 	BT_CHECKBUTTON,
 	BT_ICONBUTTON,
-	BT_MENUBUTTON
+	BT_MENUBUTTON,
+	BT_SPLITBUTTON
 };
 
 // CMyButtonEx
@@ -50,6 +51,7 @@ public:
 	void DrawCheckButton(CDC* pDC,RECT &rcClient);
 	void DrawIconButton(CDC* pDC,RECT &rcClient);
 	void DrawMenuButton(CDC* pDC,RECT &rcClient);
+	void DrawSplitButton(CDC* pDC,RECT &rcClient);
 //	void SetParentBack(HDC hDC){ m_bTransparent = true; m_hParentDC = hDC;}
 
 public:
@@ -67,6 +69,7 @@ public:
 
 protected:
 	DECLARE_MESSAGE_MAP()
+	virtual LRESULT WindowProc(UINT message, WPARAM wParam, LPARAM lParam);
 };
 
 

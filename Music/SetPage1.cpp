@@ -29,6 +29,7 @@ void CSetPage1::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CSetPage1, CMyDialog)
 	ON_WM_ERASEBKGND()
+	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 
@@ -39,4 +40,16 @@ BOOL CSetPage1::OnEraseBkgnd(CDC* pDC)
 {
 	return TRUE;
 //	return CMyDialog::OnEraseBkgnd(pDC);
+}
+
+
+HBRUSH CSetPage1::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CMyDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	if (nCtlColor == CTLCOLOR_STATIC) {
+		HBRUSH	hBrush = CreateSolidBrush(RGB(255, 255, 255));
+		pDC->SetBkMode(TRANSPARENT);
+		return hBrush;
+	}
+	return hbr;
 }

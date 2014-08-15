@@ -3,6 +3,11 @@
 #include "MyImage.h"
 
 // CMyTabCtrl
+enum TEXT_POS
+{
+	TEXT_RIGHT,
+	TEXT_BOTTOM
+};
 
 class  CTabCtrlItem
 {
@@ -30,10 +35,12 @@ public:
 	CTabCtrlItemArray	m_ItemArray;
 	CMyImage	*m_pImgBack;
 	CMyImage	*m_pItemImgNor, *m_pItemImgHov, * m_pItemImgSel;
+	CRect		m_rcTabRegion;
+
+	TEXT_POS	m_textPos;
 	BOOL		m_bMouseTracking;
 	int			m_nSelIndex, m_nHoverIndex;
 	int			m_nLeft, m_nTop;
-	CRect		m_rcTabRegion;
 
 public:
 	CMyTabCtrl();
@@ -54,6 +61,7 @@ public:
 	void	SetCurSel(int nCurSel);
 	int		AddItem(int nID);
 	void	SetItemText(int nIndex, LPCTSTR lpszText);
+	void	SetTextPos(TEXT_POS textPos);
 
 	BOOL	GetItemRectByIndex(int nIndex, CRect& rect);
 	CTabCtrlItem * GetItemByIndex(int nIndex);

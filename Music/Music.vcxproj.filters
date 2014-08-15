@@ -198,6 +198,9 @@
     <ClInclude Include="SyncDirSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MyToolTip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Music.cpp">
@@ -288,6 +291,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SyncDirSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyToolTip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -84,6 +84,13 @@ void CPage0::OnInitListCtrl()
 		m_list1.InsertImage(i, 4, _T("res\\tab_set.png"));
 	}
 
+	m_list1.InsertItem(3, NULL);
+	m_list1.SetItemContent(3, _T("自同步"), _T("@2设备 1本地"), _T("历史记录"));
+	m_list1.InsertImage(3, 0,_T("res\\appicns_folder_Download.png"));
+	m_list1.InsertImage(3, 2, _T("res\\tab1image1.png"), _T("res\\tab1image_gray.png"));
+	m_list1.InsertImage(3, 3, _T("res\\button_invite.png"));
+	m_list1.InsertImage(3, 4, _T("res\\tab_set.png"));
+
 	m_list1.SetItemHeight(70);
 	m_list1.MoveWindow(0,0,597,350);
 //	m_list1.m_HeaderCtrl.EnableWindow(FALSE);

@@ -439,15 +439,19 @@ void CMusicDlg::OnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	int nCurSel = m_Tab.GetCurSel();
 
 	switch (nCurSel) {
-		case 0:
+		case 0:			
+
 			m_page0.ShowWindow(SW_SHOW);
 			m_page1.ShowWindow(SW_HIDE);
 			m_page2.ShowWindow(SW_HIDE);
-		break;
+			break;
 		case 1:
+			/*m_page0.AnimateWindow(1000,  AW_HIDE | AW_SLIDE | AW_HOR_NEGATIVE);
+			m_page1.AnimateWindow(500,  AW_ACTIVATE |AW_SLIDE | AW_HOR_POSITIVE);*/
 			m_page0.ShowWindow(SW_HIDE);
 			m_page1.ShowWindow(SW_SHOW);
 			m_page2.ShowWindow(SW_HIDE);
+
 			break;
 		case 2:
 			m_page0.ShowWindow(SW_HIDE);
@@ -465,3 +469,4 @@ void CMusicDlg::OnBnClickedSet()
 	CDialogSet dlg;
 	dlg.DoModal();
 }
+
