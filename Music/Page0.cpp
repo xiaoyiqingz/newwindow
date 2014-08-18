@@ -62,7 +62,7 @@ BOOL CPage0::OnInitDialog()
 void CPage0::OnInitListCtrl()
 {
 	m_list1.InsertColumn( 0, _T(""), LVCFMT_LEFT, 100 );
-	m_list1.InsertColumn( 1, _T(""), LVCFMT_LEFT, 347 );
+	m_list1.InsertColumn( 1, _T(""), LVCFMT_LEFT, 327 );
 	m_list1.InsertColumn( 2, _T(""), LVCFMT_LEFT, 50 );
 	m_list1.InsertColumn( 3, _T(""), LVCFMT_LEFT, 50 );
 	m_list1.InsertColumn( 4, _T(""), LVCFMT_LEFT, 50 );

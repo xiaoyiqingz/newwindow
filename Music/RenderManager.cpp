@@ -408,38 +408,123 @@ CMyImage * CRenderManager::GetImage( LPCTSTR lpszFileName,LPCTSTR lpszResType/*=
 	}
 }
 
-
-//É¾³ýÍ¼Æ¬
-void CRenderManager::RemoveImage( CMyImage *&pImage )
+CMyImage * CRenderManager::GetImage(UINT nID, LPCTSTR lpszResType/*=NULL*/)
 {
-	map<LPCTSTR, tagImageInfo *>::iterator iter;
-	tagImageInfo * pImageInfo;
+	map<int, tagImageInfo*>::iterator iter;
+	pair<std::map<int, tagImageInfo*>::iterator, bool>pairInsert;
 
-	if (NULL == pImage) return;
-
-	for (iter = m_ArrayImage.begin(); iter != m_ArrayImage.end(); iter++)
+	tagImageInfo  *pImageInfo = NULL;
+	CMyImage	*pImage = NULL;
+	if (nID < 0) return NULL;
+	iter = m_ArrayImageId.find(nID);
+	if (iter != m_ArrayImageId.end()) 
 	{
 		pImageInfo = iter->second;
-		if (pImageInfo != NULL)
+
+		if (pImageInfo !=NULL) {
+			pImageInfo->nRef++;
+			return	pImageInfo->pImage;
+		} else {
+			return NULL;
+		}
+	}
+	else 
+	{
+		pImageInfo = new tagImageInfo;
+		pImage = new CMyImage;
+		if (pImageInfo == NULL || pImage == NULL) {
+			SafeDelete(pImageInfo);
+			SafeDelete(pImage);
+			return NULL;
+		}
+
+		pairInsert = m_ArrayImageId.insert(pair<int, tagImageInfo*>(nID, pImageInfo));
+		if (!pairInsert.second) {
+			SafeDelete(pImageInfo);
+			SafeDelete(pImage);
+
+			return NULL;
+		}
+
+		bool bReturn = false;
+
+		bReturn = pImage->LoadImage(m_hResInstance, nID, lpszResType);
+
+		if (!bReturn) {
+			m_ArrayImageId.erase(iter->first);
+			SafeDelete(pImageInfo);
+			SafeDelete(pImage);
+			return NULL;
+		}
+		pImageInfo->pImage = pImage;
+		pImageInfo->nRef = 1;
+
+		return pImage;
+	}
+
+}
+
+
+//É¾³ýÍ¼Æ¬
+void CRenderManager::RemoveImage( CMyImage *&pImage, BOOL bResFromID)
+{
+	if (NULL == pImage) return;
+
+	if (!bResFromID)        //from path;
+	{
+		map<LPCTSTR, tagImageInfo *>::iterator iter;
+		tagImageInfo * pImageInfo;
+
+		for (iter = m_ArrayImage.begin(); iter != m_ArrayImage.end(); iter++)
 		{
-			if (pImageInfo->pImage == pImage)
+			pImageInfo = iter->second;
+			if (pImageInfo != NULL)
 			{
-				pImageInfo->nRef--;
-				if (pImageInfo->nRef <= 0)
+				if (pImageInfo->pImage == pImage)
 				{
-					pImageInfo->pImage->DestroyImage();
+					pImageInfo->nRef--;
+					if (pImageInfo->nRef <= 0)
+					{
+						pImageInfo->pImage->DestroyImage();
 
-					SafeDelete(pImageInfo->pImage);
-					SafeDelete(pImageInfo);
+						SafeDelete(pImageInfo->pImage);
+						SafeDelete(pImageInfo);
 
-					m_ArrayImage.erase(iter);
+						m_ArrayImage.erase(iter);
+					}
+
+					pImage = NULL;
+					break;
 				}
+			}
+		}
+	}	
+	else 
+	{
+		map<int, tagImageInfo *>::iterator iter;
+		tagImageInfo * pImageInfo;
 
-				pImage = NULL;
-				break;
+		for (iter = m_ArrayImageId.begin(); iter != m_ArrayImageId.end(); ++iter) 
+		{
+			pImageInfo = iter->second;
+			if (pImageInfo != NULL) {
+				if (pImageInfo->pImage == pImage) {
+					pImageInfo->nRef--;
+					if (pImageInfo->nRef <= 0) {
+						pImageInfo->pImage->DestroyImage();
+						SafeDelete(pImageInfo->pImage);
+						SafeDelete(pImageInfo);
+
+						m_ArrayImageId.erase(iter);
+
+						pImage = NULL;
+						break;
+					}
+				}
 			}
 		}
 	}
+
 }
 
 //É¾³ýËùÓÐ
@@ -464,6 +549,23 @@ void CRenderManager::ClearImage()
 	}
 
 	m_ArrayImage.clear();
+
+// from ID
+	map<int, tagImageInfo*>::iterator iterID;
+	tagImageInfo *pImageInfoID;
+	for (iterID = m_ArrayImageId.begin(); iterID != m_ArrayImageId.end(); iterID++) {
+		pImageInfoID = iterID->second;
+		if (pImageInfoID != NULL) {
+			if (pImageInfoID->pImage != NULL) {
+				pImageInfoID->pImage->DestroyImage();
+				SafeDelete(pImageInfoID->pImage);
+			}
+
+			SafeDelete(pImageInfoID)
+		}
+	}
+	m_ArrayImageId.clear();
+
 }
 
 void CRenderManager::AddFont( LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic )

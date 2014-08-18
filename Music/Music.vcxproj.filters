@@ -100,6 +100,12 @@
     <None Include="res\bt_createdir.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\bt_back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_back.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Music.h">

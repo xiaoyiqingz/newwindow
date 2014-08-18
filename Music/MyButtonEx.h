@@ -31,6 +31,7 @@ protected:
 	HMENU			m_hMenu;
 	BUTTON_TYPE		m_nBtnType;
 
+	BOOL			m_bResFromID;
 	DECLARE_DYNAMIC(CMyButtonEx)
 
 public:
@@ -39,7 +40,7 @@ public:
 
 public:
 	void SetButtonType(BUTTON_TYPE nBtnType);
-	bool SetBackImage(HINSTANCE hInstance, UINT nResourceID);
+	BOOL SetBackImage(UINT nResourceID, LPCTSTR lpszFileType=NULL);
 	BOOL SetBackImage(LPCTSTR lpNormal, LPCTSTR lpHoven, LPCTSTR lpDown, LPCTSTR lpFocus, CONST LPRECT lprcNinePart=NULL);
 	bool SetCheckImage(LPCTSTR lpNormal, LPCTSTR lpHover, LPCTSTR lpTickNormal, LPCTSTR lpTickHover);
 	bool SetIconImage(LPCTSTR lpszFileName);

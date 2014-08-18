@@ -22,6 +22,7 @@ CMyButtonEx::CMyButtonEx()
 	m_nBtnType = BT_PUSHBUTTON;
 
 	m_hMenu = NULL;
+	m_bResFromID = FALSE;
 }
 
 CMyButtonEx::~CMyButtonEx()
@@ -53,11 +54,17 @@ void CMyButtonEx::OnDestroy()
 	RenderEngine->RemoveImage(m_pCheckImgTickN);
 	RenderEngine->RemoveImage(m_pIconImg);
 	RenderEngine->RemoveImage(m_pMenuImg);
-
-	RenderEngine->RemoveImage(m_pBackImgN);
-	RenderEngine->RemoveImage(m_pBackImgH);
-	RenderEngine->RemoveImage(m_pBackImgD);
-	RenderEngine->RemoveImage(m_pBackImgF);
+	if (m_bResFromID) {
+		RenderEngine->RemoveImage(m_pBackImgN, RESOURCE_ID);
+		RenderEngine->RemoveImage(m_pBackImgH, RESOURCE_ID);
+		RenderEngine->RemoveImage(m_pBackImgD, RESOURCE_ID);
+		RenderEngine->RemoveImage(m_pBackImgF, RESOURCE_ID);
+	} else {
+		RenderEngine->RemoveImage(m_pBackImgN);
+		RenderEngine->RemoveImage(m_pBackImgH);
+		RenderEngine->RemoveImage(m_pBackImgD);
+		RenderEngine->RemoveImage(m_pBackImgF);
+	}
 
 	m_bFocus = m_bHover = m_bPress = m_bMouseTracking = FALSE;
 	m_hMenu = NULL;
@@ -198,12 +205,28 @@ BOOL CMyButtonEx::OnEraseBkgnd(CDC* pDC)
 	return true;
 }
 
-bool CMyButtonEx::SetBackImage(HINSTANCE hInstance, UINT nResourceID)
+BOOL CMyButtonEx::SetBackImage( UINT nResourceID, LPCTSTR lpszFileType)
 {
-	m_pBackImg.LoadFromResource(hInstance, nResourceID);
-	ASSERT(m_pBackImg != NULL);
+	/*m_pBackImg.LoadFromResource(hInstance, nResourceID);
+	ASSERT(m_pBackImg != NULL);*/
+	m_bResFromID = TRUE;
+	RenderEngine->RemoveImage(m_pBackImgN, RESOURCE_ID);
+	RenderEngine->RemoveImage(m_pBackImgH, RESOURCE_ID);
+	RenderEngine->RemoveImage(m_pBackImgD, RESOURCE_ID);
+	RenderEngine->RemoveImage(m_pBackImgF, RESOURCE_ID);
 
-	return true;
+	m_pBackImgN = RenderEngine->GetImage(nResourceID, lpszFileType);
+	m_pBackImgH = RenderEngine->GetImage(nResourceID, lpszFileType);
+	m_pBackImgD = RenderEngine->GetImage(nResourceID, lpszFileType);
+	m_pBackImgF = RenderEngine->GetImage(nResourceID, lpszFileType);
+
+	if ((nResourceID > 0 && NULL == m_pBackImgN) || 
+		(nResourceID > 0 && NULL == m_pBackImgH) ||
+		(nResourceID > 0 && NULL == m_pBackImgD) ||
+		(nResourceID > 0 && NULL == m_pBackImgF))
+		return FALSE;
+	else
+		return TRUE;
 }
 
 BOOL CMyButtonEx::SetBackImage(LPCTSTR lpNormal, LPCTSTR lpHoven, LPCTSTR lpDown, LPCTSTR lpFocus, CONST LPRECT lprcNinePart /*=NULL*/)

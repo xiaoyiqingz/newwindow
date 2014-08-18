@@ -49,14 +49,12 @@ BOOL CSetPage0::OnInitDialog()
 void CSetPage0::OnInitButton()
 {
 	HDC hParentDC = GetBackDC();
-	m_btAccount.SetBackImage(_T("res\\bt_back.png"),_T("res\\bt_back.png"),
-		_T("res\\bt_back.png"),_T("res\\bt_back.png"));
+	m_btAccount.SetBackImage(IDB_BT_BACK, _T("PNG"));
 	m_btAccount.SetButtonType(BT_PUSHBUTTON);
 	m_btAccount.SetParentBack(hParentDC);
 	m_btAccount.SetSize(74, 26);
 
-	m_btName.SetBackImage(_T("res\\bt_back.png"),_T("res\\bt_back.png"),
-		_T("res\\bt_back.png"),_T("res\\bt_back.png"));
+	m_btName.SetBackImage(IDB_BT_BACK, _T("PNG"));
 	m_btName.SetButtonType(BT_PUSHBUTTON);
 	m_btName.SetParentBack(hParentDC);
 	m_btName.SetSize(74, 26);

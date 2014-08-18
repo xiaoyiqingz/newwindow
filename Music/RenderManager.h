@@ -6,6 +6,7 @@
 #include "Music.h"
 #include "MyImage.h"
 
+#define RESOURCE_ID TRUE
 class CMyImage;
 
 //资源结构
@@ -23,6 +24,7 @@ protected:
 	HFONT								m_hDefaultFont;			//默认字体
 	HINSTANCE							m_hResInstance;			//资源句柄
 	map<LPCTSTR,tagImageInfo*>			m_ArrayImage;			//图片数组
+	map<int, tagImageInfo*>				m_ArrayImageId;
 	vector<HFONT>						m_ArrayFont;			//字体管理
 
 public:
@@ -57,8 +59,9 @@ public:
 public:
 	//获取图片
 	CMyImage *GetImage(LPCTSTR lpszFileName,LPCTSTR lpszResType=NULL);
+	CMyImage *GetImage(UINT nID, LPCTSTR lpszResType=NULL);
 	//删除图片
-	void RemoveImage(CMyImage *&pImage);
+	void RemoveImage(CMyImage *&pImage, BOOL bResFromID = FALSE);
 	//删除所有
 	void ClearImage();
 
