@@ -20,7 +20,8 @@ CMyListCtrl::CMyListCtrl()
 	m_pHovenImg = m_pSelectImg = NULL;
 	m_pCheckImg = m_pUnCheckImg = NULL;
 	m_colorBk = RGB(255, 255, 255);
-
+	m_colorRightTopNor = m_colorRightTopHov = RGB(0, 0, 0);
+	
 	m_ToolTip.Create(this);
 }
 
@@ -508,9 +509,9 @@ void CMyListCtrl::DrawReportItem(CDC * pDC, INT nItem, CRect & rcSubItem, INT nC
 		if (ItemContent.strRightTop !=NULL) {
 			COLORREF oldColor;
 			if (ItemContent.bRightTopHov) {
-				oldColor = pDC->SetTextColor(RGB(255, 0, 0));
+				oldColor = pDC->SetTextColor(m_colorRightTopHov);
 			} else {
-				oldColor = pDC->SetTextColor(RGB(0, 0, 255));
+				oldColor = pDC->SetTextColor(m_colorRightTopNor);
 			}			
 			pDC->DrawText(ItemContent.strRightTop,lstrlen(ItemContent.strRightTop), 
 				&rcRightTop, DT_BOTTOM | DT_SINGLELINE |DT_END_ELLIPSIS);
@@ -678,6 +679,12 @@ BOOL CMyListCtrl::HitTestRightTop(int nItem, POINT pt)
 		return TRUE;
 	else
 		return FALSE;
+}
+
+void CMyListCtrl::SetRightTopColor(COLORREF colorNor,COLORREF colorHov)
+{
+	m_colorRightTopHov = colorHov;
+	m_colorRightTopNor = colorNor;
 }
 
 

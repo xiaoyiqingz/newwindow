@@ -72,7 +72,9 @@ public:
 	CItemImgArray	m_ItemInviteArray;
 	CItemImgArray	m_ItemSetArray;
 	CItemContentArray  m_ItemContent;
+	
 	COLORREF		m_colorBk;
+	COLORREF		m_colorRightTopNor, m_colorRightTopHov; 
 	UINT			m_uActiveItem;
 	int				m_nHeightItem;
 	int				m_nItemHov;
@@ -104,6 +106,7 @@ public:
 	
 	//判断是在1列右上
 	BOOL HitTestRightTop(int nItem, POINT pt);
+	void SetRightTopColor(COLORREF colorNor,COLORREF colorHov);
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
