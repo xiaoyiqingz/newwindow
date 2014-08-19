@@ -101,7 +101,9 @@ public:
 	
 	void SetItemContent(int nItem,  LPCTSTR lpszLeftTop, LPCTSTR lpszRightTop, LPCTSTR lpszLeftBottom, LPCTSTR lpszRightBtoom = NULL);
 	BOOL GetItemContent(int nItem,  tagItemContent& itemContent);
-
+	
+	//判断是在1列右上
+	BOOL HitTestRightTop(int nItem, POINT pt);
 protected:
 	DECLARE_MESSAGE_MAP()
 public:

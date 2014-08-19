@@ -183,11 +183,7 @@ void CAddDevice::OnSelchangeTabAdd(NMHDR *pNMHDR, LRESULT *pResult)
 			m_btReFind.ShowWindow(SW_SHOW);
 			m_btSelected.ShowWindow(SW_SHOW);
 			break;
-		case 1:
-			m_Page0.AnimateWindow(1000, AW_HIDE | AW_SLIDE | AW_HOR_NEGATIVE);
-			m_btReFind.AnimateWindow(1000, AW_HIDE | AW_SLIDE | AW_HOR_NEGATIVE);
-			m_btSelected.AnimateWindow(1000, AW_HIDE | AW_SLIDE | AW_HOR_NEGATIVE);
-	
+		case 1:	
 			m_Page0.ShowWindow(SW_HIDE);
 			m_Page1.ShowWindow(SW_SHOW);
 			m_Page2.ShowWindow(SW_HIDE);

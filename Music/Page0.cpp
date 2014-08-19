@@ -117,18 +117,10 @@ void CPage0::OnClickList1(NMHDR *pNMHDR, LRESULT *pResult)
 			break;
 		case 1:
 			{
-				CRect rcSubItem, rcLeftTop;
 				POINT point;
-				m_list1.GetSubItemRect(pNMListView->iItem, 
-					pNMListView->iSubItem, LVIR_BOUNDS, rcSubItem);
 				GetCursorPos(&point);
-				rcLeftTop.top = rcSubItem.top;
-				rcLeftTop.bottom = rcSubItem.top + (rcSubItem.bottom - rcSubItem.top)/2 ;
-				rcLeftTop.right = rcSubItem.right;
-				rcLeftTop.left =  rcSubItem.right - 80;
-
-				ClientToScreen(rcLeftTop);
-				if (PtInRect(&rcLeftTop, point)) {
+				::ScreenToClient(GetSafeHwnd(),&point);
+				if (m_list1.HitTestRightTop(pNMListView->iItem, point)) {
 					dlgSyncDirSet.DoModal();
 				}
 			}	

@@ -133,7 +133,7 @@ bool CMyImage::LoadImage(HINSTANCE hInstance, UINT nIDResource, LPCTSTR lpszResT
 		hResource=FindResource(hInstance, MAKEINTRESOURCE(nIDResource), lpszResType);
 	}
 
-		if (hResource==NULL) return false;
+	if (hResource==NULL) return false;
 
 	//¶ÁÈ¡×ÊÔ´
 	DWORD dwImageSize=SizeofResource(hInstance,hResource);
@@ -157,7 +157,8 @@ bool CMyImage::LoadImage(HINSTANCE hInstance, UINT nIDResource, LPCTSTR lpszResT
 	SafeRelease(pIStream);
 
 	//´íÎóÅÐ¶Ï
-	if ((m_pImage==NULL)||(m_pImage->GetLastStatus()!=Ok))
+	Status lastState = m_pImage->GetLastStatus(); // bmp return InvalidParameter
+	if ((m_pImage==NULL)||(lastState!=Ok))
 	{
 		ASSERT(FALSE);
 		return false;

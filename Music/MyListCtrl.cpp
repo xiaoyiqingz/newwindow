@@ -665,6 +665,21 @@ BOOL CMyListCtrl::GetItemContent(int nItem, tagItemContent& itemContent)
 	}
 }
 
+BOOL CMyListCtrl::HitTestRightTop(int nItem, POINT pt)
+{
+	CRect rcSubItem, rcRightTop;
+	GetSubItemRect(nItem, 1, LVIR_BOUNDS, rcSubItem);
+	rcRightTop.top = rcSubItem.top;
+	rcRightTop.bottom = rcSubItem.top + (rcSubItem.bottom - rcSubItem.top)/2 ;
+	rcRightTop.right = rcSubItem.right;
+	rcRightTop.left =  rcSubItem.right - 80;
+
+	if (PtInRect(&rcRightTop, pt)) 
+		return TRUE;
+	else
+		return FALSE;
+}
+
 
 
 BEGIN_MESSAGE_MAP(CMyHeaderCtrl, CHeaderCtrl)
