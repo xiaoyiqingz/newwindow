@@ -92,6 +92,7 @@ void CPage0::OnInitListCtrl()
 	m_list1.InsertImage(3, 4, _T("res\\tab_set.png"));
 
 	m_list1.SetItemHeight(70);
+	m_list1.SetRightTopColor(RGB(0, 124, 248), RGB(248, 24, 0));
 	m_list1.MoveWindow(0,0,597,350);
 //	m_list1.m_HeaderCtrl.EnableWindow(FALSE);
 //	m_list1.m_HeaderCtrl.SetLockCount(1);
