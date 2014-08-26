@@ -3,6 +3,7 @@
 //
 
 #include "stdafx.h"
+#include "WizardSetUp.h"
 #include "ZisyncService.h"
 #include "ZisyncServiceDlg.h"
 
@@ -129,7 +130,7 @@ BOOL CZisyncServiceApp::InitInstance()
 
 	// Create the shell manager, in case the dialog contains
 	// any shell tree view or shell list view controls.
-	CShellManager *pShellManager = new CShellManager;
+	m_pShellManager = new CShellManager;
 
 	// Standard initialization
 	// If you are not using these features and wish to reduce the size
@@ -152,6 +153,13 @@ BOOL CZisyncServiceApp::InitInstance()
 	DetourFunctionWithTrampoline((PBYTE)ShowScrollBarT, (PBYTE)ShowScrollBarD);
 	DetourFunctionWithTrampoline((PBYTE)EnableScrollBarT, (PBYTE)EnableScrollBarD);
 
+	CWizardSetUp WizaedSetUp;
+	INT_PTR nRet;
+	nRet = WizaedSetUp.DoModal();
+	if (nRet == IDCANCEL) {
+		return FALSE;
+	}
+	
 	CZisyncServiceDlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
@@ -164,12 +172,6 @@ BOOL CZisyncServiceApp::InitInstance()
 	{
 		// TODO: Place code here to handle when the dialog is
 		//  dismissed with Cancel
-	}
-
-	// Delete the shell manager created above.
-	if (pShellManager != NULL)
-	{
-		delete pShellManager;
 	}
 
 	// Since the dialog has been closed, return FALSE so that we exit the
@@ -192,5 +194,13 @@ int CZisyncServiceApp::ExitInstance()
 	DetourRemove((PBYTE)GetScrollRangeT, (PBYTE)GetScrollRangeD);
 	DetourRemove((PBYTE)ShowScrollBarT, (PBYTE)ShowScrollBarD);
 	DetourRemove((PBYTE)EnableScrollBarT, (PBYTE)EnableScrollBarD);
+
+	// Delete the shell manager created above.
+	if (m_pShellManager != NULL)
+	{
+		delete m_pShellManager;
+		m_pShellManager = NULL;
+	}
+
 	return CWinApp::ExitInstance();
 }

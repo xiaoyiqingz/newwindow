@@ -19,12 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
-    <None Include="res\Music.rc2">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\Music.ico">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\back1.jpg">
       <Filter>Resource Files</Filter>
     </None>
@@ -106,14 +100,23 @@
     <None Include="res\bt_back.bmp">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\ZisyncService.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ZisyncService.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\gif.gif">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\SetUp_Back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\logo.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Music.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MusicDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -207,14 +210,26 @@
     <ClInclude Include="MyToolTip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ZisyncService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZisyncServiceDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WizardSetUp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUpPage0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUpPage1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUpPage2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Music.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MusicDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -302,9 +317,27 @@
     <ClCompile Include="MyToolTip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ZisyncService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZisyncServiceDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WizardSetUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetUpPage0.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetUpPage1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetUpPage2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Music.rc">
+    <ResourceCompile Include="ZisyncService.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

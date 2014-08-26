@@ -23,6 +23,7 @@ class CZisyncServiceApp : public CWinApp
 protected:
 	ULONG_PTR				m_GdiplusToken;
 
+	CShellManager			*m_pShellManager;
 public:
 	CZisyncServiceApp();
 

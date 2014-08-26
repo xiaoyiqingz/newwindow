@@ -26,11 +26,14 @@ void CSetPage2::DoDataExchange(CDataExchange* pDX)
 	CMyDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_UPDATE, m_btUpdate);
 	DDX_Control(pDX, IDC_FEEDBACK, m_btFeedback);
+	DDX_Control(pDX, IDC_SYNC_TIME, m_etSyncTime);
 }
 
 
 BEGIN_MESSAGE_MAP(CSetPage2, CMyDialog)
 	ON_WM_CTLCOLOR()
+	ON_BN_CLICKED(IDC_RADIO1, &CSetPage2::OnClickedRadio1)
+	ON_COMMAND(IDC_RADIO4, &CSetPage2::OnRadio4)
 END_MESSAGE_MAP()
 
 
@@ -40,8 +43,12 @@ END_MESSAGE_MAP()
 BOOL CSetPage2::OnInitDialog()
 {
 	CMyDialog::OnInitDialog();
+	
 	OnInitButton();
-
+	
+	((CButton *)GetDlgItem(IDC_RADIO1))->SetCheck(TRUE);
+	m_etSyncTime.EnableWindow(FALSE);
+	
 	return TRUE;  
 }
 
@@ -69,4 +76,16 @@ HBRUSH CSetPage2::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 		return hBrush;
 	}
 	return hbr;
+}
+
+
+void CSetPage2::OnClickedRadio1()
+{
+	m_etSyncTime.EnableWindow(FALSE);
+}
+
+
+void CSetPage2::OnRadio4()
+{
+	m_etSyncTime.EnableWindow(TRUE);
 }

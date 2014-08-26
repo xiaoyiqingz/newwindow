@@ -80,8 +80,11 @@ public:
 	int				m_nItemHov;
 
 	CMyHeaderCtrl	m_HeaderCtrl;
-	
+
+//ToolTip	
 	CMyToolTip		m_ToolTip;
+	CString			m_strToolTip1, m_strToolTip2, m_strToolTip3;
+
 public:
 	CMyListCtrl();
 	virtual ~CMyListCtrl();

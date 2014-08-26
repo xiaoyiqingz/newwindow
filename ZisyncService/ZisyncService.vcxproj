@@ -111,10 +111,13 @@
     <None Include="res\close.png" />
     <None Include="res\device_back.png" />
     <None Include="res\device_back1.png" />
+    <None Include="res\gif.gif" />
     <None Include="res\ground.bmp" />
     <None Include="res\image1.bin" />
+    <None Include="res\logo.png" />
     <None Include="res\minimize.png" />
     <None Include="res\minimode.png" />
+    <None Include="res\SetUp_Back.png" />
     <None Include="res\ZisyncService.ico" />
     <None Include="res\ZisyncService.rc2" />
     <None Include="res\next_mini.png" />
@@ -138,6 +141,10 @@
     <ClInclude Include="DialogSet.h" />
     <ClInclude Include="MyDialogBase.h" />
     <ClInclude Include="MemoryDC.h" />
+    <ClInclude Include="SetUpPage0.h" />
+    <ClInclude Include="SetUpPage1.h" />
+    <ClInclude Include="SetUpPage2.h" />
+    <ClInclude Include="WizardSetUp.h" />
     <ClInclude Include="ZisyncService.h" />
     <ClInclude Include="ZisyncServiceDlg.h" />
     <ClInclude Include="MyButton.h" />
@@ -173,6 +180,10 @@
     <ClCompile Include="DialogSet.cpp" />
     <ClCompile Include="MyDialogBase.cpp" />
     <ClCompile Include="MemoryDC.cpp" />
+    <ClCompile Include="SetUpPage0.cpp" />
+    <ClCompile Include="SetUpPage1.cpp" />
+    <ClCompile Include="SetUpPage2.cpp" />
+    <ClCompile Include="WizardSetUp.cpp" />
     <ClCompile Include="ZisyncService.cpp" />
     <ClCompile Include="ZisyncServiceDlg.cpp" />
     <ClCompile Include="MyButton.cpp" />

@@ -1,32 +1,29 @@
 #pragma once
 #include "MyDialog.h"
-#include "MyButtonEx.h"
 #include "afxwin.h"
 
-// CSePage2 dialog
+// CSetUpPage2 dialog
 
-class CSetPage2 : public CMyDialog
+class CSetUpPage2 : public CMyDialog
 {
-	DECLARE_DYNAMIC(CSetPage2)
+	DECLARE_DYNAMIC(CSetUpPage2)
 public:
-	CMyButtonEx		m_btUpdate;
-	CMyButtonEx		m_btFeedback;
+	int		m_Radio;
 
-	CEdit			m_etSyncTime;
+	CEdit m_etDisPort;
+	CEdit m_etPubPort;
+
 public:
-	CSetPage2(CWnd* pParent = NULL);   // standard constructor
-	virtual ~CSetPage2();
+	CSetUpPage2(CWnd* pParent = NULL);   // standard constructor
+	virtual ~CSetUpPage2();
 
 // Dialog Data
-	enum { IDD = IDD_SETPAGE2 };
+	enum { IDD = IDD_SETUPPAGE2 };
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 	DECLARE_MESSAGE_MAP()
-
-public:
-	void	OnInitButton();
 
 public:
 	virtual BOOL OnInitDialog();
