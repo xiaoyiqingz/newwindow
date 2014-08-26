@@ -153,12 +153,13 @@ BOOL CZisyncServiceApp::InitInstance()
 	DetourFunctionWithTrampoline((PBYTE)ShowScrollBarT, (PBYTE)ShowScrollBarD);
 	DetourFunctionWithTrampoline((PBYTE)EnableScrollBarT, (PBYTE)EnableScrollBarD);
 
+/*
 	CWizardSetUp WizaedSetUp;
 	INT_PTR nRet;
 	nRet = WizaedSetUp.DoModal();
 	if (nRet == IDCANCEL) {
 		return FALSE;
-	}
+	}*/
 	
 	CZisyncServiceDlg dlg;
 	m_pMainWnd = &dlg;

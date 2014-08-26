@@ -9,7 +9,8 @@ class CAddMail : public CMyDialog
 {
 	DECLARE_DYNAMIC(CAddMail)
 public:
-	CMyButtonEx		m_btGif;
+	CMyButtonEx		m_btFile;
+	CMyButtonEx		m_btMail;
 
 public:
 	CAddMail(CWnd* pParent = NULL);   // standard constructor
@@ -26,4 +27,5 @@ public:
 	void OnInitButton();
 public:
 	virtual BOOL OnInitDialog();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 };

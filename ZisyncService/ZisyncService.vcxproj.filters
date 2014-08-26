@@ -115,6 +115,24 @@
     <None Include="res\logo.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\code.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\help.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\phone_help.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_help_back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_help_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_help_sel.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -228,6 +246,9 @@
     <ClInclude Include="SetUpPage2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AddPhoneHelp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -333,6 +354,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetUpPage2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddPhoneHelp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

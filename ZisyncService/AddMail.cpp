@@ -23,11 +23,13 @@ CAddMail::~CAddMail()
 void CAddMail::DoDataExchange(CDataExchange* pDX)
 {
 	CMyDialog::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_BUTTON1, m_btGif);
+	DDX_Control(pDX, IDC_BT_FILE, m_btFile);
+	DDX_Control(pDX, IDC_BT_MAIL, m_btMail);
 }
 
 
 BEGIN_MESSAGE_MAP(CAddMail, CMyDialog)
+	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 
@@ -45,8 +47,26 @@ BOOL CAddMail::OnInitDialog()
 
 void CAddMail::OnInitButton()
 {
-	m_btGif.SetBackImage(_T("res\\gif.gif"), _T("res\\gif.gif"), _T("res\\gif.gif"),_T("res\\gif.gif"));
-	m_btGif.SetButtonType(BT_PUSHBUTTON);
-	m_btGif.SetParentBack(GetBackDC());
-	m_btGif.SetSize(80,80);
+	m_btFile.SetBackImage(IDB_HELP_NOR, IDB_HELP_SEL, _T("PNG"), CRect(2, 2, 2, 2));
+	m_btFile.SetButtonType(BT_PUSHBUTTON);
+	m_btFile.SetParentBack(GetBackDC());
+	m_btFile.SetSize(80, 30);
+
+	m_btMail.SetBackImage(IDB_HELP_NOR, IDB_HELP_SEL, _T("PNG"), CRect(2, 2, 2, 2));
+	m_btMail.SetButtonType(BT_PUSHBUTTON);
+	m_btMail.SetParentBack(GetBackDC());
+	m_btMail.SetSize(80, 30);
+}
+
+HBRUSH CAddMail::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CMyDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+
+	if (nCtlColor == CTLCOLOR_STATIC) {
+		pDC->SetBkMode(TRANSPARENT);
+		HBRUSH hBrush = CreateSolidBrush(RGB(255, 255, 255));
+		return hBrush;
+	}
+
+	return hbr;
 }

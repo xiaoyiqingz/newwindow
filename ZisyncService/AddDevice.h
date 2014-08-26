@@ -6,6 +6,7 @@
 #include "AddWin.h"
 #include "AddPhone.h"
 #include "AddMail.h"
+#include "AddPhoneHelp.h"
 #include "afxcmn.h"
 #include "afxwin.h"
 
@@ -26,6 +27,7 @@ public:
 	CAddWin			m_Page0;
 	CAddPhone		m_Page1;
 	CAddMail		m_Page2;
+	CAddPhoneHelp	m_Page3;
 public:
 	CAddDevice(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CAddDevice();

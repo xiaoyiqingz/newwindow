@@ -61,14 +61,17 @@ BOOL CAddDevice::OnInitDialog()
 	m_Page0.Create(IDD_ADDWIN, &m_TabAdd);
 	m_Page1.Create(IDD_ADDPHONE, &m_TabAdd);
 	m_Page2.Create(IDD_ADDMAIL, &m_TabAdd);
+	m_Page3.Create(IDD_ADDPHONEHELP, &m_TabAdd);
 
-	CRect rcPage(0, 48, 480, 380);
+	CRect rcPage(0, 48, 444, 351);
 	m_Page0.MoveWindow(&rcPage);
 	m_Page1.MoveWindow(&rcPage);
 	m_Page2.MoveWindow(&rcPage);
+	m_Page3.MoveWindow(&rcPage);
 	m_Page0.ShowWindow(SW_SHOW);
 	m_Page1.ShowWindow(SW_HIDE);
 	m_Page2.ShowWindow(SW_HIDE);
+	m_Page3.ShowWindow(SW_HIDE);
 
 	CRect rcClient;
 	GetClientRect(&rcClient);
@@ -79,6 +82,17 @@ BOOL CAddDevice::OnInitDialog()
 void CAddDevice::DrawClientArea(CDC*pDC,int nWidth,int nHeight)
 {
 	m_ImageBack.Draw(pDC, 0, 0, nWidth, nHeight, 0, 0, 0, 0);
+
+	CRect rcTitleCaption, rcTitle;
+	rcTitle = CRect(0,0, nWidth, 35);
+	pDC->DrawText(_T("同步到本地"), &rcTitleCaption, DT_CALCRECT);
+	CalcCenterRect(rcTitle, rcTitleCaption.Width(), rcTitleCaption.Height(), rcTitleCaption);
+
+	int nMode = pDC->SetBkMode(TRANSPARENT);
+	pDC->SelectObject(GetCtrlFont());
+	pDC->SetTextColor(m_colNormalText);
+	pDC->DrawText(_T("同步到本地"), &rcTitleCaption, DT_CENTER | DT_SINGLELINE);
+	pDC->SetBkMode(nMode);
 }
 
 
@@ -180,6 +194,7 @@ void CAddDevice::OnSelchangeTabAdd(NMHDR *pNMHDR, LRESULT *pResult)
 			m_Page0.ShowWindow(SW_SHOW);
 			m_Page1.ShowWindow(SW_HIDE);
 			m_Page2.ShowWindow(SW_HIDE);
+			m_Page3.ShowWindow(SW_HIDE);
 			m_btReFind.ShowWindow(SW_SHOW);
 			m_btSelected.ShowWindow(SW_SHOW);
 			break;
@@ -194,6 +209,7 @@ void CAddDevice::OnSelchangeTabAdd(NMHDR *pNMHDR, LRESULT *pResult)
 			m_Page0.ShowWindow(SW_HIDE);
 			m_Page1.ShowWindow(SW_HIDE);
 			m_Page2.ShowWindow(SW_SHOW);
+			m_Page3.ShowWindow(SW_HIDE);
 			m_btReFind.ShowWindow(SW_HIDE);
 			m_btSelected.ShowWindow(SW_HIDE);
 			break;

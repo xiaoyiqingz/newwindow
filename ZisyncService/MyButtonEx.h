@@ -40,7 +40,7 @@ public:
 
 public:
 	void SetButtonType(BUTTON_TYPE nBtnType);
-	BOOL SetBackImage(UINT nResourceID, LPCTSTR lpszFileType=NULL);
+	BOOL SetBackImage(UINT nResNorID, UINT nResSelID = 0,LPCTSTR lpszFileType=NULL, CONST LPRECT lprcNinePart=NULL);
 	BOOL SetBackImage(LPCTSTR lpNormal, LPCTSTR lpHoven, LPCTSTR lpDown, LPCTSTR lpFocus, CONST LPRECT lprcNinePart=NULL);
 	bool SetCheckImage(LPCTSTR lpNormal, LPCTSTR lpHover, LPCTSTR lpTickNormal, LPCTSTR lpTickHover);
 	bool SetIconImage(LPCTSTR lpszFileName);

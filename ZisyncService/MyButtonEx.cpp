@@ -205,7 +205,7 @@ BOOL CMyButtonEx::OnEraseBkgnd(CDC* pDC)
 	return true;
 }
 
-BOOL CMyButtonEx::SetBackImage( UINT nResourceID, LPCTSTR lpszFileType)
+BOOL CMyButtonEx::SetBackImage(UINT nResNorID, UINT nResSelID, LPCTSTR lpszFileType, CONST LPRECT lprcNinePart)
 {
 	/*m_pBackImg.LoadFromResource(hInstance, nResourceID);
 	ASSERT(m_pBackImg != NULL);*/
@@ -214,16 +214,39 @@ BOOL CMyButtonEx::SetBackImage( UINT nResourceID, LPCTSTR lpszFileType)
 	RenderEngine->RemoveImage(m_pBackImgH, RESOURCE_ID);
 	RenderEngine->RemoveImage(m_pBackImgD, RESOURCE_ID);
 	RenderEngine->RemoveImage(m_pBackImgF, RESOURCE_ID);
+	
+	if (nResSelID == 0) {
+		m_pBackImgN = RenderEngine->GetImage(nResNorID, lpszFileType);
+		m_pBackImgH = RenderEngine->GetImage(nResNorID, lpszFileType);
+		m_pBackImgD = RenderEngine->GetImage(nResNorID, lpszFileType);
+		m_pBackImgF = RenderEngine->GetImage(nResNorID, lpszFileType);
+	} else {
+		m_pBackImgN = RenderEngine->GetImage(nResNorID, lpszFileType);
+		m_pBackImgH = RenderEngine->GetImage(nResSelID, lpszFileType);
+		m_pBackImgD = RenderEngine->GetImage(nResSelID, lpszFileType);
+		m_pBackImgF = RenderEngine->GetImage(nResNorID, lpszFileType);
 
-	m_pBackImgN = RenderEngine->GetImage(nResourceID, lpszFileType);
-	m_pBackImgH = RenderEngine->GetImage(nResourceID, lpszFileType);
-	m_pBackImgD = RenderEngine->GetImage(nResourceID, lpszFileType);
-	m_pBackImgF = RenderEngine->GetImage(nResourceID, lpszFileType);
+	}
 
-	if ((nResourceID > 0 && NULL == m_pBackImgN) || 
-		(nResourceID > 0 && NULL == m_pBackImgH) ||
-		(nResourceID > 0 && NULL == m_pBackImgD) ||
-		(nResourceID > 0 && NULL == m_pBackImgF))
+	if( lprcNinePart != NULL )
+	{
+		if (m_pBackImgN != NULL)
+			m_pBackImgN->SetNinePart(lprcNinePart);
+
+		if (m_pBackImgH != NULL)
+			m_pBackImgH->SetNinePart(lprcNinePart);
+
+		if (m_pBackImgD != NULL)
+			m_pBackImgD->SetNinePart(lprcNinePart);
+
+		if (m_pBackImgF != NULL)
+			m_pBackImgF->SetNinePart(lprcNinePart);
+	}
+
+	if ((nResNorID > 0 && NULL == m_pBackImgN) || 
+		(nResSelID >= 0 && NULL == m_pBackImgH) ||
+		(nResSelID >= 0 && NULL == m_pBackImgD) ||
+		(nResNorID > 0 && NULL == m_pBackImgF))
 		return FALSE;
 	else
 		return TRUE;

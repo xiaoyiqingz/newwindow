@@ -67,7 +67,7 @@ HBRUSH CSetUpPage1::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 void CSetUpPage1::OnInitButton()
 {
-	m_btModify.SetBackImage(IDB_BT_BACK, _T("PNG"));
+	m_btModify.SetBackImage(IDB_BT_BACK, 0, _T("PNG"));
 	m_btModify.SetButtonType(BT_PUSHBUTTON);
 	m_btModify.SetParentBack(GetBackDC());
 	m_btModify.SetSize(74, 26);
