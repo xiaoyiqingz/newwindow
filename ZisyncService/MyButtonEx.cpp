@@ -86,6 +86,10 @@ void CMyButtonEx::OnMouseMove(UINT nFlags, CPoint point)
 		tme.hwndTrack = GetSafeHwnd();
 		_TrackMouseEvent(&tme);
 
+		if (m_nBtnType == BT_GIFBUTTON) {
+			m_pBackImgN->m_bIsPause = TRUE;
+		}
+
 		m_bMouseTracking = TRUE;
 		m_bHover = TRUE;
 		m_bFocus = FALSE;
@@ -105,6 +109,11 @@ LRESULT CMyButtonEx::OnMouseLeave(WPARAM wparam, LPARAM lparam)
 	m_bMouseTracking = FALSE;
 	m_bHover = FALSE;
 	m_bFocus = TRUE;
+	
+	if (m_nBtnType == BT_GIFBUTTON) {
+		m_pBackImgN->m_bIsPause = FALSE;
+	} 
+
 	RedrawWindow(NULL, NULL, RDW_FRAME | RDW_INVALIDATE 
 		| RDW_ERASE | RDW_ERASENOW);
 
@@ -207,8 +216,6 @@ BOOL CMyButtonEx::OnEraseBkgnd(CDC* pDC)
 
 BOOL CMyButtonEx::SetBackImage(UINT nResNorID, UINT nResSelID, LPCTSTR lpszFileType, CONST LPRECT lprcNinePart)
 {
-	/*m_pBackImg.LoadFromResource(hInstance, nResourceID);
-	ASSERT(m_pBackImg != NULL);*/
 	m_bResFromID = TRUE;
 	RenderEngine->RemoveImage(m_pBackImgN, RESOURCE_ID);
 	RenderEngine->RemoveImage(m_pBackImgH, RESOURCE_ID);
@@ -389,6 +396,9 @@ void CMyButtonEx::OnPaint()
 			break;
 		case BT_SPLITBUTTON:
 			DrawSplitButton(&memoryDC, rcClient);
+			break;
+		case BT_GIFBUTTON:
+			DrawGIFButton(&memoryDC, rcClient);
 			break;
 		ASSERT(FALSE);
 	}	
@@ -729,6 +739,15 @@ void CMyButtonEx::DrawSplitButton(CDC* pDC,RECT &rcClient)
 	}
 }
 
+void CMyButtonEx::DrawGIFButton(CDC* pDC,RECT &rcClient) 
+{
+	if (m_pBackImgN != NULL && !m_pBackImgN->IsNull()) {
+		if (!m_pBackImgN->IsInitGIF()) {
+			m_pBackImgN->DrawFrameGIF(GetSafeHwnd(), rcClient);
+			//m_pBackImgN->Draw(pDC, rcClient);
+		}
+	}
+}
 
 LRESULT CMyButtonEx::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 {

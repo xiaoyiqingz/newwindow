@@ -33,4 +33,5 @@ public:
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnClickedRadio1();
 	afx_msg void OnRadio4();
+	afx_msg void OnBnClickedBtUpdate();
 };

@@ -5,7 +5,7 @@
 #include "ZisyncService.h"
 #include "SetPage2.h"
 #include "afxdialogex.h"
-
+#include "CheckUpDate.h"
 
 // CSePage2 dialog
 
@@ -34,6 +34,7 @@ BEGIN_MESSAGE_MAP(CSetPage2, CMyDialog)
 	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDC_RADIO1, &CSetPage2::OnClickedRadio1)
 	ON_COMMAND(IDC_RADIO4, &CSetPage2::OnRadio4)
+	ON_BN_CLICKED(IDC_UPDATE, OnBnClickedBtUpdate)
 END_MESSAGE_MAP()
 
 
@@ -88,4 +89,10 @@ void CSetPage2::OnClickedRadio1()
 void CSetPage2::OnRadio4()
 {
 	m_etSyncTime.EnableWindow(TRUE);
+}
+
+void CSetPage2::OnBnClickedBtUpdate()
+{
+	CCheckUpDate CheckUpDate;
+	CheckUpDate.DoModal();
 }

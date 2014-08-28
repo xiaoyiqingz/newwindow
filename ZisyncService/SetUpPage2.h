@@ -8,10 +8,10 @@ class CSetUpPage2 : public CMyDialog
 {
 	DECLARE_DYNAMIC(CSetUpPage2)
 public:
-	int		m_Radio;
+	int			m_Radio;
 
-	CEdit m_etDisPort;
-	CEdit m_etPubPort;
+	CEdit		m_etDisPort;
+	CEdit		m_etPubPort;
 
 public:
 	CSetUpPage2(CWnd* pParent = NULL);   // standard constructor

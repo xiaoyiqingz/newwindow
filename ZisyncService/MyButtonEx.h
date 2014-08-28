@@ -9,7 +9,8 @@ enum BUTTON_TYPE
 	BT_CHECKBUTTON,
 	BT_ICONBUTTON,
 	BT_MENUBUTTON,
-	BT_SPLITBUTTON
+	BT_SPLITBUTTON,
+	BT_GIFBUTTON
 };
 
 // CMyButtonEx
@@ -53,6 +54,7 @@ public:
 	void DrawIconButton(CDC* pDC,RECT &rcClient);
 	void DrawMenuButton(CDC* pDC,RECT &rcClient);
 	void DrawSplitButton(CDC* pDC,RECT &rcClient);
+	void DrawGIFButton(CDC* pDC,RECT &rcClient);
 //	void SetParentBack(HDC hDC){ m_bTransparent = true; m_hParentDC = hDC;}
 
 public:

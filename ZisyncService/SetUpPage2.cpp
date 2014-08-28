@@ -85,3 +85,4 @@ void CSetUpPage2::OnRadio4()
 	m_etDisPort.EnableWindow(TRUE);
 	m_etPubPort.EnableWindow(TRUE);
 }
+
