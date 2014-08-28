@@ -157,14 +157,12 @@ void CAddDevice::OnInitTabCtrl()
 void CAddDevice::OnInitButton()
 {
 	HDC hParentDc = GetBackDC();
-	m_btReFind.SetBackImage(_T("res\\bt_back.png"),_T("res\\bt_back.png"),
-		_T("res\\bt_back.png"),_T("res\\bt_back.png"));
+	m_btReFind.SetBackImage(IDB_BT_BACK, 0, 0, 0, IMAGE_PNG);
 	m_btReFind.SetButtonType(BT_PUSHBUTTON);
 	m_btReFind.SetParentBack(hParentDc);
 	m_btReFind.SetSize(74, 26);
 
-	m_btSelected.SetBackImage(_T("res\\bt_back.png"),_T("res\\bt_back.png"),
-		_T("res\\bt_back.png"),_T("res\\bt_back.png"));
+	m_btSelected.SetBackImage(IDB_BT_BACK, 0, 0, 0, IMAGE_PNG);
 	m_btSelected.SetButtonType(BT_PUSHBUTTON);
 	m_btSelected.SetParentBack(hParentDc);
 	m_btSelected.SetSize(74, 26);

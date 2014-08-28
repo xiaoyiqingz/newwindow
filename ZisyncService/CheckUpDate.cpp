@@ -59,7 +59,7 @@ BOOL CCheckUpDate::OnInitDialog()
 	SetControlPos(rcClient.Width(), rcClient.Height());
 	
 
-	m_btGif.SetBackImage(IDR_GIF, 0, _T("GIF"));
+	m_btGif.SetBackImage(IDR_GIF, 0, 0, 0, _T("GIF"));
 	m_btGif.SetButtonType(BT_GIFBUTTON);
 	m_btGif.SetParentBack(hParentDC);
 	m_btGif.SetSize(m_pImage->GetWidth(), m_pImage->GetHeight());

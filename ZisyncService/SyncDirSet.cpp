@@ -91,32 +91,28 @@ void CSyncDirSet::SetControlPos(int cx, int cy)
 void CSyncDirSet::OnInitButton()
 {
 	HDC hParentDC = GetBackDC();
-	m_btDeleteDir.SetBackImage(_T("res\\bt_delete_nor.png"), _T("res\\bt_delete_hov.png"),
-		_T("res\\bt_delete_hov.png"), _T("res\\bt_delete_nor.png"),CRect(2, 2, 2, 2));
+	m_btDeleteDir.SetBackImage(IDB_BT_DELETE_NOR, IDB_BT_DELETE_HOV,
+		IDB_BT_DELETE_HOV, IDB_BT_DELETE_NOR, IMAGE_PNG, CRect(2, 2, 2, 2));
 	m_btDeleteDir.SetButtonType(BT_PUSHBUTTON);
 	m_btDeleteDir.SetParentBack(hParentDC);
 	m_btDeleteDir.SetSize(130, 30);
 
-	m_btOk.SetBackImage(_T("res\\bt_back.png"),_T("res\\bt_back.png"),
-		_T("res\\bt_back.png"),_T("res\\bt_back.png"));
+	m_btOk.SetBackImage(IDB_BT_BACK, 0, 0, 0, IMAGE_PNG);
 	m_btOk.SetButtonType(BT_PUSHBUTTON);
 	m_btOk.SetParentBack(hParentDC);
 	m_btOk.SetSize(74, 26);
 
-	m_btCancle.SetBackImage(_T("res\\bt_back.png"),_T("res\\bt_back.png"),
-		_T("res\\bt_back.png"),_T("res\\bt_back.png"));
+	m_btCancle.SetBackImage(IDB_BT_BACK, 0, 0, 0, IMAGE_PNG);
 	m_btCancle.SetButtonType(BT_PUSHBUTTON);
 	m_btCancle.SetParentBack(hParentDC);
 	m_btCancle.SetSize(74, 26);
 
-	m_btCancleSync.SetBackImage(_T("res\\bt_back.png"),_T("res\\bt_back.png"),
-		_T("res\\bt_back.png"),_T("res\\bt_back.png"));
+	m_btCancleSync.SetBackImage(IDB_BT_BACK, 0, 0, 0, IMAGE_PNG);
 	m_btCancleSync.SetButtonType(BT_PUSHBUTTON);
 	m_btCancleSync.SetParentBack(hParentDC);
 	m_btCancleSync.SetSize(74, 26);
 
-	m_btSet.SetBackImage(_T("res\\bt_back.png"),_T("res\\bt_back.png"),
-		_T("res\\bt_back.png"),_T("res\\bt_back.png"));
+	m_btSet.SetBackImage(IDB_BT_BACK, 0, 0, 0, IMAGE_PNG);
 	m_btSet.SetButtonType(BT_PUSHBUTTON);
 	m_btSet.SetParentBack(hParentDC);
 	m_btSet.SetSize(74, 26);

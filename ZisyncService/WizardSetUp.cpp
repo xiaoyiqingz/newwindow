@@ -122,20 +122,20 @@ void CWizardSetUp::DrawClientArea(CDC*pDC,int nWidth,int nHeight)
 void CWizardSetUp::OnInitButton(CRect &rcClient)
 {
 	HDC hParent = GetBackDC();
-	m_btCancle.SetBackImage(IDB_BT_BACK, 0, _T("PNG"));
+	m_btCancle.SetBackImage(IDB_BT_BACK, 0, 0, 0, _T("PNG"));
 	m_btCancle.SetButtonType(BT_PUSHBUTTON);
 	m_btCancle.SetParentBack(hParent);
 	m_btCancle.SetSize(74, 26);
 	m_btCancle.MoveWindow(rcClient.left+20, rcClient.bottom-41, 74, 26);
 
-	m_btPrev.SetBackImage(IDB_BT_BACK, 0, _T("PNG"));
+	m_btPrev.SetBackImage(IDB_BT_BACK, 0, 0, 0, _T("PNG"));
 	m_btPrev.SetButtonType(BT_PUSHBUTTON);
 	m_btPrev.SetParentBack(hParent);
 	m_btPrev.SetSize(74, 26);
 	m_btPrev.MoveWindow(rcClient.right-188, rcClient.bottom-41, 74, 26);
 	m_btPrev.ShowWindow(SW_HIDE);
 
-	m_btNext.SetBackImage(IDB_BT_BACK, 0, _T("PNG"));
+	m_btNext.SetBackImage(IDB_BT_BACK, 0, 0, 0, _T("PNG"));
 	m_btNext.SetButtonType(BT_PUSHBUTTON);
 	m_btNext.SetParentBack(hParent);
 	m_btNext.SetSize(74, 26);

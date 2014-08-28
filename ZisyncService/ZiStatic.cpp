@@ -16,6 +16,7 @@ IMPLEMENT_DYNAMIC(CZiStatic, CStatic)
 CZiStatic::CZiStatic()
 {
 	m_pBackImg = NULL;
+	m_bResFromID = FALSE;
 }
 
 CZiStatic::~CZiStatic()
@@ -39,8 +40,15 @@ END_MESSAGE_MAP()
 void CZiStatic::OnDestroy()
 {
 	__super::OnDestroy();
+	
 	m_strPath.clear();
-	RenderEngine->RemoveImage(m_pBackImg);
+	
+	if (m_bResFromID) {
+		RenderEngine->RemoveImage(m_pBackImg, RESOURCE_ID);
+	} else {
+		RenderEngine->RemoveImage(m_pBackImg);
+	}	
+	
 	m_pBackImg = NULL;
 }
 
@@ -72,6 +80,19 @@ BOOL CZiStatic::SetBackImage(LPCTSTR lpszFile, const LPRECT lprcNinePart)
 		m_pBackImg->SetNinePart(lprcNinePart);
 		return TRUE;
 
+}
+
+BOOL CZiStatic::SetBackImage(UINT nResBackID, LPCTSTR lpszFileType /*= NULL*/)
+{
+	m_bResFromID = TRUE;
+	RenderEngine->RemoveImage(m_pBackImg, RESOURCE_ID);
+	
+	m_pBackImg = RenderEngine->GetImage(nResBackID, lpszFileType);
+
+	if (m_pBackImg == NULL )
+		return  FALSE;
+	else 
+		return TRUE;
 }
 
 void CZiStatic::SetItemSize(int nWidth, int nHeight)

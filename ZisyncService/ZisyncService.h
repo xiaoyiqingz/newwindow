@@ -18,6 +18,11 @@ using namespace std;
 // See ZisyncService.cpp for the implementation of this class
 //
 
+#define	  IMAGE_JPG	    _T("IMAGE");
+#define   IMAGE_PNG		_T("PNG")
+#define	  IMAGE_GIF		_T("GIF")
+#define	  IMAGE_BMP		_T("BMP")
+
 class CZisyncServiceApp : public CWinApp
 {
 protected:

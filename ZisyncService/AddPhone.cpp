@@ -41,7 +41,7 @@ BOOL CAddPhone::OnInitDialog()
 	CMyDialog::OnInitDialog();
 	m_ImageCode.LoadImage(AfxGetInstanceHandle(), IDB_CODE_PNG, _T("PNG"));
 
-	m_btHelp.SetBackImage(IDB_HELP, 0, _T("PNG"));
+	m_btHelp.SetBackImage(IDB_HELP, 0, 0, 0, _T("PNG"));
 	m_btHelp.SetButtonType(BT_PUSHBUTTON);
 	m_btHelp.SetParentBack(GetBackDC());
 	m_btHelp.SetSize(24, 24);

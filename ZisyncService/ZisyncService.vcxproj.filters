@@ -139,6 +139,57 @@
     <None Include="res\hearts.gif">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\bt_add_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_add_hov.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_delete_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_delete_hov.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_create.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_status_ok.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_set.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_back_down.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_back_highlight.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\minimize1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\minimize2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\minimize3.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\minimize4.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\close1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\close2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\close3.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\close4.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

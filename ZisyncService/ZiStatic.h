@@ -9,6 +9,8 @@ class CZiStatic : public CStatic, public MyDialogBase
 	DECLARE_DYNAMIC(CZiStatic)
 public:
 	CMyImage	*m_pBackImg;
+	BOOL		m_bResFromID;
+
 	vector<CString> m_strPath;
 public:
 	CZiStatic();
@@ -19,6 +21,7 @@ protected:
 
 public:
 	BOOL	SetBackImage(LPCTSTR lpszFile, const LPRECT lprcNinePart = NULL);
+	BOOL	SetBackImage(UINT nResBackID, LPCTSTR lpszFileType = NULL);
 	void	SetItemSize(int nWidth, int nHeight);
 
 public:

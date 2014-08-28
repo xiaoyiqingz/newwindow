@@ -42,8 +42,8 @@ BOOL CPage1::OnInitDialog()
 	OnInitListCtrl();
 
 	HDC  hParentDC = GetBackDC();
-	m_btAdd.SetBackImage(_T("res\\button_add_nor.png"), _T("res\\button_add_hov.png"),
-		_T("res\\button_add_hov.png"), _T("res\\button_add_nor.png"));
+	m_btAdd.SetBackImage(IDB_BT_ADD_NOR, IDB_BT_ADD_HOV, 
+		IDB_BT_ADD_HOV, IDB_BT_ADD_NOR, _T("PNG"));
 	m_btAdd.SetButtonType(BT_PUSHBUTTON);
 	m_btAdd.SetParentBack(hParentDC);
 	m_btAdd.SetSize(500, 48);

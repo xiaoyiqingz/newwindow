@@ -83,13 +83,12 @@ void CCreateSyncDIr::OnInitButton()
 
 	CalcCenterRect(rcClient, 360, 244, rcCenter);
 
-	m_btCreate.SetBackImage(_T("res\\bt_create.png"),_T("res\\bt_create.png"),
-		_T("res\\bt_create.png"),_T("res\\bt_create.png"), CRect(3,3,3,3));
+	m_btCreate.SetBackImage(IDB_BT_CREATE, 0, 0, 0, IMAGE_PNG, CRect(3,3,3,3));
 	m_btCreate.SetButtonType(BT_PUSHBUTTON);
 	m_btCreate.SetParentBack(GetBackDC());
 
 	m_gbArea.SetItemSize(360, 244);
-	m_gbArea.SetBackImage(_T("res\\bt_createdir.png"));
+	m_gbArea.SetBackImage(IDB_BT_CREATEDIR, IMAGE_PNG);
 	m_gbArea.SetParentBack(GetBackDC());
 	m_gbArea.MoveWindow(&rcCenter);
 }

@@ -22,7 +22,9 @@ CMyButtonEx::CMyButtonEx()
 	m_nBtnType = BT_PUSHBUTTON;
 
 	m_hMenu = NULL;
-	m_bResFromID = FALSE;
+
+	m_bBackFromID = FALSE;
+	m_bIconFromID = FALSE;
 }
 
 CMyButtonEx::~CMyButtonEx()
@@ -52,9 +54,8 @@ void CMyButtonEx::OnDestroy()
 	RenderEngine->RemoveImage(m_pCheckImgN);
 	RenderEngine->RemoveImage(m_pCheckImgTichH);
 	RenderEngine->RemoveImage(m_pCheckImgTickN);
-	RenderEngine->RemoveImage(m_pIconImg);
 	RenderEngine->RemoveImage(m_pMenuImg);
-	if (m_bResFromID) {
+	if (m_bBackFromID) {
 		RenderEngine->RemoveImage(m_pBackImgN, RESOURCE_ID);
 		RenderEngine->RemoveImage(m_pBackImgH, RESOURCE_ID);
 		RenderEngine->RemoveImage(m_pBackImgD, RESOURCE_ID);
@@ -64,6 +65,12 @@ void CMyButtonEx::OnDestroy()
 		RenderEngine->RemoveImage(m_pBackImgH);
 		RenderEngine->RemoveImage(m_pBackImgD);
 		RenderEngine->RemoveImage(m_pBackImgF);
+	}
+
+	if (m_bIconFromID) {
+		RenderEngine->RemoveImage(m_pIconImg, RESOURCE_ID);
+	} else {
+		RenderEngine->RemoveImage(m_pIconImg);
 	}
 
 	m_bFocus = m_bHover = m_bPress = m_bMouseTracking = FALSE;
@@ -214,25 +221,50 @@ BOOL CMyButtonEx::OnEraseBkgnd(CDC* pDC)
 	return true;
 }
 
-BOOL CMyButtonEx::SetBackImage(UINT nResNorID, UINT nResSelID, LPCTSTR lpszFileType, CONST LPRECT lprcNinePart)
+BOOL CMyButtonEx::SetBackImage(UINT nResNorID, 
+							   UINT nResHovID, 
+							   UINT nResDownID, 
+							   UINT nResFocID,
+							   LPCTSTR lpszFileType, 
+							   CONST LPRECT lprcNinePart)
 {
-	m_bResFromID = TRUE;
+	m_bBackFromID = TRUE;
 	RenderEngine->RemoveImage(m_pBackImgN, RESOURCE_ID);
 	RenderEngine->RemoveImage(m_pBackImgH, RESOURCE_ID);
 	RenderEngine->RemoveImage(m_pBackImgD, RESOURCE_ID);
 	RenderEngine->RemoveImage(m_pBackImgF, RESOURCE_ID);
 	
-	if (nResSelID == 0) {
+	//if nResNorID != 0, other ID = 0, other Img = m_pBakcImgN;if nResNorID == 0, other ID = 0, other Img = NULL  
+	if (nResNorID != 0) {
 		m_pBackImgN = RenderEngine->GetImage(nResNorID, lpszFileType);
-		m_pBackImgH = RenderEngine->GetImage(nResNorID, lpszFileType);
-		m_pBackImgD = RenderEngine->GetImage(nResNorID, lpszFileType);
-		m_pBackImgF = RenderEngine->GetImage(nResNorID, lpszFileType);
-	} else {
-		m_pBackImgN = RenderEngine->GetImage(nResNorID, lpszFileType);
-		m_pBackImgH = RenderEngine->GetImage(nResSelID, lpszFileType);
-		m_pBackImgD = RenderEngine->GetImage(nResSelID, lpszFileType);
-		m_pBackImgF = RenderEngine->GetImage(nResNorID, lpszFileType);
+	
+		if (nResHovID == 0) {
+			m_pBackImgH = RenderEngine->GetImage(nResNorID, lpszFileType);
+		} else {
+			m_pBackImgH = RenderEngine->GetImage(nResHovID, lpszFileType);
+		}
 
+		if (nResDownID == 0) {
+			m_pBackImgD = RenderEngine->GetImage(nResNorID, lpszFileType);
+		} else {
+			m_pBackImgD = RenderEngine->GetImage(nResDownID, lpszFileType);
+		}
+
+		if (nResFocID == 0) {
+			m_pBackImgF = RenderEngine->GetImage(nResNorID, lpszFileType);
+		} else {
+			m_pBackImgF = RenderEngine->GetImage(nResFocID, lpszFileType);
+		}
+	
+	} else {
+		if (nResHovID != 0) 
+			m_pBackImgH = RenderEngine->GetImage(nResHovID, lpszFileType);
+
+		if (nResDownID != 0) 
+			m_pBackImgD = RenderEngine->GetImage(nResDownID, lpszFileType);
+
+		if (nResFocID != 0)
+			m_pBackImgF = RenderEngine->GetImage(nResFocID, lpszFileType);
 	}
 
 	if( lprcNinePart != NULL )
@@ -251,9 +283,9 @@ BOOL CMyButtonEx::SetBackImage(UINT nResNorID, UINT nResSelID, LPCTSTR lpszFileT
 	}
 
 	if ((nResNorID > 0 && NULL == m_pBackImgN) || 
-		(nResSelID >= 0 && NULL == m_pBackImgH) ||
-		(nResSelID >= 0 && NULL == m_pBackImgD) ||
-		(nResNorID > 0 && NULL == m_pBackImgF))
+		(nResHovID >= 0 && NULL == m_pBackImgH) ||
+		(nResDownID >= 0 && NULL == m_pBackImgD) ||
+		(nResFocID >= 0 && NULL == m_pBackImgF))
 		return FALSE;
 	else
 		return TRUE;
@@ -315,18 +347,30 @@ bool CMyButtonEx::SetCheckImage(LPCTSTR lpNormal, LPCTSTR lpHover, LPCTSTR lpTic
 	}
 
 }
+BOOL CMyButtonEx::SetIconImage(UINT nResIconID, LPCTSTR lpszFileType)
+{
+	m_bIconFromID = TRUE;
 
-bool CMyButtonEx::SetIconImage(LPCTSTR lpszFileName)
+	RenderEngine->RemoveImage(m_pIconImg, RESOURCE_ID);
+
+	m_pIconImg = RenderEngine->GetImage(nResIconID, lpszFileType);
+
+	if (m_pIconImg == NULL) 
+		return FALSE;
+	else
+		return TRUE;
+}
+
+BOOL CMyButtonEx::SetIconImage(LPCTSTR lpszFileName)
 {
 	RenderEngine->RemoveImage(m_pIconImg);
 	
 	m_pIconImg = RenderEngine->GetImage(lpszFileName);
 
 	if (m_pIconImg == NULL) 
-		return false;
+		return FALSE;
 	else 
-		return true;
-
+		return TRUE;
 }
 
 BOOL CMyButtonEx::SetMenuImage(LPCTSTR lpszFileName)

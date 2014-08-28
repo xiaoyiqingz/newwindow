@@ -47,12 +47,14 @@ BOOL CAddMail::OnInitDialog()
 
 void CAddMail::OnInitButton()
 {
-	m_btFile.SetBackImage(IDB_HELP_NOR, IDB_HELP_SEL, _T("PNG"), CRect(2, 2, 2, 2));
+	m_btFile.SetBackImage(IDB_HELP_NOR, IDB_HELP_SEL, IDB_HELP_SEL, 0, 
+		_T("PNG"), CRect(2, 2, 2, 2));
 	m_btFile.SetButtonType(BT_PUSHBUTTON);
 	m_btFile.SetParentBack(GetBackDC());
 	m_btFile.SetSize(80, 30);
 
-	m_btMail.SetBackImage(IDB_HELP_NOR, IDB_HELP_SEL, _T("PNG"), CRect(2, 2, 2, 2));
+	m_btMail.SetBackImage(IDB_HELP_NOR, IDB_HELP_SEL, IDB_HELP_SEL, 0, 
+		_T("PNG"), CRect(2, 2, 2, 2));
 	m_btMail.SetButtonType(BT_PUSHBUTTON);
 	m_btMail.SetParentBack(GetBackDC());
 	m_btMail.SetSize(80, 30);
