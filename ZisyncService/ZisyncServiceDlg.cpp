@@ -5,9 +5,10 @@
 #include "stdafx.h"
 #include "ZisyncService.h"
 #include "ZisyncServiceDlg.h"
-#include "DialogSet.h"
 #include "afxdialogex.h"
 #include "resource.h"
+#include "DialogSet.h"
+#include "MemoryDC.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -194,6 +195,14 @@ void CZisyncServiceDlg::OnLButtonDown(UINT nFlags, CPoint point)
 
 BOOL CZisyncServiceDlg::OnEraseBkgnd(CDC* pDC)
 {
+/*
+	CRect rcClient;
+	GetClientRect(&rcClient);
+
+	CMemoryDC BufferDC(pDC,&rcClient);
+
+	BufferDC.FillSolidRect(&rcClient,m_colBack);*/
+
 	return TRUE;
 //	return CMyDialog::OnEraseBkgnd(pDC);
 }

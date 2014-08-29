@@ -20,11 +20,13 @@ class CMyListIcon : public CListCtrl, public MyDialogBase
 	DECLARE_DYNAMIC(CMyListIcon)
 public:
 	CItemArray		m_ItemImgArray;
+	CImageList		m_ImageList1;
 	CSize			m_ItemSize;
 	BOOL			m_bMouseTracking;
 	int				m_nHoverIndex;
-	int				m_xPadding, m_yPadding;
-	CImageList		m_ImageList1;
+	int				m_xPadding, m_yPadding;	
+	BOOL			m_bResFromID;
+
 public:
 	CMyListIcon();
 	virtual ~CMyListIcon();
@@ -33,7 +35,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
+	BOOL	SetItemImage(int nItem, UINT nResBackID, UINT nResIconNorID, UINT nResIconSelID, LPCTSTR lpszFileType=NULL);
 	BOOL	SetItemImage(int nItem, LPCTSTR lpBackImg, LPCTSTR lpIcon, LPCTSTR lpIconSel);
+	
 	BOOL	SetItemText(int nItem, CString strText);
 	void	SetItemSize(CSize size);
 	void	SetPadding(int cx, int cy);

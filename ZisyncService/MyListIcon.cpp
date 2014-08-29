@@ -17,6 +17,8 @@ CMyListIcon::CMyListIcon()
 	m_yPadding = 5;
 	m_nHoverIndex = -1;
 	m_bMouseTracking = FALSE;
+	
+	m_bResFromID = FALSE;
 }
 
 CMyListIcon::~CMyListIcon()
@@ -37,9 +39,6 @@ END_MESSAGE_MAP()
 
 // CMyListIcon message handlers
 
-
-
-
 void CMyListIcon::PreSubclassWindow()
 {
 	m_ImageList1.Create(55, 55,ILC_MASK|ILC_COLOR32, 0, 0);
@@ -55,9 +54,15 @@ void CMyListIcon::OnDestroy()
 
 	CItemArray::iterator iter = m_ItemImgArray.begin();
 	for (; iter != m_ItemImgArray.end(); ++iter) {
-		RenderEngine->RemoveImage(iter->m_pImgBack);
-		RenderEngine->RemoveImage(iter->m_pImgIcon);
-		RenderEngine->RemoveImage(iter->m_pImgIconSel);
+		if (m_bResFromID) {
+			RenderEngine->RemoveImage(iter->m_pImgBack, RESOURCE_ID);
+			RenderEngine->RemoveImage(iter->m_pImgIcon, RESOURCE_ID);
+			RenderEngine->RemoveImage(iter->m_pImgIconSel, RESOURCE_ID);
+		} else {
+			RenderEngine->RemoveImage(iter->m_pImgBack);
+			RenderEngine->RemoveImage(iter->m_pImgIcon);
+			RenderEngine->RemoveImage(iter->m_pImgIconSel);
+		}		
 	}
 	m_ItemImgArray.clear();
 	
@@ -67,6 +72,63 @@ void CMyListIcon::OnDestroy()
 	RemoveScorll();
 }
 
+BOOL CMyListIcon::SetItemImage(int nItem, 
+							   UINT nResBackID, 
+							   UINT nResIconNorID, 
+							   UINT nResIconSelID, 
+							   LPCTSTR lpszFileType)
+{
+	m_bResFromID = TRUE;
+
+	CItemArray::iterator iter = m_ItemImgArray.begin();
+	for (; iter != m_ItemImgArray.end(); iter++) {
+		if (iter->nItem == nItem) {
+			if (iter->m_pImgBack != NULL) {
+				RenderEngine->RemoveImage(iter->m_pImgBack, RESOURCE_ID);
+				iter->m_pImgBack = RenderEngine->GetImage(nResBackID, lpszFileType);
+			}
+
+			if (iter->m_pImgIcon != NULL) {
+				RenderEngine->RemoveImage(iter->m_pImgIcon, RESOURCE_ID);
+				iter->m_pImgIcon = RenderEngine->GetImage(nResIconNorID, lpszFileType);
+			}
+
+			if (iter->m_pImgIconSel!= NULL) {
+				RenderEngine->RemoveImage(iter->m_pImgIconSel, RESOURCE_ID);
+				if (nResIconSelID == 0) {
+					iter->m_pImgIconSel = RenderEngine->GetImage(nResIconNorID, lpszFileType);
+				} else {
+					iter->m_pImgIconSel = RenderEngine->GetImage(nResIconSelID, lpszFileType);
+				}
+				
+			}
+			return TRUE;
+		}
+	}
+
+	tagItem ItemNode;
+	ItemNode.nItem = nItem;
+	ItemNode.bIsSelected = false;
+	ItemNode.bIsHoveing = false;
+	ItemNode.m_pImgBack = RenderEngine->GetImage(nResBackID, lpszFileType);
+	ItemNode.m_pImgIcon = RenderEngine->GetImage(nResIconNorID, lpszFileType);
+	if (nResIconSelID == 0) {
+		ItemNode.m_pImgIconSel = RenderEngine->GetImage(nResIconNorID, lpszFileType);
+	} else {
+		ItemNode.m_pImgIconSel = RenderEngine->GetImage(nResIconSelID, lpszFileType);
+	}
+	
+
+	if (ItemNode.m_pImgBack == NULL ||ItemNode.m_pImgIcon == NULL || 
+		ItemNode.m_pImgIconSel == NULL) 
+		return FALSE;
+	else {
+		m_ItemImgArray.push_back(ItemNode);
+		__super::InsertItem(nItem, _T(""), 0);
+		return TRUE;
+	}
+}
+
 BOOL CMyListIcon::SetItemImage(int nItem, LPCTSTR lpBackImg, LPCTSTR lpIcon, LPCTSTR lpIconSel)
 {
 	CItemArray::iterator iter = m_ItemImgArray.begin();
@@ -74,17 +136,17 @@ BOOL CMyListIcon::SetItemImage(int nItem, LPCTSTR lpBackImg, LPCTSTR lpIcon, LPC
 		if (iter->nItem == nItem) {
 			if (iter->m_pImgBack != NULL) {
 				RenderEngine->RemoveImage(iter->m_pImgBack);
-				RenderEngine->GetImage(lpBackImg);
+				iter->m_pImgBack = RenderEngine->GetImage(lpBackImg);
 			}
 
 			if (iter->m_pImgIcon != NULL) {
 				RenderEngine->RemoveImage(iter->m_pImgIcon);
-				RenderEngine->GetImage(lpIcon);
+				iter->m_pImgIcon = RenderEngine->GetImage(lpIcon);
 			}
 
 			if (iter->m_pImgIconSel!= NULL) {
 				RenderEngine->RemoveImage(iter->m_pImgIconSel);
-				RenderEngine->GetImage(lpIconSel);
+				iter->m_pImgIconSel = RenderEngine->GetImage(lpIconSel);
 			}
 			return TRUE;
 		}
@@ -122,15 +184,6 @@ void CMyListIcon::OnPaint()
 	
 	for (int i = 0; i < (int)m_ItemImgArray.size(); i++) {
 		GetSubItemRect(i, 0, LVIR_BOUNDS, rcItem);
-/*
-		int xOrder = i % GetItemCountH();
-		int yOrder = i / GetItemCountH();
-		CRect rcItem;
-		rcItem.left = GetItemLeftPadding() + (m_ItemSize.cx + m_xPadding) * xOrder;
-		rcItem.right = rcItem.left + m_ItemSize.cy;
-		rcItem.top = (m_ItemSize.cy + m_yPadding) * yOrder;
-		rcItem.bottom = rcItem.top + m_ItemSize.cy;*/
-
 		DrawIconItem(&memoryDC, rcItem, i);
 	}
 }
@@ -167,12 +220,6 @@ void CMyListIcon::DrawIconItem(CDC *pDC, CRect & rcItem, int nItem)
 				iter->m_pImgIconSel->Draw(pDC, rcIcon);
 			else 
 				iter->m_pImgIcon->Draw(pDC, rcIcon);
-
-/*
-			rcText.top = rcIcon.bottom + 2;
-			rcText.left = rcItem.left + 2;
-			rcText.bottom = rcItem.bottom - 2;
-			rcText.right = rcItem.right - 2;*/
 
 			CRect rcText(0,0,0,0);
 			int nMode = pDC->SetBkMode(TRANSPARENT);

@@ -47,8 +47,8 @@ BOOL CSyncDirSet::OnInitDialog()
 
 	CRect  rcControl(0, 0, 0, 0);
 	m_btClose.Create(NULL, WS_CHILD | WS_VISIBLE, rcControl, this, IDCANCEL);
-	m_btClose.SetBackImage(_T("res\\close1.png"), _T("res\\close2.png"), 
-		_T("res\\close3.png"), _T("res\\close4.png"));
+	m_btClose.SetBackImage(IDB_CLOSE_NOR, IDB_CLOSE_HOV,IDB_CLOSE_SEL, 
+		IDB_CLOSE_FOC, IMAGE_PNG);
 	m_btClose.SetButtonType(BT_PUSHBUTTON);
 	m_btClose.SetParentBack(GetBackDC());
 	m_btClose.SetSize(18, 18);

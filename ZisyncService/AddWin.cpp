@@ -42,12 +42,12 @@ BOOL CAddWin::OnInitDialog()
 	m_ListDevice.SetParentBack(GetBackDC());
 	m_ListDevice.SetScrollImage(&m_ListDevice,_T("res\\SKIN_SCROLL.bmp"));
 
-	m_ListDevice.SetItemImage(0, _T("res\\linux.png"), _T("res\\check_nor.png"), 
-		_T("res\\check_sel.png"));
+	m_ListDevice.SetItemImage(0, IDB_DEVICE_LINUX, IDB_LIST_CHECK_NOR, 
+		IDB_LIST_CHECK_SEL, IMAGE_PNG);
 	m_ListDevice.SetItemText(0,_T("Zhang"));
 	for (int i = 1; i < 5; i++) {
-		m_ListDevice.SetItemImage(i, _T("res\\win32.png"), _T("res\\check_nor.png"), 
-			_T("res\\check_sel.png"));
+		m_ListDevice.SetItemImage(i, IDB_DEVICE_WIN, IDB_LIST_CHECK_NOR, 
+			IDB_LIST_CHECK_SEL, IMAGE_PNG);
 		m_ListDevice.SetItemText(i,_T("DeskTop"));
 	}
 	return TRUE; 

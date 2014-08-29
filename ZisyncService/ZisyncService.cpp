@@ -153,6 +153,7 @@ BOOL CZisyncServiceApp::InitInstance()
 	DetourFunctionWithTrampoline((PBYTE)ShowScrollBarT, (PBYTE)ShowScrollBarD);
 	DetourFunctionWithTrampoline((PBYTE)EnableScrollBarT, (PBYTE)EnableScrollBarD);
 
+
 /*
 	CWizardSetUp WizaedSetUp;
 	INT_PTR nRet;

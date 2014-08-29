@@ -79,6 +79,10 @@ public:
 	int				m_nHeightItem;
 	int				m_nItemHov;
 
+	BOOL			m_bBackHovFromID;
+	BOOL			m_bBackSelFromID;
+	BOOL			m_bIconFromID;
+
 	CMyHeaderCtrl	m_HeaderCtrl;
 
 //ToolTip	
@@ -90,10 +94,16 @@ public:
 	virtual ~CMyListCtrl();
 
 public:
-	BOOL SetHovenImage(LPCTSTR lpszFileName, const LPRECT lprcNinePart);
-	BOOL SetSelectImage(LPCTSTR lpszFileName, const LPRECT lprcNinePart);
+	BOOL SetHovenImage(UINT nResFromID, LPCTSTR lpszFileType, const LPRECT lprcNinePart=NULL);
+	BOOL SetHovenImage(LPCTSTR lpszFileName, const LPRECT lprcNinePart=NULL);
+	
+	BOOL SetSelectImage(UINT nResFromID, LPCTSTR lpszFileType, const LPRECT lprcNinePart=NULL);
+	BOOL SetSelectImage(LPCTSTR lpszFileName, const LPRECT lprcNinePart=NULL);
+	
 	BOOL SetCheckImage(LPCTSTR lpszCheckName,LPCTSTR lpszUnCheckName);
-	BOOL InsertImage(int nItem, int nSubitem, LPCTSTR lpszNorFileName, LPCTSTR lpszSelFileName = NULL);
+
+	BOOL InsertImage(int nItem, int nSubItem, UINT nResNorID, UINT nResSelID, LPCTSTR lpszFileType=NULL);
+	BOOL InsertImage(int nItem, int nSubItem, LPCTSTR lpszNorFileName, LPCTSTR lpszSelFileName = NULL);
 
 	int InsertItem(const LVITEM* pItem);
 	int InsertItem(int nItem, LPCTSTR lpszItem);

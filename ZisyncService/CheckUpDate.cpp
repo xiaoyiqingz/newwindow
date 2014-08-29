@@ -39,18 +39,18 @@ END_MESSAGE_MAP()
 BOOL CCheckUpDate::OnInitDialog()
 {
 	CMyDialog::OnInitDialog();
-	m_ImageBack.LoadImage(AfxGetInstanceHandle(), IDB_UPDATE_BACK, _T("PNG"));
-	m_ImageWaiting.LoadImage(_T("res\\hearts.gif"));
+	m_ImageBack.LoadImage(AfxGetInstanceHandle(), IDB_UPDATE_BACK, IMAGE_PNG);
+//	m_ImageWaiting.LoadImage(_T("res\\hearts.gif"));
 	
-	m_pImage = Image::FromFile(_T("res\\hearts.gif"));
+//	m_pImage = Image::FromFile(_T("res\\hearts.gif"));
 
 	SetWindowPos(NULL, 0, 0, 400, 220, SWP_NOMOVE);
 
 	CRect rcControl(0, 0, 0, 0);
 	HDC hParentDC = GetBackDC();
 	m_btClose.Create(NULL,  WS_CHILD | WS_VISIBLE, rcControl, this, IDCANCEL);
-	m_btClose.SetBackImage(_T("res\\close1.png"), _T("res\\close2.png"), 
-		_T("res\\close3.png"), _T("res\\close4.png"));
+	m_btClose.SetBackImage(IDB_CLOSE_NOR, IDB_CLOSE_HOV,IDB_CLOSE_SEL, 
+		IDB_CLOSE_FOC, IMAGE_PNG);
 	m_btClose.SetButtonType(BT_PUSHBUTTON);
 	m_btClose.SetParentBack(hParentDC);
 	m_btClose.SetSize(18 ,18);
@@ -59,10 +59,10 @@ BOOL CCheckUpDate::OnInitDialog()
 	SetControlPos(rcClient.Width(), rcClient.Height());
 	
 
-	m_btGif.SetBackImage(IDR_GIF, 0, 0, 0, _T("GIF"));
+	m_btGif.SetBackImage(IDR_GIF, 0, 0, 0, IMAGE_GIF);
 	m_btGif.SetButtonType(BT_GIFBUTTON);
 	m_btGif.SetParentBack(hParentDC);
-	m_btGif.SetSize(m_pImage->GetWidth(), m_pImage->GetHeight());
+	m_btGif.SetSize(80, 100);
 
 	return TRUE;
 }
@@ -71,15 +71,6 @@ BOOL CCheckUpDate::OnInitDialog()
 void CCheckUpDate::DrawClientArea(CDC*pDC,int nWidth,int nHeight)
 {
 	m_ImageBack.Draw(pDC, 0, 0, nWidth, nHeight, 0, 0, 0, 0);
-	
-	CRect rcImage, rcClient(0, 0, nWidth, nHeight);
-	int cx = m_ImageWaiting.GetWidth();
-	int cy = m_ImageWaiting.GetHeight();
-	CalcCenterRect(rcClient, cx, cy, rcImage);
-	m_pDC = pDC;
-
-//	m_ImageWaiting.Draw(pDc, rcImage);
-//	m_ImageWaiting.DrawFrameGIF(&dc, rcImage);
 }
 
 void CCheckUpDate::SetControlPos(int cx, int cy)

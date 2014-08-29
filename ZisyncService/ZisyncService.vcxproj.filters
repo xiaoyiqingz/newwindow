@@ -19,21 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
-    <None Include="res\back1.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\bitmap1.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\back.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\ground.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\bitmap.BMP">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\image1.bin">
       <Filter>Resource Files</Filter>
     </None>
@@ -46,37 +31,7 @@
     <None Include="res\minimode.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\prev_mini.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\play_mini.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\pause_mini.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\next_mini.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\SKIN_WND_CLOSE.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\radiobtn_highlight.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\radiobtn_normal.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\radiobtn_tick_highlight.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\radiobtn_tick_normal.png">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\back_new.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\button-check_basic_blue48.png">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\set_back.png">
@@ -104,9 +59,6 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\ZisyncService.rc2">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\gif.gif">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\SetUp_Back.png">
@@ -230,6 +182,63 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\tab_phone_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_device_linux.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_device_mac.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_device_win.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_check_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_check_sel.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_icon_folder.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_icon_invite.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_icon_sync_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_icon_sync_sel.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_phone_android.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_phone_ios.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_doc.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_folder.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_pdf.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_png.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_folder_del.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_folder_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_back_hov.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_back_sel.png">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

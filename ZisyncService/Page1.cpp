@@ -58,27 +58,25 @@ void CPage1::OnInitListCtrl()
 	m_ListPhone.InsertColumn(1, _T(""), LVCFMT_LEFT, 350);
 	m_ListPhone.InsertColumn(2, _T(""), LVCFMT_LEFT, 147);
 
-	m_ListPhone.SetHovenImage(_T("res\\item_bg_hover.png"),&CRect(2,2,2,2));
-	m_ListPhone.SetSelectImage(_T("res\\item_bg_selected.png"),&CRect(2,2,2,2));
+	m_ListPhone.SetHovenImage(IDB_LIST_BACK_HOV, IMAGE_PNG, CRect(2,2,2,2));
+	m_ListPhone.SetSelectImage(IDB_LIST_BACK_SEL, IMAGE_PNG, CRect(2,2,2,2));
 	m_ListPhone.SetScrollImage(&m_ListPhone, _T("res\\SKIN_SCROLL.bmp"));
 
 	m_ListPhone.InsertItem(0, NULL);
-	m_ListPhone.InsertImage(0, 0, _T("res\\Android.png"));
+	m_ListPhone.InsertImage(0, 0, IDB_PHONE_ANDROID, 0, IMAGE_PNG);
 	m_ListPhone.SetItemContent(0, _T("Android"), _T(""), _T("F:\\手机备份"),
 		_T("上次备份完成于1分钟前"));
 
 	m_ListPhone.InsertItem(1, NULL);
-	m_ListPhone.InsertImage(1, 0, _T("res\\Apple.png"));
+	m_ListPhone.InsertImage(1, 0, IDB_PHONE_IOS, 0, IMAGE_PNG);
 	m_ListPhone.SetItemContent(1, _T("iPhone"), _T(""), _T("F:\\手机备份"),
 		_T("上次备份完成于 2014-07-16"));
 
 	m_ListPhone.InsertItem(2, NULL);
-	m_ListPhone.InsertImage(2, 0, _T("res\\Android.png"));
+	m_ListPhone.InsertImage(2, 0, IDB_PHONE_ANDROID, 0, IMAGE_PNG);
 	m_ListPhone.SetItemContent(2, _T("Android"), _T(""), _T("F:\\手机备份"),
 		_T("上次备份完成于 2014-07-16"));
 
 	m_ListPhone.SetItemHeight(70);
 	m_ListPhone.MoveWindow(0,0,597,350);
-//	m_ListPhone.m_HeaderCtrl.EnableWindow(FALSE);
-//	m_ListPhone.m_HeaderCtrl.SetLockCount(1);
 }

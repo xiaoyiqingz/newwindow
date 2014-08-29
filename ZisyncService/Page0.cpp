@@ -46,7 +46,7 @@ BOOL CPage0::OnInitDialog()
 
 	HDC hParentDC = GetBackDC(); 
 	m_buttonadd.SetBackImage(IDB_BT_ADD_NOR, IDB_BT_ADD_HOV, 
-		IDB_BT_ADD_HOV, IDB_BT_ADD_NOR, _T("PNG"));
+		IDB_BT_ADD_HOV, IDB_BT_ADD_NOR, IMAGE_PNG);
 	m_buttonadd.SetButtonType(BT_PUSHBUTTON);
 	m_buttonadd.SetParentBack(hParentDC);
 	m_buttonadd.SetSize(500,48);
@@ -64,36 +64,30 @@ void CPage0::OnInitListCtrl()
 	m_list1.InsertColumn( 2, _T(""), LVCFMT_LEFT, 50 );
 	m_list1.InsertColumn( 3, _T(""), LVCFMT_LEFT, 50 );
 	m_list1.InsertColumn( 4, _T(""), LVCFMT_LEFT, 50 );
-//	m_list1.m_HeaderCtrl.SetItemHeight(0);
-/*
-	m_list1.m_HeaderCtrl.SetBackImage(_T("res\\folder_nav_item_bg_hover.png"),&CRect(2,2,2,2));
-	m_list1.m_HeaderCtrl.SetPressImage(_T("res\\folder_nav_item_bg_pressed.png"),&CRect(2,2,2,2));
-	m_list1.m_HeaderCtrl.SetGridImage(_T("res\\category_sep.png"));*/
-	m_list1.SetHovenImage(_T("res\\item_bg_hover.png"),&CRect(2,2,2,2));
-	m_list1.SetSelectImage(_T("res\\item_bg_selected.png"),&CRect(2,2,2,2));
-	m_list1.SetScrollImage(&m_list1,_T("res\\SKIN_SCROLL.bmp"));
+
+	m_list1.SetHovenImage(IDB_LIST_BACK_HOV, IMAGE_PNG, CRect(2,2,2,2));
+	m_list1.SetSelectImage(IDB_LIST_BACK_SEL, IMAGE_PNG, CRect(2,2,2,2));
+	m_list1.SetScrollImage(&m_list1,_T("res\\scroll_bar.png"));
 
 	for (int i=0; i < 3; i++) {
 		m_list1.InsertItem(i,NULL);	
 		m_list1.SetItemContent(i, _T("我的自同步"), _T("@3设备 1本地"), _T("历史记录"));
-		m_list1.InsertImage(i, 0, _T("res\\appicns_folder_Download.png"));
-		m_list1.InsertImage(i, 2, _T("res\\tab1image1.png"), _T("res\\tab1image_gray.png"));
-		m_list1.InsertImage(i, 3, _T("res\\button_invite.png"));
-		m_list1.InsertImage(i, 4, _T("res\\bt_set.png"));
+		m_list1.InsertImage(i, 0, IDB_LIST_FOLDER, 0, IMAGE_PNG);
+		m_list1.InsertImage(i, 2, IDB_LIST_SYNC_NOR, IDB_LIST_SYNC_SEL, IMAGE_PNG);
+		m_list1.InsertImage(i, 3, IDB_LIST_INVITE, 0, IMAGE_PNG);
+		m_list1.InsertImage(i, 4, IDB_BT_SET, 0, IMAGE_PNG);
 	}
 
 	m_list1.InsertItem(3, NULL);
 	m_list1.SetItemContent(3, _T("自同步"), _T("@2设备 1本地"), _T("历史记录"));
-	m_list1.InsertImage(3, 0,_T("res\\appicns_folder_Download.png"));
-	m_list1.InsertImage(3, 2, _T("res\\tab1image1.png"), _T("res\\tab1image_gray.png"));
-	m_list1.InsertImage(3, 3, _T("res\\button_invite.png"));
-	m_list1.InsertImage(3, 4, _T("res\\bt_set.png"));
+	m_list1.InsertImage(3, 0, IDB_LIST_FOLDER, 0, IMAGE_PNG);
+	m_list1.InsertImage(3, 2, IDB_LIST_SYNC_NOR, IDB_LIST_SYNC_SEL, IMAGE_PNG);
+	m_list1.InsertImage(3, 3, IDB_LIST_INVITE, 0, IMAGE_PNG);
+	m_list1.InsertImage(3, 4, IDB_BT_SET, 0, IMAGE_PNG);
 
 	m_list1.SetItemHeight(70);
 	m_list1.SetRightTopColor(RGB(0, 124, 248), RGB(248, 24, 0));
 	m_list1.MoveWindow(0,0,597,350);
-//	m_list1.m_HeaderCtrl.EnableWindow(FALSE);
-//	m_list1.m_HeaderCtrl.SetLockCount(1);
 }
 
 void CPage0::OnBnClickedButton1()

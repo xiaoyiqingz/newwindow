@@ -40,13 +40,13 @@ END_MESSAGE_MAP()
 BOOL CWizardSetUp::OnInitDialog()
 {
 	CMyDialog::OnInitDialog();
-	m_ImageBack.LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_SETUP_BACK), _T("PNG"));
+	m_ImageBack.LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_SETUP_BACK), IMAGE_PNG);
 	SetWindowPos(NULL, 0, 0, 510, 380, SWP_NOMOVE );
 
 	CRect rcControl(0, 0, 0, 0);
 	m_btClose.Create(NULL,  WS_CHILD | WS_VISIBLE, rcControl, this, IDCANCEL);
-	m_btClose.SetBackImage(_T("res\\close1.png"), _T("res\\close2.png"), 
-		_T("res\\close3.png"), _T("res\\close4.png"));
+	m_btClose.SetBackImage(IDB_CLOSE_NOR, IDB_CLOSE_HOV,IDB_CLOSE_SEL, 
+		IDB_CLOSE_FOC, IMAGE_PNG);
 	m_btClose.SetButtonType(BT_PUSHBUTTON);
 	m_btClose.SetParentBack(GetBackDC());
 	m_btClose.SetSize(18, 18);
@@ -122,20 +122,20 @@ void CWizardSetUp::DrawClientArea(CDC*pDC,int nWidth,int nHeight)
 void CWizardSetUp::OnInitButton(CRect &rcClient)
 {
 	HDC hParent = GetBackDC();
-	m_btCancle.SetBackImage(IDB_BT_BACK, 0, 0, 0, _T("PNG"));
+	m_btCancle.SetBackImage(IDB_BT_BACK, 0, 0, 0, IMAGE_PNG);
 	m_btCancle.SetButtonType(BT_PUSHBUTTON);
 	m_btCancle.SetParentBack(hParent);
 	m_btCancle.SetSize(74, 26);
 	m_btCancle.MoveWindow(rcClient.left+20, rcClient.bottom-41, 74, 26);
 
-	m_btPrev.SetBackImage(IDB_BT_BACK, 0, 0, 0, _T("PNG"));
+	m_btPrev.SetBackImage(IDB_BT_BACK, 0, 0, 0, IMAGE_PNG);
 	m_btPrev.SetButtonType(BT_PUSHBUTTON);
 	m_btPrev.SetParentBack(hParent);
 	m_btPrev.SetSize(74, 26);
 	m_btPrev.MoveWindow(rcClient.right-188, rcClient.bottom-41, 74, 26);
 	m_btPrev.ShowWindow(SW_HIDE);
 
-	m_btNext.SetBackImage(IDB_BT_BACK, 0, 0, 0, _T("PNG"));
+	m_btNext.SetBackImage(IDB_BT_BACK, 0, 0, 0, IMAGE_PNG);
 	m_btNext.SetButtonType(BT_PUSHBUTTON);
 	m_btNext.SetParentBack(hParent);
 	m_btNext.SetSize(74, 26);

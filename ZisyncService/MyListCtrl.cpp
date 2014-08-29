@@ -22,6 +22,10 @@ CMyListCtrl::CMyListCtrl()
 	m_colorBk = RGB(255, 255, 255);
 	m_colorRightTopNor = m_colorRightTopHov = RGB(0, 0, 0);
 	
+	m_bBackHovFromID = FALSE;
+	m_bBackSelFromID = FALSE;
+	m_bIconFromID = FALSE;
+
 	m_ToolTip.Create(this);
 }
 
@@ -65,35 +69,62 @@ void CMyListCtrl::OnDestroy()
 		m_ToolTip.DestroyWindow();
 	m_ToolTip.m_hWnd = NULL;
 
-	RenderEngine->RemoveImage(m_pCheckImg);
-	RenderEngine->RemoveImage(m_pUnCheckImg);
-	RenderEngine->RemoveImage(m_pHovenImg);
-	RenderEngine->RemoveImage(m_pSelectImg);
+	if (m_bBackHovFromID) {
+		RenderEngine->RemoveImage(m_pHovenImg, RESOURCE_ID);
+	} else {
+		RenderEngine->RemoveImage(m_pHovenImg);
+	}
+	
+	if (m_bBackSelFromID) {
+		RenderEngine->RemoveImage(m_pSelectImg, RESOURCE_ID);
+	} else {
+		RenderEngine->RemoveImage(m_pSelectImg);
+	}
 
 	CItemImgArray::iterator iterImg = m_ItemImgArray.begin();
 	for (; iterImg != m_ItemImgArray.end(); ++iterImg) {
-		RenderEngine->RemoveImage(iterImg->pImage);
+		if (m_bIconFromID) {
+			RenderEngine->RemoveImage(iterImg->pImage, RESOURCE_ID);
+		} else {
+			RenderEngine->RemoveImage(iterImg->pImage);
+		}		
 	}
 	m_ItemImgArray.clear();
 
 	CItemImgArray::iterator iterBtn = m_ItemBtnArray.begin();
 	for (; iterBtn != m_ItemBtnArray.end(); ++iterBtn) {
-		RenderEngine->RemoveImage(iterBtn->pImage);
-		RenderEngine->RemoveImage(iterBtn->pSelectImage);
+		if (m_bIconFromID) {
+			RenderEngine->RemoveImage(iterBtn->pImage, RESOURCE_ID);
+			RenderEngine->RemoveImage(iterBtn->pSelectImage, RESOURCE_ID);
+		} else {
+			RenderEngine->RemoveImage(iterBtn->pImage);
+			RenderEngine->RemoveImage(iterBtn->pSelectImage);
+		}		
 	}
 	m_ItemBtnArray.clear();
 
 	CItemImgArray::iterator iterInvite = m_ItemInviteArray.begin();
 	for (; iterInvite != m_ItemInviteArray.end(); ++iterInvite) {
-		RenderEngine->RemoveImage(iterInvite->pImage);
+		if (m_bIconFromID) {
+			RenderEngine->RemoveImage(iterInvite->pImage, RESOURCE_ID);
+		} else {
+			RenderEngine->RemoveImage(iterInvite->pImage);
+		}		
 	}
 	m_ItemInviteArray.clear();
 
 	CItemImgArray::iterator iterSet = m_ItemSetArray.begin();
 	for (; iterSet != m_ItemSetArray.end(); ++iterSet) {
-		RenderEngine->RemoveImage(iterSet->pImage);
+		if (m_bIconFromID) {
+			RenderEngine->RemoveImage(iterSet->pImage, RESOURCE_ID);
+		} else {
+			RenderEngine->RemoveImage(iterSet->pImage);
+		}
 	}
 	m_ItemSetArray.clear();
+
+	RenderEngine->RemoveImage(m_pCheckImg);
+	RenderEngine->RemoveImage(m_pUnCheckImg);
 
 	m_ItemContent.clear();
 	RemoveScorll();
@@ -281,16 +312,48 @@ void CMyListCtrl::OnLButtonDown(UINT nFlags, CPoint point)
 	__super::OnLButtonDown(nFlags, point);
 }
 
+BOOL CMyListCtrl::SetHovenImage(UINT nResFromID, LPCTSTR lpszFileType, const LPRECT lprcNinePart)
+{
+	m_bBackHovFromID = TRUE;
+
+	RenderEngine->RemoveImage(m_pHovenImg, RESOURCE_ID);
+
+	m_pHovenImg = RenderEngine->GetImage(nResFromID, lpszFileType);
+
+	if (m_pHovenImg == NULL) {
+		return FALSE;
+	} else {
+		m_pHovenImg->SetNinePart(lprcNinePart);
+		return TRUE;
+	}
+}
+
 BOOL CMyListCtrl::SetHovenImage(LPCTSTR lpszFileName, const LPRECT lprcNinePart)
 {
 	RenderEngine->RemoveImage(m_pHovenImg);
 
 	m_pHovenImg = RenderEngine->GetImage(lpszFileName);
 
-	if (NULL == m_pHovenImg) { 
+	if (m_pHovenImg == NULL) { 
 		return FALSE;
 	}else {
 		m_pHovenImg->SetNinePart(lprcNinePart);
+		return TRUE;
+	}
+}
+
+BOOL CMyListCtrl::SetSelectImage(UINT nResFromID, LPCTSTR lpszFileType, const LPRECT lprcNinePart) 
+{
+	m_bBackSelFromID = TRUE;
+
+	RenderEngine->RemoveImage(m_pSelectImg);
+
+	m_pSelectImg = RenderEngine->GetImage(nResFromID, lpszFileType);
+
+	if (m_pSelectImg == NULL) {
+		return FALSE;
+	} else {
+		m_pSelectImg->SetNinePart(lprcNinePart);
 		return TRUE;
 	}
 }
@@ -301,7 +364,7 @@ BOOL CMyListCtrl::SetSelectImage(LPCTSTR lpszFileName, const LPRECT lprcNinePart
 
 	m_pSelectImg = RenderEngine->GetImage(lpszFileName);
 
-	if (NULL == m_pSelectImg) {
+	if (m_pSelectImg == NULL) {
 		return FALSE;
 	} else {
 		m_pSelectImg->SetNinePart(lprcNinePart);
@@ -317,10 +380,77 @@ BOOL CMyListCtrl::SetCheckImage(LPCTSTR lpszCheckName,LPCTSTR lpszUnCheckName)
 	m_pCheckImg = RenderEngine->GetImage(lpszCheckName);
 	m_pUnCheckImg = RenderEngine->GetImage(lpszUnCheckName);
 	
-	if (NULL == m_pCheckImg || NULL == m_pUnCheckImg)
+	if (m_pCheckImg == NULL || m_pUnCheckImg == NULL)
 		return FALSE;
 	else
 		return TRUE;
+}
+
+BOOL CMyListCtrl::InsertImage(int nItem, int nSubItem, UINT nResNorID, UINT nResSelID, LPCTSTR lpszFileType)
+{
+	m_bIconFromID = TRUE;
+	
+	CItemImgArray::iterator iter, iterEnd;
+	CItemImgArray* pItemArray;
+	switch (nSubItem)
+	{
+	case 0:
+		iter = m_ItemImgArray.begin();
+		iterEnd = m_ItemImgArray.end();
+		pItemArray = &m_ItemImgArray;
+		break;
+	case 2:
+		iter = m_ItemBtnArray.begin();
+		iterEnd = m_ItemBtnArray.end();
+		pItemArray = &m_ItemBtnArray;
+		break;
+	case 3:
+		iter = m_ItemInviteArray.begin();
+		iterEnd = m_ItemInviteArray.end();
+		pItemArray = &m_ItemInviteArray;
+		break;
+	case 4:
+		iter = m_ItemSetArray.begin();
+		iterEnd = m_ItemSetArray.end();
+		pItemArray = &m_ItemSetArray;
+		break;
+	}
+
+	for (; iter != iterEnd; ++iter) {
+		if (iter->nItem == nItem) {
+			if (iter->pImage != NULL) {
+				RenderEngine->RemoveImage(iter->pImage, RESOURCE_ID);
+				iter->pImage = RenderEngine->GetImage(nResNorID, lpszFileType);
+				
+				if (iter->pSelectImage != NULL) {
+					iter->bSelect = false;
+					RenderEngine->RemoveImage(iter->pSelectImage);
+					if (nResSelID != 0)
+						iter->pSelectImage = RenderEngine->GetImage(nResSelID, lpszFileType);					
+				}
+				return TRUE;
+			}
+		}		
+	}
+
+	tagItemImage ItemImage;
+	ItemImage.nItem = nItem;
+	ItemImage.bSelect = false;
+	ItemImage.pImage = RenderEngine->GetImage(nResNorID, lpszFileType);
+	if (nResSelID != 0)
+		ItemImage.pSelectImage = RenderEngine->GetImage(nResSelID, lpszFileType);
+
+	if (NULL == ItemImage.pImage)
+		return FALSE;
+	else if (nResSelID > 0 && ItemImage.pSelectImage ==NULL) 
+		return FALSE;
+	else {
+		pItemArray->push_back(ItemImage);
+		return TRUE;
+	} 
+
+	ASSERT(FALSE);		
+	return FALSE;
 }
 
 BOOL CMyListCtrl::InsertImage(int nItem, int nSubItem, LPCTSTR lpszFileName, LPCTSTR lpszSelFileName)
@@ -354,11 +484,10 @@ BOOL CMyListCtrl::InsertImage(int nItem, int nSubItem, LPCTSTR lpszFileName, LPC
 	for (; iter != iterEnd; ++ iter) {
 		if (iter->nItem == nItem) {
 			if (iter->pImage != NULL) {
-				if (iter->pImage != NULL) 
-				{
-					RenderEngine->RemoveImage(iter->pImage);
-					iter->pImage = RenderEngine->GetImage(lpszFileName);
-				} else if (lpszSelFileName != NULL &&(iter->pSelectImage != NULL))
+				RenderEngine->RemoveImage(iter->pImage);
+				iter->pImage = RenderEngine->GetImage(lpszFileName);
+
+				if (lpszSelFileName != NULL &&(iter->pSelectImage != NULL))
 				{
 					iter->bSelect = false;
 					RenderEngine->RemoveImage(iter->pSelectImage);
@@ -377,7 +506,7 @@ BOOL CMyListCtrl::InsertImage(int nItem, int nSubItem, LPCTSTR lpszFileName, LPC
 		ItemImage.pSelectImage = RenderEngine->GetImage(lpszSelFileName);
 	}
 
-	if (NULL == ItemImage.pImage)
+	if (ItemImage.pImage == NULL)
 		return FALSE;
 	else if (lpszSelFileName != NULL && ItemImage.pSelectImage ==NULL) 
 		return FALSE;

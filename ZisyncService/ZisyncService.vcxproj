@@ -99,11 +99,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
-    <None Include="res\back.jpg" />
-    <None Include="res\back1.jpg" />
     <None Include="res\back_new.png" />
-    <None Include="res\bitmap.BMP" />
-    <None Include="res\bitmap1.bmp" />
     <None Include="res\bt_add_hov.png" />
     <None Include="res\bt_add_nor.png" />
     <None Include="res\bt_back.bmp" />
@@ -119,7 +115,6 @@
     <None Include="res\bt_help_sel.png" />
     <None Include="res\bt_set.png" />
     <None Include="res\bt_status_ok.png" />
-    <None Include="res\button-check_basic_blue48.png" />
     <None Include="res\close.png" />
     <None Include="res\close1.png" />
     <None Include="res\close2.png" />
@@ -128,11 +123,28 @@
     <None Include="res\code.png" />
     <None Include="res\device_back.png" />
     <None Include="res\device_back1.png" />
-    <None Include="res\gif.gif" />
-    <None Include="res\ground.bmp" />
     <None Include="res\hearts.gif" />
     <None Include="res\help.png" />
     <None Include="res\image1.bin" />
+    <None Include="res\list_back_hov.png" />
+    <None Include="res\list_back_sel.png" />
+    <None Include="res\list_check_nor.png" />
+    <None Include="res\list_check_sel.png" />
+    <None Include="res\list_device_linux.png" />
+    <None Include="res\list_device_mac.png" />
+    <None Include="res\list_device_win.png" />
+    <None Include="res\list_doc.png" />
+    <None Include="res\list_folder.png" />
+    <None Include="res\list_folder_del.png" />
+    <None Include="res\list_folder_nor.png" />
+    <None Include="res\list_icon_folder.png" />
+    <None Include="res\list_icon_invite.png" />
+    <None Include="res\list_icon_sync_nor.png" />
+    <None Include="res\list_icon_sync_sel.png" />
+    <None Include="res\list_pdf.png" />
+    <None Include="res\list_phone_android.png" />
+    <None Include="res\list_phone_ios.png" />
+    <None Include="res\list_png.png" />
     <None Include="res\logo.png" />
     <None Include="res\minimize.png" />
     <None Include="res\minimize1.png" />
@@ -159,17 +171,8 @@
     <None Include="res\update_back.png" />
     <None Include="res\ZisyncService.ico" />
     <None Include="res\ZisyncService.rc2" />
-    <None Include="res\next_mini.png" />
-    <None Include="res\pause_mini.png" />
-    <None Include="res\play_mini.png" />
-    <None Include="res\prev_mini.png" />
-    <None Include="res\radiobtn_highlight.png" />
-    <None Include="res\radiobtn_normal.png" />
-    <None Include="res\radiobtn_tick_highlight.png" />
-    <None Include="res\radiobtn_tick_normal.png" />
     <None Include="res\set_back.png" />
     <None Include="res\set_line.bmp" />
-    <None Include="res\SKIN_WND_CLOSE.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddDevice.h" />
