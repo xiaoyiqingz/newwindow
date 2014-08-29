@@ -190,6 +190,48 @@
     <None Include="res\close4.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\tab_device.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_history.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_phone.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_back_down.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_back_hoven.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_set_back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_set_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_set_sel.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_device_hov.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_device_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_mail_hov.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_mail_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_phone_hov.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_phone_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

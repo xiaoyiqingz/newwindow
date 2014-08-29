@@ -16,6 +16,8 @@ CMyToolTip::CMyToolTip()
 {
 	m_pBackImg = NULL;
 	m_colorText = RGB(0, 0, 0);
+
+	m_bResFromID = FALSE;
 }
 
 CMyToolTip::~CMyToolTip()
@@ -52,10 +54,31 @@ void CMyToolTip::OnDestroy()
 {
 	CToolTipCtrl::OnDestroy();
 
-	RenderEngine->RemoveImage(m_pBackImg);
+	if (m_bResFromID)
+		RenderEngine->RemoveImage(m_pBackImg, RESOURCE_ID);
+	else 
+		RenderEngine->RemoveImage(m_pBackImg);
 }
 
-bool CMyToolTip::SetBackImg(LPCTSTR lpszBack, CONST LPRECT lpNinePart /*= NULL*/)
+BOOL CMyToolTip::SetBackImg(UINT nResFromID, LPCTSTR lpszFileType/* =NULL */, CONST	LPRECT lpNinePart)
+{
+	m_bResFromID = TRUE;
+	
+	RenderEngine->RemoveImage(m_pBackImg, RESOURCE_ID);
+
+	m_pBackImg = RenderEngine->GetImage(nResFromID, lpszFileType);
+
+	if (m_pBackImg != NULL) {
+		m_pBackImg->SetNinePart(lpNinePart);
+	}
+
+	if (m_pBackImg == NULL || m_pBackImg->IsNull()) 
+		return FALSE;
+	else
+		return TRUE;
+}
+
+BOOL CMyToolTip::SetBackImg(LPCTSTR lpszBack, CONST LPRECT lpNinePart /*= NULL*/)
 {
 	RenderEngine->RemoveImage(m_pBackImg);
 
@@ -66,10 +89,9 @@ bool CMyToolTip::SetBackImg(LPCTSTR lpszBack, CONST LPRECT lpNinePart /*= NULL*/
 	}
 
 	if (m_pBackImg == NULL || m_pBackImg->IsNull()) 
-		return false;
+		return FALSE;
 	else
-		return true;
-
+		return TRUE;
 }
 
 void CMyToolTip::SetTextCol(COLORREF colorText)

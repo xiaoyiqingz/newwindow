@@ -16,13 +16,15 @@ public:
 	~CTabCtrlItem(void);
 
 public:
-	int		m_nID;
-	CString	m_strText;
-	int		m_nWidth, m_nHeight;
-	int		m_nLeftWidth, m_nRightWidth;
-	int		m_nPadding;
-	CMyImage * m_lpBgImgN, * m_lpBgImgH, * m_lpBgImgD;
-	CMyImage * m_lpIconImg, * m_lpSelIconImg;
+	int			m_nID;
+	CString		m_strText;
+	int			m_nWidth, m_nHeight;
+	int			m_nLeftWidth, m_nRightWidth;
+	int			m_nPadding;
+	BOOL		m_bIconFromID;
+
+	CMyImage	*m_lpBgImgN, *m_lpBgImgH, *m_lpBgImgD;
+	CMyImage	*m_lpIconImg, *m_lpSelIconImg;
 };
 
 typedef vector<CTabCtrlItem *>			CTabCtrlItemArray;
@@ -37,6 +39,9 @@ public:
 	CMyImage	*m_pItemImgNor, *m_pItemImgHov, * m_pItemImgSel;
 	CRect		m_rcTabRegion;
 
+	BOOL		m_bBackFromID;
+	BOOL		m_bItemsFromID;
+
 	TEXT_POS	m_textPos;
 	BOOL		m_bMouseTracking;
 	int			m_nSelIndex, m_nHoverIndex;
@@ -47,8 +52,13 @@ public:
 	virtual ~CMyTabCtrl();
 
 public:
+	BOOL    SetBackImage(UINT nResFromID, LPCTSTR lpszFileType=NULL, CONST LPRECT lpNinePart=NULL);
 	BOOL	SetBackImage(LPCTSTR lpszFileName, CONST LPRECT lpNinePart=NULL);
-	BOOL	SetItemsImage(LPCTSTR lpNormal, LPCTSTR lpHighlight, LPCTSTR lpDown, CONST LPRECT lprcNinePart = NULL);
+
+	BOOL	SetItemsImage(UINT nResNorID, UINT nResHovID, UINT nResDownID, LPCTSTR lpszFileType=NULL, CONST LPRECT lprcNinePart=NULL);
+	BOOL	SetItemsImage(LPCTSTR lpNormal, LPCTSTR lpHighlight, LPCTSTR lpDown, CONST LPRECT lprcNinePart=NULL);
+
+	BOOL    SetIconImage(int nIndex, UINT nResNorID, UINT nResSelID, LPCTSTR lpszFileType=NULL);
 	BOOL	SetIconImage(int nIndex, LPCTSTR lpIcon, LPCTSTR lpSelIcon);
 
 	void	SetLeftTop(int nLeft, int nTop);

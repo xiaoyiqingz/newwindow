@@ -79,7 +79,7 @@ void CPage0::OnInitListCtrl()
 		m_list1.InsertImage(i, 0, _T("res\\appicns_folder_Download.png"));
 		m_list1.InsertImage(i, 2, _T("res\\tab1image1.png"), _T("res\\tab1image_gray.png"));
 		m_list1.InsertImage(i, 3, _T("res\\button_invite.png"));
-		m_list1.InsertImage(i, 4, _T("res\\tab_set.png"));
+		m_list1.InsertImage(i, 4, _T("res\\bt_set.png"));
 	}
 
 	m_list1.InsertItem(3, NULL);
@@ -87,7 +87,7 @@ void CPage0::OnInitListCtrl()
 	m_list1.InsertImage(3, 0,_T("res\\appicns_folder_Download.png"));
 	m_list1.InsertImage(3, 2, _T("res\\tab1image1.png"), _T("res\\tab1image_gray.png"));
 	m_list1.InsertImage(3, 3, _T("res\\button_invite.png"));
-	m_list1.InsertImage(3, 4, _T("res\\tab_set.png"));
+	m_list1.InsertImage(3, 4, _T("res\\bt_set.png"));
 
 	m_list1.SetItemHeight(70);
 	m_list1.SetRightTopColor(RGB(0, 124, 248), RGB(248, 24, 0));

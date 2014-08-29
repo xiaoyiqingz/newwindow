@@ -34,6 +34,8 @@ protected:
 
 	BOOL			m_bBackFromID;
 	BOOL			m_bIconFromID;
+	BOOL			m_bCheckFromID;
+	BOOL			m_bMenuFromID;
 
 	DECLARE_DYNAMIC(CMyButtonEx)
 
@@ -44,14 +46,16 @@ public:
 public:
 	void SetButtonType(BUTTON_TYPE nBtnType);
 	
-	BOOL SetBackImage(UINT nResNorID, UINT nResHovID = 0, UINT nResDownID = 0, UINT nResFocID = 0,LPCTSTR lpszFileType=NULL, CONST LPRECT lprcNinePart=NULL);
+	BOOL SetBackImage(UINT nResNorID, UINT nResHovID=0, UINT nResDownID=0, UINT nResFocID=0,LPCTSTR lpszFileType=NULL, CONST LPRECT lprcNinePart=NULL);
 	BOOL SetBackImage(LPCTSTR lpNormal, LPCTSTR lpHoven, LPCTSTR lpDown, LPCTSTR lpFocus, CONST LPRECT lprcNinePart=NULL);
 	
-	bool SetCheckImage(LPCTSTR lpNormal, LPCTSTR lpHover, LPCTSTR lpTickNormal, LPCTSTR lpTickHover);
+	BOOL SetCheckImage(UINT nResNorID, UINT nResHovID, UINT nResTickNorID, UINT nResTickHovID, LPCTSTR lpszFileType=NULL);
+	BOOL SetCheckImage(LPCTSTR lpNormal, LPCTSTR lpHover, LPCTSTR lpTickNormal, LPCTSTR lpTickHover);
 	
 	BOOL SetIconImage(UINT nResIconID, LPCTSTR lpszFileType);
 	BOOL SetIconImage(LPCTSTR lpszFileName);
 	
+	BOOL SetMenuImage(UINT nResFromID, LPCTSTR lpszFileType);
 	BOOL SetMenuImage(LPCTSTR lpszFileName);
 	
 	void SetSize(int nWidth, int nHeight);

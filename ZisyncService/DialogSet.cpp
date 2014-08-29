@@ -135,8 +135,8 @@ void CDialogSet::OnInitTabCtrl()
 	m_tabSet.SetItemText(0, _T("常规"));
 	m_tabSet.SetItemText(1, _T("网络"));
 	m_tabSet.SetItemText(2, _T("高级"));
-	m_tabSet.SetBackImage(_T("res\\tab_set_back.png"));
-	m_tabSet.SetItemsImage(_T("res\\tab_set_nor.png"),_T("res\\tab_set_nor.png"), _T("res\\tab_set_sel.png"));
+	m_tabSet.SetBackImage(IDB_TAB_SET_BACK, IMAGE_PNG);
+	m_tabSet.SetItemsImage(IDB_TAB_SET_NOR, IDB_TAB_SET_NOR, IDB_TAB_SET_SEL, IMAGE_PNG);
 	m_tabSet.SetLeftTop(100,0);
 	m_tabSet.SetCurSel(0);
 	m_tabSet.MoveWindow(35, 40, 495, 310);

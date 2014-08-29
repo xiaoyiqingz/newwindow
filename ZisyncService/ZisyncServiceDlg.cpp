@@ -255,12 +255,12 @@ void CZisyncServiceDlg::InitTabCtrl() {
 	m_Tab.SetItemPadding(0, 10);
 	m_Tab.SetItemPadding(1, 60);
 	m_Tab.SetItemPadding(2, 10);
-	m_Tab.SetIconImage(0, _T("res\\tab1.png"), _T("res\\tab1.png"));
-	m_Tab.SetIconImage(1, _T("res\\tab2.png"), _T("res\\tab2.png"));
-	m_Tab.SetIconImage(2, _T("res\\tab3.png"), _T("res\\tab3.png"));
+	m_Tab.SetIconImage(0, IDB_TAB_DEVICE, 0, IMAGE_PNG);
+	m_Tab.SetIconImage(1, IDB_TAB_PHONE, 0, IMAGE_PNG);
+	m_Tab.SetIconImage(2, IDB_TAB_HISTROY, 0, IMAGE_PNG);
 
-//	m_Tab.SetBackImage(_T("res\\back.png"), &CRect(2,2,2,2));
-	m_Tab.SetItemsImage(NULL, _T("res\\Hoven.png"), _T("res\\down.png"), &CRect(2,2,2,2));
+	m_Tab.SetItemsImage(0, IDB_TAB_BACK_HOVEN, IDB_TAB_BACK_DOWN, 
+		IMAGE_PNG, &CRect(2,2,2,2));
 	m_Tab.SetLeftTop(10,10);
 	m_Tab.SetCurSel(0);
 	m_Tab.MoveWindow(0,0 ,597, 527);

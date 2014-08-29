@@ -25,6 +25,8 @@ CMyButtonEx::CMyButtonEx()
 
 	m_bBackFromID = FALSE;
 	m_bIconFromID = FALSE;
+	m_bMenuFromID = FALSE;
+	m_bCheckFromID = FALSE;
 }
 
 CMyButtonEx::~CMyButtonEx()
@@ -49,12 +51,9 @@ END_MESSAGE_MAP()
 void CMyButtonEx::OnDestroy()
 {
 	CButton::OnDestroy();
-	m_pBackImg.Destroy();
-	RenderEngine->RemoveImage(m_pCheckImgH);
-	RenderEngine->RemoveImage(m_pCheckImgN);
-	RenderEngine->RemoveImage(m_pCheckImgTichH);
-	RenderEngine->RemoveImage(m_pCheckImgTickN);
-	RenderEngine->RemoveImage(m_pMenuImg);
+
+//	m_pBackImg.Destroy();
+	
 	if (m_bBackFromID) {
 		RenderEngine->RemoveImage(m_pBackImgN, RESOURCE_ID);
 		RenderEngine->RemoveImage(m_pBackImgH, RESOURCE_ID);
@@ -71,6 +70,24 @@ void CMyButtonEx::OnDestroy()
 		RenderEngine->RemoveImage(m_pIconImg, RESOURCE_ID);
 	} else {
 		RenderEngine->RemoveImage(m_pIconImg);
+	}
+
+	if (m_bCheckFromID) {
+		RenderEngine->RemoveImage(m_pCheckImgH, RESOURCE_ID);
+		RenderEngine->RemoveImage(m_pCheckImgN, RESOURCE_ID);
+		RenderEngine->RemoveImage(m_pCheckImgTichH, RESOURCE_ID);
+		RenderEngine->RemoveImage(m_pCheckImgTickN, RESOURCE_ID);
+	} else {
+		RenderEngine->RemoveImage(m_pCheckImgH);
+		RenderEngine->RemoveImage(m_pCheckImgN);
+		RenderEngine->RemoveImage(m_pCheckImgTichH);
+		RenderEngine->RemoveImage(m_pCheckImgTickN);
+	}
+
+	if (m_bMenuFromID) {
+		RenderEngine->RemoveImage(m_pMenuImg, RESOURCE_ID);
+	} else {
+		RenderEngine->RemoveImage(m_pMenuImg);
 	}
 
 	m_bFocus = m_bHover = m_bPress = m_bMouseTracking = FALSE;
@@ -234,7 +251,8 @@ BOOL CMyButtonEx::SetBackImage(UINT nResNorID,
 	RenderEngine->RemoveImage(m_pBackImgD, RESOURCE_ID);
 	RenderEngine->RemoveImage(m_pBackImgF, RESOURCE_ID);
 	
-	//if nResNorID != 0, other ID = 0, other Img = m_pBakcImgN;if nResNorID == 0, other ID = 0, other Img = NULL  
+	//if nResNorID != 0, other ID = 0, other Img = m_pBakcImgN;
+	//if nResNorID == 0, other ID = 0, other Img = NULL  
 	if (nResNorID != 0) {
 		m_pBackImgN = RenderEngine->GetImage(nResNorID, lpszFileType);
 	
@@ -291,7 +309,11 @@ BOOL CMyButtonEx::SetBackImage(UINT nResNorID,
 		return TRUE;
 }
 
-BOOL CMyButtonEx::SetBackImage(LPCTSTR lpNormal, LPCTSTR lpHoven, LPCTSTR lpDown, LPCTSTR lpFocus, CONST LPRECT lprcNinePart /*=NULL*/)
+BOOL CMyButtonEx::SetBackImage(LPCTSTR lpNormal, 
+							   LPCTSTR lpHoven, 
+							   LPCTSTR lpDown, 
+							   LPCTSTR lpFocus, 
+							   CONST LPRECT lprcNinePart /*=NULL*/)
 {
 	RenderEngine->RemoveImage(m_pBackImgN);
 	RenderEngine->RemoveImage(m_pBackImgH);
@@ -318,16 +340,44 @@ BOOL CMyButtonEx::SetBackImage(LPCTSTR lpNormal, LPCTSTR lpHoven, LPCTSTR lpDown
 			m_pBackImgF->SetNinePart(lprcNinePart);
 	}
 
-	if ((lpNormal != NULL && NULL == m_pBackImgN) || 
-		(lpHoven  != NULL && NULL == m_pBackImgH) ||
-		(lpDown   != NULL && NULL == m_pBackImgD) ||
-		(lpFocus  != NULL && NULL == m_pBackImgF))
+	if ((lpNormal != NULL && m_pBackImgN == NULL) || 
+		(lpHoven  != NULL && m_pBackImgH == NULL) ||
+		(lpDown   != NULL && m_pBackImgD == NULL) ||
+		(lpFocus  != NULL && m_pBackImgF == NULL))
 		return FALSE;
 	else
 		return TRUE;
 }
 
-bool CMyButtonEx::SetCheckImage(LPCTSTR lpNormal, LPCTSTR lpHover, LPCTSTR lpTickNormal, LPCTSTR lpTickHover)
+BOOL CMyButtonEx::SetCheckImage(UINT nResNorID, 
+								UINT nResHovID, 
+								UINT nResTickNorID, 
+								UINT nResTickHovID, 
+								LPCTSTR lpszFileType/* =NULL */)
+{
+	m_bCheckFromID = TRUE;
+
+	RenderEngine->RemoveImage(m_pCheckImgN, RESOURCE_ID);
+	RenderEngine->RemoveImage(m_pCheckImgH, RESOURCE_ID);
+	RenderEngine->RemoveImage(m_pCheckImgTickN, RESOURCE_ID);
+	RenderEngine->RemoveImage(m_pCheckImgTichH, RESOURCE_ID);
+
+	m_pCheckImgH = RenderEngine->GetImage(nResHovID, lpszFileType);
+	m_pCheckImgN = RenderEngine->GetImage(nResNorID, lpszFileType);
+	m_pCheckImgTichH = RenderEngine->GetImage(nResTickHovID, lpszFileType);
+	m_pCheckImgTickN = RenderEngine->GetImage(nResTickNorID, lpszFileType);
+
+	if (m_pCheckImgH == NULL || m_pCheckImgN == NULL 
+		|| m_pCheckImgTichH == NULL || m_pCheckImgTickN == NULL)
+		return FALSE;
+	else
+		return TRUE;
+}
+
+BOOL CMyButtonEx::SetCheckImage(LPCTSTR lpNormal, 
+								LPCTSTR lpHover, 
+								LPCTSTR lpTickNormal, 
+								LPCTSTR lpTickHover)
 {
 	RenderEngine->RemoveImage(m_pCheckImgH);
 	RenderEngine->RemoveImage(m_pCheckImgN);
@@ -340,13 +390,12 @@ bool CMyButtonEx::SetCheckImage(LPCTSTR lpNormal, LPCTSTR lpHover, LPCTSTR lpTic
 	m_pCheckImgTickN = RenderEngine->GetImage(lpTickNormal);
 
 	if (m_pCheckImgH == NULL || m_pCheckImgN == NULL 
-		|| m_pCheckImgTichH == NULL || m_pCheckImgTickN == NULL) {
-			return false;
-	} else {
-		return true;
-	}
-
+		|| m_pCheckImgTichH == NULL || m_pCheckImgTickN == NULL)
+		return FALSE;
+	else
+		return TRUE;
 }
+
 BOOL CMyButtonEx::SetIconImage(UINT nResIconID, LPCTSTR lpszFileType)
 {
 	m_bIconFromID = TRUE;
@@ -373,13 +422,27 @@ BOOL CMyButtonEx::SetIconImage(LPCTSTR lpszFileName)
 		return TRUE;
 }
 
+BOOL CMyButtonEx::SetMenuImage(UINT nResFromID, LPCTSTR lpszFileType)
+{
+	m_bMenuFromID = TRUE;
+
+	RenderEngine->RemoveImage(m_pMenuImg);
+
+	m_pMenuImg = RenderEngine->GetImage(nResFromID, lpszFileType);
+
+	if (m_pMenuImg == NULL)
+		return FALSE;
+	else
+		return TRUE;
+}
+
 BOOL CMyButtonEx::SetMenuImage(LPCTSTR lpszFileName)
 {
 	RenderEngine->RemoveImage(m_pMenuImg);
 
 	m_pMenuImg = RenderEngine->GetImage(lpszFileName);
 
-	if (NULL == m_pMenuImg)
+	if (m_pMenuImg == NULL)
 		return FALSE;
 	else
 		return TRUE;

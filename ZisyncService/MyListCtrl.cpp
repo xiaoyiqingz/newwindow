@@ -209,9 +209,7 @@ void CMyListCtrl::OnMouseMove(UINT nFlags, CPoint point)
 			}
 
 			if (m_ToolTip.GetSafeHwnd()) {
-			//	m_ToolTip.SetBackImg(_T("res\\bk_tooltip.png"));
 				m_ToolTip.Activate(TRUE);
-				m_ToolTip.SetTipBkColor(RGB(255, 0, 0));
 				m_ToolTip.AddTool(this, _T("Á¢¼´Í¬²½"),&rcSubItemTip, 1);
 			}
 		}

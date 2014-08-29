@@ -10,6 +10,7 @@ public:
 	CMyImage		*m_pBackImg;
 	COLORREF		m_colorText;
 
+	BOOL			m_bResFromID;
 public:
 	CMyToolTip();
 	virtual ~CMyToolTip();
@@ -18,7 +19,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	bool	SetBackImg(LPCTSTR lpszBack,  CONST	LPRECT lpNinePart = NULL);
+	BOOL	SetBackImg(UINT nResFromID, LPCTSTR lpszFileType=NULL, CONST LPRECT lpNinePart = NULL);
+	BOOL	SetBackImg(LPCTSTR lpszBack,  CONST	LPRECT lpNinePart=NULL);
+	
 	void	SetTextCol(COLORREF colorText);
 
 	void	DrawItem(CDC *pDc, RECT &rcClient);

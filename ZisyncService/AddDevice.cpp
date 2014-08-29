@@ -141,15 +141,14 @@ void CAddDevice::OnInitTabCtrl()
 		m_TabAdd.SetItemPadding(i, 0);
 	}
 	m_TabAdd.SetItemSize(CSize(80, 34), CSize(80,34));
-	m_TabAdd.SetIconImage(0,_T("res\\win_nor.png"), _T("res\\win_hov.png"));
-	m_TabAdd.SetIconImage(1,_T("res\\phone_nor.png"), _T("res\\phone_hov.png"));
-	m_TabAdd.SetIconImage(2,_T("res\\mail_nor.png"), _T("res\\mail_hov.png"));
+	m_TabAdd.SetIconImage(0,IDB_TAB_DEVICE_NOR, IDB_TAB_DEVICE_HOV, IMAGE_PNG);
+	m_TabAdd.SetIconImage(1,IDB_TAB_PHONE_NOR, IDB_TAB_PHONE_HOV, IMAGE_PNG);
+	m_TabAdd.SetIconImage(2,IDB_TAB_MAIL_NOR, IDB_TAB_MAIL_HOV, IMAGE_PNG);
 	
 	m_TabAdd.SetItemText(0, _T("电脑"));
 	m_TabAdd.SetItemText(1, _T("手机"));
 	m_TabAdd.SetItemText(2, _T("其他"));
 
-//	m_TabAdd.SetBackImage(_T("res\\device_black.png"));
 	m_TabAdd.SetLeftTop(5, 5);
 	m_TabAdd.SetCurSel(0);
 }

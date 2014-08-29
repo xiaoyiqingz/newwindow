@@ -16,20 +16,29 @@ CTabCtrlItem::CTabCtrlItem(void)
 {
 	m_nID = 0;
 	m_strText = _T("");
+	m_nPadding = 0;
 	m_nWidth = m_nHeight = 0;
 	m_nLeftWidth = m_nRightWidth = 0;
-	m_nPadding = 0;
-	m_lpBgImgN = m_lpBgImgH = m_lpBgImgD = NULL;
+	m_bIconFromID = FALSE;
+
 	m_lpIconImg = m_lpSelIconImg = NULL;
+	m_lpBgImgN = m_lpBgImgH = m_lpBgImgD = NULL;	
 }
 
 CTabCtrlItem::~CTabCtrlItem(void) 
 {
+	if (m_bIconFromID) {
+		RenderEngine->RemoveImage(m_lpIconImg, RESOURCE_ID);
+		RenderEngine->RemoveImage(m_lpSelIconImg, RESOURCE_ID);
+	} else {
+		RenderEngine->RemoveImage(m_lpIconImg);
+		RenderEngine->RemoveImage(m_lpSelIconImg);
+	}
+
 	RenderEngine->RemoveImage(m_lpBgImgD);
 	RenderEngine->RemoveImage(m_lpBgImgH);
 	RenderEngine->RemoveImage(m_lpBgImgN);
-	RenderEngine->RemoveImage(m_lpIconImg);
-	RenderEngine->RemoveImage(m_lpSelIconImg);
+	
 }
 
 CMyTabCtrl::CMyTabCtrl()
@@ -42,6 +51,9 @@ CMyTabCtrl::CMyTabCtrl()
 	m_nLeft = m_nTop = 0;
 	m_rcTabRegion = CRect(0, 0, 0, 0);
 	m_textPos = TEXT_RIGHT;
+
+	m_bBackFromID = FALSE;
+	m_bItemsFromID = FALSE;
 }
 
 CMyTabCtrl::~CMyTabCtrl()
@@ -71,6 +83,23 @@ void CMyTabCtrl::SetLeftTop(int nLeft, int nTop)
 	m_nTop = nTop;
 }
 
+BOOL CMyTabCtrl::SetBackImage(UINT nResFromID, LPCTSTR lpszFileType, CONST LPRECT lpNinePart)
+{
+	m_bBackFromID = TRUE;
+
+	RenderEngine->RemoveImage(m_pImgBack);
+
+	m_pImgBack = RenderEngine->GetImage(nResFromID, lpszFileType);
+
+	if (m_pImgBack != NULL)
+		m_pImgBack->SetNinePart(lpNinePart);
+
+	if (m_pImgBack == NULL) 
+		return FALSE;
+	else
+		return TRUE;
+}
+
 BOOL CMyTabCtrl::SetBackImage(LPCTSTR lpszFileName, CONST LPRECT lpNinePart/*=NULL*/)
 {
 	RenderEngine->RemoveImage(m_pImgBack);
@@ -86,7 +115,50 @@ BOOL CMyTabCtrl::SetBackImage(LPCTSTR lpszFileName, CONST LPRECT lpNinePart/*=NU
 		return TRUE;
 }
 
-BOOL CMyTabCtrl::SetItemsImage(LPCTSTR lpNormal, LPCTSTR lpHighlight, LPCTSTR lpDown, CONST LPRECT lprcNinePart /*= NULL*/)
+BOOL CMyTabCtrl::SetItemsImage(UINT nResNorID, 
+							   UINT nResHovID, 
+							   UINT nResDownID, 
+							   LPCTSTR lpszFileType/* =NULL */, 
+							   CONST LPRECT lprcNinePart/* =NULL */)
+{
+	m_bItemsFromID = TRUE;
+
+	RenderEngine->RemoveImage(m_pItemImgHov, RESOURCE_ID);
+	RenderEngine->RemoveImage(m_pItemImgNor, RESOURCE_ID);
+	RenderEngine->RemoveImage(m_pItemImgSel, RESOURCE_ID);
+
+	if (nResNorID != 0) {
+		m_pItemImgNor = RenderEngine->GetImage(nResNorID, lpszFileType);
+	}
+
+	if (nResHovID != 0) {
+		m_pItemImgHov = RenderEngine->GetImage(nResHovID, lpszFileType);
+	}
+	
+	if (nResDownID != 0){
+		m_pItemImgSel = RenderEngine->GetImage(nResDownID, lpszFileType);
+	}	
+
+	if (m_pItemImgHov != NULL) {
+		m_pItemImgHov->SetNinePart(lprcNinePart);
+	}
+	if (m_pItemImgNor != NULL) {
+		m_pItemImgNor->SetNinePart(lprcNinePart);
+	}
+	if (m_pItemImgSel != NULL) {
+		m_pItemImgSel->SetNinePart(lprcNinePart);
+	}
+
+	if (m_pItemImgNor == NULL || m_pItemImgHov == NULL ||  m_pItemImgSel== NULL)
+		return FALSE;
+	else
+		return TRUE;
+}
+
+BOOL CMyTabCtrl::SetItemsImage(LPCTSTR lpNormal, 
+							   LPCTSTR lpHighlight, 
+							   LPCTSTR lpDown, 
+							   CONST LPRECT lprcNinePart /*= NULL*/)
 {
 	RenderEngine->RemoveImage(m_pItemImgHov);
 	RenderEngine->RemoveImage(m_pItemImgNor);
@@ -112,6 +184,32 @@ BOOL CMyTabCtrl::SetItemsImage(LPCTSTR lpNormal, LPCTSTR lpHighlight, LPCTSTR lp
 		return FALSE;
 	else
 		return TRUE;
+}
+
+BOOL CMyTabCtrl::SetIconImage(int nIndex, UINT nResNorID, UINT nResSelID, LPCTSTR lpszFileType)
+{
+	CTabCtrlItem *lpItem = GetItemByIndex(nIndex);
+	if (lpItem == NULL) 
+		return FALSE;
+
+	lpItem->m_bIconFromID = TRUE;
+	
+	RenderEngine->RemoveImage(lpItem->m_lpIconImg, RESOURCE_ID);
+	RenderEngine->RemoveImage(lpItem->m_lpSelIconImg, RESOURCE_ID);
+
+	lpItem->m_lpIconImg = RenderEngine->GetImage(nResNorID, lpszFileType);
+	if (nResSelID == 0) {
+		lpItem->m_lpSelIconImg = RenderEngine->GetImage(nResNorID, lpszFileType);
+	} else {
+		lpItem->m_lpSelIconImg = RenderEngine->GetImage(nResSelID, lpszFileType);
+	}
+	
+
+	if ((nResNorID > 0 && lpItem->m_lpIconImg == NULL) ||
+		(nResSelID >=0 && lpItem->m_lpSelIconImg == NULL))
+		return FALSE;
+	else 
+		return TRUE;	
 }
 
 BOOL CMyTabCtrl::SetIconImage(int nIndex, LPCTSTR lpIcon, LPCTSTR lpSelIcon)
@@ -410,11 +508,21 @@ void CMyTabCtrl::OnDestroy()
 {
 	__super::OnDestroy();
 
-	RenderEngine->RemoveImage(m_pImgBack);
-	RenderEngine->RemoveImage(m_pItemImgHov);
-	RenderEngine->RemoveImage(m_pItemImgNor);
-	RenderEngine->RemoveImage(m_pItemImgSel);
-
+	if (m_bBackFromID) 
+		RenderEngine->RemoveImage(m_pImgBack, RESOURCE_ID);
+	else
+		RenderEngine->RemoveImage(m_pImgBack);
+	
+	if (m_bItemsFromID) {
+		RenderEngine->RemoveImage(m_pItemImgHov, RESOURCE_ID);
+		RenderEngine->RemoveImage(m_pItemImgNor, RESOURCE_ID);
+		RenderEngine->RemoveImage(m_pItemImgSel, RESOURCE_ID);
+	} else {
+		RenderEngine->RemoveImage(m_pItemImgHov);
+		RenderEngine->RemoveImage(m_pItemImgNor);
+		RenderEngine->RemoveImage(m_pItemImgSel);
+	}
+	
 	CTabCtrlItem *lpItem;
 	for (int i = 0; i < (int)m_ItemArray.size(); i++) {
 		lpItem = m_ItemArray[i];
