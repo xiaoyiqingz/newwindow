@@ -241,6 +241,9 @@
     <None Include="res\list_back_sel.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\loading.gif">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

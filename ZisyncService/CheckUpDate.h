@@ -2,6 +2,7 @@
 #include "MyDialog.h"
 #include "MyImage.h"
 #include "MyButtonEx.h"
+#include "afxwin.h"
 // CCheckUpDate dialog
 
 class CCheckUpDate : public CMyDialog
@@ -10,10 +11,16 @@ class CCheckUpDate : public CMyDialog
 public:
 	CMyImage		m_ImageBack;
 	CMyButtonEx		m_btClose;
+	CMyButtonEx		m_btCancle;
+	CMyButtonEx		m_btUpdate;
 	CMyImage		m_ImageWaiting;
+	CMyImage		m_ImageLogo;
 	
-	CMyButtonEx		m_btGif;
-
+	CStatic			m_etChecked;
+	CStatic			m_etOldVer;
+	CStatic			m_etNewVer;
+	CButton			m_btOk;
+	BOOL			m_bCheckOk;
 public:
 	CCheckUpDate(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CCheckUpDate();
@@ -25,15 +32,6 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 	DECLARE_MESSAGE_MAP()
-
-public:	
-	void SetControlPos(int cx, int cy);
-
-public:
-	virtual	BOOL OnInitDialog();
-	virtual void DrawClientArea(CDC*pDC,int nWidth,int nHeight);
-	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnTimer(UINT_PTR nIDEvent);
 
 public:
 	UINT				m_nFrameCount;
@@ -49,5 +47,15 @@ public:
 	void DestroyGif();
 	bool TestGIF();
 	bool DrawFrameGIF();
-	void DrawLine();
+
+public:	
+	void SetControlPos(int cx, int cy);
+	void OnInitButton();
+
+public:
+	virtual	BOOL OnInitDialog();
+	virtual void DrawClientArea(CDC*pDC,int nWidth,int nHeight);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnBnClickedCheckOk();
 };

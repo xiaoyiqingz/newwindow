@@ -145,6 +145,7 @@
     <None Include="res\list_phone_android.png" />
     <None Include="res\list_phone_ios.png" />
     <None Include="res\list_png.png" />
+    <None Include="res\loading.gif" />
     <None Include="res\logo.png" />
     <None Include="res\minimize.png" />
     <None Include="res\minimize1.png" />

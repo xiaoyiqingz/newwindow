@@ -15,6 +15,7 @@ CCheckUpDate::CCheckUpDate(CWnd* pParent /*=NULL*/)
 	: CMyDialog(CCheckUpDate::IDD, pParent)
 {
 	InitializeGIF();
+	m_bCheckOk = FALSE;
 }
 
 CCheckUpDate::~CCheckUpDate()
@@ -25,13 +26,19 @@ CCheckUpDate::~CCheckUpDate()
 void CCheckUpDate::DoDataExchange(CDataExchange* pDX)
 {
 	CMyDialog::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_GIF, m_btGif);
+	DDX_Control(pDX, IDC_CHECK_OK, m_btOk);
+	DDX_Control(pDX, IDCANCEL, m_btCancle);
+	DDX_Control(pDX, IDC_UPDATE, m_btUpdate);
+	DDX_Control(pDX, IDC_TEXT, m_etChecked);
+	DDX_Control(pDX, IDC_OLD, m_etOldVer);
+	DDX_Control(pDX, IDC_NEW, m_etNewVer);
 }
 
 
 BEGIN_MESSAGE_MAP(CCheckUpDate, CMyDialog)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_TIMER()
+	ON_BN_CLICKED(IDC_CHECK_OK, &CCheckUpDate::OnBnClickedCheckOk)
 END_MESSAGE_MAP()
 
 // CCheckUpDate message handlers
@@ -39,10 +46,12 @@ END_MESSAGE_MAP()
 BOOL CCheckUpDate::OnInitDialog()
 {
 	CMyDialog::OnInitDialog();
-	m_ImageBack.LoadImage(AfxGetInstanceHandle(), IDB_UPDATE_BACK, IMAGE_PNG);
-//	m_ImageWaiting.LoadImage(_T("res\\hearts.gif"));
+	HINSTANCE hInstance = AfxGetInstanceHandle();
+	m_ImageBack.LoadImage(hInstance, IDB_UPDATE_BACK, IMAGE_PNG);
 	
-//	m_pImage = Image::FromFile(_T("res\\hearts.gif"));
+	m_ImageWaiting.LoadImage(hInstance, IDR_LOAD, IMAGE_GIF);
+	m_ImageLogo.LoadImage(hInstance, IDB_LOGO, IMAGE_PNG);
+	//	m_pImage = Image::FromFile(_T("res\\hearts.gif"));
 
 	SetWindowPos(NULL, 0, 0, 400, 220, SWP_NOMOVE);
 
@@ -54,15 +63,16 @@ BOOL CCheckUpDate::OnInitDialog()
 	m_btClose.SetButtonType(BT_PUSHBUTTON);
 	m_btClose.SetParentBack(hParentDC);
 	m_btClose.SetSize(18 ,18);
+	
+	m_etChecked.ShowWindow(SW_HIDE);
+	m_etNewVer.ShowWindow(SW_HIDE);
+	m_etOldVer.ShowWindow(SW_HIDE);
+
+	OnInitButton();
+
 	CRect rcClient;
 	GetClientRect(&rcClient);
 	SetControlPos(rcClient.Width(), rcClient.Height());
-	
-
-	m_btGif.SetBackImage(IDR_GIF, 0, 0, 0, IMAGE_GIF);
-	m_btGif.SetButtonType(BT_GIFBUTTON);
-	m_btGif.SetParentBack(hParentDC);
-	m_btGif.SetSize(80, 100);
 
 	return TRUE;
 }
@@ -71,6 +81,45 @@ BOOL CCheckUpDate::OnInitDialog()
 void CCheckUpDate::DrawClientArea(CDC*pDC,int nWidth,int nHeight)
 {
 	m_ImageBack.Draw(pDC, 0, 0, nWidth, nHeight, 0, 0, 0, 0);
+
+	if (!m_bCheckOk) {
+		CRect rcClient, rcCenter, rcLogo, rcText;
+		GetClientRect(&rcClient);
+		CalcCenterRect(rcClient, m_ImageWaiting.GetWidth(), m_ImageWaiting.GetHeight(),
+			rcCenter);
+		::OffsetRect(rcCenter, 0 ,-30);
+		m_ImageWaiting.DrawFrameGIF(GetSafeHwnd(), rcCenter);
+		CalcCenterRect(rcCenter, 32, 32, rcLogo);
+		m_ImageLogo.Draw(pDC, rcLogo);
+
+		int nMode = pDC->SetBkMode(TRANSPARENT); 
+		pDC->SelectObject(GetCtrlFont());
+		pDC->DrawText(_T("当前版本0.5.0， 正在检查更新..."), &rcText, DT_CALCRECT);
+		int cx = rcText.Width();
+		int cy = rcText.Height();
+		CalcCenterRect(rcClient, cx, cy, rcText);
+		rcText.top = rcCenter.bottom + 10;
+		rcText.bottom = rcText.top + cy;
+		pDC->DrawText(_T("当前版本0.5.0， 正在检查更新..."), &rcText, DT_CENTER);
+		pDC->SetBkMode(nMode);
+	} else {
+		CRect rcLogo, rcText1, rcText2;
+		m_etOldVer.GetWindowRect(&rcText1);
+		m_etNewVer.GetWindowRect(&rcText2);
+		ScreenToClient(rcText1);
+		ScreenToClient(rcText2);
+		
+		int nTextLeft = rcText1.left;
+		int nTextTop = rcText1.top;
+		int nTextHeight = rcText2.bottom - rcText1.top;
+
+		rcLogo.top = nTextTop - (48 - nTextHeight)/2;
+		rcLogo.bottom = rcLogo.top + 48;
+		rcLogo.right = nTextLeft - 10;
+		rcLogo.left = rcLogo.right - 48;
+
+		m_ImageLogo.Draw(pDC, rcLogo);
+	}	
 }
 
 void CCheckUpDate::SetControlPos(int cx, int cy)
@@ -94,6 +143,21 @@ void CCheckUpDate::SetControlPos(int cx, int cy)
 void CCheckUpDate::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	PostMessage(WM_NCLBUTTONDOWN, HTCAPTION, MAKELPARAM(point.x, point.y));
+}
+
+void CCheckUpDate::OnInitButton()
+{
+	HDC hParentDC = GetBackDC();
+	m_btCancle.SetBackImage(IDB_BT_BACK, 0, 0, 0, IMAGE_PNG);
+	m_btCancle.SetButtonType(BT_PUSHBUTTON);
+	m_btCancle.SetParentBack(hParentDC);
+	m_btCancle.SetSize(74, 26);
+
+	m_btUpdate.SetBackImage(IDB_BT_BACK, 0, 0, 0, IMAGE_PNG);
+	m_btUpdate.SetButtonType(BT_PUSHBUTTON);
+	m_btUpdate.SetParentBack(hParentDC);
+	m_btUpdate.SetSize(74, 26);
+	m_btUpdate.ShowWindow(FALSE);
 }
 
 void CCheckUpDate::OnTimer(UINT_PTR nIDEvent)
@@ -182,13 +246,23 @@ void CCheckUpDate::DestroyGif()
 	}
 }
 
-void CCheckUpDate::DrawLine()
+void CCheckUpDate::OnBnClickedCheckOk()
 {
-	static int x1 =50, y1 =50, x2 = 100, y2 = 50; 
-	CClientDC dc(this);
-	Graphics graphics(dc.GetSafeHdc());
-	Pen pen(Color(255, 255, 0, 0));
-	graphics.DrawLine(&pen, x1, y1, x2, y2);
-	x1 += 5;
-	x2 += 5;
+	m_bCheckOk = TRUE;
+//	m_ImageLogo.DestroyImage();
+	m_ImageWaiting.DestroyImage();
+	m_btCancle.ShowWindow(SW_HIDE);
+
+	Invalidate(FALSE);
+	
+	m_etChecked.ShowWindow(SW_SHOW);
+	m_etNewVer.ShowWindow(SW_SHOW);
+	m_etOldVer.ShowWindow(SW_SHOW);
+	
+	CRect rcItem;
+	m_btCancle.GetWindowRect(&rcItem);
+	ScreenToClient(rcItem);
+	m_btUpdate.ShowWindow(TRUE);
+	m_btUpdate.MoveWindow(rcItem);
 }
+
