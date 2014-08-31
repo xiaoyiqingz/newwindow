@@ -4,14 +4,14 @@
 #pragma once
 
 #include "ZisyncService.h"
-#include "MyImage.h"
+#include "ZiImage.h"
 
-class MyDialogBase
+class ZiDialogBase
 {
 protected:
 	HDC							m_hParentDC;
 	BOOL						m_bTransparent;
-	CMyImage					*m_pImageScroll;						//滚动资源
+	CZiImage					*m_pImageScroll;						//滚动资源
 
 	HFONT						m_Font;
 
@@ -27,8 +27,8 @@ public:
 	COLORREF					m_colFrameNormal;					//边框颜色
 
 public:
-	MyDialogBase(void);
-	virtual ~MyDialogBase(void);
+	ZiDialogBase(void);
+	virtual ~ZiDialogBase(void);
 
 public:
 	//矩形居中

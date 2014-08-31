@@ -1,18 +1,17 @@
-// MyToolTip.cpp : implementation file
+// ZiToolTip.cpp : implementation file
 //
 
 #include "stdafx.h"
 #include "ZisyncService.h"
-#include "MyToolTip.h"
+#include "ZiToolTip.h"
 #include "MemoryDC.h"
 #include "RenderManager.h"
 
+// CZiToolTip
 
-// CMyToolTip
+IMPLEMENT_DYNAMIC(CZiToolTip, CToolTipCtrl)
 
-IMPLEMENT_DYNAMIC(CMyToolTip, CToolTipCtrl)
-
-CMyToolTip::CMyToolTip()
+CZiToolTip::CZiToolTip()
 {
 	m_pBackImg = NULL;
 	m_colorText = RGB(0, 0, 0);
@@ -20,24 +19,19 @@ CMyToolTip::CMyToolTip()
 	m_bResFromID = FALSE;
 }
 
-CMyToolTip::~CMyToolTip()
+CZiToolTip::~CZiToolTip()
 {
 }
 
 
-BEGIN_MESSAGE_MAP(CMyToolTip, CToolTipCtrl)
+BEGIN_MESSAGE_MAP(CZiToolTip, CToolTipCtrl)
 	ON_WM_PAINT()
 	ON_WM_DESTROY()
 END_MESSAGE_MAP()
 
+// CZiToolTip message handlers
 
-
-// CMyToolTip message handlers
-
-
-
-
-void CMyToolTip::OnPaint()
+void CZiToolTip::OnPaint()
 {
 	CPaintDC dc(this); 
 	CRect	rcClient;
@@ -50,7 +44,7 @@ void CMyToolTip::OnPaint()
 }
 
 
-void CMyToolTip::OnDestroy()
+void CZiToolTip::OnDestroy()
 {
 	CToolTipCtrl::OnDestroy();
 
@@ -60,7 +54,7 @@ void CMyToolTip::OnDestroy()
 		RenderEngine->RemoveImage(m_pBackImg);
 }
 
-BOOL CMyToolTip::SetBackImg(UINT nResFromID, LPCTSTR lpszFileType/* =NULL */, CONST	LPRECT lpNinePart)
+BOOL CZiToolTip::SetBackImg(UINT nResFromID, LPCTSTR lpszFileType/* =NULL */, CONST	LPRECT lpNinePart)
 {
 	m_bResFromID = TRUE;
 	
@@ -78,7 +72,7 @@ BOOL CMyToolTip::SetBackImg(UINT nResFromID, LPCTSTR lpszFileType/* =NULL */, CO
 		return TRUE;
 }
 
-BOOL CMyToolTip::SetBackImg(LPCTSTR lpszBack, CONST LPRECT lpNinePart /*= NULL*/)
+BOOL CZiToolTip::SetBackImg(LPCTSTR lpszBack, CONST LPRECT lpNinePart /*= NULL*/)
 {
 	RenderEngine->RemoveImage(m_pBackImg);
 
@@ -94,17 +88,13 @@ BOOL CMyToolTip::SetBackImg(LPCTSTR lpszBack, CONST LPRECT lpNinePart /*= NULL*/
 		return TRUE;
 }
 
-void CMyToolTip::SetTextCol(COLORREF colorText)
+void CZiToolTip::SetTextCol(COLORREF colorText)
 {
 	m_colorText = colorText;
 }
 
-void CMyToolTip::DrawItem(CDC *pDc, RECT & rcClient)
+void CZiToolTip::DrawItem(CDC *pDc, RECT & rcClient)
 {
-	/*if (m_pBackImg != NULL && !m_pBackImg->IsNull()) {
-		m_pBackImg->Draw(pDc, rcClient);
-	}*/
-	
 	CBrush Brush;
 	LOGBRUSH logBrush;
 	logBrush.lbStyle = BS_SOLID;

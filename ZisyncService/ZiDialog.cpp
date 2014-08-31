@@ -1,4 +1,4 @@
-// MyDialog.cpp : implementation file
+// ZiDialog.cpp : implementation file
 //
 
 #include "stdafx.h"
@@ -8,7 +8,7 @@
 #include "afxdialogex.h"
 
 
-// CMyDialog dialog
+// CZiDialog dialog
 
 #define		IDC_WND_MAX			WM_USER+0x01
 #define		IDC_WND_MIN			WM_USER+0x02
@@ -47,14 +47,13 @@ void CZiDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CZiDialog, CDialog)
 	ON_WM_PAINT()
-//	ON_WM_SIZE()
 //	ON_WM_LBUTTONDOWN()
 	ON_WM_NCHITTEST()
 	ON_WM_NCLBUTTONDOWN()
 END_MESSAGE_MAP()
 
 
-// CMyDialog message handlers
+// CZiDialog message handlers
 
 
 BOOL CZiDialog::OnInitDialog()
@@ -73,21 +72,6 @@ BOOL CZiDialog::OnInitDialog()
 	dwNewExStyle&=dwExStyle;
 	SetWindowLong(m_hWnd,GWL_EXSTYLE,dwNewExStyle);*/
 
-/*
-	CRect rcControl(0,0,0,0);  //在WM_SIZE中改变大小
-
-	m_btClose.Create(NULL,WS_CHILD|WS_VISIBLE,rcControl,this,IDCANCEL);
-	m_btClose.SetButtonImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_CLOSE), _T("PNG"));
-
-
-	m_btMax.Create(NULL,WS_CHILD|WS_VISIBLE,rcControl,this,IDC_WND_MAX);
-	m_btMax.SetButtonImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_MAX), _T("PNG"));
-
-	m_btMin.Create(NULL,WS_CHILD|WS_VISIBLE,rcControl,this,IDC_WND_MIN);
-	m_btMin.SetButtonImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_MIN), _T("PNG"));
-
-	m_bIsInit = true;*/
-
 	CRect rcClient;
 	GetClientRect(&rcClient);
 	HDC hDC = ::GetDC(m_hWnd);
@@ -99,22 +83,8 @@ BOOL CZiDialog::OnInitDialog()
 	return TRUE; 
 }
 
-void CZiDialog::LoadBackSkin(LPCTSTR pszResourcePath)
-{
-//	return m_ImageBack.LoadImage(pszResourcePath);
-	m_ImageBack.Load(pszResourcePath);
-}
-
 void CZiDialog::LoadBackSkin(HINSTANCE hInstance, UINT nIDResource, LPCTSTR pszType)
 {
-//  HINSTANCE hInstance, LPCTSTR pszResourceName,LPCTSTR pszType 
-//	return m_ImageBack.LoadImage(hInstance,pszResourceName, pszType);
-
-/*
-	if (pszType == NULL) 
-		m_ImageBack.LoadFromResource(hInstance, nIDResource);
-	else 
-		m_ImageBack.LoadImage(hInstance, MAKEINTRESOURCE(nIDResource), pszType);*/
 	m_BackImg.LoadImage(hInstance, nIDResource, pszType);
 }
 

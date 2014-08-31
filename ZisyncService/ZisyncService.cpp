@@ -1,4 +1,3 @@
-
 // ZisyncService.cpp : Defines the class behaviors for the application.
 //
 

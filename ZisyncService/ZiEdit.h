@@ -1,16 +1,17 @@
 #pragma once
-#include "MyImage.h"
-#include "MyDialogBase.h"
-// CMyEdit
+#include "ZiImage.h"
+#include "ZiDialogBase.h"
 
-class CMyEdit : public CEdit, public MyDialogBase
+// CZiEdit
+
+class CZiEdit : public CEdit, public ZiDialogBase
 {
-	DECLARE_DYNAMIC(CMyEdit)
+	DECLARE_DYNAMIC(CZiEdit)
 protected:
-	CMyImage*		m_pBackImgN;
-	CMyImage*		m_pBackImgH;
-	CMyImage*		m_pIconImg;
-	CMyImage*		m_pArrowImg;
+	CZiImage*		m_pBackImgN;
+	CZiImage*		m_pBackImgH;
+	CZiImage*		m_pIconImg;
+	CZiImage*		m_pArrowImg;
 
 	bool	m_bPress, m_bHover, m_bFocus, m_bMouseTracking;
 	int		m_nIconWidth;
@@ -20,8 +21,8 @@ protected:
 	TCHAR	m_cPwdChar;				
 	CPoint	m_ptClient;		
 public:
-	CMyEdit();
-	virtual ~CMyEdit();
+	CZiEdit();
+	virtual ~CZiEdit();
 
 public:
 	BOOL SetBackNormalImg(LPCTSTR lpszFileName, CONST LPRECT lpNinePart = NULL);

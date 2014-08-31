@@ -1,7 +1,7 @@
 #include "StdAfx.h"
-#include "MyImage.h"
+#include "ZiImage.h"
 
-CMyImage::CMyImage()
+CZiImage::CZiImage()
 {
 	m_pImage=NULL;
 	ZeroMemory(m_strImageName, sizeof(m_strImageName));
@@ -14,7 +14,7 @@ CMyImage::CMyImage()
 }
 
 
-CMyImage::~CMyImage()
+CZiImage::~CZiImage()
 {	 	
 	if (m_hTimer != INVALID_HANDLE_VALUE) {
 		 if (!DeleteTimerQueueTimer(NULL, m_hTimer, INVALID_HANDLE_VALUE)) {
@@ -35,7 +35,7 @@ CMyImage::~CMyImage()
 }
 
 //ÊÇ·ñ¼ÓÔØ
-bool CMyImage::IsNull()
+bool CZiImage::IsNull()
 {
 	//¼ÓÔØÅÐ¶Ï
 	if (m_pImage==NULL) return true;
@@ -45,7 +45,7 @@ bool CMyImage::IsNull()
 }
 
 //»ñÈ¡¿í¶È
-INT CMyImage::GetWidth()
+INT CZiImage::GetWidth()
 {
 	//¼ÓÔØÅÐ¶Ï
 	ASSERT(IsNull()==false);
@@ -56,7 +56,7 @@ INT CMyImage::GetWidth()
 }
 
 //»ñÈ¡¸ß¶È
-INT CMyImage::GetHeight()
+INT CZiImage::GetHeight()
 {
 	//¼ÓÔØÅÐ¶Ï
 	ASSERT(IsNull()==false);
@@ -67,7 +67,7 @@ INT CMyImage::GetHeight()
 }
 
 //Ïú»ÙÍ¼Æ¬
-bool CMyImage::DestroyImage()
+bool CZiImage::DestroyImage()
 {
 	if (m_hTimer != INVALID_HANDLE_VALUE) {
 		if (!DeleteTimerQueueTimer(NULL, m_hTimer, INVALID_HANDLE_VALUE)) {
@@ -83,7 +83,7 @@ bool CMyImage::DestroyImage()
 }
 
 //¼ÓÔØÍ¼Æ¬
-bool CMyImage::LoadImage(LPCTSTR pszFileName)
+bool CZiImage::LoadImage(LPCTSTR pszFileName)
 {
 	//¼ÓÔØÅÐ¶Ï
 	ASSERT(m_pImage==NULL);
@@ -104,7 +104,7 @@ bool CMyImage::LoadImage(LPCTSTR pszFileName)
 }
 
 //¼ÓÔØÍ¼Æ¬
-bool CMyImage::LoadImage(HINSTANCE hInstance, LPCTSTR pszResourceName, LPCTSTR pszType)
+bool CZiImage::LoadImage(HINSTANCE hInstance, LPCTSTR pszResourceName, LPCTSTR pszType)
 {
 	//¼ÓÔØÅÐ¶Ï
 	ASSERT(m_pImage==NULL);
@@ -145,7 +145,7 @@ bool CMyImage::LoadImage(HINSTANCE hInstance, LPCTSTR pszResourceName, LPCTSTR p
 	return true;
 }
 
-bool CMyImage::LoadImage(HINSTANCE hInstance, UINT nIDResource, LPCTSTR lpszResType)
+bool CZiImage::LoadImage(HINSTANCE hInstance, UINT nIDResource, LPCTSTR lpszResType)
 {
 	//¼ÓÔØÅÐ¶Ï
 	ASSERT(m_pImage==NULL);
@@ -194,7 +194,7 @@ bool CMyImage::LoadImage(HINSTANCE hInstance, UINT nIDResource, LPCTSTR lpszResT
 }
 
 //»æ»­Í¼Ïñ
-bool CMyImage::DrawImage(CDC * pDC, INT nXPos, INT nYPos)
+bool CZiImage::DrawImage(CDC * pDC, INT nXPos, INT nYPos)
 {
 	//¼ÓÔØÅÐ¶Ï
 	ASSERT(m_pImage!=NULL);
@@ -222,7 +222,7 @@ bool CMyImage::DrawImage(CDC * pDC, INT nXPos, INT nYPos)
 }
 
 //»æ»­Í¼Ïñ
-bool CMyImage::DrawImage( CDC * pDC, INT nXPos, INT nYPos, INT nDestWidth, INT nDestHeight )
+bool CZiImage::DrawImage( CDC * pDC, INT nXPos, INT nYPos, INT nDestWidth, INT nDestHeight )
 {
 	//¼ÓÔØÅÐ¶Ï
 	ASSERT(m_pImage!=NULL);
@@ -245,7 +245,7 @@ bool CMyImage::DrawImage( CDC * pDC, INT nXPos, INT nYPos, INT nDestWidth, INT n
 	return true;
 }
 
-bool CMyImage::DrawImage(CDC * pDC, RECT &rc)
+bool CZiImage::DrawImage(CDC * pDC, RECT &rc)
 {
 	ASSERT(m_pImage != NULL);
 	if (m_pImage == NULL)  return false;
@@ -264,7 +264,7 @@ bool CMyImage::DrawImage(CDC * pDC, RECT &rc)
 }
 
 //»æ»­Í¼Ïñ
-bool CMyImage::DrawImage(CDC * pDC, INT nXDest, INT nYDest, INT nDestWidth, INT nDestHeight, INT nXScr, INT nYSrc, INT nSrcWidth, INT nSrcHeight)
+bool CZiImage::DrawImage(CDC * pDC, INT nXDest, INT nYDest, INT nDestWidth, INT nDestHeight, INT nXScr, INT nYSrc, INT nSrcWidth, INT nSrcHeight)
 {
 	//¼ÓÔØÅÐ¶Ï
 	ASSERT(m_pImage!=NULL);
@@ -288,7 +288,7 @@ bool CMyImage::DrawImage(CDC * pDC, INT nXDest, INT nYDest, INT nDestWidth, INT 
 }
 
 //»æ»­Í¼Ïñ
-bool CMyImage::DrawImage(CDC * pDC, INT nXDest, INT nYDest, INT nDestWidth, INT nDestHeight, INT nXScr, INT nYSrc)
+bool CZiImage::DrawImage(CDC * pDC, INT nXDest, INT nYDest, INT nDestWidth, INT nDestHeight, INT nXScr, INT nYSrc)
 {
 	//¼ÓÔØÅÐ¶Ï
 	ASSERT(m_pImage!=NULL);
@@ -312,7 +312,7 @@ bool CMyImage::DrawImage(CDC * pDC, INT nXDest, INT nYDest, INT nDestWidth, INT 
 }
 
 //»ìºÏ»æ»­
-bool CMyImage::AlphaDrawImage(CDC * pDestDC, INT xDest, INT yDest, BYTE cbAlphaDepth)
+bool CZiImage::AlphaDrawImage(CDC * pDestDC, INT xDest, INT yDest, BYTE cbAlphaDepth)
 {
 	//Í¸Ã÷»æ»­
 	AlphaDrawImage(pDestDC,xDest,yDest,GetWidth(),GetHeight(),0,0,cbAlphaDepth);
@@ -321,7 +321,7 @@ bool CMyImage::AlphaDrawImage(CDC * pDestDC, INT xDest, INT yDest, BYTE cbAlphaD
 }
 
 //»ìºÏ»æ»­
-bool CMyImage::AlphaDrawImage(CDC * pDestDC, INT xDest, INT yDest, INT cxDest, INT cyDest, INT xSrc, INT ySrc, BYTE cbAlphaDepth)
+bool CZiImage::AlphaDrawImage(CDC * pDestDC, INT xDest, INT yDest, INT cxDest, INT cyDest, INT xSrc, INT ySrc, BYTE cbAlphaDepth)
 {
 	//¼ÓÔØÅÐ¶Ï
 	ASSERT(m_pImage!=NULL);
@@ -359,7 +359,7 @@ bool CMyImage::AlphaDrawImage(CDC * pDestDC, INT xDest, INT yDest, INT cxDest, I
 }
 
 //»ìºÏ»æ»­
-bool CMyImage::AlphaDrawImage(CDC * pDestDC, INT xDest, INT yDest, INT cxDest, INT cyDest, INT xSrc, INT ySrc, INT cxSrc, INT cySrc, BYTE cbAlphaDepth)
+bool CZiImage::AlphaDrawImage(CDC * pDestDC, INT xDest, INT yDest, INT cxDest, INT cyDest, INT xSrc, INT ySrc, INT cxSrc, INT cySrc, BYTE cbAlphaDepth)
 {
 	//´´½¨»º³å
 	if ((cxDest!=cxSrc)||(cyDest!=cySrc))
@@ -405,7 +405,7 @@ bool CMyImage::AlphaDrawImage(CDC * pDestDC, INT xDest, INT yDest, INT cxDest, I
 	return true;
 }
 
-bool CMyImage::Draw( CDC * pDC, INT x, INT y, INT cx, INT cy,INT nLeft,INT nTop,INT nRight,INT nBottom )
+bool CZiImage::Draw( CDC * pDC, INT x, INT y, INT cx, INT cy,INT nLeft,INT nTop,INT nRight,INT nBottom )
 {
 	int cxImage = GetWidth();
 	int cyImage = GetHeight();
@@ -495,25 +495,25 @@ bool CMyImage::Draw( CDC * pDC, INT x, INT y, INT cx, INT cy,INT nLeft,INT nTop,
 	return TRUE;
 }
 
-bool CMyImage::Draw( CDC * pDC, const RECT& rectDest, const RECT& rectSrc )
+bool CZiImage::Draw( CDC * pDC, const RECT& rectDest, const RECT& rectSrc )
 {
 	return Draw(pDC,rectDest.left, rectDest.top, rectDest.right-rectDest.left, rectDest.bottom-rectDest.top, 
 		rectSrc.left, rectSrc.top,rectSrc.right, rectSrc.bottom);
 }
 
-bool CMyImage::Draw( CDC * pDC, const RECT& rectDest )
+bool CZiImage::Draw( CDC * pDC, const RECT& rectDest )
 {
 	return Draw(pDC,rectDest,m_rcNinePart);
 }
 
-void CMyImage::SetNinePart( CONST LPRECT lprcNinePart )
+void CZiImage::SetNinePart( CONST LPRECT lprcNinePart )
 {
 	if( lprcNinePart == NULL ) return;
 
 	::CopyRect(&m_rcNinePart,lprcNinePart);
 }
 
-HBITMAP CMyImage::ImageToBitmap(/*HDC hDC*/) 
+HBITMAP CZiImage::ImageToBitmap(/*HDC hDC*/) 
 { 
 	ASSERT(m_pImage != NULL);
 	if(m_pImage == NULL) return NULL;
@@ -524,7 +524,7 @@ HBITMAP CMyImage::ImageToBitmap(/*HDC hDC*/)
 
 //for GIF
 
-bool CMyImage::TestGIF()
+bool CZiImage::TestGIF()
 {
 	UINT count = 0;
 	count = m_pImage->GetFrameDimensionsCount();
@@ -548,7 +548,7 @@ bool CMyImage::TestGIF()
 	return m_nFrameCount > 1;
 }
 
-bool CMyImage::DrawFrameGIF(HWND hwnd, const RECT& rectDest)
+bool CZiImage::DrawFrameGIF(HWND hwnd, const RECT& rectDest)
 {
 	if (!TestGIF()) 
 		return false;
@@ -566,16 +566,16 @@ bool CMyImage::DrawFrameGIF(HWND hwnd, const RECT& rectDest)
 	return true;
 }
 
-VOID CALLBACK CMyImage::TimerRoute(PVOID lpParam, BOOLEAN TimerOrWaitFired)
+VOID CALLBACK CZiImage::TimerRoute(PVOID lpParam, BOOLEAN TimerOrWaitFired)
 {
 	ASSERT(lpParam);
-	CMyImage *pImage = reinterpret_cast<CMyImage *> (lpParam);
+	CZiImage *pImage = reinterpret_cast<CZiImage *> (lpParam);
 	if (!pImage->m_bIsPause) {
 		pImage->DrawGIF();
 	} 
 }
 
-bool CMyImage::DrawGIF()
+bool CZiImage::DrawGIF()
 {	
 	if (m_pImage != NULL) {
 		GUID   pageGuid = FrameDimensionTime;

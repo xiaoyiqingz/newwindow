@@ -1,13 +1,13 @@
 #pragma once
 #include "ZiDialog.h"
-#include "MyImage.h"
+#include "ZiImage.h"
 // CSetUpPage0 dialog
 
 class CSetUpPage0 : public CZiDialog
 {
 	DECLARE_DYNAMIC(CSetUpPage0)
 public:
-	CMyImage	m_ImageLoge;
+	CZiImage	m_ImageLoge;
 
 public:
 	CSetUpPage0(CWnd* pParent = NULL);   // standard constructor

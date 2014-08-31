@@ -1,7 +1,7 @@
 #pragma once
 #include "ZiDialog.h"
 #include "ZiButton.h"
-#include "MyImage.h"
+#include "ZiImage.h"
 #include "SetUpPage0.h"
 #include "SetUpPage1.h"
 #include "SetUpPage2.h"
@@ -12,7 +12,7 @@ class CWizardSetUp : public CZiDialog
 {
 	DECLARE_DYNAMIC(CWizardSetUp)
 public:
-	CMyImage		m_ImageBack;
+	CZiImage		m_ImageBack;
 	CZiButton		m_btClose;	
 	CZiButton		m_btCancle;
 	CZiButton		m_btNext;

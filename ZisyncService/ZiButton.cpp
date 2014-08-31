@@ -1,4 +1,4 @@
-// MyButtonEx.cpp : implementation file
+// ZiButton.cpp : implementation file
 //
 
 #include "stdafx.h"
@@ -7,7 +7,7 @@
 #include "MemoryDC.h"
 #include "RenderManager.h"
 
-// CMyButtonEx
+// CZiButton
 
 IMPLEMENT_DYNAMIC(CZiButton, CButton)
 
@@ -48,10 +48,10 @@ BEGIN_MESSAGE_MAP(CZiButton, CButton)
 END_MESSAGE_MAP()
 
 // CZiButton message handlers
+
 void CZiButton::OnDestroy()
 {
 	CButton::OnDestroy();
-
 //	m_pBackImg.Destroy();
 	
 	if (m_bBackFromID) {

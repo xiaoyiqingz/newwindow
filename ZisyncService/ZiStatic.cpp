@@ -8,7 +8,6 @@
 #include "ZiStatic.h"
 #include <algorithm>
 
-
 // CZiStatic
 
 IMPLEMENT_DYNAMIC(CZiStatic, CStatic)
@@ -30,12 +29,7 @@ BEGIN_MESSAGE_MAP(CZiStatic, CStatic)
 	ON_WM_DROPFILES()
 END_MESSAGE_MAP()
 
-
-
 // CZiStatic message handlers
-
-
-
 
 void CZiStatic::OnDestroy()
 {

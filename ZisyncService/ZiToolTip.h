@@ -1,19 +1,20 @@
 #pragma once
-#include "MyImage.h"
-#include "MyDialogBase.h"
+#include "ZiImage.h"
+#include "ZiDialogBase.h"
 
-// CMyToolTip
-class CMyToolTip : public CToolTipCtrl, public MyDialogBase
+// CZiToolTip
+
+class CZiToolTip : public CToolTipCtrl, public ZiDialogBase
 {
-	DECLARE_DYNAMIC(CMyToolTip)
+	DECLARE_DYNAMIC(CZiToolTip)
 public:
-	CMyImage		*m_pBackImg;
+	CZiImage		*m_pBackImg;
 	COLORREF		m_colorText;
 
 	BOOL			m_bResFromID;
 public:
-	CMyToolTip();
-	virtual ~CMyToolTip();
+	CZiToolTip();
+	virtual ~CZiToolTip();
 
 protected:
 	DECLARE_MESSAGE_MAP()

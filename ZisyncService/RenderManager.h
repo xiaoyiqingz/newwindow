@@ -4,15 +4,15 @@
 #pragma once
 
 #include "ZisyncService.h"
-#include "MyImage.h"
+#include "ZiImage.h"
 
 #define RESOURCE_ID TRUE
-class CMyImage;
+class CZiImage;
 
 //资源结构
 struct tagImageInfo
 {
-	CMyImage		*pImage;
+	CZiImage		*pImage;
 	int				nRef;
 };
 
@@ -58,10 +58,10 @@ public:
 	//图片管理
 public:
 	//获取图片
-	CMyImage *GetImage(LPCTSTR lpszFileName,LPCTSTR lpszResType=NULL);
-	CMyImage *GetImage(UINT nID, LPCTSTR lpszResType=NULL);
+	CZiImage *GetImage(LPCTSTR lpszFileName,LPCTSTR lpszResType=NULL);
+	CZiImage *GetImage(UINT nID, LPCTSTR lpszResType=NULL);
 	//删除图片
-	void RemoveImage(CMyImage *&pImage, BOOL bResFromID = FALSE);
+	void RemoveImage(CZiImage *&pImage, BOOL bResFromID = FALSE);
 	//删除所有
 	void ClearImage();
 

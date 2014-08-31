@@ -1,6 +1,6 @@
 #pragma once
 #include "ZiDialog.h"
-#include "MyImage.h"
+#include "ZiImage.h"
 #include "ZiButton.h"
 #include "afxwin.h"
 #include "afxcmn.h"
@@ -10,7 +10,7 @@ class CSyncDirSet : public CZiDialog
 {
 	DECLARE_DYNAMIC(CSyncDirSet)
 public:
-	CMyImage		*m_pBackImg;
+	CZiImage		*m_pBackImg;
 	CZiButton		m_btClose;
 	CZiButton		m_btDeleteDir;
 	CZiButton		m_btOk;

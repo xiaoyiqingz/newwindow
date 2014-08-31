@@ -255,9 +255,6 @@
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyImage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MyImageEx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -271,18 +268,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RenderManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MyDialogBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MyEdit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MyListCtrl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MyTabCtrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Page0.h">
@@ -309,9 +294,6 @@
     <ClInclude Include="Page2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyListIcon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AddWin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -328,9 +310,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SyncDirSet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MyToolTip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ZisyncService.h">
@@ -363,12 +342,30 @@
     <ClInclude Include="ZiButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ZiImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiDialogBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiListCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiListIcon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiTabCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiToolTip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MyImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MyButton.cpp">
@@ -384,18 +381,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RenderManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MyDialogBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MyListCtrl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MyEdit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MyTabCtrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Page0.cpp">
@@ -422,9 +407,6 @@
     <ClCompile Include="Page2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyListIcon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AddWin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -441,9 +423,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SyncDirSet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MyToolTip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ZisyncService.cpp">
@@ -474,6 +453,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ZiButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiDialogBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiListCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiListIcon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiTabCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiToolTip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

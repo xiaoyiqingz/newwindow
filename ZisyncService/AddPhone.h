@@ -1,6 +1,6 @@
 #pragma once
 #include "ZiDialog.h"
-#include "MyImage.h"
+#include "ZiImage.h"
 #include "ZiButton.h"
 #include "afxwin.h"
 
@@ -10,7 +10,7 @@ class CAddPhone : public CZiDialog
 {
 	DECLARE_DYNAMIC(CAddPhone)
 public:
-	CMyImage		m_ImageCode;
+	CZiImage		m_ImageCode;
 	CZiButton		m_btHelp;
 
 public:

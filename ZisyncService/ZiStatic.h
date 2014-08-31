@@ -1,14 +1,14 @@
 #pragma once
-#include "MyImage.h"
-#include "MyDialogBase.h"
+#include "ZiImage.h"
+#include "ZiDialogBase.h"
 
 // CZiStatic
 
-class CZiStatic : public CStatic, public MyDialogBase
+class CZiStatic : public CStatic, public ZiDialogBase
 {
 	DECLARE_DYNAMIC(CZiStatic)
 public:
-	CMyImage	*m_pBackImg;
+	CZiImage	*m_pBackImg;
 	BOOL		m_bResFromID;
 
 	vector<CString> m_strPath;

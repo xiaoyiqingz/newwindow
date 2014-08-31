@@ -1,10 +1,11 @@
 #pragma once
-#include "MyDialogBase.h"
-#include "MyToolTip.h"
-#include "MyImage.h"
+#include "ZiDialogBase.h"
+#include "ZiToolTip.h"
+#include "ZiImage.h"
 
-// CMyListCtrl
-class CMyHeaderCtrl : public CHeaderCtrl, public MyDialogBase
+// CZiListCtrl
+
+class CZiHeaderCtrl : public CHeaderCtrl, public ZiDialogBase
 {
 public:
 	UINT		m_uLockCount;
@@ -12,10 +13,10 @@ public:
 	UINT		m_uActiveItem;
 	bool		m_bPress;
 
-	CMyImage	*m_pBackImg, *m_pPressImg, *m_pGridImg;
+	CZiImage	*m_pBackImg, *m_pPressImg, *m_pGridImg;
 public:
-	CMyHeaderCtrl();
-	virtual ~CMyHeaderCtrl();
+	CZiHeaderCtrl();
+	virtual ~CZiHeaderCtrl();
 
 public:
 	BOOL	SetBackImage(LPCTSTR lpNormal, CONST LPRECT lprcNinePart=NULL);
@@ -43,8 +44,8 @@ struct  tagItemImage
 {
 	int				nItem;
 	bool			bSelect;
-	CMyImage		*pImage;
-	CMyImage		*pSelectImage;
+	CZiImage		*pImage;
+	CZiImage		*pSelectImage;
 };
 
 typedef vector<tagItemImage>	CItemImgArray;
@@ -60,12 +61,12 @@ struct tagItemContent
 
 typedef map<int, tagItemContent> CItemContentArray;
 
-class CMyListCtrl : public CListCtrl, public MyDialogBase
+class CZiListCtrl : public CListCtrl, public ZiDialogBase
 {
-	DECLARE_DYNAMIC(CMyListCtrl)
+	DECLARE_DYNAMIC(CZiListCtrl)
 public:
-	CMyImage	*m_pHovenImg, *m_pSelectImg;
-	CMyImage	*m_pCheckImg, *m_pUnCheckImg;
+	CZiImage	*m_pHovenImg, *m_pSelectImg;
+	CZiImage	*m_pCheckImg, *m_pUnCheckImg;
 
 	CItemImgArray	m_ItemImgArray;
 	CItemImgArray	m_ItemBtnArray;
@@ -83,15 +84,15 @@ public:
 	BOOL			m_bBackSelFromID;
 	BOOL			m_bIconFromID;
 
-	CMyHeaderCtrl	m_HeaderCtrl;
+	CZiHeaderCtrl	m_HeaderCtrl;
 
 //ToolTip	
-	CMyToolTip		m_ToolTip;
+	CZiToolTip		m_ToolTip;
 	CString			m_strToolTip1, m_strToolTip2, m_strToolTip3;
 
 public:
-	CMyListCtrl();
-	virtual ~CMyListCtrl();
+	CZiListCtrl();
+	virtual ~CZiListCtrl();
 
 public:
 	BOOL SetHovenImage(UINT nResFromID, LPCTSTR lpszFileType, const LPRECT lprcNinePart=NULL);

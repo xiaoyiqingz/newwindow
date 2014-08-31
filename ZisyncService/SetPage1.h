@@ -1,6 +1,5 @@
 #pragma once
 #include "ZiDialog.h"
-#include "MyEdit.h"
 #include "afxwin.h"
 
 // CSetPage1 dialog

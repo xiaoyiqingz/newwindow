@@ -1,22 +1,17 @@
 #pragma once
-#include "MyImage.h"
+#include "ZiImage.h"
 #include "MyButton.h"
 #include "MyImageEx.h"
-#include "MyImage.h"
-#include "MyDialogBase.h"
+#include "ZiImage.h"
+#include "ZiDialogBase.h"
 
-// CMyDialog dialog
+// CZiDialog dialog
 
-class CZiDialog : public CDialog, public MyDialogBase
+class CZiDialog : public CDialog, public ZiDialogBase
 {
 	DECLARE_DYNAMIC(CZiDialog)
 public:
-	CMyImageEx		m_ImageBack;
-	CMyImage		m_BackImg;
-/*
-	CMyButton		m_btClose;
-	CMyButton		m_btMax;
-	CMyButton		m_btMin;*/
+	CZiImage		m_BackImg;
 
 //	bool			m_bIsInit;
 	bool			m_bIsZoomed;		//是否最大化
@@ -44,12 +39,10 @@ public:
 public:
 	virtual BOOL OnInitDialog();
 //	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
-	void	LoadBackSkin(LPCTSTR pszResourcePath);
 	void	LoadBackSkin(HINSTANCE hInstance, UINT nIDResource, LPCTSTR pszType = NULL);
 	HDC		GetBackDC(){ return m_hMemDC; }
 
 	afx_msg void OnPaint();
-//	afx_msg void OnSize(UINT nType, int cx, int cy);	
 //	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg LRESULT OnNcHitTest(CPoint point);
 	afx_msg void OnNcLButtonDown(UINT nHitTest, CPoint point);

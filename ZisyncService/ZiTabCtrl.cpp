@@ -1,16 +1,14 @@
-// MyTabCtrl.cpp : implementation file
+// ZiTabCtrl.cpp : implementation file
 //
-
 #include "stdafx.h"
 #include "ZisyncService.h"
-#include "MyTabCtrl.h"
+#include "ZiTabCtrl.h"
 #include "MemoryDC.h"
 #include "RenderManager.h"
 
+// CZiTabCtrl
 
-// CMyTabCtrl
-
-IMPLEMENT_DYNAMIC(CMyTabCtrl, CTabCtrl)
+IMPLEMENT_DYNAMIC(CZiTabCtrl, CTabCtrl)
 
 CTabCtrlItem::CTabCtrlItem(void) 
 {
@@ -41,7 +39,7 @@ CTabCtrlItem::~CTabCtrlItem(void)
 	
 }
 
-CMyTabCtrl::CMyTabCtrl()
+CZiTabCtrl::CZiTabCtrl()
 {
 	m_pImgBack = NULL;
 	m_pItemImgHov = m_pItemImgNor = m_pItemImgSel = NULL;
@@ -56,12 +54,12 @@ CMyTabCtrl::CMyTabCtrl()
 	m_bItemsFromID = FALSE;
 }
 
-CMyTabCtrl::~CMyTabCtrl()
+CZiTabCtrl::~CZiTabCtrl()
 {
 }
 
 
-BEGIN_MESSAGE_MAP(CMyTabCtrl, CTabCtrl)
+BEGIN_MESSAGE_MAP(CZiTabCtrl, CTabCtrl)
 	ON_WM_ERASEBKGND()
 	ON_WM_PAINT()
 	ON_WM_LBUTTONDOWN()
@@ -70,20 +68,15 @@ BEGIN_MESSAGE_MAP(CMyTabCtrl, CTabCtrl)
 	ON_WM_DESTROY()
 END_MESSAGE_MAP()
 
+// CZiTabCtrl message handlers
 
-
-// CMyTabCtrl message handlers
-
-
-
-
-void CMyTabCtrl::SetLeftTop(int nLeft, int nTop)
+void CZiTabCtrl::SetLeftTop(int nLeft, int nTop)
 {
 	m_nLeft = nLeft;
 	m_nTop = nTop;
 }
 
-BOOL CMyTabCtrl::SetBackImage(UINT nResFromID, LPCTSTR lpszFileType, CONST LPRECT lpNinePart)
+BOOL CZiTabCtrl::SetBackImage(UINT nResFromID, LPCTSTR lpszFileType, CONST LPRECT lpNinePart)
 {
 	m_bBackFromID = TRUE;
 
@@ -100,7 +93,7 @@ BOOL CMyTabCtrl::SetBackImage(UINT nResFromID, LPCTSTR lpszFileType, CONST LPREC
 		return TRUE;
 }
 
-BOOL CMyTabCtrl::SetBackImage(LPCTSTR lpszFileName, CONST LPRECT lpNinePart/*=NULL*/)
+BOOL CZiTabCtrl::SetBackImage(LPCTSTR lpszFileName, CONST LPRECT lpNinePart/*=NULL*/)
 {
 	RenderEngine->RemoveImage(m_pImgBack);
 
@@ -115,7 +108,7 @@ BOOL CMyTabCtrl::SetBackImage(LPCTSTR lpszFileName, CONST LPRECT lpNinePart/*=NU
 		return TRUE;
 }
 
-BOOL CMyTabCtrl::SetItemsImage(UINT nResNorID, 
+BOOL CZiTabCtrl::SetItemsImage(UINT nResNorID, 
 							   UINT nResHovID, 
 							   UINT nResDownID, 
 							   LPCTSTR lpszFileType/* =NULL */, 
@@ -155,7 +148,7 @@ BOOL CMyTabCtrl::SetItemsImage(UINT nResNorID,
 		return TRUE;
 }
 
-BOOL CMyTabCtrl::SetItemsImage(LPCTSTR lpNormal, 
+BOOL CZiTabCtrl::SetItemsImage(LPCTSTR lpNormal, 
 							   LPCTSTR lpHighlight, 
 							   LPCTSTR lpDown, 
 							   CONST LPRECT lprcNinePart /*= NULL*/)
@@ -186,7 +179,7 @@ BOOL CMyTabCtrl::SetItemsImage(LPCTSTR lpNormal,
 		return TRUE;
 }
 
-BOOL CMyTabCtrl::SetIconImage(int nIndex, UINT nResNorID, UINT nResSelID, LPCTSTR lpszFileType)
+BOOL CZiTabCtrl::SetIconImage(int nIndex, UINT nResNorID, UINT nResSelID, LPCTSTR lpszFileType)
 {
 	CTabCtrlItem *lpItem = GetItemByIndex(nIndex);
 	if (lpItem == NULL) 
@@ -212,7 +205,7 @@ BOOL CMyTabCtrl::SetIconImage(int nIndex, UINT nResNorID, UINT nResSelID, LPCTST
 		return TRUE;	
 }
 
-BOOL CMyTabCtrl::SetIconImage(int nIndex, LPCTSTR lpIcon, LPCTSTR lpSelIcon)
+BOOL CZiTabCtrl::SetIconImage(int nIndex, LPCTSTR lpIcon, LPCTSTR lpSelIcon)
 {
 	CTabCtrlItem *lpItem = GetItemByIndex(nIndex);
 	if (lpItem == NULL) 
@@ -231,18 +224,18 @@ BOOL CMyTabCtrl::SetIconImage(int nIndex, LPCTSTR lpIcon, LPCTSTR lpSelIcon)
 		return TRUE;	
 }
 
-int CMyTabCtrl::GetCurSel()
+int CZiTabCtrl::GetCurSel()
 {
 	return m_nSelIndex;
 }
 
-void CMyTabCtrl::SetCurSel(int nCurSel)
+void CZiTabCtrl::SetCurSel(int nCurSel)
 {
 	m_nSelIndex = nCurSel;
 	Invalidate(FALSE);
 }
 
-int CMyTabCtrl::AddItem(int nID)
+int CZiTabCtrl::AddItem(int nID)
 {
 	CTabCtrlItem * lpItem = new CTabCtrlItem;
 	if (NULL == lpItem)
@@ -255,7 +248,7 @@ int CMyTabCtrl::AddItem(int nID)
 	return m_ItemArray.size() - 1;
 }
 
-CSize CMyTabCtrl::SetItemSize(CSize size,  CSize sizeRect)
+CSize CZiTabCtrl::SetItemSize(CSize size,  CSize sizeRect)
 {
 	for (int i = 0; i < (int)m_ItemArray.size(); i++) {
 		CTabCtrlItem *lpItem = m_ItemArray.at(i);
@@ -271,7 +264,7 @@ CSize CMyTabCtrl::SetItemSize(CSize size,  CSize sizeRect)
  	return __super::SetItemSize(sizeRect);
 }
 
-void CMyTabCtrl::SetItemPadding(int nIndex, int nPadding)
+void CZiTabCtrl::SetItemPadding(int nIndex, int nPadding)
 {
 	CTabCtrlItem* lpItem = GetItemByIndex(nIndex);
 
@@ -279,7 +272,7 @@ void CMyTabCtrl::SetItemPadding(int nIndex, int nPadding)
 		lpItem->m_nPadding = nPadding;
 }
 
-void CMyTabCtrl::SetItemText(int nIndex, LPCTSTR lpszText)
+void CZiTabCtrl::SetItemText(int nIndex, LPCTSTR lpszText)
 {
 	CTabCtrlItem *lpItem = GetItemByIndex(nIndex);
 
@@ -287,12 +280,12 @@ void CMyTabCtrl::SetItemText(int nIndex, LPCTSTR lpszText)
 		lpItem->m_strText = lpszText;	
 }
 
-void CMyTabCtrl::SetTextPos(TEXT_POS textPos)
+void CZiTabCtrl::SetTextPos(TEXT_POS textPos)
 {
 	m_textPos = textPos;
 }
 
-BOOL CMyTabCtrl::GetItemRectByIndex(int nIndex, CRect& rect)
+BOOL CZiTabCtrl::GetItemRectByIndex(int nIndex, CRect& rect)
 {
 	CTabCtrlItem *lpItem;
 	int nLeft = m_nLeft, nTop = m_nTop;
@@ -315,7 +308,7 @@ BOOL CMyTabCtrl::GetItemRectByIndex(int nIndex, CRect& rect)
 	return FALSE;
 }
 
-void CMyTabCtrl::DrawItem(CDC *pDC, int nIndex)
+void CZiTabCtrl::DrawItem(CDC *pDC, int nIndex)
 {
 	CTabCtrlItem * lpItem = GetItemByIndex(nIndex);
 	if (lpItem == NULL) return;
@@ -340,7 +333,7 @@ void CMyTabCtrl::DrawItem(CDC *pDC, int nIndex)
 			m_pItemImgNor->Draw(pDC, rcItem);
 	}
 
-	CMyImage * lpIconImg = NULL;
+	CZiImage * lpIconImg = NULL;
 
 	BOOL bSelected = FALSE;
 	if (m_nSelIndex == nIndex) {
@@ -426,13 +419,13 @@ void CMyTabCtrl::DrawItem(CDC *pDC, int nIndex)
 	}
 }
 
-BOOL CMyTabCtrl::OnEraseBkgnd(CDC* pDC)
+BOOL CZiTabCtrl::OnEraseBkgnd(CDC* pDC)
 {
 	return TRUE;
 }
 
 
-void CMyTabCtrl::OnPaint()
+void CZiTabCtrl::OnPaint()
 {
 	CPaintDC dc(this);
 
@@ -453,7 +446,7 @@ void CMyTabCtrl::OnPaint()
 }
 
 
-void CMyTabCtrl::OnLButtonDown(UINT nFlags, CPoint point)
+void CZiTabCtrl::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	SetFocus();
 	
@@ -472,7 +465,7 @@ void CMyTabCtrl::OnLButtonDown(UINT nFlags, CPoint point)
 }
 
 
-void CMyTabCtrl::OnMouseMove(UINT nFlags, CPoint point)
+void CZiTabCtrl::OnMouseMove(UINT nFlags, CPoint point)
 {
 	if (!m_bMouseTracking) {
 		TrackMouseLeave(GetSafeHwnd());
@@ -492,7 +485,7 @@ void CMyTabCtrl::OnMouseMove(UINT nFlags, CPoint point)
 }
 
 
-LRESULT CMyTabCtrl::OnMouseLeave(WPARAM wparam, LPARAM lparam)
+LRESULT CZiTabCtrl::OnMouseLeave(WPARAM wparam, LPARAM lparam)
 {
 	m_bMouseTracking = FALSE;
 	int nIndex = -1;
@@ -504,7 +497,7 @@ LRESULT CMyTabCtrl::OnMouseLeave(WPARAM wparam, LPARAM lparam)
 	return 0;
 }
 
-void CMyTabCtrl::OnDestroy()
+void CZiTabCtrl::OnDestroy()
 {
 	__super::OnDestroy();
 
@@ -537,14 +530,14 @@ void CMyTabCtrl::OnDestroy()
 }
 
 
-BOOL CMyTabCtrl::PreTranslateMessage(MSG* pMsg)
+BOOL CZiTabCtrl::PreTranslateMessage(MSG* pMsg)
 {
 	// TODO: Add your specialized code here and/or call the base class
 
 	return __super::PreTranslateMessage(pMsg);
 }
 
-CTabCtrlItem * CMyTabCtrl::GetItemByIndex(int nIndex)
+CTabCtrlItem * CZiTabCtrl::GetItemByIndex(int nIndex)
 {
 	if (nIndex >= 0 && nIndex < (int)m_ItemArray.size()) 
 		return m_ItemArray[nIndex];
@@ -552,7 +545,7 @@ CTabCtrlItem * CMyTabCtrl::GetItemByIndex(int nIndex)
 		return NULL;
 }
 
-int CMyTabCtrl::HitTest(POINT pt)
+int CZiTabCtrl::HitTest(POINT pt)
 {
 	CTabCtrlItem *lpItem;
 	int nLeft = m_nLeft, nTop = m_nTop;

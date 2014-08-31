@@ -1,17 +1,17 @@
-// MyListIcon.cpp : implementation file
+// ZiListIcon.cpp : implementation file
 //
 
 #include "stdafx.h"
 #include "ZisyncService.h"
 #include "MemoryDC.h"
-#include "MyListIcon.h"
+#include "ZiListIcon.h"
 #include "RenderManager.h"
 
-// CMyListIcon
+// CZiListIcon
 
-IMPLEMENT_DYNAMIC(CMyListIcon, CListCtrl)
+IMPLEMENT_DYNAMIC(CZiListIcon, CListCtrl)
 
-CMyListIcon::CMyListIcon()
+CZiListIcon::CZiListIcon()
 {
 	m_xPadding = 5;
 	m_yPadding = 5;
@@ -21,12 +21,12 @@ CMyListIcon::CMyListIcon()
 	m_bResFromID = FALSE;
 }
 
-CMyListIcon::~CMyListIcon()
+CZiListIcon::~CZiListIcon()
 {
 }
 
 
-BEGIN_MESSAGE_MAP(CMyListIcon, CListCtrl)
+BEGIN_MESSAGE_MAP(CZiListIcon, CListCtrl)
 	ON_WM_DESTROY()
 	ON_WM_PAINT()
 	ON_WM_ERASEBKGND()
@@ -35,11 +35,9 @@ BEGIN_MESSAGE_MAP(CMyListIcon, CListCtrl)
 	ON_MESSAGE(WM_MOUSELEAVE, OnMouseLeave)
 END_MESSAGE_MAP()
 
+// CZiListIcon message handlers
 
-
-// CMyListIcon message handlers
-
-void CMyListIcon::PreSubclassWindow()
+void CZiListIcon::PreSubclassWindow()
 {
 	m_ImageList1.Create(55, 55,ILC_MASK|ILC_COLOR32, 0, 0);
 	m_ImageList1.Add(AfxGetApp()->LoadIcon(IDR_MAINFRAME));
@@ -48,7 +46,7 @@ void CMyListIcon::PreSubclassWindow()
 	__super::PreSubclassWindow();
 }
 
-void CMyListIcon::OnDestroy()
+void CZiListIcon::OnDestroy()
 {
 	__super::OnDestroy();
 
@@ -72,7 +70,7 @@ void CMyListIcon::OnDestroy()
 	RemoveScorll();
 }
 
-BOOL CMyListIcon::SetItemImage(int nItem, 
+BOOL CZiListIcon::SetItemImage(int nItem, 
 							   UINT nResBackID, 
 							   UINT nResIconNorID, 
 							   UINT nResIconSelID, 
@@ -129,7 +127,7 @@ BOOL CMyListIcon::SetItemImage(int nItem,
 	}
 }
 
-BOOL CMyListIcon::SetItemImage(int nItem, LPCTSTR lpBackImg, LPCTSTR lpIcon, LPCTSTR lpIconSel)
+BOOL CZiListIcon::SetItemImage(int nItem, LPCTSTR lpBackImg, LPCTSTR lpIcon, LPCTSTR lpIconSel)
 {
 	CItemArray::iterator iter = m_ItemImgArray.begin();
 	for (; iter != m_ItemImgArray.end(); iter++) {
@@ -171,7 +169,7 @@ BOOL CMyListIcon::SetItemImage(int nItem, LPCTSTR lpBackImg, LPCTSTR lpIcon, LPC
 }
 
 
-void CMyListIcon::OnPaint()
+void CZiListIcon::OnPaint()
 {
 	CPaintDC dc(this); 
 	
@@ -188,7 +186,7 @@ void CMyListIcon::OnPaint()
 	}
 }
 
-void CMyListIcon::DrawIconItem(CDC *pDC, CRect & rcItem, int nItem)
+void CZiListIcon::DrawIconItem(CDC *pDC, CRect & rcItem, int nItem)
 {
 	CItemArray::iterator iter = m_ItemImgArray.begin();
 	for(; iter != m_ItemImgArray.end(); iter++) {
@@ -253,7 +251,7 @@ void CMyListIcon::DrawIconItem(CDC *pDC, CRect & rcItem, int nItem)
 	}	
 }
 
-int CMyListIcon::GetItemLeftPadding()
+int CZiListIcon::GetItemLeftPadding()
 {	
 	int itemWidth = GetItemCountH() * (m_xPadding + m_ItemSize.cx) -m_xPadding;
 	CRect rcClient;
@@ -261,7 +259,7 @@ int CMyListIcon::GetItemLeftPadding()
 	return (rcClient.Width() - itemWidth)/2;
 }
 
-BOOL CMyListIcon::SetItemText(int nItem, CString strText)
+BOOL CZiListIcon::SetItemText(int nItem, CString strText)
 {
 	CItemArray::iterator iter = m_ItemImgArray.begin();
 	for (; iter != m_ItemImgArray.end(); iter++) {
@@ -275,14 +273,14 @@ BOOL CMyListIcon::SetItemText(int nItem, CString strText)
 }
 
 
-BOOL CMyListIcon::OnEraseBkgnd(CDC* pDC)
+BOOL CZiListIcon::OnEraseBkgnd(CDC* pDC)
 {
 	return TRUE;
 //	return __super::OnEraseBkgnd(pDC);
 }
 
 
-void CMyListIcon::OnLButtonDown(UINT nFlags, CPoint point)
+void CZiListIcon::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	int nIndex = HitTest(point);
 	if (nIndex != -1) {
@@ -292,7 +290,7 @@ void CMyListIcon::OnLButtonDown(UINT nFlags, CPoint point)
 	__super::OnLButtonDown(nFlags, point);
 }
 
-void CMyListIcon::SetItemSize(CSize size)
+void CZiListIcon::SetItemSize(CSize size)
 {
 	m_ItemSize = size;
 	CRect rcWorkAreas, rcClient;
@@ -304,7 +302,7 @@ void CMyListIcon::SetItemSize(CSize size)
 	rcWorkAreas.bottom = rcWorkAreas.top + ((int)m_ItemImgArray.size()/GetItemCountH() * (m_ItemSize.cy + m_yPadding) + m_ItemSize.cy);
 }
 
-int CMyListIcon::HitTest(POINT point)
+int CZiListIcon::HitTest(POINT point)
 {
 	for (int i = 0; i < (int)m_ItemImgArray.size(); i++) {
 		CRect rcItem;
@@ -333,7 +331,7 @@ int CMyListIcon::HitTest(POINT point)
 	}*/
 }
 
-BOOL CMyListIcon::GetChecked(int nItem)
+BOOL CZiListIcon::GetChecked(int nItem)
 {
 	if (m_ItemImgArray[nItem].bIsSelected == true) 
 		return TRUE;
@@ -342,27 +340,27 @@ BOOL CMyListIcon::GetChecked(int nItem)
 }
 
 
-void CMyListIcon::SetPadding(int cx, int cy)
+void CZiListIcon::SetPadding(int cx, int cy)
 {
 	m_xPadding = cx;
 	m_yPadding = cy;
 }
 
 
-int CMyListIcon::GetItemCountH()
+int CZiListIcon::GetItemCountH()
 {
 	CRect rcClient;
 	GetClientRect(&rcClient);
 	return ((rcClient.Width() - m_ItemSize.cx) / (m_ItemSize.cx + m_xPadding)) + 1;
 }
 
-int CMyListIcon::GetItemCount()
+int CZiListIcon::GetItemCount()
 {
 	return (int)m_ItemImgArray.size();
 }
 
 
-void CMyListIcon::OnMouseMove(UINT nFlags, CPoint point)
+void CZiListIcon::OnMouseMove(UINT nFlags, CPoint point)
 {
 	if (!m_bMouseTracking) {
 		TrackMouseLeave(GetSafeHwnd());
@@ -387,7 +385,7 @@ void CMyListIcon::OnMouseMove(UINT nFlags, CPoint point)
 	__super::OnMouseMove(nFlags, point);
 }
 
-LRESULT CMyListIcon::OnMouseLeave(WPARAM wparam, LPARAM lparam)
+LRESULT CZiListIcon::OnMouseLeave(WPARAM wparam, LPARAM lparam)
 {
 	m_bMouseTracking = FALSE;
 	int nIndex = -1;

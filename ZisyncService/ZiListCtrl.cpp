@@ -1,18 +1,17 @@
-// MyListCtrl.cpp : implementation file
+// ZiListCtrl.cpp : implementation file
 //
 
 #include "stdafx.h"
 #include "ZisyncService.h"
-#include "MyListCtrl.h"
+#include "ZiListCtrl.h"
 #include "MemoryDC.h"
 #include "RenderManager.h"
 
+// CZiListCtrl
 
-// CMyListCtrl
+IMPLEMENT_DYNAMIC(CZiListCtrl, CListCtrl)
 
-IMPLEMENT_DYNAMIC(CMyListCtrl, CListCtrl)
-
-CMyListCtrl::CMyListCtrl()
+CZiListCtrl::CZiListCtrl()
 {
 	m_nHeightItem = 0;
 	m_uActiveItem = -1;
@@ -29,12 +28,12 @@ CMyListCtrl::CMyListCtrl()
 	m_ToolTip.Create(this);
 }
 
-CMyListCtrl::~CMyListCtrl()
+CZiListCtrl::~CZiListCtrl()
 {
 }
 
 
-BEGIN_MESSAGE_MAP(CMyListCtrl, CListCtrl)
+BEGIN_MESSAGE_MAP(CZiListCtrl, CListCtrl)
 	ON_WM_DESTROY()
 	ON_WM_LBUTTONDOWN()
 	ON_WM_MOUSEMOVE()
@@ -43,14 +42,9 @@ BEGIN_MESSAGE_MAP(CMyListCtrl, CListCtrl)
 	ON_WM_MEASUREITEM_REFLECT()
 END_MESSAGE_MAP()
 
+// CZiListCtrl message handlers
 
-
-// CMyListCtrl message handlers
-
-
-
-
-int CMyListCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
+int CZiListCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (__super::OnCreate(lpCreateStruct) == -1)
 		return -1;
@@ -61,7 +55,7 @@ int CMyListCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 }
 
 
-void CMyListCtrl::OnDestroy()
+void CZiListCtrl::OnDestroy()
 {
 	__super::OnDestroy();
 
@@ -131,7 +125,7 @@ void CMyListCtrl::OnDestroy()
 }
 
 
-void CMyListCtrl::PreSubclassWindow()
+void CZiListCtrl::PreSubclassWindow()
 {
 	// TODO: Add your specialized code here and/or call the base class
 	__super::PreSubclassWindow();
@@ -140,7 +134,7 @@ void CMyListCtrl::PreSubclassWindow()
 }
 
 
-void CMyListCtrl::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
+void CZiListCtrl::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 {
 	CRect rcItem = lpDrawItemStruct->rcItem;
 	CDC *pDC = CDC::FromHandle(lpDrawItemStruct->hDC);
@@ -182,7 +176,7 @@ void CMyListCtrl::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 	return;
 }
 
-void CMyListCtrl::OnMouseMove(UINT nFlags, CPoint point)
+void CZiListCtrl::OnMouseMove(UINT nFlags, CPoint point)
 {
 	CRect rcItem;
 
@@ -249,7 +243,7 @@ void CMyListCtrl::OnMouseMove(UINT nFlags, CPoint point)
 	__super::OnMouseMove(nFlags, point);
 }
 
-BOOL CMyListCtrl::PreTranslateMessage(MSG* pMsg)
+BOOL CZiListCtrl::PreTranslateMessage(MSG* pMsg)
 {
 	if(m_ToolTip.GetSafeHwnd())
 	{
@@ -259,7 +253,7 @@ BOOL CMyListCtrl::PreTranslateMessage(MSG* pMsg)
 	return __super::PreTranslateMessage(pMsg);
 }
 
-BOOL CMyListCtrl::OnEraseBkgnd(CDC* pDC)
+BOOL CZiListCtrl::OnEraseBkgnd(CDC* pDC)
 {
 	// TODO: Add your message handler code here and/or call default
 	CRect rcClient;
@@ -271,7 +265,7 @@ BOOL CMyListCtrl::OnEraseBkgnd(CDC* pDC)
 	return TRUE;
 }
 
-void CMyListCtrl::OnLButtonDown(UINT nFlags, CPoint point)
+void CZiListCtrl::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	if (m_pCheckImg != NULL && !m_pCheckImg->IsNull()) {
 		CRect rcSubItem, rcIcon;
@@ -312,7 +306,7 @@ void CMyListCtrl::OnLButtonDown(UINT nFlags, CPoint point)
 	__super::OnLButtonDown(nFlags, point);
 }
 
-BOOL CMyListCtrl::SetHovenImage(UINT nResFromID, LPCTSTR lpszFileType, const LPRECT lprcNinePart)
+BOOL CZiListCtrl::SetHovenImage(UINT nResFromID, LPCTSTR lpszFileType, const LPRECT lprcNinePart)
 {
 	m_bBackHovFromID = TRUE;
 
@@ -328,7 +322,7 @@ BOOL CMyListCtrl::SetHovenImage(UINT nResFromID, LPCTSTR lpszFileType, const LPR
 	}
 }
 
-BOOL CMyListCtrl::SetHovenImage(LPCTSTR lpszFileName, const LPRECT lprcNinePart)
+BOOL CZiListCtrl::SetHovenImage(LPCTSTR lpszFileName, const LPRECT lprcNinePart)
 {
 	RenderEngine->RemoveImage(m_pHovenImg);
 
@@ -342,7 +336,7 @@ BOOL CMyListCtrl::SetHovenImage(LPCTSTR lpszFileName, const LPRECT lprcNinePart)
 	}
 }
 
-BOOL CMyListCtrl::SetSelectImage(UINT nResFromID, LPCTSTR lpszFileType, const LPRECT lprcNinePart) 
+BOOL CZiListCtrl::SetSelectImage(UINT nResFromID, LPCTSTR lpszFileType, const LPRECT lprcNinePart) 
 {
 	m_bBackSelFromID = TRUE;
 
@@ -358,7 +352,7 @@ BOOL CMyListCtrl::SetSelectImage(UINT nResFromID, LPCTSTR lpszFileType, const LP
 	}
 }
 
-BOOL CMyListCtrl::SetSelectImage(LPCTSTR lpszFileName, const LPRECT lprcNinePart)
+BOOL CZiListCtrl::SetSelectImage(LPCTSTR lpszFileName, const LPRECT lprcNinePart)
 {
 	RenderEngine->RemoveImage(m_pSelectImg);
 
@@ -372,7 +366,7 @@ BOOL CMyListCtrl::SetSelectImage(LPCTSTR lpszFileName, const LPRECT lprcNinePart
 	}
 }
 
-BOOL CMyListCtrl::SetCheckImage(LPCTSTR lpszCheckName,LPCTSTR lpszUnCheckName)
+BOOL CZiListCtrl::SetCheckImage(LPCTSTR lpszCheckName,LPCTSTR lpszUnCheckName)
 {
 	RenderEngine->RemoveImage(m_pCheckImg);
 	RenderEngine->RemoveImage(m_pUnCheckImg);
@@ -386,7 +380,7 @@ BOOL CMyListCtrl::SetCheckImage(LPCTSTR lpszCheckName,LPCTSTR lpszUnCheckName)
 		return TRUE;
 }
 
-BOOL CMyListCtrl::InsertImage(int nItem, int nSubItem, UINT nResNorID, UINT nResSelID, LPCTSTR lpszFileType)
+BOOL CZiListCtrl::InsertImage(int nItem, int nSubItem, UINT nResNorID, UINT nResSelID, LPCTSTR lpszFileType)
 {
 	m_bIconFromID = TRUE;
 	
@@ -453,7 +447,7 @@ BOOL CMyListCtrl::InsertImage(int nItem, int nSubItem, UINT nResNorID, UINT nRes
 	return FALSE;
 }
 
-BOOL CMyListCtrl::InsertImage(int nItem, int nSubItem, LPCTSTR lpszFileName, LPCTSTR lpszSelFileName)
+BOOL CZiListCtrl::InsertImage(int nItem, int nSubItem, LPCTSTR lpszFileName, LPCTSTR lpszSelFileName)
 {
 	CItemImgArray::iterator iter, iterEnd;
 	CItemImgArray* pItemArray;
@@ -519,7 +513,7 @@ BOOL CMyListCtrl::InsertImage(int nItem, int nSubItem, LPCTSTR lpszFileName, LPC
 	return FALSE;	
 }
 
-void CMyListCtrl::DrawReportItem(CDC * pDC, INT nItem, CRect & rcSubItem, INT nColumnIndex)
+void CZiListCtrl::DrawReportItem(CDC * pDC, INT nItem, CRect & rcSubItem, INT nColumnIndex)
 {
 //	TCHAR szString[256] = _T("");
 //	GetItemText(nItem, nColumnIndex, szString, sizeof(szString)/sizeof(TCHAR));
@@ -544,7 +538,7 @@ void CMyListCtrl::DrawReportItem(CDC * pDC, INT nItem, CRect & rcSubItem, INT nC
 		CItemImgArray::iterator iter = m_ItemImgArray.begin();
 		for (;iter != m_ItemImgArray.end(); ++iter) {
 			if (iter->nItem == nItem) {
-				CMyImage *pImage = iter->pImage;
+				CZiImage *pImage = iter->pImage;
 				
 				if (pImage != NULL && !pImage->IsNull()) {
 					pImage->DrawImage(pDC, rcSubItem.left+2,
@@ -558,7 +552,7 @@ void CMyListCtrl::DrawReportItem(CDC * pDC, INT nItem, CRect & rcSubItem, INT nC
 		CItemImgArray::iterator iter = m_ItemBtnArray.begin();
 		for (;iter != m_ItemBtnArray.end(); ++iter) {
 			if (iter->nItem == nItem) {
-				CMyImage *pImage;
+				CZiImage *pImage;
 				if (iter->bSelect) {
 					pImage = iter->pSelectImage;;
 				} else {
@@ -653,7 +647,7 @@ void CMyListCtrl::DrawReportItem(CDC * pDC, INT nItem, CRect & rcSubItem, INT nC
 		CItemImgArray::iterator iter = m_ItemInviteArray.begin();
 		for (;iter != m_ItemInviteArray.end(); ++iter) {
 			if (iter->nItem == nItem) {
-				CMyImage *pImage;
+				CZiImage *pImage;
 				if (iter->bSelect) {
 					pImage = iter->pSelectImage;;
 				} else {
@@ -672,7 +666,7 @@ void CMyListCtrl::DrawReportItem(CDC * pDC, INT nItem, CRect & rcSubItem, INT nC
 		CItemImgArray::iterator iter = m_ItemSetArray.begin();
 		for (;iter != m_ItemSetArray.end(); ++iter) {
 			if (iter->nItem == nItem) {
-				CMyImage *pImage;
+				CZiImage *pImage;
 				if (iter->bSelect) {
 					pImage = iter->pSelectImage;;
 				} else {
@@ -691,7 +685,7 @@ void CMyListCtrl::DrawReportItem(CDC * pDC, INT nItem, CRect & rcSubItem, INT nC
 	return;
 }
 
-void CMyListCtrl::SetItemHeight(int nHeight)
+void CZiListCtrl::SetItemHeight(int nHeight)
 {
 	m_nHeightItem = nHeight;
 
@@ -707,14 +701,14 @@ void CMyListCtrl::SetItemHeight(int nHeight)
 	SendMessage(WM_WINDOWPOSCHANGED, 0, LPARAM(&wp));
 }
 
-void CMyListCtrl::MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct)
+void CZiListCtrl::MeasureItem(LPMEASUREITEMSTRUCT lpMeasureItemStruct)
 {
 	if (m_nHeightItem > 0) {
 		lpMeasureItemStruct->itemHeight  = m_nHeightItem;
 	}
 }
 
-int CMyListCtrl::InsertItem(const LVITEM* pItem)
+int CZiListCtrl::InsertItem(const LVITEM* pItem)
 {
 	int nResult = CListCtrl::InsertItem(pItem);
 
@@ -723,7 +717,7 @@ int CMyListCtrl::InsertItem(const LVITEM* pItem)
 	return nResult;
 }
 
-int CMyListCtrl::InsertItem(int nItem, LPCTSTR lpszItem)
+int CZiListCtrl::InsertItem(int nItem, LPCTSTR lpszItem)
 {
 	int nResult = CListCtrl::InsertItem(nItem, lpszItem);
 
@@ -732,7 +726,7 @@ int CMyListCtrl::InsertItem(int nItem, LPCTSTR lpszItem)
 	return nResult;
 }
 
-int CMyListCtrl::InsertItem(int nItem, LPCTSTR lpszItem, int nImage)
+int CZiListCtrl::InsertItem(int nItem, LPCTSTR lpszItem, int nImage)
 {
 	int nResult = CListCtrl::InsertItem(nItem, lpszItem, nImage);
 
@@ -741,7 +735,7 @@ int CMyListCtrl::InsertItem(int nItem, LPCTSTR lpszItem, int nImage)
 	return nResult;
 }
 
-int CMyListCtrl::InsertItem(UINT nMask, int nItem, LPCTSTR lpszItem, UINT nState,UINT nStateMask, int nImage, LPARAM lParam)
+int CZiListCtrl::InsertItem(UINT nMask, int nItem, LPCTSTR lpszItem, UINT nState,UINT nStateMask, int nImage, LPARAM lParam)
 {
 	int nResult = CListCtrl::InsertItem(nMask, nItem, lpszItem, nState, nStateMask, nImage, lParam);
 
@@ -750,7 +744,7 @@ int CMyListCtrl::InsertItem(UINT nMask, int nItem, LPCTSTR lpszItem, UINT nState
 	return nResult;
 }
 
-DWORD CMyListCtrl::SetExtendedStyle(DWORD dwNewStyle)
+DWORD CZiListCtrl::SetExtendedStyle(DWORD dwNewStyle)
 {
 	if ( dwNewStyle & LVS_EX_CHECKBOXES )
 	{
@@ -761,7 +755,7 @@ DWORD CMyListCtrl::SetExtendedStyle(DWORD dwNewStyle)
 	return CListCtrl::SetExtendedStyle(dwNewStyle);
 }
 
-void CMyListCtrl::SetItemContent(int nItem, LPCTSTR lpszLeftTop, LPCTSTR lpszRightTop, LPCTSTR lpszLeftBottom, LPCTSTR lpszRightBtoom)
+void CZiListCtrl::SetItemContent(int nItem, LPCTSTR lpszLeftTop, LPCTSTR lpszRightTop, LPCTSTR lpszLeftBottom, LPCTSTR lpszRightBtoom)
 {
 	CItemContentArray::iterator it = m_ItemContent.find(nItem);
 	tagItemContent ItemContent;
@@ -779,7 +773,7 @@ void CMyListCtrl::SetItemContent(int nItem, LPCTSTR lpszLeftTop, LPCTSTR lpszRig
 	}
 }
 
-BOOL CMyListCtrl::GetItemContent(int nItem, tagItemContent& itemContent)
+BOOL CZiListCtrl::GetItemContent(int nItem, tagItemContent& itemContent)
 {
 	CItemContentArray::iterator it = m_ItemContent.find(nItem);
 
@@ -793,7 +787,7 @@ BOOL CMyListCtrl::GetItemContent(int nItem, tagItemContent& itemContent)
 	}
 }
 
-BOOL CMyListCtrl::HitTestRightTop(int nItem, POINT pt)
+BOOL CZiListCtrl::HitTestRightTop(int nItem, POINT pt)
 {
 	CRect rcSubItem, rcRightTop;
 	GetSubItemRect(nItem, 1, LVIR_BOUNDS, rcSubItem);
@@ -808,7 +802,7 @@ BOOL CMyListCtrl::HitTestRightTop(int nItem, POINT pt)
 		return FALSE;
 }
 
-void CMyListCtrl::SetRightTopColor(COLORREF colorNor,COLORREF colorHov)
+void CZiListCtrl::SetRightTopColor(COLORREF colorNor,COLORREF colorHov)
 {
 	m_colorRightTopHov = colorHov;
 	m_colorRightTopNor = colorNor;
@@ -816,7 +810,7 @@ void CMyListCtrl::SetRightTopColor(COLORREF colorNor,COLORREF colorHov)
 
 
 
-BEGIN_MESSAGE_MAP(CMyHeaderCtrl, CHeaderCtrl)
+BEGIN_MESSAGE_MAP(CZiHeaderCtrl, CHeaderCtrl)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_LBUTTONUP()
 	ON_WM_ERASEBKGND()
@@ -826,7 +820,7 @@ BEGIN_MESSAGE_MAP(CMyHeaderCtrl, CHeaderCtrl)
 END_MESSAGE_MAP()
 
 
-CMyHeaderCtrl::CMyHeaderCtrl()
+CZiHeaderCtrl::CZiHeaderCtrl()
 {
 	m_uLockCount = 0;
 	m_uItemHeight = 0;
@@ -835,12 +829,12 @@ CMyHeaderCtrl::CMyHeaderCtrl()
 	m_bPress = false;
 }
 
-CMyHeaderCtrl::~CMyHeaderCtrl()
+CZiHeaderCtrl::~CZiHeaderCtrl()
 {
 
 }
 
-void CMyHeaderCtrl::PreSubclassWindow()
+void CZiHeaderCtrl::PreSubclassWindow()
 {
 	// TODO: Add your specialized code here and/or call the base class
 
@@ -848,7 +842,7 @@ void CMyHeaderCtrl::PreSubclassWindow()
 }
 
 
-BOOL CMyHeaderCtrl::OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pLResult)
+BOOL CZiHeaderCtrl::OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pLResult)
 {
 	NMHEADER * pNMHearder=(NMHEADER*)lParam;
 
@@ -863,7 +857,7 @@ BOOL CMyHeaderCtrl::OnChildNotify(UINT message, WPARAM wParam, LPARAM lParam, LR
 
 	return CHeaderCtrl::OnChildNotify(message, wParam, lParam, pLResult);
 }
-void CMyHeaderCtrl::OnPaint()
+void CZiHeaderCtrl::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
 	CRect rcRect;
@@ -908,7 +902,7 @@ void CMyHeaderCtrl::OnPaint()
 
 }
 
-void CMyHeaderCtrl::OnLButtonDown(UINT nFlags, CPoint point)
+void CZiHeaderCtrl::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	CRect rcItem;
 
@@ -930,7 +924,7 @@ void CMyHeaderCtrl::OnLButtonDown(UINT nFlags, CPoint point)
 }
 
 
-void CMyHeaderCtrl::OnLButtonUp(UINT nFlags, CPoint point)
+void CZiHeaderCtrl::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	m_bPress = false;
 
@@ -940,12 +934,12 @@ void CMyHeaderCtrl::OnLButtonUp(UINT nFlags, CPoint point)
 }
 
 
-BOOL CMyHeaderCtrl::OnEraseBkgnd(CDC* pDC)
+BOOL CZiHeaderCtrl::OnEraseBkgnd(CDC* pDC)
 {
 	return	TRUE;
 }
 
-BOOL CMyHeaderCtrl::SetBackImage(LPCTSTR lpNormal, CONST LPRECT lprcNinePart/*=NULL*/)
+BOOL CZiHeaderCtrl::SetBackImage(LPCTSTR lpNormal, CONST LPRECT lprcNinePart/*=NULL*/)
 {
 	RenderEngine->RemoveImage(m_pBackImg);
 
@@ -960,7 +954,7 @@ BOOL CMyHeaderCtrl::SetBackImage(LPCTSTR lpNormal, CONST LPRECT lprcNinePart/*=N
 	}
 }
 
-BOOL CMyHeaderCtrl::SetPressImage(LPCTSTR lpNormal, CONST LPRECT lprcNinePart/*=NULL*/)
+BOOL CZiHeaderCtrl::SetPressImage(LPCTSTR lpNormal, CONST LPRECT lprcNinePart/*=NULL*/)
 {
 	RenderEngine->RemoveImage(m_pPressImg);
 
@@ -975,7 +969,7 @@ BOOL CMyHeaderCtrl::SetPressImage(LPCTSTR lpNormal, CONST LPRECT lprcNinePart/*=
 	}
 }
 
-BOOL CMyHeaderCtrl::SetGridImage(LPCTSTR lpNormal)
+BOOL CZiHeaderCtrl::SetGridImage(LPCTSTR lpNormal)
 {
 	RenderEngine->RemoveImage(m_pGridImg);
 
@@ -989,18 +983,18 @@ BOOL CMyHeaderCtrl::SetGridImage(LPCTSTR lpNormal)
 	}
 }
 
-void CMyHeaderCtrl::SetLockCount(UINT uLockCount) {
+void CZiHeaderCtrl::SetLockCount(UINT uLockCount) {
 	m_uLockCount = uLockCount;
 }
 
-void CMyHeaderCtrl::SetItemHeight(UINT uItemHeight)
+void CZiHeaderCtrl::SetItemHeight(UINT uItemHeight)
 {
 	m_uItemHeight = uItemHeight;
 }
 
 
 
-void CMyHeaderCtrl::OnDestroy()
+void CZiHeaderCtrl::OnDestroy()
 {
 	__super::OnDestroy();
 
@@ -1009,7 +1003,7 @@ void CMyHeaderCtrl::OnDestroy()
 	RenderEngine->RemoveImage(m_pGridImg);
 }
 
-LRESULT CMyHeaderCtrl::OnLayout( WPARAM wParam, LPARAM lParam )
+LRESULT CZiHeaderCtrl::OnLayout( WPARAM wParam, LPARAM lParam )
 {
 	LRESULT lResult = CHeaderCtrl::DefWindowProc(HDM_LAYOUT, 0, lParam); 
 	HD_LAYOUT &hdl = *( HD_LAYOUT * ) lParam; 

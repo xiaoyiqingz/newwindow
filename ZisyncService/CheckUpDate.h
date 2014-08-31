@@ -1,6 +1,6 @@
 #pragma once
 #include "ZiDialog.h"
-#include "MyImage.h"
+#include "ZiImage.h"
 #include "ZiButton.h"
 #include "afxwin.h"
 // CCheckUpDate dialog
@@ -9,12 +9,12 @@ class CCheckUpDate : public CZiDialog
 {
 	DECLARE_DYNAMIC(CCheckUpDate)
 public:
-	CMyImage		m_ImageBack;
+	CZiImage		m_ImageBack;
 	CZiButton		m_btClose;
 	CZiButton		m_btCancle;
 	CZiButton		m_btUpdate;
-	CMyImage		m_ImageWaiting;
-	CMyImage		m_ImageLogo;
+	CZiImage		m_ImageWaiting;
+	CZiImage		m_ImageLogo;
 	
 	CStatic			m_etChecked;
 	CStatic			m_etOldVer;

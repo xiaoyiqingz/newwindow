@@ -1,4 +1,3 @@
-
 // ZisyncServiceDlg.cpp : implementation file
 //
 
@@ -15,8 +14,8 @@
 #endif
 
 #define IDC_MIN		WM_USER+0x014
-// CZisyncServiceDlg dialog
 
+// CZisyncServiceDlg dialog
 
 CZisyncServiceDlg::CZisyncServiceDlg(CWnd* pParent /*=NULL*/)
 	: CZiDialog(CZisyncServiceDlg::IDD, pParent)

@@ -1,11 +1,11 @@
 #pragma once
 #include "ZiDialog.h"
 #include "ZiButton.h"
-#include "MyTabCtrl.h"
+#include "ZiTabCtrl.h"
 #include "SetPage0.h"
 #include "SetPage1.h"
 #include "SetPage2.h"
-#include "MyImage.h"
+#include "ZiImage.h"
 #include "afxcmn.h"
 
 // CDialogSet dialog
@@ -15,9 +15,9 @@ class CDialogSet : public CZiDialog
 
 	DECLARE_DYNAMIC(CDialogSet)
 public:
-	CMyImage		m_ImageBack;
+	CZiImage		m_ImageBack;
 	CZiButton		m_btClose;
-	CMyTabCtrl		m_tabSet;
+	CZiTabCtrl		m_tabSet;
 
 	bool			m_bIsInit;
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "ZiDialog.h"
 #include "ZiButton.h"
-#include "MyImage.h"
+#include "ZiImage.h"
 // CAddPhoneHelp dialog
 
 class CAddPhoneHelp : public CZiDialog
@@ -10,7 +10,7 @@ class CAddPhoneHelp : public CZiDialog
 public:
 	CZiButton		m_btBack;
 
-	CMyImage		m_ImageBack;
+	CZiImage		m_ImageBack;
 public:
 	CAddPhoneHelp(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CAddPhoneHelp();

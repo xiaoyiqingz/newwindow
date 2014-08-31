@@ -1,9 +1,9 @@
 #include "StdAfx.h"
-#include "MyDialogBase.h"
+#include "ZiDialogBase.h"
 #include "RenderManager.h"
 #include "UI/SkinUI_ScrollBar.h"
 
-MyDialogBase::MyDialogBase(void)
+ZiDialogBase::ZiDialogBase(void)
 {
 	m_hParentDC = NULL;
 	m_bTransparent = FALSE;
@@ -17,12 +17,12 @@ MyDialogBase::MyDialogBase(void)
 	m_Font = RenderEngine->GetDeaultFont();
 }
 
-MyDialogBase::~MyDialogBase(void)
+ZiDialogBase::~ZiDialogBase(void)
 {
 	m_bTransparent = FALSE;
 }
 
-void MyDialogBase::CalcCenterRect( RECT& rcDest, int cx, int cy, RECT& rcCenter )
+void ZiDialogBase::CalcCenterRect( RECT& rcDest, int cx, int cy, RECT& rcCenter )
 {
 	int x = ((rcDest.right-rcDest.left) - cx + 1) / 2;
 	int y = ((rcDest.bottom-rcDest.top) - cy + 1) / 2;
@@ -33,7 +33,7 @@ void MyDialogBase::CalcCenterRect( RECT& rcDest, int cx, int cy, RECT& rcCenter 
 	rcCenter.bottom = rcCenter.top+cy;
 }
 
-void MyDialogBase::DrawParentWndBg(HWND hWnd, HDC hDC )
+void ZiDialogBase::DrawParentWndBg(HWND hWnd, HDC hDC )
 {
 	if( hWnd == NULL ) return;
 	if ( !m_bTransparent ) return;
@@ -48,33 +48,33 @@ void MyDialogBase::DrawParentWndBg(HWND hWnd, HDC hDC )
 	::BitBlt(hDC, 0, 0, rcWindow.Width(), rcWindow.Height(), m_hParentDC, rcWindow.left, rcWindow.top, SRCCOPY);
 }
 
-void MyDialogBase::SetDefText( COLORREF colText )
+void ZiDialogBase::SetDefText( COLORREF colText )
 {
 	m_colDefText = colText;
 }
 
-void MyDialogBase::SetNormalText( COLORREF colText )
+void ZiDialogBase::SetNormalText( COLORREF colText )
 {
 	m_colNormalText = colText;
 }
 
-void MyDialogBase::SetDisableText( COLORREF colText )
+void ZiDialogBase::SetDisableText( COLORREF colText )
 {
 	m_colDisableText = colText;
 }
 
-void MyDialogBase::SetSelectText( COLORREF colText )
+void ZiDialogBase::SetSelectText( COLORREF colText )
 {
 	m_colSelectText = colText;
 }
 
-void MyDialogBase::SetFrameColor( COLORREF colFrame )
+void ZiDialogBase::SetFrameColor( COLORREF colFrame )
 {
 	m_colFrameNormal = colFrame;
 }
 
 
-BOOL MyDialogBase::SetScrollImage( CWnd * pOwn,LPCTSTR pszFileName )
+BOOL ZiDialogBase::SetScrollImage( CWnd * pOwn,LPCTSTR pszFileName )
 {
 	RenderEngine->RemoveImage(m_pImageScroll);
 	m_pImageScroll = RenderEngine->GetImage(pszFileName);
@@ -91,12 +91,12 @@ BOOL MyDialogBase::SetScrollImage( CWnd * pOwn,LPCTSTR pszFileName )
 	return TRUE;
 }
 
-void MyDialogBase::RemoveScorll()
+void ZiDialogBase::RemoveScorll()
 {
 	RenderEngine->RemoveImage(m_pImageScroll);
 }
 
-BOOL MyDialogBase::TrackMouseLeave( HWND hWnd )
+BOOL ZiDialogBase::TrackMouseLeave( HWND hWnd )
 {
 	TRACKMOUSEEVENT tme = { 0 };
 	tme.cbSize = sizeof(tme);
@@ -106,22 +106,22 @@ BOOL MyDialogBase::TrackMouseLeave( HWND hWnd )
 	return _TrackMouseEvent(&tme);
 }
 
-void MyDialogBase::SetCtrlFont( HFONT hFont )
+void ZiDialogBase::SetCtrlFont( HFONT hFont )
 {
 	m_Font = hFont;
 }
 
-HFONT MyDialogBase::GetCtrlFont()
+HFONT ZiDialogBase::GetCtrlFont()
 {
 	return m_Font;
 }
 
-void MyDialogBase::SetBackColor( COLORREF colBack )
+void ZiDialogBase::SetBackColor( COLORREF colBack )
 {
 	m_colBack = colBack;
 }
 
-void MyDialogBase::SetUnTransparent()
+void ZiDialogBase::SetUnTransparent()
 {
 	m_bTransparent  = false;
 }

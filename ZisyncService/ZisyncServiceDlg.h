@@ -1,4 +1,3 @@
-
 // ZisyncServiceDlg.h : header file
 //
 
@@ -7,15 +6,16 @@
 #include "MyButton.h"
 #include "MyListBox.h"
 #include "ZiButton.h"
-#include "MyListCtrl.h"
-#include "MyEdit.h"
-#include "MyTabCtrl.h"
+#include "ZiListCtrl.h"
+#include "ZiTabCtrl.h"
 #include "Page0.h"
 #include "Page1.h"
 #include "Page2.h"
 #include "afxwin.h"
 #include "afxcmn.h"
+
 // CZisyncServiceDlg dialog
+
 class CZisyncServiceDlg : public CZiDialog
 {
 // Construction
@@ -25,8 +25,8 @@ protected:
 	CZiButton		m_btSet;
 	CZiButton		m_btRight;
 
-	CMyListCtrl		m_list1;
-	CMyTabCtrl		m_Tab;
+	CZiListCtrl		m_list1;
+	CZiTabCtrl		m_Tab;
 
 	CZiButton		m_btClose;
 	CZiButton		m_btMin;

@@ -1,6 +1,6 @@
 #pragma once
 #include "ZiDialog.h"
-#include "MyListIcon.h"
+#include "ZiListIcon.h"
 #include "afxcmn.h"
 
 // CAddWin dialog
@@ -9,7 +9,7 @@ class CAddWin : public CZiDialog
 {
 	DECLARE_DYNAMIC(CAddWin)
 public:
-	CMyListIcon		m_ListDevice;
+	CZiListIcon		m_ListDevice;
 
 public:
 	CAddWin(CWnd* pParent = NULL);   // standard constructor

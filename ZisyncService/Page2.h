@@ -1,6 +1,6 @@
 #pragma once
 #include "ZiDialog.h"
-#include "MyListCtrl.h"
+#include "ZiListCtrl.h"
 #include "afxcmn.h"
 
 // CPage2 dialog
@@ -9,7 +9,7 @@ class CPage2 : public CZiDialog
 {
 	DECLARE_DYNAMIC(CPage2)
 public:
-	CMyListCtrl		m_list1;
+	CZiListCtrl		m_list1;
 
 public:
 	CPage2(CWnd* pParent = NULL);   // standard constructor

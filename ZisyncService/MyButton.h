@@ -1,5 +1,5 @@
 #pragma once
-#include "MyImage.h"
+#include "ZiImage.h"
 #include "MyImageEx.h"
 // CMyButton
 

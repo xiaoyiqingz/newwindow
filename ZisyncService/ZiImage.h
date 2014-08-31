@@ -1,6 +1,6 @@
 #pragma once
 
-class CMyImage
+class CZiImage
 {
 public:
 	Bitmap *			m_pImage;                       //图片对象
@@ -17,8 +17,8 @@ public:
 	HINSTANCE			m_hInst;
 */
 public:
-	CMyImage();
-	~CMyImage();
+	CZiImage();
+	~CZiImage();
 
 	//是否加载
 	bool IsNull();

@@ -1,4 +1,3 @@
-
 // ZisyncService.h : main header file for the PROJECT_NAME application
 //
 
@@ -14,6 +13,7 @@
 #include <vector>
 
 using namespace std;
+
 // CZisyncServiceApp:
 // See ZisyncService.cpp for the implementation of this class
 //

@@ -325,13 +325,13 @@ void CRenderManager::SetDefaultFont( LPCTSTR pStrFontName, int nSize, bool bBold
 }
 
 //ªÒ»°Õº∆¨
-CMyImage * CRenderManager::GetImage( LPCTSTR lpszFileName,LPCTSTR lpszResType/*=NULL*/ )
+CZiImage * CRenderManager::GetImage( LPCTSTR lpszFileName,LPCTSTR lpszResType/*=NULL*/ )
 {
 	map<LPCTSTR,tagImageInfo*>::iterator iter;
 	pair<std::map<LPCTSTR, tagImageInfo *>::iterator, bool> pairInsert;
 	
 	tagImageInfo * pImageInfo = NULL;
-	CMyImage * pImage=NULL;
+	CZiImage * pImage=NULL;
 
 	if (NULL == lpszFileName || NULL == *lpszFileName)
 		return NULL;
@@ -353,7 +353,7 @@ CMyImage * CRenderManager::GetImage( LPCTSTR lpszFileName,LPCTSTR lpszResType/*=
 	else
 	{
 		pImageInfo = new tagImageInfo;
-		pImage = new CMyImage;
+		pImage = new CZiImage;
 		if (NULL == pImageInfo || NULL == pImage)
 		{
 			SafeDelete(pImageInfo);
@@ -408,13 +408,13 @@ CMyImage * CRenderManager::GetImage( LPCTSTR lpszFileName,LPCTSTR lpszResType/*=
 	}
 }
 
-CMyImage * CRenderManager::GetImage(UINT nID, LPCTSTR lpszResType/*=NULL*/)
+CZiImage * CRenderManager::GetImage(UINT nID, LPCTSTR lpszResType/*=NULL*/)
 {
 	map<int, tagImageInfo*>::iterator iter;
 	pair<std::map<int, tagImageInfo*>::iterator, bool>pairInsert;
 
 	tagImageInfo  *pImageInfo = NULL;
-	CMyImage	*pImage = NULL;
+	CZiImage	*pImage = NULL;
 	if (nID < 0) return NULL;
 	iter = m_ArrayImageId.find(nID);
 	if (iter != m_ArrayImageId.end()) 
@@ -431,7 +431,7 @@ CMyImage * CRenderManager::GetImage(UINT nID, LPCTSTR lpszResType/*=NULL*/)
 	else 
 	{
 		pImageInfo = new tagImageInfo;
-		pImage = new CMyImage;
+		pImage = new CZiImage;
 		if (pImageInfo == NULL || pImage == NULL) {
 			SafeDelete(pImageInfo);
 			SafeDelete(pImage);
@@ -466,7 +466,7 @@ CMyImage * CRenderManager::GetImage(UINT nID, LPCTSTR lpszResType/*=NULL*/)
 
 
 //…æ≥˝Õº∆¨
-void CRenderManager::RemoveImage( CMyImage *&pImage, BOOL bResFromID)
+void CRenderManager::RemoveImage( CZiImage *&pImage, BOOL bResFromID)
 {
 	if (NULL == pImage) return;
 

@@ -1,6 +1,6 @@
 #pragma once
-#include "MyImage.h"
-#include "MyDialogBase.h"
+#include "ZiImage.h"
+#include "ZiDialogBase.h"
 
 enum BUTTON_TYPE 
 {
@@ -15,14 +15,14 @@ enum BUTTON_TYPE
 
 // CZiButton
 
-class CZiButton : public CButton,public MyDialogBase
+class CZiButton : public CButton,public ZiDialogBase
 {
 protected:
 	CImage			m_pBackImg;
-	CMyImage	    * m_pBackImgN, * m_pBackImgH, * m_pBackImgD, * m_pBackImgF;
-	CMyImage		*m_pCheckImgH, *m_pCheckImgN, *m_pCheckImgTichH, *m_pCheckImgTickN; 
-	CMyImage		*m_pIconImg;
-	CMyImage		*m_pMenuImg;
+	CZiImage	    * m_pBackImgN, * m_pBackImgH, * m_pBackImgD, * m_pBackImgF;
+	CZiImage		*m_pCheckImgH, *m_pCheckImgN, *m_pCheckImgTichH, *m_pCheckImgTickN; 
+	CZiImage		*m_pIconImg;
+	CZiImage		*m_pMenuImg;
 
 	BOOL			m_bPress;
 	BOOL			m_bHover;

@@ -1,8 +1,9 @@
 #pragma once
-#include "MyDialogBase.h"
-#include "MyImage.h"
+#include "ZiDialogBase.h"
+#include "ZiImage.h"
 
-// CMyTabCtrl
+// CZiTabCtrl
+
 enum TEXT_POS
 {
 	TEXT_RIGHT,
@@ -23,20 +24,20 @@ public:
 	int			m_nPadding;
 	BOOL		m_bIconFromID;
 
-	CMyImage	*m_lpBgImgN, *m_lpBgImgH, *m_lpBgImgD;
-	CMyImage	*m_lpIconImg, *m_lpSelIconImg;
+	CZiImage	*m_lpBgImgN, *m_lpBgImgH, *m_lpBgImgD;
+	CZiImage	*m_lpIconImg, *m_lpSelIconImg;
 };
 
 typedef vector<CTabCtrlItem *>			CTabCtrlItemArray;
 
 
-class CMyTabCtrl : public CTabCtrl, public MyDialogBase
+class CZiTabCtrl : public CTabCtrl, public ZiDialogBase
 {
-	DECLARE_DYNAMIC(CMyTabCtrl)
+	DECLARE_DYNAMIC(CZiTabCtrl)
 public:
 	CTabCtrlItemArray	m_ItemArray;
-	CMyImage	*m_pImgBack;
-	CMyImage	*m_pItemImgNor, *m_pItemImgHov, * m_pItemImgSel;
+	CZiImage	*m_pImgBack;
+	CZiImage	*m_pItemImgNor, *m_pItemImgHov, * m_pItemImgSel;
 	CRect		m_rcTabRegion;
 
 	BOOL		m_bBackFromID;
@@ -48,8 +49,8 @@ public:
 	int			m_nLeft, m_nTop;
 
 public:
-	CMyTabCtrl();
-	virtual ~CMyTabCtrl();
+	CZiTabCtrl();
+	virtual ~CZiTabCtrl();
 
 public:
 	BOOL    SetBackImage(UINT nResFromID, LPCTSTR lpszFileType=NULL, CONST LPRECT lpNinePart=NULL);

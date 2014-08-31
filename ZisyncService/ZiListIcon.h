@@ -1,23 +1,24 @@
 #pragma once
-#include "MyImage.h"
-#include "MyDialogBase.h"
+#include "ZiImage.h"
+#include "ZiDialogBase.h"
 
-// CMyListIcon
+// CZiListIcon
+
 struct tagItem 
 {
 	int			nItem;
 	bool		bIsSelected;
 	bool		bIsHoveing;
 	CString		strText;
-	CMyImage	*m_pImgBack;
-	CMyImage	*m_pImgIcon;
-	CMyImage	*m_pImgIconSel;
+	CZiImage	*m_pImgBack;
+	CZiImage	*m_pImgIcon;
+	CZiImage	*m_pImgIconSel;
 };
 typedef vector<tagItem> CItemArray;
 
-class CMyListIcon : public CListCtrl, public MyDialogBase
+class CZiListIcon : public CListCtrl, public ZiDialogBase
 {
-	DECLARE_DYNAMIC(CMyListIcon)
+	DECLARE_DYNAMIC(CZiListIcon)
 public:
 	CItemArray		m_ItemImgArray;
 	CImageList		m_ImageList1;
@@ -28,8 +29,8 @@ public:
 	BOOL			m_bResFromID;
 
 public:
-	CMyListIcon();
-	virtual ~CMyListIcon();
+	CZiListIcon();
+	virtual ~CZiListIcon();
 
 protected:
 	DECLARE_MESSAGE_MAP()

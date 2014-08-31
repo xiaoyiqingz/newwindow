@@ -1,17 +1,17 @@
-// MyEdit.cpp : implementation file
+// ZiEdit.cpp : implementation file
 //
 
 #include "stdafx.h"
 #include "ZisyncService.h"
-#include "MyEdit.h"
+#include "ZiEdit.h"
 #include "MemoryDC.h"
 #include "RenderManager.h"
 
-// CMyEdit
+// CZiEdit
 
-IMPLEMENT_DYNAMIC(CMyEdit, CEdit)
+IMPLEMENT_DYNAMIC(CZiEdit, CEdit)
 
-CMyEdit::CMyEdit()
+CZiEdit::CZiEdit()
 {
 	m_pBackImgN = NULL;
 	m_pBackImgH = NULL;
@@ -27,12 +27,12 @@ CMyEdit::CMyEdit()
 	m_ptClient.SetPoint(0,0);
 }
 
-CMyEdit::~CMyEdit()
+CZiEdit::~CZiEdit()
 {
 }
 
 
-BEGIN_MESSAGE_MAP(CMyEdit, CEdit)
+BEGIN_MESSAGE_MAP(CZiEdit, CEdit)
 	ON_WM_NCCALCSIZE()
 	ON_WM_NCPAINT()
 	ON_WM_ERASEBKGND()
@@ -49,8 +49,9 @@ BEGIN_MESSAGE_MAP(CMyEdit, CEdit)
 	ON_WM_NCLBUTTONUP()
 END_MESSAGE_MAP()
 
-// CMyEdit message handlers
-BOOL CMyEdit::Create(DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID)
+// CZiEdit message handlers
+
+BOOL CZiEdit::Create(DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID)
 {
 	return 	CEdit::CreateEx(
 		WS_EX_LEFT|WS_EX_LTRREADING|WS_EX_RIGHTSCROLLBAR|WS_EX_NOPARENTNOTIFY|WS_EX_CLIENTEDGE,
@@ -63,15 +64,14 @@ BOOL CMyEdit::Create(DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID
 }
 
 
-LRESULT CMyEdit::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CZiEdit::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	// TODO: Add your specialized code here and/or call the base class
-
 	return CEdit::DefWindowProc(message, wParam, lParam);
 }
 
 
-void CMyEdit::OnNcCalcSize(BOOL bCalcValidRects, NCCALCSIZE_PARAMS* lpncsp)
+void CZiEdit::OnNcCalcSize(BOOL bCalcValidRects, NCCALCSIZE_PARAMS* lpncsp)
 {
 	if (NULL != m_pIconImg && !m_pIconImg->IsNull())
 	{
@@ -88,7 +88,7 @@ void CMyEdit::OnNcCalcSize(BOOL bCalcValidRects, NCCALCSIZE_PARAMS* lpncsp)
 }
 
 
-void CMyEdit::OnNcPaint()
+void CZiEdit::OnNcPaint()
 {
 	CRect rcWindow;
 	GetWindowRect(&rcWindow);
@@ -144,14 +144,14 @@ void CMyEdit::OnNcPaint()
 }
 
 
-BOOL CMyEdit::OnEraseBkgnd(CDC* pDC)
+BOOL CZiEdit::OnEraseBkgnd(CDC* pDC)
 {
 	return TRUE;
 //	return CEdit::OnEraseBkgnd(pDC);
 }
 
 
-void CMyEdit::OnLButtonDown(UINT nFlags, CPoint point)
+void CZiEdit::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	CRect rcIcon;
 	CPoint pt;
@@ -165,7 +165,7 @@ void CMyEdit::OnLButtonDown(UINT nFlags, CPoint point)
 }
 
 
-void CMyEdit::OnLButtonUp(UINT nFlags, CPoint point)
+void CZiEdit::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	CRect rcIcon;
 	CPoint pt;
@@ -186,7 +186,7 @@ void CMyEdit::OnLButtonUp(UINT nFlags, CPoint point)
 }
 
 
-void CMyEdit::OnMouseMove(UINT nFlags, CPoint point)
+void CZiEdit::OnMouseMove(UINT nFlags, CPoint point)
 {
 	if (!m_bMouseTracking)
 	{
@@ -201,7 +201,7 @@ void CMyEdit::OnMouseMove(UINT nFlags, CPoint point)
 }
 
 
-LRESULT CMyEdit::OnMouseLeave(WPARAM wparam, LPARAM lparam)
+LRESULT CZiEdit::OnMouseLeave(WPARAM wparam, LPARAM lparam)
 {
 	m_bMouseTracking = FALSE;
 	m_bHover = FALSE;
@@ -211,7 +211,7 @@ LRESULT CMyEdit::OnMouseLeave(WPARAM wparam, LPARAM lparam)
 }
 
 
-void CMyEdit::OnDestroy()
+void CZiEdit::OnDestroy()
 {
 	CEdit::OnDestroy();
 
@@ -225,7 +225,7 @@ void CMyEdit::OnDestroy()
 }
 
 
-void CMyEdit::OnSetFocus(CWnd* pOldWnd)
+void CZiEdit::OnSetFocus(CWnd* pOldWnd)
 {
 	CEdit::OnSetFocus(pOldWnd);
 
@@ -241,7 +241,7 @@ void CMyEdit::OnSetFocus(CWnd* pOldWnd)
 }
 
 
-void CMyEdit::OnKillFocus(CWnd* pNewWnd)
+void CZiEdit::OnKillFocus(CWnd* pNewWnd)
 {
 	CEdit::OnKillFocus(pNewWnd);
 
@@ -258,7 +258,7 @@ void CMyEdit::OnKillFocus(CWnd* pNewWnd)
 }
 
 
-BOOL CMyEdit::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
+BOOL CZiEdit::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 {
 	CRect rcIcon;
 	CPoint pt;
@@ -279,7 +279,7 @@ BOOL CMyEdit::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 }
 
 
-void CMyEdit::GetIconRect(RECT &rcIcon)
+void CZiEdit::GetIconRect(RECT &rcIcon)
 {
 	CRect rcWindow;
 	GetWindowRect(&rcWindow);
@@ -289,7 +289,7 @@ void CMyEdit::GetIconRect(RECT &rcIcon)
 	rcIcon.left = rcIcon.right - m_nIconWidth;
 }
 
-HBRUSH CMyEdit::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+HBRUSH CZiEdit::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
 	if (m_bIsDefText)
 		pDC->SetTextColor(m_colDefText);
@@ -300,7 +300,7 @@ HBRUSH CMyEdit::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 }
 
 
-LRESULT CMyEdit::OnNcHitTest(CPoint point)
+LRESULT CZiEdit::OnNcHitTest(CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
 	CRect rcIcon;
@@ -314,7 +314,7 @@ LRESULT CMyEdit::OnNcHitTest(CPoint point)
 }
 
 
-void CMyEdit::OnNcLButtonUp(UINT nHitTest, CPoint point)
+void CZiEdit::OnNcLButtonUp(UINT nHitTest, CPoint point)
 {
 	CWnd *pWnd = GetParent();
 
@@ -332,7 +332,7 @@ void CMyEdit::OnNcLButtonUp(UINT nHitTest, CPoint point)
 	CEdit::OnNcLButtonUp(nHitTest, point);
 }
 
-BOOL CMyEdit::SetBackNormalImg(LPCTSTR lpszFileName, CONST LPRECT lpNinePart /*= NULL*/)
+BOOL CZiEdit::SetBackNormalImg(LPCTSTR lpszFileName, CONST LPRECT lpNinePart /*= NULL*/)
 {
 	RenderEngine->RemoveImage(m_pBackImgN);
 	m_pBackImgN = RenderEngine->GetImage(lpszFileName);
@@ -343,7 +343,7 @@ BOOL CMyEdit::SetBackNormalImg(LPCTSTR lpszFileName, CONST LPRECT lpNinePart /*=
 	return (m_pBackImgN != NULL) ? TRUE : FALSE;
 }
 
-BOOL CMyEdit::SetBackHotImg(LPCTSTR lpszFileName, CONST LPRECT lpNinePart /*= NULL*/)
+BOOL CZiEdit::SetBackHotImg(LPCTSTR lpszFileName, CONST LPRECT lpNinePart /*= NULL*/)
 {
 	RenderEngine->RemoveImage(m_pBackImgH);
 	m_pBackImgH = RenderEngine->GetImage(lpszFileName);
@@ -354,7 +354,7 @@ BOOL CMyEdit::SetBackHotImg(LPCTSTR lpszFileName, CONST LPRECT lpNinePart /*= NU
 	return (m_pBackImgH != NULL) ? TRUE : FALSE;
 }
 
-BOOL CMyEdit::SetIconImg(LPCTSTR lpszFileName, bool bHandCursor /*= false*/)
+BOOL CZiEdit::SetIconImg(LPCTSTR lpszFileName, bool bHandCursor /*= false*/)
 {
 	RenderEngine->RemoveImage(m_pIconImg);
 	m_pIconImg = RenderEngine->GetImage(lpszFileName);
@@ -367,12 +367,12 @@ BOOL CMyEdit::SetIconImg(LPCTSTR lpszFileName, bool bHandCursor /*= false*/)
 	return (m_pIconImg != NULL) ? TRUE : FALSE;
 }
 
-void CMyEdit::SetDefaultText(LPCTSTR lpszText)
+void CZiEdit::SetDefaultText(LPCTSTR lpszText)
 {
 	m_strDefText = lpszText;
 }
 
-void CMyEdit::SetDefaultTextMode(BOOL bIsDefText)
+void CZiEdit::SetDefaultTextMode(BOOL bIsDefText)
 {
 	if (bIsDefText == m_bIsDefText)
 		return;
