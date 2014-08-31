@@ -193,8 +193,8 @@
     <ClInclude Include="ZisyncService.h" />
     <ClInclude Include="ZisyncServiceDlg.h" />
     <ClInclude Include="MyButton.h" />
-    <ClInclude Include="MyButtonEx.h" />
-    <ClInclude Include="MyDialog.h" />
+    <ClInclude Include="ZiButton.h" />
+    <ClInclude Include="ZiDialog.h" />
     <ClInclude Include="MyEdit.h" />
     <ClInclude Include="MyImage.h" />
     <ClInclude Include="MyImageEx.h" />
@@ -234,8 +234,8 @@
     <ClCompile Include="ZisyncService.cpp" />
     <ClCompile Include="ZisyncServiceDlg.cpp" />
     <ClCompile Include="MyButton.cpp" />
-    <ClCompile Include="MyButtonEx.cpp" />
-    <ClCompile Include="MyDialog.cpp" />
+    <ClCompile Include="ZiButton.cpp" />
+    <ClCompile Include="ZiDialog.cpp" />
     <ClCompile Include="MyEdit.cpp" />
     <ClCompile Include="MyImage.cpp" />
     <ClCompile Include="MyImageEx.cpp" />

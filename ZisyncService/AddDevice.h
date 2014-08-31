@@ -1,8 +1,8 @@
 #pragma once
-#include "MyDialog.h"
+#include "ZiDialog.h"
 #include "MyImage.h"
 #include "MyTabCtrl.h"
-#include "MyButtonEx.h"
+#include "ZiButton.h"
 #include "AddWin.h"
 #include "AddPhone.h"
 #include "AddMail.h"
@@ -12,15 +12,15 @@
 
 // CAddDevice dialog
 
-class CAddDevice : public CMyDialog
+class CAddDevice : public CZiDialog
 {
 	DECLARE_DYNAMIC(CAddDevice)
 public:
 	CMyImage		m_ImageBack;
-	CMyButtonEx		m_btClose;
+	CZiButton		m_btClose;
 	CMyTabCtrl		m_TabAdd;
-	CMyButtonEx		m_btReFind;
-	CMyButtonEx		m_btSelected;
+	CZiButton		m_btReFind;
+	CZiButton		m_btSelected;
 
 	bool			m_bIsInit;
 

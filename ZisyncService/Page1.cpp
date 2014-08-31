@@ -9,10 +9,10 @@
 
 // CPage1 dialog
 
-IMPLEMENT_DYNAMIC(CPage1, CMyDialog)
+IMPLEMENT_DYNAMIC(CPage1, CZiDialog)
 
 CPage1::CPage1(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CPage1::IDD, pParent)
+	: CZiDialog(CPage1::IDD, pParent)
 {
 
 }
@@ -29,7 +29,7 @@ void CPage1::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CPage1, CMyDialog)
+BEGIN_MESSAGE_MAP(CPage1, CZiDialog)
 END_MESSAGE_MAP()
 
 
@@ -37,7 +37,7 @@ END_MESSAGE_MAP()
 
 BOOL CPage1::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 
 	OnInitListCtrl();
 

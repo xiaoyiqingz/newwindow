@@ -1,16 +1,16 @@
 #pragma once
-#include "MyDialog.h"
-#include "MyButtonEx.h"
+#include "ZiDialog.h"
+#include "ZiButton.h"
 #include "afxwin.h"
 
 // CSetPage0 dialog
 
-class CSetPage0 : public CMyDialog
+class CSetPage0 : public CZiDialog
 {
 	DECLARE_DYNAMIC(CSetPage0)
 public:
-	CMyButtonEx		m_btAccount;
-	CMyButtonEx		m_btName;
+	CZiButton		m_btAccount;
+	CZiButton		m_btName;
 public:
 	CSetPage0(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CSetPage0();

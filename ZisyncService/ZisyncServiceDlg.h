@@ -3,10 +3,10 @@
 //
 
 #pragma once
-#include "MyDialog.h"
+#include "ZiDialog.h"
 #include "MyButton.h"
 #include "MyListBox.h"
-#include "MyButtonEx.h"
+#include "ZiButton.h"
 #include "MyListCtrl.h"
 #include "MyEdit.h"
 #include "MyTabCtrl.h"
@@ -16,20 +16,20 @@
 #include "afxwin.h"
 #include "afxcmn.h"
 // CZisyncServiceDlg dialog
-class CZisyncServiceDlg : public CMyDialog
+class CZisyncServiceDlg : public CZiDialog
 {
 // Construction
 protected:
 	CMyListBox		m_ListZisyncService;
 
-	CMyButtonEx		m_btSet;
-	CMyButtonEx		m_btRight;
+	CZiButton		m_btSet;
+	CZiButton		m_btRight;
 
 	CMyListCtrl		m_list1;
 	CMyTabCtrl		m_Tab;
 
-	CMyButtonEx		m_btClose;
-	CMyButtonEx		m_btMin;
+	CZiButton		m_btClose;
+	CZiButton		m_btMin;
 	bool			m_bIsInit;
 public:
 	CPage0			m_page0;

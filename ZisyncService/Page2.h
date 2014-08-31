@@ -1,11 +1,11 @@
 #pragma once
-#include "MyDialog.h"
+#include "ZiDialog.h"
 #include "MyListCtrl.h"
 #include "afxcmn.h"
 
 // CPage2 dialog
 
-class CPage2 : public CMyDialog
+class CPage2 : public CZiDialog
 {
 	DECLARE_DYNAMIC(CPage2)
 public:

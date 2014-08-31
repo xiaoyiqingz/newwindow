@@ -1,17 +1,17 @@
 #pragma once
-#include "MyDialog.h"
+#include "ZiDialog.h"
 #include "ZiStatic.h"
-#include "MyButtonEx.h"
+#include "ZiButton.h"
 #include "afxwin.h"
 
 // CCreateSyncDIr dialog
 
-class CCreateSyncDIr : public CMyDialog
+class CCreateSyncDIr : public CZiDialog
 {
 	DECLARE_DYNAMIC(CCreateSyncDIr)
 public:
-	CMyButtonEx		m_btClose;
-	CMyButtonEx		m_btCreate;
+	CZiButton		m_btClose;
+	CZiButton		m_btCreate;
 
 	CZiStatic		m_gbArea;
 public:

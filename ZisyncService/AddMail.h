@@ -1,16 +1,16 @@
 #pragma once
-#include "MyDialog.h"
-#include "MyButtonEx.h"
+#include "ZiDialog.h"
+#include "ZiButton.h"
 #include "afxwin.h"
 
 // CAddMail dialog
 
-class CAddMail : public CMyDialog
+class CAddMail : public CZiDialog
 {
 	DECLARE_DYNAMIC(CAddMail)
 public:
-	CMyButtonEx		m_btFile;
-	CMyButtonEx		m_btMail;
+	CZiButton		m_btFile;
+	CZiButton		m_btMail;
 
 public:
 	CAddMail(CWnd* pParent = NULL);   // standard constructor

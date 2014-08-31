@@ -1,18 +1,18 @@
 #pragma once
-#include "MyDialog.h"
+#include "ZiDialog.h"
 #include "MyImage.h"
-#include "MyButtonEx.h"
+#include "ZiButton.h"
 #include "afxwin.h"
 // CCheckUpDate dialog
 
-class CCheckUpDate : public CMyDialog
+class CCheckUpDate : public CZiDialog
 {
 	DECLARE_DYNAMIC(CCheckUpDate)
 public:
 	CMyImage		m_ImageBack;
-	CMyButtonEx		m_btClose;
-	CMyButtonEx		m_btCancle;
-	CMyButtonEx		m_btUpdate;
+	CZiButton		m_btClose;
+	CZiButton		m_btCancle;
+	CZiButton		m_btUpdate;
 	CMyImage		m_ImageWaiting;
 	CMyImage		m_ImageLogo;
 	

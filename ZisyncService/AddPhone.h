@@ -1,17 +1,17 @@
 #pragma once
-#include "MyDialog.h"
+#include "ZiDialog.h"
 #include "MyImage.h"
-#include "MyButtonEx.h"
+#include "ZiButton.h"
 #include "afxwin.h"
 
 // CAddPhone dialog
 
-class CAddPhone : public CMyDialog
+class CAddPhone : public CZiDialog
 {
 	DECLARE_DYNAMIC(CAddPhone)
 public:
 	CMyImage		m_ImageCode;
-	CMyButtonEx		m_btHelp;
+	CZiButton		m_btHelp;
 
 public:
 	CAddPhone(CWnd* pParent = NULL);   // standard constructor

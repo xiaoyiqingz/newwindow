@@ -15,7 +15,7 @@
 IMPLEMENT_DYNAMIC(CPage0, CDialog)
 
 CPage0::CPage0(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CPage0::IDD, pParent)
+	: CZiDialog(CPage0::IDD, pParent)
 {
 
 }
@@ -26,13 +26,13 @@ CPage0::~CPage0()
 
 void CPage0::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST1, m_list1);
 	DDX_Control(pDX, IDC_BUTTON1, m_buttonadd);
 }
 
 
-BEGIN_MESSAGE_MAP(CPage0, CMyDialog)
+BEGIN_MESSAGE_MAP(CPage0, CZiDialog)
 	ON_BN_CLICKED(IDC_BUTTON1, &CPage0::OnBnClickedButton1)
 	ON_NOTIFY(NM_CLICK, IDC_LIST1, &CPage0::OnClickList1)
 END_MESSAGE_MAP()
@@ -42,7 +42,7 @@ END_MESSAGE_MAP()
 
 BOOL CPage0::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 
 	HDC hParentDC = GetBackDC(); 
 	m_buttonadd.SetBackImage(IDB_BT_ADD_NOR, IDB_BT_ADD_HOV, 

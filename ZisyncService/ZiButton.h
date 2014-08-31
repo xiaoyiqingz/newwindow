@@ -13,9 +13,9 @@ enum BUTTON_TYPE
 	BT_GIFBUTTON
 };
 
-// CMyButtonEx
+// CZiButton
 
-class CMyButtonEx : public CButton,public MyDialogBase
+class CZiButton : public CButton,public MyDialogBase
 {
 protected:
 	CImage			m_pBackImg;
@@ -37,11 +37,11 @@ protected:
 	BOOL			m_bCheckFromID;
 	BOOL			m_bMenuFromID;
 
-	DECLARE_DYNAMIC(CMyButtonEx)
+	DECLARE_DYNAMIC(CZiButton)
 
 public:
-	CMyButtonEx();
-	virtual ~CMyButtonEx();
+	CZiButton();
+	virtual ~CZiButton();
 
 public:
 	void SetButtonType(BUTTON_TYPE nBtnType);

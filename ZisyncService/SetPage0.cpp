@@ -12,7 +12,7 @@
 IMPLEMENT_DYNAMIC(CSetPage0, CDialog)
 
 CSetPage0::CSetPage0(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CSetPage0::IDD, pParent)
+	: CZiDialog(CSetPage0::IDD, pParent)
 {
 
 }
@@ -23,13 +23,13 @@ CSetPage0::~CSetPage0()
 
 void CSetPage0::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_BT_ACCOUNT, m_btAccount);
 	DDX_Control(pDX, IDC_BT_NAME, m_btName);
 }
 
 
-BEGIN_MESSAGE_MAP(CSetPage0, CMyDialog)
+BEGIN_MESSAGE_MAP(CSetPage0, CZiDialog)
 	ON_WM_ERASEBKGND()
 	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
@@ -39,7 +39,7 @@ END_MESSAGE_MAP()
 
 BOOL CSetPage0::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 	
 	OnInitButton();
 
@@ -71,7 +71,7 @@ BOOL CSetPage0::OnEraseBkgnd(CDC* pDC)
 
 HBRUSH CSetPage0::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
-	HBRUSH hbr = CMyDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	HBRUSH hbr = CZiDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 
 	if (nCtlColor == CTLCOLOR_STATIC) {
 		pDC->SetBkMode(TRANSPARENT);

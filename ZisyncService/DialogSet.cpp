@@ -9,10 +9,10 @@
 
 // CDialogSet dialog
 
-IMPLEMENT_DYNAMIC(CDialogSet, CMyDialog)
+IMPLEMENT_DYNAMIC(CDialogSet, CZiDialog)
 
 CDialogSet::CDialogSet(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CDialogSet::IDD, pParent)
+	: CZiDialog(CDialogSet::IDD, pParent)
 {
 	m_bIsInit = false;
 }
@@ -23,12 +23,12 @@ CDialogSet::~CDialogSet()
 
 void CDialogSet::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_TAB_SET, m_tabSet);
 }
 
 
-BEGIN_MESSAGE_MAP(CDialogSet, CMyDialog)
+BEGIN_MESSAGE_MAP(CDialogSet, CZiDialog)
 	ON_WM_SIZE()
 	ON_WM_LBUTTONDOWN()
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB_SET, &CDialogSet::OnSelchangeTabSet)
@@ -40,7 +40,7 @@ END_MESSAGE_MAP()
 
 BOOL CDialogSet::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 
 	m_ImageBack.LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_SET_BACK), _T("PNG"));
 	SetWindowPos(NULL, 0 , 0, 571, 400, SWP_NOMOVE);
@@ -84,7 +84,7 @@ BOOL CDialogSet::OnInitDialog()
 
 void CDialogSet::OnSize(UINT nType, int cx, int cy)
 {
-	CMyDialog::OnSize(nType, cx, cy);
+	CZiDialog::OnSize(nType, cx, cy);
 	
 	if (!m_bIsInit) return;
 	SetControlPos(cx, cy);	
@@ -120,7 +120,7 @@ void CDialogSet::OnLButtonDown(UINT nFlags, CPoint point)
 	if (PtInRect(&rcTitle, point)) {
 		PostMessage(WM_NCLBUTTONDOWN, HTCAPTION, MAKELPARAM(point.x, point.y));
 	}
-	CMyDialog::OnLButtonDown(nFlags, point);
+	CZiDialog::OnLButtonDown(nFlags, point);
 }
 
 void CDialogSet::OnInitTabCtrl()

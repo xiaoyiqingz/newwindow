@@ -9,10 +9,10 @@
 
 // CSetPage1 dialog
 
-IMPLEMENT_DYNAMIC(CSetPage1, CMyDialog)
+IMPLEMENT_DYNAMIC(CSetPage1, CZiDialog)
 
 CSetPage1::CSetPage1(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CSetPage1::IDD, pParent)
+	: CZiDialog(CSetPage1::IDD, pParent)
 {
 
 }
@@ -23,14 +23,14 @@ CSetPage1::~CSetPage1()
 
 void CSetPage1::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_DISCOVER_PORT, m_etDiscoverPort);
 	DDX_Control(pDX, IDC_UPLOAD_SPEED, m_etUpSpeed);
 	DDX_Control(pDX, IDC_DOWNLOAD_SPEED, m_etDownSpeed);
 }
 
 
-BEGIN_MESSAGE_MAP(CSetPage1, CMyDialog)
+BEGIN_MESSAGE_MAP(CSetPage1, CZiDialog)
 	ON_WM_ERASEBKGND()
 	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDC_RADIO1, &CSetPage1::OnClickedRadio1)
@@ -43,7 +43,7 @@ END_MESSAGE_MAP()
 // CSetPage1 message handlers
 BOOL CSetPage1::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 	((CButton *)GetDlgItem(IDC_RADIO1))->SetCheck(TRUE);
 	((CButton *)GetDlgItem(IDC_RADIO5))->SetCheck(TRUE);
 
@@ -61,7 +61,7 @@ BOOL CSetPage1::OnEraseBkgnd(CDC* pDC)
 
 HBRUSH CSetPage1::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
-	HBRUSH hbr = CMyDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	HBRUSH hbr = CZiDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 	if (nCtlColor == CTLCOLOR_STATIC) {
 		HBRUSH	hBrush = CreateSolidBrush(RGB(255, 255, 255));
 		pDC->SetBkMode(TRANSPARENT);

@@ -9,10 +9,10 @@
 
 // CCreateSyncDIr dialog
 
-IMPLEMENT_DYNAMIC(CCreateSyncDIr, CMyDialog)
+IMPLEMENT_DYNAMIC(CCreateSyncDIr, CZiDialog)
 
 CCreateSyncDIr::CCreateSyncDIr(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CCreateSyncDIr::IDD, pParent)
+	: CZiDialog(CCreateSyncDIr::IDD, pParent)
 {
 
 }
@@ -23,13 +23,13 @@ CCreateSyncDIr::~CCreateSyncDIr()
 
 void CCreateSyncDIr::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_BT_CREATE, m_btCreate);
 	DDX_Control(pDX, IDC_AREA, m_gbArea);
 }
 
 
-BEGIN_MESSAGE_MAP(CCreateSyncDIr, CMyDialog)
+BEGIN_MESSAGE_MAP(CCreateSyncDIr, CZiDialog)
 	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
@@ -39,7 +39,7 @@ END_MESSAGE_MAP()
 
 BOOL CCreateSyncDIr::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 
 	CRect rcControl(0, 0, 0, 0);
 	HDC hParentDC = GetBackDC();
@@ -98,5 +98,5 @@ void CCreateSyncDIr::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	PostMessage(WM_NCLBUTTONDOWN, HTCAPTION, MAKELPARAM(point.x, point.y));
 
-	CMyDialog::OnLButtonDown(nFlags, point);
+	CZiDialog::OnLButtonDown(nFlags, point);
 }

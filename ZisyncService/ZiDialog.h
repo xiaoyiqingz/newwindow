@@ -7,9 +7,9 @@
 
 // CMyDialog dialog
 
-class CMyDialog : public CDialog, public MyDialogBase
+class CZiDialog : public CDialog, public MyDialogBase
 {
-	DECLARE_DYNAMIC(CMyDialog)
+	DECLARE_DYNAMIC(CZiDialog)
 public:
 	CMyImageEx		m_ImageBack;
 	CMyImage		m_BackImg;
@@ -26,8 +26,8 @@ public:
 	HBITMAP			m_hMemBmp, m_hOldBmp;
 
 public:
-	CMyDialog(INT nIDTemplate, CWnd* pParent = NULL);   // standard constructor
-	virtual ~CMyDialog();
+	CZiDialog(INT nIDTemplate, CWnd* pParent = NULL);   // standard constructor
+	virtual ~CZiDialog();
 
 // Dialog Data
 //	enum { IDD = IDD_MYDIALOG };

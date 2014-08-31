@@ -1,14 +1,14 @@
 #pragma once
-#include "MyDialog.h"
-#include "MyButtonEx.h"
+#include "ZiDialog.h"
+#include "ZiButton.h"
 #include "MyImage.h"
 // CAddPhoneHelp dialog
 
-class CAddPhoneHelp : public CMyDialog
+class CAddPhoneHelp : public CZiDialog
 {
 	DECLARE_DYNAMIC(CAddPhoneHelp)
 public:
-	CMyButtonEx		m_btBack;
+	CZiButton		m_btBack;
 
 	CMyImage		m_ImageBack;
 public:

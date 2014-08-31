@@ -1,11 +1,11 @@
 #pragma once
-#include "MyDialog.h"
+#include "ZiDialog.h"
 #include "MyEdit.h"
 #include "afxwin.h"
 
 // CSetPage1 dialog
 
-class CSetPage1 : public CMyDialog
+class CSetPage1 : public CZiDialog
 {
 	DECLARE_DYNAMIC(CSetPage1)
 public:

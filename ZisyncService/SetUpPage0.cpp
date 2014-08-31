@@ -9,10 +9,10 @@
 
 // CSetUpPage0 dialog
 
-IMPLEMENT_DYNAMIC(CSetUpPage0, CMyDialog)
+IMPLEMENT_DYNAMIC(CSetUpPage0, CZiDialog)
 
 CSetUpPage0::CSetUpPage0(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CSetUpPage0::IDD, pParent)
+	: CZiDialog(CSetUpPage0::IDD, pParent)
 {
 
 }
@@ -23,11 +23,11 @@ CSetUpPage0::~CSetUpPage0()
 
 void CSetUpPage0::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 }
 
 
-BEGIN_MESSAGE_MAP(CSetUpPage0, CMyDialog)
+BEGIN_MESSAGE_MAP(CSetUpPage0, CZiDialog)
 	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
@@ -36,7 +36,7 @@ END_MESSAGE_MAP()
 
 BOOL CSetUpPage0::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 
 	m_ImageLoge.LoadImage(AfxGetInstanceHandle(), IDB_LOGO, _T("PNG"));
 
@@ -84,7 +84,7 @@ void CSetUpPage0::DrawClientArea(CDC*pDC,int nWidth,int nHeight)
 
 HBRUSH CSetUpPage0::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
-	HBRUSH hbr = CMyDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	HBRUSH hbr = CZiDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 	if (nCtlColor == CTLCOLOR_STATIC) {
 		pDC->SetBkMode(TRANSPARENT);
 		HBRUSH hBrush = CreateSolidBrush(RGB(255, 255, 255));

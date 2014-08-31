@@ -1,13 +1,13 @@
 #pragma once
-#include "MyDialog.h"
-#include "MyButtonEx.h"
+#include "ZiDialog.h"
+#include "ZiButton.h"
 // SetUpPage1 dialog
 
-class CSetUpPage1 : public CMyDialog
+class CSetUpPage1 : public CZiDialog
 {
 	DECLARE_DYNAMIC(CSetUpPage1)
 public:
-	CMyButtonEx		m_btModify;
+	CZiButton		m_btModify;
 
 public:
 	CSetUpPage1(CWnd* pParent = NULL);   // standard constructor

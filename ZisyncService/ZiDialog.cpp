@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include "ZisyncService.h"
-#include "MyDialog.h"
+#include "ZiDialog.h"
 #include "RenderManager.h"
 #include "afxdialogex.h"
 
@@ -15,9 +15,9 @@
 
 #define		BORDERWIDTH			3
 
-IMPLEMENT_DYNAMIC(CMyDialog, CDialog)
+IMPLEMENT_DYNAMIC(CZiDialog, CDialog)
 
-CMyDialog::CMyDialog(INT nIDTemplate, CWnd* pParent /*=NULL*/)
+CZiDialog::CZiDialog(INT nIDTemplate, CWnd* pParent /*=NULL*/)
 	: CDialog(nIDTemplate, pParent)
 {
 //	m_bIsInit = false;
@@ -28,7 +28,7 @@ CMyDialog::CMyDialog(INT nIDTemplate, CWnd* pParent /*=NULL*/)
 	m_hMemBmp = m_hOldBmp = NULL;
 }
 
-CMyDialog::~CMyDialog()
+CZiDialog::~CZiDialog()
 {
 	if (m_hMemBmp != NULL && m_hOldBmp != NULL) {
 		::SelectObject(m_hMemDC, m_hOldBmp);
@@ -39,13 +39,13 @@ CMyDialog::~CMyDialog()
 	m_hMemDC = NULL;
 }
 
-void CMyDialog::DoDataExchange(CDataExchange* pDX)
+void CZiDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 }
 
 
-BEGIN_MESSAGE_MAP(CMyDialog, CDialog)
+BEGIN_MESSAGE_MAP(CZiDialog, CDialog)
 	ON_WM_PAINT()
 //	ON_WM_SIZE()
 //	ON_WM_LBUTTONDOWN()
@@ -57,7 +57,7 @@ END_MESSAGE_MAP()
 // CMyDialog message handlers
 
 
-BOOL CMyDialog::OnInitDialog()
+BOOL CZiDialog::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
@@ -99,13 +99,13 @@ BOOL CMyDialog::OnInitDialog()
 	return TRUE; 
 }
 
-void CMyDialog::LoadBackSkin(LPCTSTR pszResourcePath)
+void CZiDialog::LoadBackSkin(LPCTSTR pszResourcePath)
 {
 //	return m_ImageBack.LoadImage(pszResourcePath);
 	m_ImageBack.Load(pszResourcePath);
 }
 
-void CMyDialog::LoadBackSkin(HINSTANCE hInstance, UINT nIDResource, LPCTSTR pszType)
+void CZiDialog::LoadBackSkin(HINSTANCE hInstance, UINT nIDResource, LPCTSTR pszType)
 {
 //  HINSTANCE hInstance, LPCTSTR pszResourceName,LPCTSTR pszType 
 //	return m_ImageBack.LoadImage(hInstance,pszResourceName, pszType);
@@ -118,7 +118,7 @@ void CMyDialog::LoadBackSkin(HINSTANCE hInstance, UINT nIDResource, LPCTSTR pszT
 	m_BackImg.LoadImage(hInstance, nIDResource, pszType);
 }
 
-void CMyDialog::OnPaint()
+void CZiDialog::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
 	CRect rcClient;
@@ -273,7 +273,7 @@ void CMyDialog::OnLButtonDown(UINT nFlags, CPoint point)
 }*/
 
 
-LRESULT CMyDialog::OnNcHitTest(CPoint point)
+LRESULT CZiDialog::OnNcHitTest(CPoint point)
 {
 	if( m_bExtrude )
 	{
@@ -307,7 +307,7 @@ LRESULT CMyDialog::OnNcHitTest(CPoint point)
 }
 
 
-void CMyDialog::OnNcLButtonDown(UINT nHitTest, CPoint point)
+void CZiDialog::OnNcLButtonDown(UINT nHitTest, CPoint point)
 {
 	if( m_bExtrude )
 	{

@@ -9,10 +9,10 @@
 
 // CCheckUpDate dialog
 
-IMPLEMENT_DYNAMIC(CCheckUpDate, CMyDialog)
+IMPLEMENT_DYNAMIC(CCheckUpDate, CZiDialog)
 
 CCheckUpDate::CCheckUpDate(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CCheckUpDate::IDD, pParent)
+	: CZiDialog(CCheckUpDate::IDD, pParent)
 {
 	InitializeGIF();
 	m_bCheckOk = FALSE;
@@ -25,7 +25,7 @@ CCheckUpDate::~CCheckUpDate()
 
 void CCheckUpDate::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_CHECK_OK, m_btOk);
 	DDX_Control(pDX, IDCANCEL, m_btCancle);
 	DDX_Control(pDX, IDC_UPDATE, m_btUpdate);
@@ -35,7 +35,7 @@ void CCheckUpDate::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CCheckUpDate, CMyDialog)
+BEGIN_MESSAGE_MAP(CCheckUpDate, CZiDialog)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_TIMER()
 	ON_BN_CLICKED(IDC_CHECK_OK, &CCheckUpDate::OnBnClickedCheckOk)
@@ -45,7 +45,7 @@ END_MESSAGE_MAP()
 
 BOOL CCheckUpDate::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 	HINSTANCE hInstance = AfxGetInstanceHandle();
 	m_ImageBack.LoadImage(hInstance, IDB_UPDATE_BACK, IMAGE_PNG);
 	
@@ -178,7 +178,7 @@ void CCheckUpDate::OnTimer(UINT_PTR nIDEvent)
 	if (m_nFramePosition == m_nFrameCount)
 		m_nFramePosition = 0;
 
-	CMyDialog::OnTimer(nIDEvent);
+	CZiDialog::OnTimer(nIDEvent);
 }
 
 bool CCheckUpDate::TestGIF()

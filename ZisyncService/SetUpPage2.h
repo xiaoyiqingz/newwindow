@@ -1,10 +1,10 @@
 #pragma once
-#include "MyDialog.h"
+#include "ZiDialog.h"
 #include "afxwin.h"
 
 // CSetUpPage2 dialog
 
-class CSetUpPage2 : public CMyDialog
+class CSetUpPage2 : public CZiDialog
 {
 	DECLARE_DYNAMIC(CSetUpPage2)
 public:

@@ -19,7 +19,7 @@
 
 
 CZisyncServiceDlg::CZisyncServiceDlg(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CZisyncServiceDlg::IDD, pParent)
+	: CZiDialog(CZisyncServiceDlg::IDD, pParent)
 {
 	m_bIsInit = false;
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
@@ -27,14 +27,14 @@ CZisyncServiceDlg::CZisyncServiceDlg(CWnd* pParent /*=NULL*/)
 
 void CZisyncServiceDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_SET, m_btSet);
 	DDX_Control(pDX, IDC_LIST1, m_list1);
 	DDX_Control(pDX, IDC_BUTTON4, m_btRight);
 	DDX_Control(pDX, IDC_TAB1, m_Tab);
 }
 
-BEGIN_MESSAGE_MAP(CZisyncServiceDlg, CMyDialog)
+BEGIN_MESSAGE_MAP(CZisyncServiceDlg, CZiDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_WM_ERASEBKGND()
@@ -50,7 +50,7 @@ END_MESSAGE_MAP()
 
 BOOL CZisyncServiceDlg::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 
 	/*_CrtDumpMemoryLeaks();
 	_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );*/
@@ -126,7 +126,7 @@ void CZisyncServiceDlg::OnPaint()
 	}
 	else
 	{
-		CMyDialog::OnPaint();
+		CZiDialog::OnPaint();
 	}
 }
 
@@ -147,13 +147,13 @@ BOOL CZisyncServiceDlg::OnCommand(WPARAM wParam, LPARAM lParam)
 		ShowWindow(SW_MINIMIZE);
 		break;
 	}
-	return CMyDialog::OnCommand(wParam, lParam);
+	return CZiDialog::OnCommand(wParam, lParam);
 }
 
 
 void CZisyncServiceDlg::OnSize(UINT nType, int cx, int cy)
 {
-	CMyDialog::OnSize(nType, cx, cy);
+	CZiDialog::OnSize(nType, cx, cy);
 	if( !m_bIsInit ) return;
 
 	SetControlPos(cx, cy);
@@ -190,7 +190,7 @@ void CZisyncServiceDlg::SetControlPos(int cx, int cy)
 void CZisyncServiceDlg::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	PostMessage(WM_NCLBUTTONDOWN, HTCAPTION, MAKELPARAM(point.x, point.y));
-	CMyDialog::OnLButtonDown(nFlags, point);
+	CZiDialog::OnLButtonDown(nFlags, point);
 }
 
 BOOL CZisyncServiceDlg::OnEraseBkgnd(CDC* pDC)

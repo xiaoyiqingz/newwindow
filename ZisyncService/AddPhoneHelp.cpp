@@ -10,10 +10,10 @@
 
 // CAddPhoneHelp dialog
 
-IMPLEMENT_DYNAMIC(CAddPhoneHelp, CMyDialog)
+IMPLEMENT_DYNAMIC(CAddPhoneHelp, CZiDialog)
 
 CAddPhoneHelp::CAddPhoneHelp(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CAddPhoneHelp::IDD, pParent)
+	: CZiDialog(CAddPhoneHelp::IDD, pParent)
 {
 
 }
@@ -24,12 +24,12 @@ CAddPhoneHelp::~CAddPhoneHelp()
 
 void CAddPhoneHelp::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_BACK, m_btBack);
 }
 
 
-BEGIN_MESSAGE_MAP(CAddPhoneHelp, CMyDialog)
+BEGIN_MESSAGE_MAP(CAddPhoneHelp, CZiDialog)
 	ON_BN_CLICKED(IDC_BACK, OnBnClickBtBack)
 END_MESSAGE_MAP()
 
@@ -37,7 +37,7 @@ END_MESSAGE_MAP()
 
 BOOL CAddPhoneHelp::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 	
 	m_ImageBack.LoadImage(AfxGetInstanceHandle() ,IDB_PHONE_HELP, _T("PNG"));
 

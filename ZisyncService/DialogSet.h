@@ -1,6 +1,6 @@
 #pragma once
-#include "MyDialog.h"
-#include "MyButtonEx.h"
+#include "ZiDialog.h"
+#include "ZiButton.h"
 #include "MyTabCtrl.h"
 #include "SetPage0.h"
 #include "SetPage1.h"
@@ -10,13 +10,13 @@
 
 // CDialogSet dialog
 
-class CDialogSet : public CMyDialog
+class CDialogSet : public CZiDialog
 {
 
 	DECLARE_DYNAMIC(CDialogSet)
 public:
 	CMyImage		m_ImageBack;
-	CMyButtonEx		m_btClose;
+	CZiButton		m_btClose;
 	CMyTabCtrl		m_tabSet;
 
 	bool			m_bIsInit;

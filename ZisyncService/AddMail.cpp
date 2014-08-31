@@ -8,10 +8,10 @@
 
 // CAddMail dialog
 
-IMPLEMENT_DYNAMIC(CAddMail, CMyDialog)
+IMPLEMENT_DYNAMIC(CAddMail, CZiDialog)
 
 CAddMail::CAddMail(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CAddMail::IDD, pParent)
+	: CZiDialog(CAddMail::IDD, pParent)
 {
 
 }
@@ -22,13 +22,13 @@ CAddMail::~CAddMail()
 
 void CAddMail::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_BT_FILE, m_btFile);
 	DDX_Control(pDX, IDC_BT_MAIL, m_btMail);
 }
 
 
-BEGIN_MESSAGE_MAP(CAddMail, CMyDialog)
+BEGIN_MESSAGE_MAP(CAddMail, CZiDialog)
 	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
@@ -38,7 +38,7 @@ END_MESSAGE_MAP()
 
 BOOL CAddMail::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 
 	OnInitButton();
 
@@ -62,7 +62,7 @@ void CAddMail::OnInitButton()
 
 HBRUSH CAddMail::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
-	HBRUSH hbr = CMyDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	HBRUSH hbr = CZiDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 
 	if (nCtlColor == CTLCOLOR_STATIC) {
 		pDC->SetBkMode(TRANSPARENT);

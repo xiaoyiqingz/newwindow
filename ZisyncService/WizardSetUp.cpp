@@ -9,10 +9,10 @@
 
 // CWizardSetUp dialog
 
-IMPLEMENT_DYNAMIC(CWizardSetUp, CMyDialog)
+IMPLEMENT_DYNAMIC(CWizardSetUp, CZiDialog)
 
 CWizardSetUp::CWizardSetUp(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CWizardSetUp::IDD, pParent)
+	: CZiDialog(CWizardSetUp::IDD, pParent)
 {
 	m_nPage = 0;
 }
@@ -23,14 +23,14 @@ CWizardSetUp::~CWizardSetUp()
 
 void CWizardSetUp::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDCANCEL, m_btCancle);
 	DDX_Control(pDX, IDC_SETUP_PREV, m_btPrev);
 	DDX_Control(pDX, IDC_SETUP_NEXT, m_btNext);
 }
 
 
-BEGIN_MESSAGE_MAP(CWizardSetUp, CMyDialog)
+BEGIN_MESSAGE_MAP(CWizardSetUp, CZiDialog)
 	ON_WM_LBUTTONDOWN()
 	ON_BN_CLICKED(IDC_SETUP_NEXT, OnBnClickedNext)
 	ON_BN_CLICKED(IDC_SETUP_PREV, OnBnClickedPrev)
@@ -39,7 +39,7 @@ END_MESSAGE_MAP()
 // CWizardSetUp message handlers
 BOOL CWizardSetUp::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 	m_ImageBack.LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDB_SETUP_BACK), IMAGE_PNG);
 	SetWindowPos(NULL, 0, 0, 510, 380, SWP_NOMOVE );
 
@@ -100,7 +100,7 @@ void CWizardSetUp::OnLButtonDown(UINT nFlags, CPoint point)
 		PostMessage(WM_NCLBUTTONDOWN, HTCAPTION, MAKELPARAM(point.x, point.y));
 	}	
 
-	CMyDialog::OnLButtonDown(nFlags, point);
+	CZiDialog::OnLButtonDown(nFlags, point);
 }
 
 void CWizardSetUp::DrawClientArea(CDC*pDC,int nWidth,int nHeight)

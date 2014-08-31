@@ -9,10 +9,10 @@
 
 // CAddWin dialog
 
-IMPLEMENT_DYNAMIC(CAddWin, CMyDialog)
+IMPLEMENT_DYNAMIC(CAddWin, CZiDialog)
 
 CAddWin::CAddWin(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CAddWin::IDD, pParent)
+	: CZiDialog(CAddWin::IDD, pParent)
 {
 
 }
@@ -23,12 +23,12 @@ CAddWin::~CAddWin()
 
 void CAddWin::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST_DEVICE, m_ListDevice);
 }
 
 
-BEGIN_MESSAGE_MAP(CAddWin, CMyDialog)
+BEGIN_MESSAGE_MAP(CAddWin, CZiDialog)
 END_MESSAGE_MAP()
 
 
@@ -37,7 +37,7 @@ END_MESSAGE_MAP()
 
 BOOL CAddWin::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 
 	m_ListDevice.SetParentBack(GetBackDC());
 	m_ListDevice.SetScrollImage(&m_ListDevice,_T("res\\SKIN_SCROLL.bmp"));

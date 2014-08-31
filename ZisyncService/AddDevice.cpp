@@ -9,10 +9,10 @@
 
 // CAddDevice dialog
 
-IMPLEMENT_DYNAMIC(CAddDevice, CMyDialog)
+IMPLEMENT_DYNAMIC(CAddDevice, CZiDialog)
 
 CAddDevice::CAddDevice(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CAddDevice::IDD, pParent)
+	: CZiDialog(CAddDevice::IDD, pParent)
 {
 	m_bIsInit = false;
 }
@@ -23,14 +23,14 @@ CAddDevice::~CAddDevice()
 
 void CAddDevice::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_TAB_ADD, m_TabAdd);
 	DDX_Control(pDX, IDC_BT_REFIND, m_btReFind);
 	DDX_Control(pDX, IDC_BT_SELECTED, m_btSelected);
 }
 
 
-BEGIN_MESSAGE_MAP(CAddDevice, CMyDialog)
+BEGIN_MESSAGE_MAP(CAddDevice, CZiDialog)
 	ON_WM_SIZE()
 	ON_WM_LBUTTONDOWN()
 	ON_BN_CLICKED(IDC_BT_SELECTED, &CAddDevice::OnBnClickedBtSelected)
@@ -43,7 +43,7 @@ END_MESSAGE_MAP()
 
 BOOL CAddDevice::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 	m_ImageBack.LoadImage(AfxGetInstanceHandle(), IDB_DEVICE_BACK, _T("PNG"));
 	
 	CRect rcControl(0, 0, 0, 0);
@@ -98,7 +98,7 @@ void CAddDevice::DrawClientArea(CDC*pDC,int nWidth,int nHeight)
 
 void CAddDevice::OnSize(UINT nType, int cx, int cy)
 {
-	CMyDialog::OnSize(nType, cx, cy);
+	CZiDialog::OnSize(nType, cx, cy);
 
 	if (!m_bIsInit) return;
 	SetControlPos(cx, cy);
@@ -130,7 +130,7 @@ void CAddDevice::OnLButtonDown(UINT nFlags, CPoint point)
 		PostMessage(WM_NCLBUTTONDOWN, HTCAPTION, MAKELPARAM(point.x, point.y));
 	}
 
-	CMyDialog::OnLButtonDown(nFlags, point);
+	CZiDialog::OnLButtonDown(nFlags, point);
 }
 
 void CAddDevice::OnInitTabCtrl()

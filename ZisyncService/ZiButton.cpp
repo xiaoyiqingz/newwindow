@@ -3,15 +3,15 @@
 
 #include "stdafx.h"
 #include "ZisyncService.h"
-#include "MyButtonEx.h"
+#include "ZiButton.h"
 #include "MemoryDC.h"
 #include "RenderManager.h"
 
 // CMyButtonEx
 
-IMPLEMENT_DYNAMIC(CMyButtonEx, CButton)
+IMPLEMENT_DYNAMIC(CZiButton, CButton)
 
-CMyButtonEx::CMyButtonEx()
+CZiButton::CZiButton()
 {
 	m_pCheckImgH = m_pCheckImgN = m_pCheckImgTichH = m_pCheckImgTickN = NULL;
 	m_pBackImgN = m_pBackImgH = m_pBackImgD = m_pBackImgF = NULL;
@@ -29,12 +29,12 @@ CMyButtonEx::CMyButtonEx()
 	m_bCheckFromID = FALSE;
 }
 
-CMyButtonEx::~CMyButtonEx()
+CZiButton::~CZiButton()
 {
 }
 
 
-BEGIN_MESSAGE_MAP(CMyButtonEx, CButton)
+BEGIN_MESSAGE_MAP(CZiButton, CButton)
 	ON_WM_DESTROY()
 	ON_WM_MOUSEMOVE()
 	ON_MESSAGE(WM_MOUSELEAVE, OnMouseLeave)
@@ -47,8 +47,8 @@ BEGIN_MESSAGE_MAP(CMyButtonEx, CButton)
 	ON_WM_PAINT()
 END_MESSAGE_MAP()
 
-// CMyButtonEx message handlers
-void CMyButtonEx::OnDestroy()
+// CZiButton message handlers
+void CZiButton::OnDestroy()
 {
 	CButton::OnDestroy();
 
@@ -94,13 +94,13 @@ void CMyButtonEx::OnDestroy()
 	m_hMenu = NULL;
 }
 
-void CMyButtonEx::SetButtonType(BUTTON_TYPE nBtnType)
+void CZiButton::SetButtonType(BUTTON_TYPE nBtnType)
 {
 	m_nBtnType = nBtnType;
 }
 
 
-void CMyButtonEx::OnMouseMove(UINT nFlags, CPoint point)
+void CZiButton::OnMouseMove(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
 	if (!m_bMouseTracking) {
@@ -127,7 +127,7 @@ void CMyButtonEx::OnMouseMove(UINT nFlags, CPoint point)
 }
 
 
-LRESULT CMyButtonEx::OnMouseLeave(WPARAM wparam, LPARAM lparam)
+LRESULT CZiButton::OnMouseLeave(WPARAM wparam, LPARAM lparam)
 {
 	// TODO: Add your message handler code here and/or call default
 	m_bMouseTracking = FALSE;
@@ -145,7 +145,7 @@ LRESULT CMyButtonEx::OnMouseLeave(WPARAM wparam, LPARAM lparam)
 }
 
 
-void CMyButtonEx::OnLButtonDown(UINT nFlags, CPoint point)
+void CZiButton::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
 	m_bPress = TRUE;
@@ -156,7 +156,7 @@ void CMyButtonEx::OnLButtonDown(UINT nFlags, CPoint point)
 }
 
 
-void CMyButtonEx::OnLButtonUp(UINT nFlags, CPoint point)
+void CZiButton::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
 	if (m_bPress) {
@@ -201,7 +201,7 @@ void CMyButtonEx::OnLButtonUp(UINT nFlags, CPoint point)
 }
 
 
-void CMyButtonEx::OnLButtonDblClk(UINT nFlags, CPoint point)
+void CZiButton::OnLButtonDblClk(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
 	m_bPress = true;
@@ -212,7 +212,7 @@ void CMyButtonEx::OnLButtonDblClk(UINT nFlags, CPoint point)
 }
 
 
-void CMyButtonEx::OnSetFocus(CWnd* pOldWnd)
+void CZiButton::OnSetFocus(CWnd* pOldWnd)
 {
 	CButton::OnSetFocus(pOldWnd);
 
@@ -222,7 +222,7 @@ void CMyButtonEx::OnSetFocus(CWnd* pOldWnd)
 }
 
 
-void CMyButtonEx::OnKillFocus(CWnd* pNewWnd)
+void CZiButton::OnKillFocus(CWnd* pNewWnd)
 {
 	CButton::OnKillFocus(pNewWnd);
 	m_bFocus = FALSE;
@@ -231,14 +231,14 @@ void CMyButtonEx::OnKillFocus(CWnd* pNewWnd)
 }
 
 
-BOOL CMyButtonEx::OnEraseBkgnd(CDC* pDC)
+BOOL CZiButton::OnEraseBkgnd(CDC* pDC)
 {
 	// TODO: Add your message handler code here and/or call default
 
 	return true;
 }
 
-BOOL CMyButtonEx::SetBackImage(UINT nResNorID, 
+BOOL CZiButton::SetBackImage(UINT nResNorID, 
 							   UINT nResHovID, 
 							   UINT nResDownID, 
 							   UINT nResFocID,
@@ -309,7 +309,7 @@ BOOL CMyButtonEx::SetBackImage(UINT nResNorID,
 		return TRUE;
 }
 
-BOOL CMyButtonEx::SetBackImage(LPCTSTR lpNormal, 
+BOOL CZiButton::SetBackImage(LPCTSTR lpNormal, 
 							   LPCTSTR lpHoven, 
 							   LPCTSTR lpDown, 
 							   LPCTSTR lpFocus, 
@@ -349,7 +349,7 @@ BOOL CMyButtonEx::SetBackImage(LPCTSTR lpNormal,
 		return TRUE;
 }
 
-BOOL CMyButtonEx::SetCheckImage(UINT nResNorID, 
+BOOL CZiButton::SetCheckImage(UINT nResNorID, 
 								UINT nResHovID, 
 								UINT nResTickNorID, 
 								UINT nResTickHovID, 
@@ -374,7 +374,7 @@ BOOL CMyButtonEx::SetCheckImage(UINT nResNorID,
 		return TRUE;
 }
 
-BOOL CMyButtonEx::SetCheckImage(LPCTSTR lpNormal, 
+BOOL CZiButton::SetCheckImage(LPCTSTR lpNormal, 
 								LPCTSTR lpHover, 
 								LPCTSTR lpTickNormal, 
 								LPCTSTR lpTickHover)
@@ -396,7 +396,7 @@ BOOL CMyButtonEx::SetCheckImage(LPCTSTR lpNormal,
 		return TRUE;
 }
 
-BOOL CMyButtonEx::SetIconImage(UINT nResIconID, LPCTSTR lpszFileType)
+BOOL CZiButton::SetIconImage(UINT nResIconID, LPCTSTR lpszFileType)
 {
 	m_bIconFromID = TRUE;
 
@@ -410,7 +410,7 @@ BOOL CMyButtonEx::SetIconImage(UINT nResIconID, LPCTSTR lpszFileType)
 		return TRUE;
 }
 
-BOOL CMyButtonEx::SetIconImage(LPCTSTR lpszFileName)
+BOOL CZiButton::SetIconImage(LPCTSTR lpszFileName)
 {
 	RenderEngine->RemoveImage(m_pIconImg);
 	
@@ -422,7 +422,7 @@ BOOL CMyButtonEx::SetIconImage(LPCTSTR lpszFileName)
 		return TRUE;
 }
 
-BOOL CMyButtonEx::SetMenuImage(UINT nResFromID, LPCTSTR lpszFileType)
+BOOL CZiButton::SetMenuImage(UINT nResFromID, LPCTSTR lpszFileType)
 {
 	m_bMenuFromID = TRUE;
 
@@ -436,7 +436,7 @@ BOOL CMyButtonEx::SetMenuImage(UINT nResFromID, LPCTSTR lpszFileType)
 		return TRUE;
 }
 
-BOOL CMyButtonEx::SetMenuImage(LPCTSTR lpszFileName)
+BOOL CZiButton::SetMenuImage(LPCTSTR lpszFileName)
 {
 	RenderEngine->RemoveImage(m_pMenuImg);
 
@@ -448,18 +448,18 @@ BOOL CMyButtonEx::SetMenuImage(LPCTSTR lpszFileName)
 		return TRUE;
 }
 
-void CMyButtonEx::SetSize(int nWidth, int nHeight)
+void CZiButton::SetSize(int nWidth, int nHeight)
 {
 	SetWindowPos(NULL, 0, 0, nWidth, nHeight, SWP_NOMOVE);
 }
 
 
-void CMyButtonEx::SetMenu(HMENU hMenu)
+void CZiButton::SetMenu(HMENU hMenu)
 {
 	m_hMenu = hMenu;
 }
 
-LRESULT CMyButtonEx::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CZiButton::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	// TODO: Add your specialized code here and/or call the base class
 	if (message == BM_SETSTATE) {
@@ -478,7 +478,7 @@ LRESULT CMyButtonEx::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 
 
 
-void CMyButtonEx::OnPaint()
+void CZiButton::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
 	CRect rcClient;
@@ -511,7 +511,7 @@ void CMyButtonEx::OnPaint()
 	}	
 }
 
-void CMyButtonEx::DrawPushButton(CDC* pDC,RECT &rcClient)
+void CZiButton::DrawPushButton(CDC* pDC,RECT &rcClient)
 {
 	if (m_bPress)		// Êó±ê×ó¼ü°´ÏÂ×´Ì¬
 	{
@@ -609,7 +609,7 @@ void CMyButtonEx::DrawPushButton(CDC* pDC,RECT &rcClient)
 	}*/
 }
 
-void CMyButtonEx::DrawCheckButton(CDC* pDC,RECT &rcClient)
+void CZiButton::DrawCheckButton(CDC* pDC,RECT &rcClient)
 {
 	int nWidth = 15, nHeight = 15;
 	if (m_pCheckImgN != NULL && !m_pCheckImgN->IsNull()) {
@@ -663,7 +663,7 @@ void CMyButtonEx::DrawCheckButton(CDC* pDC,RECT &rcClient)
 	}
 }
 
-void CMyButtonEx::DrawIconButton(CDC* pDC,RECT &rcClient)
+void CZiButton::DrawIconButton(CDC* pDC,RECT &rcClient)
 {
 	if (m_bPress)
 	{
@@ -743,7 +743,7 @@ void CMyButtonEx::DrawIconButton(CDC* pDC,RECT &rcClient)
 	}
 }
 
-void CMyButtonEx::DrawMenuButton(CDC* pDC,RECT &rcClient)
+void CZiButton::DrawMenuButton(CDC* pDC,RECT &rcClient)
 {
 	if (m_bPress)
 	{
@@ -788,7 +788,7 @@ void CMyButtonEx::DrawMenuButton(CDC* pDC,RECT &rcClient)
 	}
 }
 
-void CMyButtonEx::DrawSplitButton(CDC* pDC,RECT &rcClient)
+void CZiButton::DrawSplitButton(CDC* pDC,RECT &rcClient)
 {
 	if (m_pBackImgN != NULL && !m_pBackImgN->IsNull()) {
 		m_pBackImgN->DrawImage(pDC, rcClient);
@@ -846,7 +846,7 @@ void CMyButtonEx::DrawSplitButton(CDC* pDC,RECT &rcClient)
 	}
 }
 
-void CMyButtonEx::DrawGIFButton(CDC* pDC,RECT &rcClient) 
+void CZiButton::DrawGIFButton(CDC* pDC,RECT &rcClient) 
 {
 	if (m_pBackImgN != NULL && !m_pBackImgN->IsNull()) {
 		if (!m_pBackImgN->IsInitGIF()) {
@@ -856,7 +856,7 @@ void CMyButtonEx::DrawGIFButton(CDC* pDC,RECT &rcClient)
 	}
 }
 
-LRESULT CMyButtonEx::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CZiButton::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (message == WM_PRINT || message == WM_PRINTCLIENT) {
 /*

@@ -9,10 +9,10 @@
 
 // CSyncDirSet dialog
 
-IMPLEMENT_DYNAMIC(CSyncDirSet, CMyDialog)
+IMPLEMENT_DYNAMIC(CSyncDirSet, CZiDialog)
 
 CSyncDirSet::CSyncDirSet(CWnd* pParent /*=NULL*/)
-	: CMyDialog(CSyncDirSet::IDD, pParent)
+	: CZiDialog(CSyncDirSet::IDD, pParent)
 {
 
 }
@@ -23,7 +23,7 @@ CSyncDirSet::~CSyncDirSet()
 
 void CSyncDirSet::DoDataExchange(CDataExchange* pDX)
 {
-	CMyDialog::DoDataExchange(pDX);
+	CZiDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_BT_DELETE_DIR, m_btDeleteDir);
 	DDX_Control(pDX, IDC_BT_OK, m_btOk);
 	DDX_Control(pDX, IDC_BT_CANCLE, m_btCancle);
@@ -33,7 +33,7 @@ void CSyncDirSet::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CSyncDirSet, CMyDialog)
+BEGIN_MESSAGE_MAP(CSyncDirSet, CZiDialog)
 	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
@@ -43,7 +43,7 @@ END_MESSAGE_MAP()
 
 BOOL CSyncDirSet::OnInitDialog()
 {
-	CMyDialog::OnInitDialog();
+	CZiDialog::OnInitDialog();
 
 	CRect  rcControl(0, 0, 0, 0);
 	m_btClose.Create(NULL, WS_CHILD | WS_VISIBLE, rcControl, this, IDCANCEL);
@@ -67,7 +67,7 @@ void CSyncDirSet::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	PostMessage(WM_NCLBUTTONDOWN, HTCAPTION, MAKELPARAM(point.x, point.y));
 
-	CMyDialog::OnLButtonDown(nFlags, point);
+	CZiDialog::OnLButtonDown(nFlags, point);
 }
 
 void CSyncDirSet::SetControlPos(int cx, int cy)

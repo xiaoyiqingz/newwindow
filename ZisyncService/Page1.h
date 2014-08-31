@@ -1,18 +1,18 @@
 #pragma once
-#include "MyDialog.h"
+#include "ZiDialog.h"
 #include "MyListCtrl.h"
-#include "MyButtonEx.h"
+#include "ZiButton.h"
 #include "afxcmn.h"
 #include "afxwin.h"
 
 // CPage1 dialog
 
-class CPage1 : public CMyDialog
+class CPage1 : public CZiDialog
 {
 	DECLARE_DYNAMIC(CPage1)
 public:
 	CMyListCtrl		m_ListPhone;
-	CMyButtonEx		m_btAdd;						
+	CZiButton		m_btAdd;						
 
 public:
 	CPage1(CWnd* pParent = NULL);   // standard constructor

@@ -1,22 +1,22 @@
 #pragma once
-#include "MyDialog.h"
+#include "ZiDialog.h"
 #include "MyImage.h"
-#include "MyButtonEx.h"
+#include "ZiButton.h"
 #include "afxwin.h"
 #include "afxcmn.h"
 // CSyncDirSet dialog
 
-class CSyncDirSet : public CMyDialog
+class CSyncDirSet : public CZiDialog
 {
 	DECLARE_DYNAMIC(CSyncDirSet)
 public:
 	CMyImage		*m_pBackImg;
-	CMyButtonEx		m_btClose;
-	CMyButtonEx		m_btDeleteDir;
-	CMyButtonEx		m_btOk;
-	CMyButtonEx		m_btCancle;
-	CMyButtonEx		m_btCancleSync;
-	CMyButtonEx		m_btSet;
+	CZiButton		m_btClose;
+	CZiButton		m_btDeleteDir;
+	CZiButton		m_btOk;
+	CZiButton		m_btCancle;
+	CZiButton		m_btCancleSync;
+	CZiButton		m_btSet;
 
 	CListCtrl		m_ListDir;
 	CImageList		m_ImageList;

@@ -1,11 +1,11 @@
 #pragma once
-#include "MyDialog.h"
+#include "ZiDialog.h"
 #include "MyListIcon.h"
 #include "afxcmn.h"
 
 // CAddWin dialog
 
-class CAddWin : public CMyDialog
+class CAddWin : public CZiDialog
 {
 	DECLARE_DYNAMIC(CAddWin)
 public:
