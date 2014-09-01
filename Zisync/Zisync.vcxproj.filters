@@ -1,0 +1,488 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{d797ef7d-5f83-4f78-b451-d908d1fefaac}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="res\image1.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\close.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\minimize.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\minimode.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\back_new.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\set_back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\set_line.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\device_back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\device_back1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_createdir.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_back.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\SetUp_Back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\logo.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\code.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\help.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\phone_help.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_help_back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_help_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_help_sel.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\update_back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\hearts.gif">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_add_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_add_hov.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_delete_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_delete_hov.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_create.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_status_ok.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_set.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_back_down.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bt_back_highlight.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\minimize1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\minimize2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\minimize3.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\minimize4.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\close1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\close2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\close3.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\close4.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_device.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_history.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_phone.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_back_down.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_back_hoven.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_set_back.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_set_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_set_sel.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_device_hov.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_device_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_mail_hov.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_mail_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_phone_hov.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab_phone_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_device_linux.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_device_mac.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_device_win.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_check_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_check_sel.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_icon_folder.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_icon_invite.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_icon_sync_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_icon_sync_sel.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_phone_android.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_phone_ios.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_doc.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_folder.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_pdf.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_png.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_folder_del.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_folder_nor.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_back_hov.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\list_back_sel.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\loading.gif">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Zisync.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Zisync.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll_bar.png">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyImageEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyListBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryDC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Page0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Page1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPage0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPage1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetPage2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Page2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddWin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddPhone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddMail.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateSyncDIr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiStatic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SyncDirSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WizardSetUp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUpPage0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUpPage1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUpPage2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddPhoneHelp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckUpDate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiDialogBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiListCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiListIcon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiTabCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZiToolTip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Zisync.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ZisyncDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyImageEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyListBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryDC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Page0.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Page1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPage0.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPage1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetPage2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Page2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddWin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddPhone.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddMail.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateSyncDIr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiStatic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SyncDirSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WizardSetUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetUpPage0.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetUpPage1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetUpPage2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddPhoneHelp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckUpDate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiDialogBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiListCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiListIcon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiTabCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZiToolTip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Zisync.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZisyncDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Zisync.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

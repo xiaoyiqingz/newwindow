@@ -19,9 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7A865D89-1C4F-4659-925B-10AC35540CA1}</ProjectGuid>
-    <RootNamespace>NewWindow</RootNamespace>
+    <ProjectGuid>{0121F86F-1141-418E-A171-A12111DF22C0}</ProjectGuid>
+    <RootNamespace>Zisync</RootNamespace>
     <Keyword>MFCProj</Keyword>
+    <ProjectName>Zisync</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -84,6 +85,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -106,6 +108,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -129,12 +132,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -155,12 +161,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -174,50 +183,177 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
-    <None Include="res\back.jpg" />
-    <None Include="res\NewWindow.ico" />
-    <None Include="res\NewWindow.rc2" />
-    <None Include="res\SKIN_WND_CLOSE.bmp" />
-    <None Include="res\SKIN_WND_MAX.bmp" />
-    <None Include="res\SKIN_WND_MIN.bmp" />
-    <None Include="res\SKIN_WND_RESTORE.bmp" />
-    <None Include="res\SKIN_WND_TL.png" />
-    <None Include="res\SKIN_WND_TM.png" />
-    <None Include="res\SKIN_WND_TM_SPE.png" />
-    <None Include="res\SKIN_WND_TR.png" />
-    <None Include="res\state.bmp" />
+    <None Include="res\back_new.png" />
+    <None Include="res\bt_add_hov.png" />
+    <None Include="res\bt_add_nor.png" />
+    <None Include="res\bt_back.bmp" />
+    <None Include="res\bt_back.png" />
+    <None Include="res\bt_back_down.png" />
+    <None Include="res\bt_back_highlight.png" />
+    <None Include="res\bt_create.png" />
+    <None Include="res\bt_createdir.png" />
+    <None Include="res\bt_delete_hov.png" />
+    <None Include="res\bt_delete_nor.png" />
+    <None Include="res\bt_help_back.png" />
+    <None Include="res\bt_help_nor.png" />
+    <None Include="res\bt_help_sel.png" />
+    <None Include="res\bt_set.png" />
+    <None Include="res\bt_status_ok.png" />
+    <None Include="res\close.png" />
+    <None Include="res\close1.png" />
+    <None Include="res\close2.png" />
+    <None Include="res\close3.png" />
+    <None Include="res\close4.png" />
+    <None Include="res\code.png" />
+    <None Include="res\device_back.png" />
+    <None Include="res\device_back1.png" />
+    <None Include="res\hearts.gif" />
+    <None Include="res\help.png" />
+    <None Include="res\image1.bin" />
+    <None Include="res\list_back_hov.png" />
+    <None Include="res\list_back_sel.png" />
+    <None Include="res\list_check_nor.png" />
+    <None Include="res\list_check_sel.png" />
+    <None Include="res\list_device_linux.png" />
+    <None Include="res\list_device_mac.png" />
+    <None Include="res\list_device_win.png" />
+    <None Include="res\list_doc.png" />
+    <None Include="res\list_folder.png" />
+    <None Include="res\list_folder_del.png" />
+    <None Include="res\list_folder_nor.png" />
+    <None Include="res\list_icon_folder.png" />
+    <None Include="res\list_icon_invite.png" />
+    <None Include="res\list_icon_sync_nor.png" />
+    <None Include="res\list_icon_sync_sel.png" />
+    <None Include="res\list_pdf.png" />
+    <None Include="res\list_phone_android.png" />
+    <None Include="res\list_phone_ios.png" />
+    <None Include="res\list_png.png" />
+    <None Include="res\loading.gif" />
+    <None Include="res\logo.png" />
+    <None Include="res\minimize.png" />
+    <None Include="res\minimize1.png" />
+    <None Include="res\minimize2.png" />
+    <None Include="res\minimize3.png" />
+    <None Include="res\minimize4.png" />
+    <None Include="res\minimode.png" />
+    <None Include="res\phone_help.png" />
+    <None Include="res\scroll_bar.png" />
+    <None Include="res\SetUp_Back.png" />
+    <None Include="res\tab_back_down.png" />
+    <None Include="res\tab_back_hoven.png" />
+    <None Include="res\tab_device.png" />
+    <None Include="res\tab_device_hov.png" />
+    <None Include="res\tab_device_nor.png" />
+    <None Include="res\tab_history.png" />
+    <None Include="res\tab_mail_hov.png" />
+    <None Include="res\tab_mail_nor.png" />
+    <None Include="res\tab_phone.png" />
+    <None Include="res\tab_phone_hov.png" />
+    <None Include="res\tab_phone_nor.png" />
+    <None Include="res\tab_set_back.png" />
+    <None Include="res\tab_set_nor.png" />
+    <None Include="res\tab_set_sel.png" />
+    <None Include="res\update_back.png" />
+    <None Include="res\Zisync.ico" />
+    <None Include="res\Zisync.rc2" />
+    <None Include="res\set_back.png" />
+    <None Include="res\set_line.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DialogEx.h" />
-    <ClInclude Include="ImageEx.h" />
-    <ClInclude Include="NewWindow.h" />
-    <ClInclude Include="NewWindowDlg.h" />
+    <ClInclude Include="AddDevice.h" />
+    <ClInclude Include="AddMail.h" />
+    <ClInclude Include="AddPhone.h" />
+    <ClInclude Include="AddPhoneHelp.h" />
+    <ClInclude Include="AddWin.h" />
+    <ClInclude Include="CheckUpDate.h" />
+    <ClInclude Include="CreateSyncDIr.h" />
+    <ClInclude Include="DialogSet.h" />
+    <ClInclude Include="ZiDialogBase.h" />
+    <ClInclude Include="MemoryDC.h" />
+    <ClInclude Include="SetUpPage0.h" />
+    <ClInclude Include="SetUpPage1.h" />
+    <ClInclude Include="SetUpPage2.h" />
+    <ClInclude Include="WizardSetUp.h" />
+    <ClInclude Include="Zisync.h" />
+    <ClInclude Include="ZisyncDlg.h" />
+    <ClInclude Include="MyButton.h" />
+    <ClInclude Include="ZiButton.h" />
+    <ClInclude Include="ZiDialog.h" />
+    <ClInclude Include="ZiEdit.h" />
+    <ClInclude Include="ZiImage.h" />
+    <ClInclude Include="MyImageEx.h" />
+    <ClInclude Include="MyListBox.h" />
+    <ClInclude Include="ZiListCtrl.h" />
+    <ClInclude Include="ZiListIcon.h" />
+    <ClInclude Include="ZiTabCtrl.h" />
+    <ClInclude Include="ZiToolTip.h" />
+    <ClInclude Include="Page0.h" />
+    <ClInclude Include="Page1.h" />
+    <ClInclude Include="Page2.h" />
+    <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SetPage2.h" />
+    <ClInclude Include="SetPage0.h" />
+    <ClInclude Include="SetPage1.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SyncDirSet.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="\UI\MyDialog.h" />
+    <ClInclude Include="ZiStatic.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DialogEx.cpp" />
-    <ClCompile Include="ImageEx.cpp" />
-    <ClCompile Include="NewWindow.cpp" />
-    <ClCompile Include="NewWindowDlg.cpp" />
+    <ClCompile Include="AddDevice.cpp" />
+    <ClCompile Include="AddMail.cpp" />
+    <ClCompile Include="AddPhone.cpp" />
+    <ClCompile Include="AddPhoneHelp.cpp" />
+    <ClCompile Include="AddWin.cpp" />
+    <ClCompile Include="CheckUpDate.cpp" />
+    <ClCompile Include="CreateSyncDIr.cpp" />
+    <ClCompile Include="DialogSet.cpp" />
+    <ClCompile Include="ZiDialogBase.cpp" />
+    <ClCompile Include="MemoryDC.cpp" />
+    <ClCompile Include="SetUpPage0.cpp" />
+    <ClCompile Include="SetUpPage1.cpp" />
+    <ClCompile Include="SetUpPage2.cpp" />
+    <ClCompile Include="WizardSetUp.cpp" />
+    <ClCompile Include="Zisync.cpp" />
+    <ClCompile Include="ZisyncDlg.cpp" />
+    <ClCompile Include="MyButton.cpp" />
+    <ClCompile Include="ZiButton.cpp" />
+    <ClCompile Include="ZiDialog.cpp" />
+    <ClCompile Include="ZiEdit.cpp" />
+    <ClCompile Include="ZiImage.cpp" />
+    <ClCompile Include="MyImageEx.cpp" />
+    <ClCompile Include="MyListBox.cpp" />
+    <ClCompile Include="ZiListCtrl.cpp" />
+    <ClCompile Include="ZiListIcon.cpp" />
+    <ClCompile Include="ZiTabCtrl.cpp" />
+    <ClCompile Include="ZiToolTip.cpp" />
+    <ClCompile Include="Page0.cpp" />
+    <ClCompile Include="Page1.cpp" />
+    <ClCompile Include="Page2.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="SetPage2.cpp" />
+    <ClCompile Include="SetPage0.cpp" />
+    <ClCompile Include="SetPage1.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SyncDirSet.cpp" />
+    <ClCompile Include="ZiStatic.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="NewWindow.rc" />
+    <ResourceCompile Include="Zisync.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties RESOURCE_FILE="NewWindow.rc" />
+      <UserProperties RESOURCE_FILE="Zisync.rc" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
