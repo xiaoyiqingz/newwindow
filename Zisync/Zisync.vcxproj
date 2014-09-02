@@ -69,6 +69,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -238,6 +239,20 @@
     <None Include="res\minimize4.png" />
     <None Include="res\minimode.png" />
     <None Include="res\phone_help.png" />
+    <None Include="res\scroll\Hscrolled_arrow_left.bmp" />
+    <None Include="res\scroll\Hscrolled_arrow_right.bmp" />
+    <None Include="res\scroll\Hscrolled_slider_center.bmp" />
+    <None Include="res\scroll\Hscrolled_slider_left.bmp" />
+    <None Include="res\scroll\Hscrolled_slider_middle.bmp" />
+    <None Include="res\scroll\Hscrolled_slider_right.bmp" />
+    <None Include="res\scroll\Hscrolled_trough.bmp" />
+    <None Include="res\scroll\Vscrolled_arrow_down.bmp" />
+    <None Include="res\scroll\Vscrolled_arrow_up_over.bmp" />
+    <None Include="res\scroll\Vscrolled_slider_bottom.bmp" />
+    <None Include="res\scroll\Vscrolled_slider_center.bmp" />
+    <None Include="res\scroll\Vscrolled_slider_middle.bmp" />
+    <None Include="res\scroll\Vscrolled_slider_top.bmp" />
+    <None Include="res\scroll\Vscrolled_trough.bmp" />
     <None Include="res\scroll_bar.png" />
     <None Include="res\SetUp_Back.png" />
     <None Include="res\tab_back_down.png" />
@@ -269,6 +284,7 @@
     <ClInclude Include="CheckUpDate.h" />
     <ClInclude Include="CreateSyncDIr.h" />
     <ClInclude Include="DialogSet.h" />
+    <ClInclude Include="UI\ZiScrollBar.h" />
     <ClInclude Include="ZiDialogBase.h" />
     <ClInclude Include="MemoryDC.h" />
     <ClInclude Include="SetUpPage0.h" />
@@ -310,6 +326,7 @@
     <ClCompile Include="CheckUpDate.cpp" />
     <ClCompile Include="CreateSyncDIr.cpp" />
     <ClCompile Include="DialogSet.cpp" />
+    <ClCompile Include="UI\ZiScrollBar.cpp" />
     <ClCompile Include="ZiDialogBase.cpp" />
     <ClCompile Include="MemoryDC.cpp" />
     <ClCompile Include="SetUpPage0.cpp" />

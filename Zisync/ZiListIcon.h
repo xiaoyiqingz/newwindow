@@ -1,6 +1,7 @@
 #pragma once
 #include "ZiImage.h"
 #include "ZiDialogBase.h"
+#include "UI/ZiScrollBar.h"
 
 // CZiListIcon
 
@@ -28,6 +29,7 @@ public:
 	int				m_xPadding, m_yPadding;	
 	BOOL			m_bResFromID;
 
+	CZiScrollBar	m_VScroll;
 public:
 	CZiListIcon();
 	virtual ~CZiListIcon();

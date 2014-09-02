@@ -10,7 +10,6 @@ class CAddWin : public CZiDialog
 	DECLARE_DYNAMIC(CAddWin)
 public:
 	CZiListIcon		m_ListDevice;
-
 public:
 	CAddWin(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CAddWin();

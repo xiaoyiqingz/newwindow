@@ -52,6 +52,7 @@ using namespace Gdiplus;
 #define SafeDelete(pData) { try { delete pData; } catch (...) { ASSERT(FALSE); } pData=NULL; }
 #define SafeRelease(pObject) { if (pObject!=NULL) { pObject->Release(); pObject=NULL; } }
 
+/*
 #include "UI/detours.h"
 #include "UI/SkinUI_ScrollBar.h"
 #ifdef _DEBUG
@@ -61,6 +62,7 @@ using namespace Gdiplus;
 #endif
 
 #pragma comment (lib,"../lib/Detours.lib")
+*/
 
 
 

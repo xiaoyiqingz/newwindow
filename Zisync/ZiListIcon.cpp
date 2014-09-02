@@ -42,7 +42,7 @@ void CZiListIcon::PreSubclassWindow()
 	m_ImageList1.Create(55, 55,ILC_MASK|ILC_COLOR32, 0, 0);
 	m_ImageList1.Add(AfxGetApp()->LoadIcon(IDR_MAINFRAME));
 	SetImageList(&m_ImageList1, LVSIL_NORMAL);
-
+	m_VScroll.SetScrollType(this, SB_VERT);
 	__super::PreSubclassWindow();
 }
 
@@ -184,6 +184,8 @@ void CZiListIcon::OnPaint()
 		GetSubItemRect(i, 0, LVIR_BOUNDS, rcItem);
 		DrawIconItem(&memoryDC, rcItem, i);
 	}
+
+	m_VScroll.UpdateScrollBar();
 }
 
 void CZiListIcon::DrawIconItem(CDC *pDC, CRect & rcItem, int nItem)

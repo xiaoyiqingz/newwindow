@@ -11,6 +11,8 @@
 #endif
 
 
+
+/*
 DETOUR_TRAMPOLINE(int   WINAPI SetScrollInfoT(HWND, int, LPCSCROLLINFO, BOOL), SetScrollInfo)
 	DETOUR_TRAMPOLINE(BOOL  WINAPI GetScrollInfoT(HWND, int, LPSCROLLINFO), GetScrollInfo)
 	DETOUR_TRAMPOLINE(int   WINAPI SetScrollPosT(HWND, int, int, BOOL), SetScrollPos)
@@ -83,7 +85,7 @@ BOOL WINAPI EnableScrollBarD(HWND hwnd, UINT wSBflags, UINT wArrows)
 		return SkinUI_EnableScrollBar(hwnd, wSBflags, wArrows);
 	else
 		return EnableScrollBarT(hwnd, wSBflags, wArrows);
-}
+}*/
 
 // CZisyncApp
 
@@ -144,7 +146,7 @@ BOOL CZisyncApp::InitInstance()
 	GdiplusStartupInput input;     //不能放在下面
 	GdiplusStartup(&m_GdiplusToken, &input, NULL);
 
-
+/*
 	DetourFunctionWithTrampoline((PBYTE)SetScrollInfoT, (PBYTE)SetScrollInfoD);
 	DetourFunctionWithTrampoline((PBYTE)GetScrollInfoT, (PBYTE)GetScrollInfoD);
 	DetourFunctionWithTrampoline((PBYTE)SetScrollPosT, (PBYTE)SetScrollPosD);
@@ -152,7 +154,7 @@ BOOL CZisyncApp::InitInstance()
 	DetourFunctionWithTrampoline((PBYTE)SetScrollRangeT, (PBYTE)SetScrollRangeD);
 	DetourFunctionWithTrampoline((PBYTE)GetScrollRangeT, (PBYTE)GetScrollRangeD);
 	DetourFunctionWithTrampoline((PBYTE)ShowScrollBarT, (PBYTE)ShowScrollBarD);
-	DetourFunctionWithTrampoline((PBYTE)EnableScrollBarT, (PBYTE)EnableScrollBarD);
+	DetourFunctionWithTrampoline((PBYTE)EnableScrollBarT, (PBYTE)EnableScrollBarD);*/
 
 
 /*
@@ -190,6 +192,8 @@ int CZisyncApp::ExitInstance()
 	GdiplusShutdown(m_GdiplusToken);
 
 
+
+/*
 	DetourRemove((PBYTE)SetScrollInfoT, (PBYTE)SetScrollInfoD);
 	DetourRemove((PBYTE)SetScrollPosT, (PBYTE)SetScrollPosD);
 	DetourRemove((PBYTE)GetScrollInfoT, (PBYTE)GetScrollInfoD);
@@ -197,7 +201,7 @@ int CZisyncApp::ExitInstance()
 	DetourRemove((PBYTE)SetScrollRangeT, (PBYTE)SetScrollRangeD);
 	DetourRemove((PBYTE)GetScrollRangeT, (PBYTE)GetScrollRangeD);
 	DetourRemove((PBYTE)ShowScrollBarT, (PBYTE)ShowScrollBarD);
-	DetourRemove((PBYTE)EnableScrollBarT, (PBYTE)EnableScrollBarD);
+	DetourRemove((PBYTE)EnableScrollBarT, (PBYTE)EnableScrollBarD);*/
 
 	// Delete the shell manager created above.
 	if (m_pShellManager != NULL)

@@ -88,7 +88,7 @@ BOOL ZiDialogBase::SetScrollImage( CWnd * pOwn,UINT nResID, LPCTSTR lpszFileType
 		if( m_pImageScroll == NULL) return FALSE;
 
 		//ÉèÖÃ¹ö¶¯
-		SkinUI_Init(pOwn->GetSafeHwnd(),m_pImageScroll->ImageToBitmap());
+//		SkinUI_Init(pOwn->GetSafeHwnd(),m_pImageScroll->ImageToBitmap());
 	}
 
 	return TRUE;

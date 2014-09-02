@@ -40,7 +40,7 @@ BOOL CAddWin::OnInitDialog()
 	CZiDialog::OnInitDialog();
 
 	m_ListDevice.SetParentBack(GetBackDC());
-	m_ListDevice.SetScrollImage(&m_ListDevice, IDB_SCROLL_BAR, IMAGE_PNG);
+//	m_ListDevice.SetScrollImage(&m_ListDevice, IDB_SCROLL_BAR, IMAGE_PNG);
 
 	m_ListDevice.SetItemImage(0, IDB_DEVICE_LINUX, IDB_LIST_CHECK_NOR, 
 		IDB_LIST_CHECK_SEL, IMAGE_PNG);

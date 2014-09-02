@@ -48,9 +48,7 @@ int CZiListCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (__super::OnCreate(lpCreateStruct) == -1)
 		return -1;
-
 //	m_HeaderCtrl.SubclassWindow(GetHeaderCtrl()->GetSafeHwnd());
-
 	return 0;
 }
 
@@ -129,6 +127,7 @@ void CZiListCtrl::PreSubclassWindow()
 {
 	// TODO: Add your specialized code here and/or call the base class
 	__super::PreSubclassWindow();
+	m_VScrollBar.SetScrollType(this, SB_VERT);
 //	m_HeaderCtrl.SubclassWindow(GetHeaderCtrl()->GetSafeHwnd());
 	return;
 }
@@ -172,7 +171,7 @@ void CZiListCtrl::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 
 		DrawReportItem(&BufferDc, nItemID, rcSubRect, i);
 	}
-
+	m_VScrollBar.UpdateScrollBar();
 	return;
 }
 

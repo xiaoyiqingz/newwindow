@@ -9,6 +9,8 @@
 #include "CreateSyncDIr.h"
 #include "afxdialogex.h"
 
+// for test
+#define LVITEMCOUNT 4
 
 // CPage0 dialog
 
@@ -67,9 +69,9 @@ void CPage0::OnInitListCtrl()
 
 	m_list1.SetHovenImage(IDB_LIST_BACK_HOV, IMAGE_PNG, CRect(2,2,2,2));
 	m_list1.SetSelectImage(IDB_LIST_BACK_SEL, IMAGE_PNG, CRect(2,2,2,2));
-	m_list1.SetScrollImage(&m_list1,IDB_SCROLL_BAR, IMAGE_PNG);
+//	m_list1.SetScrollImage(&m_list1,IDB_SCROLL_BAR, IMAGE_PNG);
 
-	for (int i=0; i < 8; i++) {
+	for (int i=0; i < LVITEMCOUNT; i++) {
 		m_list1.InsertItem(i,NULL);	
 		m_list1.SetItemContent(i, _T("我的自同步"), _T("@3设备 1本地"), _T("历史记录"));
 		m_list1.InsertImage(i, 0, IDB_LIST_FOLDER, 0, IMAGE_PNG);
@@ -78,12 +80,12 @@ void CPage0::OnInitListCtrl()
 		m_list1.InsertImage(i, 4, IDB_BT_SET, 0, IMAGE_PNG);
 	}
 
-	m_list1.InsertItem(8, NULL);
-	m_list1.SetItemContent(8, _T("自同步"), _T("@2设备 1本地"), _T("历史记录"));
-	m_list1.InsertImage(8, 0, IDB_LIST_FOLDER, 0, IMAGE_PNG);
-	m_list1.InsertImage(8, 2, IDB_LIST_SYNC_NOR, IDB_LIST_SYNC_SEL, IMAGE_PNG);
-	m_list1.InsertImage(8, 3, IDB_LIST_INVITE, 0, IMAGE_PNG);
-	m_list1.InsertImage(8, 4, IDB_BT_SET, 0, IMAGE_PNG);
+	m_list1.InsertItem(LVITEMCOUNT, NULL);
+	m_list1.SetItemContent(LVITEMCOUNT, _T("自同步"), _T("@2设备 1本地"), _T("历史记录"));
+	m_list1.InsertImage(LVITEMCOUNT, 0, IDB_LIST_FOLDER, 0, IMAGE_PNG);
+	m_list1.InsertImage(LVITEMCOUNT, 2, IDB_LIST_SYNC_NOR, IDB_LIST_SYNC_SEL, IMAGE_PNG);
+	m_list1.InsertImage(LVITEMCOUNT, 3, IDB_LIST_INVITE, 0, IMAGE_PNG);
+	m_list1.InsertImage(LVITEMCOUNT, 4, IDB_BT_SET, 0, IMAGE_PNG);
 
 	m_list1.SetItemHeight(70);
 	m_list1.SetRightTopColor(RGB(0, 124, 248), RGB(248, 24, 0));

@@ -1,6 +1,7 @@
 #pragma once
 #include "ZiDialogBase.h"
 #include "ZiToolTip.h"
+#include "UI/ZiScrollBar.h"
 #include "ZiImage.h"
 
 // CZiListCtrl
@@ -74,6 +75,8 @@ public:
 	CItemImgArray	m_ItemSetArray;
 	CItemContentArray  m_ItemContent;
 	
+	CZiScrollBar	m_VScrollBar;
+
 	COLORREF		m_colorBk;
 	COLORREF		m_colorRightTopNor, m_colorRightTopHov; 
 	UINT			m_uActiveItem;

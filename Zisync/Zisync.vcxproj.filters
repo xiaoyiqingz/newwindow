@@ -247,6 +247,48 @@
     <None Include="res\scroll_bar.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\scroll\Hscrolled_arrow_left.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll\Hscrolled_arrow_right.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll\Hscrolled_slider_center.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll\Hscrolled_slider_left.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll\Hscrolled_slider_middle.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll\Hscrolled_slider_right.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll\Hscrolled_trough.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll\Vscrolled_arrow_down.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll\Vscrolled_arrow_up_over.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll\Vscrolled_slider_bottom.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll\Vscrolled_slider_center.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll\Vscrolled_slider_middle.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll\Vscrolled_slider_top.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scroll\Vscrolled_trough.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -366,6 +408,9 @@
     <ClInclude Include="ZisyncDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UI\ZiScrollBar.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -478,6 +523,9 @@
     </ClCompile>
     <ClCompile Include="ZisyncDlg.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\ZiScrollBar.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
